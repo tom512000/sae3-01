@@ -1,47 +1,40 @@
 # SAE 3-01 : Développement d'une application
 
-## Auteurs :
+## 👥 Auteurs
 
-- Cladel Valentin - clad0006
-- Simon Baptiste - simo0170
-- Sikora Tom - siko0001
-- Bourga Camille - bour0087
+- 👤 Valentin CLADEL - <span style="color: purple">clad0006</span>
+- 👤 Baptiste SIMON - <span style="color: purple">simo0170</span>
+- 👤 Tom SIKORA - <span style="color: purple">siko0001</span>
+- 👤 Camille BOURGA - <span style="color: purple">bour0087</span>
 
-## Installation/configuration :
-
-### En fin de sprint
-
-En fin de séance, vous devez impérativement synchroniser votre dépôt distant (en ligne de commande ou avec PhpStorm)
-
-- git branch (branche)
-
-- git checkout (branche)
-
-- git commit -m "Message"
-
-- git push --set-upstream origin branche
-
-Ensuite, allez sur gitlab faire une merge request pour votre branche et assignez un camarade à la revue/validation.
-
-### En début de séance
+## 🛠 Installation et Configuration
+### *<span style="color: orange">1. En début de séance</span>*
 
 Mettre à jour votre dépôt local :
+- `cd <dépôt_local>`
+- `git pull`
 
-- cd votre_depôt
+Ensuite, dans le répertoire de votre projet, vous devez <span style="color: orange">installer les composants nécessaires</span> au fonctionnement du projet :
+- `composer install`
 
-- git pull
+Finalement, <span style="color: orange">reconfigurez votre accès à la base de données</span> en redéfinissant le fichier « .env.local » :
+- `DATABASE_URL="mysql://identifiant:mot-de-passe@service:port/nom-bdd?serverVersion=mariadb-10.2.25&charset=utf8"`
 
+### *<span style="color: green">2. En fin de séance</span>*
 
-Ensuite, dans le répertoire de votre projet, vous devez et (ré)installer les composants nécessaires à son fonctionnement :
+En fin de séance, <span style="color: green">resynchronisez votre dépôt distant</span> (Invite de commandes ou PhpStorm) :
 
-composer install
+- `git branch <branche>`
+- `git checkout <branche>`
+- `git commit -m "message-commit"`
+- `git push --set-upstream origin <branche>`
 
-Vous devrez également reconfigurer votre accès base de données en redéfinissant le fichier « .env.local »
+Ensuite, sur GitLab, <span style="color: green">acceptez le merge-request</span> sur votre branche et <span style="color: green">assignez un camarade</span> à la revue et à la validation.
 
-### Scritps
-
-composer start - lancer le serveur
-
-composer test:cs / fix:cs - verifier/corriger le code
-
-composer db - regénerer des données factices
+### Scripts
+- `composer start` : Lance le serveur web de test.
+- `composer test:cs` : Lance la commande de vérification du code par PHP CS Fixer.
+- `composer fix:cs` : Lance la commande de correction du code par PHP CS Fixer.
+- `composer test:codeception` : Nettoie le répertoire « _output » et le code généré par Codeception, initialise la base de données de test et lance les tests de Codeception.
+- `composer test` : Teste la mise en forme du code et lance les tests avec Codeception.
+- `composer bd` : Détruit et recrée la base de données, migre sa structure et regénère les données factices.
