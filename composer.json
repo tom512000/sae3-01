@@ -78,7 +78,41 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "start": [
+            "symfony serve"
+        ],
+        "fix:cs": [
+            "php-cs-fixer fix"
+        ],
+        "test:cs" : [
+            "php-cs-fixer fix --dry-run"
+        ],
+        "test:codeception" : [
+            "php vendor/bin/codecept clean",
+            "php bin/console doctrine:database:drop --force --quiet --env=test",
+            "php bin/console doctrine:database:create --quiet --env=test",
+            "php bin/console doctrine:schema:create --quiet --env=test",
+            "php vendor/bin/codecept run"
+        ],
+        "test" : [
+            "@fix:cs",
+            "@test:codeception"
+        ],
+        "db" : [
+            "php bin/console doctrine:database:drop --force --if-exists",
+            "php bin/console doctrine:database:create",
+            "php bin/console doctrine:migrations:migrate --no-interaction",
+            "php bin/console doctrine:fixtures:load --no-interaction"
         ]
+    },
+    "scripts-descriptions": {
+        "start" : "Run Test Web server",
+        "fix:cs": "Fix PHP code with PHP CS Fixer",
+        "test:cs" : "Test PHP code with PHP CS Fixer",
+        "test:codeception" : "Nettoie le répertoire « _output » et le code généré par Codeception, initialise la base de données de test et lance les tests de Codeception",
+        "test" : "Teste la mise en forme du code et lance les tests avec Codeception",
+        "db" : "Détruit et recrée la base de données, migre sa structure et regénère les données factices"
     },
     "conflict": {
         "symfony/symfony": "*"
