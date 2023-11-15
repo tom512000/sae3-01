@@ -19,7 +19,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private string $firstName;
     #[ORM\Column(length: 180)]
     private string $lastName;
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(length: 20)]
     private string $phone;
     #[ORM\Column]
     private int $status;
