@@ -37,4 +37,4 @@ Ensuite, sur GitLab, <span style="color: green">acceptez le merge-request</span>
 - `composer fix:cs` : Lance la commande de correction du code par PHP CS Fixer.
 - `composer test:codeception` : Nettoie le répertoire « _output » et le code généré par Codeception, initialise la base de données de test et lance les tests de Codeception.
 - `composer test` : Teste la mise en forme du code et lance les tests avec Codeception.
-- `composer bd` : Détruit et recrée la base de données, migre sa structure et regénère les données factices.
+- `composer db` : Détruit et recrée la base de données, migre sa structure et regénère les données factices.
