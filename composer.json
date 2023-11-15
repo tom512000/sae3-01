@@ -1,27 +1,137 @@
 {
-    "name": "valen/sae3",
-    "description": "Gestion de stages et alternances",
     "type": "project",
-    "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.38"
+    "license": "proprietary",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=8.1",
+        "ext-ctype": "*",
+        "ext-iconv": "*",
+        "doctrine/doctrine-bundle": "^2.11",
+        "doctrine/doctrine-migrations-bundle": "^3.2",
+        "doctrine/orm": "^2.16",
+        "phpdocumentor/reflection-docblock": "^5.3",
+        "phpstan/phpdoc-parser": "^1.24",
+        "symfony/asset": "6.3.*",
+        "symfony/console": "6.3.*",
+        "symfony/doctrine-messenger": "6.3.*",
+        "symfony/dotenv": "6.3.*",
+        "symfony/expression-language": "6.3.*",
+        "symfony/flex": "^2",
+        "symfony/form": "6.3.*",
+        "symfony/framework-bundle": "6.3.*",
+        "symfony/http-client": "6.3.*",
+        "symfony/intl": "6.3.*",
+        "symfony/mailer": "6.3.*",
+        "symfony/mime": "6.3.*",
+        "symfony/monolog-bundle": "^3.0",
+        "symfony/notifier": "6.3.*",
+        "symfony/process": "6.3.*",
+        "symfony/property-access": "6.3.*",
+        "symfony/property-info": "6.3.*",
+        "symfony/runtime": "6.3.*",
+        "symfony/security-bundle": "6.3.*",
+        "symfony/serializer": "6.3.*",
+        "symfony/string": "6.3.*",
+        "symfony/translation": "6.3.*",
+        "symfony/twig-bundle": "6.3.*",
+        "symfony/validator": "6.3.*",
+        "symfony/web-link": "6.3.*",
+        "symfony/yaml": "6.3.*",
+        "twig/extra-bundle": "^2.12|^3.0",
+        "twig/twig": "^2.12|^3.0"
     },
-    "license": "Copyleft",
-    "autoload": {
-        "psr-4": {
-            "Valen\\Sae3\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "Valentin Cladel",
-            "email": "valentin.cladel@gmail.com"
-        }
-    ],
-    "require": {},
     "config": {
         "allow-plugins": {
+            "php-http/discovery": true,
             "symfony/flex": true,
             "symfony/runtime": true
+        },
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Tests\\": "tests/"
+        }
+    },
+    "replace": {
+        "symfony/polyfill-ctype": "*",
+        "symfony/polyfill-iconv": "*",
+        "symfony/polyfill-php72": "*",
+        "symfony/polyfill-php73": "*",
+        "symfony/polyfill-php74": "*",
+        "symfony/polyfill-php80": "*",
+        "symfony/polyfill-php81": "*"
+    },
+    "scripts": {
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        },
+        "post-install-cmd": [
+            "@auto-scripts"
+        ],
+        "post-update-cmd": [
+            "@auto-scripts"
+        ],
+        "start": [
+            "Composer\\Config::disableProcessTimeout",
+            "symfony serve"
+        ],
+        "fix:cs": [
+            "php-cs-fixer fix"
+        ],
+        "test:cs" : [
+            "php-cs-fixer fix --dry-run"
+        ],
+        "test:codeception" : [
+            "php vendor/bin/codecept clean",
+            "php bin/console doctrine:database:drop --force --quiet --env=test",
+            "php bin/console doctrine:database:create --quiet --env=test",
+            "php bin/console doctrine:schema:create --quiet --env=test",
+            "php vendor/bin/codecept run"
+        ],
+        "test" : [
+            "@fix:cs",
+            "@test:codeception"
+        ],
+        "db" : [
+            "php bin/console doctrine:database:drop --force --if-exists",
+            "php bin/console doctrine:database:create",
+            "php bin/console doctrine:migrations:migrate --no-interaction",
+            "php bin/console doctrine:fixtures:load --no-interaction"
+        ]
+    },
+    "scripts-descriptions": {
+        "start" : "Run Test Web server",
+        "fix:cs": "Fix PHP code with PHP CS Fixer",
+        "test:cs" : "Test PHP code with PHP CS Fixer",
+        "test:codeception" : "Nettoie le répertoire « _output » et le code généré par Codeception, initialise la base de données de test et lance les tests de Codeception",
+        "test" : "Teste la mise en forme du code et lance les tests avec Codeception",
+        "db" : "Détruit et recrée la base de données, migre sa structure et regénère les données factices"
+    },
+    "conflict": {
+        "symfony/symfony": "*"
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": false,
+            "require": "6.3.*"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "symfony/browser-kit": "6.3.*",
+        "symfony/css-selector": "6.3.*",
+        "symfony/debug-bundle": "6.3.*",
+        "symfony/maker-bundle": "^1.0",
+        "symfony/phpunit-bridge": "^6.3",
+        "symfony/stopwatch": "6.3.*",
+        "symfony/web-profiler-bundle": "6.3.*"
     }
 }
