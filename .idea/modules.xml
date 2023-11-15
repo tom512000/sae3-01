@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../../../TD-SI/connectsport-authentication/.idea/connectsport-authentication.iml" filepath="$PROJECT_DIR$/../../../TD-SI/connectsport-authentication/.idea/connectsport-authentication.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/sae3.iml" filepath="$PROJECT_DIR$/.idea/sae3.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../../../PHP-Web/symfony-contacts/.idea/symfony-contacts.iml" filepath="$PROJECT_DIR$/../../../PHP-Web/symfony-contacts/.idea/symfony-contacts.iml" />
     </modules>
   </component>
 </project>
