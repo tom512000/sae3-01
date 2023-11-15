@@ -8,7 +8,7 @@
   </component>
   <component name="PHPCSFixerOptionsConfiguration">
     <option name="codingStandard" value="Custom" />
-    <option name="rulesetPath" value="$PROJECT_DIR$/../../../PHP-Web/php-authentication/vendor/bin/php-cs-fixer" />
+    <option name="rulesetPath" value="$PROJECT_DIR$/vendor/bin/php-cs-fixer" />
     <option name="transferred" value="true" />
   </component>
   <component name="PHPCodeSnifferOptionsConfiguration">
@@ -152,6 +152,7 @@
       <path value="$PROJECT_DIR$/vendor/psr/cache" />
       <path value="$PROJECT_DIR$/vendor/psr/log" />
       <path value="$PROJECT_DIR$/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/vendor/friendsofphp/php-cs-fixer" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />
@@ -160,7 +161,7 @@
   </component>
   <component name="PhpUnit">
     <phpunit_settings>
-      <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/phpunit.xml.dist" custom_loader_path="$PROJECT_DIR$/vendor/autoload.php" use_configuration_file="true" />
+      <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/phpunit.xml.dist" custom_loader_path="$PROJECT_DIR$/vendor/autoload.php" phpunit_phar_path="" use_configuration_file="true" />
     </phpunit_settings>
   </component>
   <component name="PsalmOptionsConfiguration">
