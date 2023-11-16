@@ -4,4 +4,18 @@
 
 {% block body %}
 <h1>Accueil</h1>
+    <h1>Liste des recentes Offres</h1>
+    <ul >
+        {% for Offre in Offres %}
+            <li>
+                nom de l'offre : {{ Offre.nomOffre }}<br>
+                jour de début de stage : {{ Offre.getJourDeb() }}<br>
+                Nombre de place : {{ Offre.nbPlace }}<br>
+                Lieux : {{ Offre.lieux }}<br>
+                Duree en jour du stage : {{ Offre.duree }}<br>
+                nom de l'entreprise : {{ Offre.getIDEntreprise() }}<br>
+                Description du stage : {{ Offre.getDescrip() }}
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}
