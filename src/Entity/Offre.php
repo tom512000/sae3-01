@@ -120,7 +120,7 @@ class Offre
 
     public function getJourDeb(): string
     {
-        return $this->jourDeb->format('Y-m-d');
+        return $this->jourDeb->format('d F Y');
     }
 
     public function setJourDeb(\DateTimeInterface $jourDeb): static
