@@ -52,11 +52,13 @@ final class OffreFactory extends ModelFactory
         return [
             'ID_offre' => self::faker()->randomNumber(),
             'ID_type' => self::faker()->randomNumber(),
-            'duree' => self::faker()->randomNumber(),
+            'duree' => self::faker()->numberBetween($min = 5, $max = 300),
             'jourDeb' => self::faker()->dateTime(),
             'lieux' => self::faker()->address(),
-            'nbPlace' => self::faker()->randomNumber(),
+            'nbPlace' => self::faker()->numberBetween($min = 2, $max = 40),
             'nomOffre' => self::faker()->name(),
+            'ID_entreprise'=> self::faker()->randomNumber(),
+            'descrip' => self::faker()->realText(),
         ];
     }
 
