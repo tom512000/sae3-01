@@ -49,10 +49,25 @@ class OffreRepository extends ServiceEntityRepository
     public function findByRecent():array{
         $qb = $this->createQueryBuilder('o')
             ->select('o')
-            ->orderBy('o.jourDeb', 'DESC') // Assuming you want to order by the 'jourDeb' field
+            ->orderBy('o.jourDeb', 'ASC') // Assuming you want to order by the 'jourDeb' field
             ->setMaxResults(10);
 
         return $qb->getQuery()->getResult();
     }
+
+    public function search(string $searchText = ''): array
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->orderBy('o.nomOffre', 'ASC');
+
+        if (!empty($searchText)) {
+            $qb->andWhere($qb->expr()->orX(
+                $qb->expr()->like('o.nomOffre', ':searchText')
+            ))->setParameter('searchText', '%'.$searchText.'%');
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
 }
 

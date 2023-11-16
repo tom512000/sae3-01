@@ -1,18 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Hello OffreController!{% endblock %}
 
 {% block body %}
-<h1>Accueil</h1>
-    <h1>Liste des recentes Offres</h1>
+    <h1>Liste des Offres</h1>
     <ul >
         {% for Offre in Offres %}
             <li>
                 <table>
                     <thead>
-                    <tr>
-                        <th colspan="2"> {{ Offre.nomOffre }}</th>
-                    </tr>
+                        <tr>
+                           <th colspan="2"> {{ Offre.nomOffre }}</th>
+                        </tr>
                     </thead>
                     <tr>
                         <td>{{ Offre.getJourDeb() }}</td>
