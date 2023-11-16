@@ -30,15 +30,15 @@
                         Menu
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="/offre">Toutes les offres</a></li>
                         <li><a class="dropdown-item" href="#">Another action</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 </li>
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search">
+            <form class="d-flex" role="search" action="{{ path('app_offre_index') }}" method="get">
+                <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search" name="textRecherche" value="{{ textRecherche|default }}">
                 <button class="btn btn-outline-success" type="submit">Rechercher</button>
             </form>
         </div>
