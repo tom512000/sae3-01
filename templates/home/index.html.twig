@@ -7,27 +7,31 @@
     <h1>Liste des recentes Offres</h1>
     <ul >
         {% for Offre in Offres %}
-            <li>
-                <table>
+            <li class="ligne_offre">
+                <table class="offre">
                     <thead>
                     <tr>
-                        <th colspan="2"> {{ Offre.nomOffre }}</th>
+                        <th>Recruteur·se</th>
+                        <th>Entreprise</th>
+                        <th>Jour</th>
+                        <th>Place·s</th>
+                        <th>Durée</th>
+                        <th>Lieu</th>
                     </tr>
                     </thead>
+                    <tbody>
                     <tr>
+                        <td>{{ Offre.nomOffre }}</td>
+                        <td>{{ Offre.getIDEntreprise() }}</td>
                         <td>{{ Offre.getJourDeb() }}</td>
+                        <td>{{ Offre.nbPlace }}</td>
                         <td>{{ Offre.duree }} jours</td>
-                    </tr>
-                    <tr>
                         <td>{{ Offre.lieux }}</td>
-                        <td>{{ Offre.nbPlace }} place</td>
                     </tr>
                     <tr>
-                        <td colspan="2">{{ Offre.getIDEntreprise() }}</td>
+                        <td colspan="6">{{ Offre.getDescrip() }}</td>
                     </tr>
-                    <tr>
-                        <td colspan="2">{{ Offre.getDescrip() }}</td>
-                    </tr>
+                    </tbody>
                 </table>
             </li>
             <br>
