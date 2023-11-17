@@ -13,12 +13,12 @@ class EntrepriseController extends AbstractController
     #[Route('/entreprise', name: 'app_entreprise_index')]
     public function index(EntrepriseRepository $EntrepriseRepository, Request $request): Response
     {
-        $textRechercher = $request->query->get('textRecherche', '');
-        $Entreprises = $EntrepriseRepository->search($textRechercher);
+        $textRechercheEntreprise = $request->query->get('textRecherche', '');
+        $Entreprises = $EntrepriseRepository->search($textRechercheEntreprise);
 
         return $this->render('entreprise/index.html.twig', [
             'Entreprises'=>$Entreprises,
-            'textRecherche' => $textRechercher,
+            'textRechercheEntreprise' => $textRechercheEntreprise,
         ]);
     }
 }

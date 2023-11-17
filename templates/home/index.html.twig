@@ -2,7 +2,7 @@
 
 {% block form %}
     <form class="d-flex" role="search" action="{{ path('app_offre_index') }}" method="get">
-        <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search" name="textRecherche" value="{{ textRecherche|default }}">
+        <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search" name="textRechercheEntreprise" value="{{ textRechercheEntreprise|default }}">
         <button class="btn btn-outline-success" type="submit">Rechercher</button>
     </form>
 {% endblock %}
