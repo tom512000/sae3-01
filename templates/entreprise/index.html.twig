@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block form %}
+    <form class="d-flex" role="search" action="{{ path('app_entreprise_index') }}" method="get">
+        <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search" name="textRecherche" value="{{ textRecherche|default }}">
+        <button class="btn btn-outline-success" type="submit">Rechercher</button>
+    </form>
+{% endblock %}
+
+{% block title %}Hello EntrepriseController!{% endblock %}
+
+{% block body %}
+    <h1>Liste des entreprises</h1>
+    <ul >
+        {% for Entreprise in Entreprises %}
+            <li>
+                <table>
+                    <thead>
+                    <tr>
+                        <th colspan="2"> {{ Entreprise.nomEnt }}</th>
+                    </tr>
+                    </thead>
+                    <tr>
+                        <td colspan="2">{{ Entreprise.adresse }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">{{ Entreprise.mail }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">{{ Entreprise.siteWeb }}</td>
+                    </tr>
+                </table>
+            </li>
+            <br>
+            <br>
+        {% endfor %}
+    </ul>
+{% endblock %}
