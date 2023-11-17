@@ -1,38 +1,33 @@
 {% extends 'base.html.twig' %}
 
 {% block form %}
-    <form class="d-flex" role="search" action="{{ path('app_offre_index') }}" method="get">
+    <form class="d-flex" role="search" action="{{ path('app_entreprise_index') }}" method="get">
         <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search" name="textRecherche" value="{{ textRecherche|default }}">
         <button class="btn btn-outline-success" type="submit">Rechercher</button>
     </form>
 {% endblock %}
 
-{% block title %}Hello OffreController!{% endblock %}
+{% block title %}Hello EntrepriseController!{% endblock %}
 
 {% block body %}
-    <h1>Liste des Offres</h1>
+    <h1>Liste des entreprises</h1>
     <ul >
-        {% for Offre in Offres %}
+        {% for Entreprise in Entreprises %}
             <li>
                 <table>
                     <thead>
-                        <tr>
-                           <th colspan="2"> {{ Offre.nomOffre }}</th>
-                        </tr>
+                    <tr>
+                        <th colspan="2"> {{ Entreprise.nomEnt }}</th>
+                    </tr>
                     </thead>
                     <tr>
-                        <td>{{ Offre.getJourDeb() }}</td>
-                        <td>{{ Offre.duree }} jours</td>
+                        <td colspan="2">{{ Entreprise.adresse }}</td>
                     </tr>
                     <tr>
-                        <td>{{ Offre.lieux }}</td>
-                        <td>{{ Offre.nbPlace }} place</td>
+                        <td colspan="2">{{ Entreprise.mail }}</td>
                     </tr>
                     <tr>
-                        <td colspan="2">{{ Offre.getIDEntreprise() }}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">{{ Offre.getDescrip() }}</td>
+                        <td colspan="2">{{ Entreprise.siteWeb }}</td>
                     </tr>
                 </table>
             </li>
