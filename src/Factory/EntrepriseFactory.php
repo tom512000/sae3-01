@@ -54,7 +54,6 @@ final class EntrepriseFactory extends ModelFactory
         $siteWeb = $this->generateSiteWeb($nomEnt);
 
         return [
-            'ID_entreprise' => self::faker()->randomNumber(),
             'adresse' => self::faker()->address(),
             'nomEnt' => $nomEnt,
             'mail'=>$email,

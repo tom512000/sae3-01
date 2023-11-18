@@ -10,29 +10,53 @@
 {% block title %}Hello EntrepriseController!{% endblock %}
 
 {% block body %}
-    <h1>Liste des entreprises</h1>
-    <ul >
-        {% for Entreprise in Entreprises %}
+    {% if Entreprises|length > 1  %}
+        <h1>Liste des entreprises</h1>
+        <ul>
+            {% for Entreprise in Entreprises %}
+                <li>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th colspan="2">{{ Entreprise.nomEnt }}</th>
+                        </tr>
+                        </thead>
+                        <tr>
+                            <td colspan="2">{{ Entreprise.adresse }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{ Entreprise.mail }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">{{ Entreprise.siteWeb }}</td>
+                        </tr>
+                    </table>
+                </li>
+                <br>
+                <br>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h1>Détails de l'entreprise</h1>
+        <ul>
             <li>
                 <table>
                     <thead>
                     <tr>
-                        <th colspan="2"> {{ Entreprise.nomEnt }}</th>
+                        <th colspan="2">{{ Entreprises.nomEnt }}</th>
                     </tr>
                     </thead>
                     <tr>
-                        <td colspan="2">{{ Entreprise.adresse }}</td>
+                        <td colspan="2">{{ Entreprises.adresse }}</td>
                     </tr>
                     <tr>
-                        <td colspan="2">{{ Entreprise.mail }}</td>
+                        <td colspan="2">{{ Entreprises.mail }}</td>
                     </tr>
                     <tr>
-                        <td colspan="2">{{ Entreprise.siteWeb }}</td>
+                        <td colspan="2">{{ Entreprises.siteWeb }}</td>
                     </tr>
                 </table>
             </li>
-            <br>
-            <br>
-        {% endfor %}
-    </ul>
+        </ul>
+    {% endif %}
 {% endblock %}

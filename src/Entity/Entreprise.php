@@ -13,9 +13,6 @@ class Entreprise
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $ID_entreprise = null;
-
     #[ORM\Column(length: 128)]
     private ?string $nomEnt = null;
 
@@ -30,18 +27,6 @@ class Entreprise
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIDEntreprise(): ?int
-    {
-        return $this->ID_entreprise;
-    }
-
-    public function setIDEntreprise(int $ID_entreprise): static
-    {
-        $this->ID_entreprise = $ID_entreprise;
-
-        return $this;
     }
 
     public function getNomEnt(): ?string

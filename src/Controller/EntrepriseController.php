@@ -21,4 +21,21 @@ class EntrepriseController extends AbstractController
             'textRechercheEntreprise' => $textRechercheEntreprise,
         ]);
     }
+
+    #[Route('/entreprise/{entrepriseId}', name: 'app_entreprise_show', requirements: ['entrepriseId' => '\d+'])]
+    public function show(int $entrepriseId,EntrepriseRepository $EntrepriseRepository, Request $request): Response
+    {
+        $textRechercheEntreprise = $request->query->get('textRecherche', '');
+        $Entreprises = $EntrepriseRepository->find($entrepriseId);
+
+        if (!$Entreprises) {
+            throw $this->createNotFoundException("Entreprise n'a pas été trouver ");
+        }
+
+
+        return $this->render('entreprise/index.html.twig', [
+            'Entreprises'=>$Entreprises,
+            'textRechercheEntreprise' => $textRechercheEntreprise,
+        ]);
+    }
 }
