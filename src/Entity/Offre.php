@@ -15,13 +15,12 @@ class Offre
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?int $ID_offre = null;
-
-    #[ORM\Column]
     private ?int $ID_type = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $ID_entreprise = null;
+
+    #[ORM\ManyToOne(targetEntity:Entreprise::class)]
+    #[ORM\JoinColumn(name:"idEntreprise", referencedColumnName:"id")]
+    private ?Entreprise $entreprise = null;
 
     #[ORM\Column(length: 128)]
     private ?string $nomOffre = null;
@@ -32,30 +31,22 @@ class Offre
     #[ORM\Column(length: 128)]
     private ?string $lieux = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+
+    #[ORM\Column(type:Types::DATE_MUTABLE)]
+
     private ?\DateTimeInterface $jourDeb = null;
 
     #[ORM\Column]
     private ?int $nbPlace = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+
+    #[ORM\Column(length:255, nullable:true)]
+
     private ?string $descrip = null;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIDOffre(): ?int
-    {
-        return $this->ID_offre;
-    }
-
-    public function setIDOffre(int $ID_offre): static
-    {
-        $this->ID_offre = $ID_offre;
-
-        return $this;
     }
 
     public function getIDType(): ?int
@@ -70,14 +61,14 @@ class Offre
         return $this;
     }
 
-    public function getIDEntreprise(): ?int
+    public function getEntreprise(): ?Entreprise
     {
-        return $this->ID_entreprise;
+        return $this->entreprise;
     }
 
-    public function setIDEntreprise(?int $ID_entreprise): static
+    public function setEntreprise(?Entreprise $entreprise): static
     {
-        $this->ID_entreprise = $ID_entreprise;
+        $this->entreprise = $entreprise;
 
         return $this;
     }
