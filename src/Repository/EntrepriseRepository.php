@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Entreprise;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\AbstractQuery;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -57,6 +59,13 @@ class EntrepriseRepository extends ServiceEntityRepository
             ))->setParameter('searchText', '%'.$searchText.'%');
         }
 
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findEntreprises(): array
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->orderBy('e.nomEnt', 'ASC');
         return $qb->getQuery()->getResult();
     }
 
