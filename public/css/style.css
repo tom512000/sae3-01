@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cabin:wght@700&display=swap');
 
+/* CSS global */
 :root {
     /* Rouge clair RGB(228, 55, 25) */
     --main-color: #E43719;
@@ -29,21 +30,13 @@ html, body {
     background-color: var(--third-color);
 }
 
+/* CSS templates/base.html.twig */
 div.container-fluid img {
     height: 30px;
 }
 
 a.btn-connection {
     margin-left: 25px;
-}
-
-form.d-flex button, a.btn-connection {
-    border-color: var(--main-color);
-}
-
-form.d-flex button:hover, a.btn-connection:hover {
-    border-color: var(--main-color);
-    background-color: var(--main-color);
 }
 
 li.nav-item a {
@@ -57,6 +50,17 @@ li.nav-item a:hover {
     border-radius: 10px;
 }
 
+/* CSS Formulaires */
+form.d-flex button, a.btn-connection {
+    border-color: var(--main-color);
+}
+
+form.d-flex button:hover, a.btn-connection:hover {
+    border-color: var(--main-color);
+    background-color: var(--main-color);
+}
+
+/* CSS offre/index.html.twig */
 div.carousel-item {
     height: 500px;
 }
@@ -97,7 +101,50 @@ li.ligne_offre {
     margin-left: 10%;
 }
 
-table.offre {
+/* CSS entreprise/index.html.twig */
+div.entreprise_menu {
+    height: 500px;
+    background: url("../img/entreprise.jpg") no-repeat 75% 25%;
+    background-size: cover;
+    margin-bottom: 40px;
+}
+
+div.entreprise_menu h1 {
+    position: relative;
+    padding-top: 400px;
+    margin-left: 730px;
+    color: #ffffff;
+    text-shadow: #000000 1px 0 10px;
+    font-family: 'Cabin', sans-serif;
+}
+
+ul.liste_entreprises {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+li.ligne_entreprise {
+    width: 40%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 40px;
+    box-sizing: border-box;
+}
+
+td.link {
+    width: 35px;
+}
+
+img.link {
+    width: 35px;
+    height: 35px;
+}
+
+/* CSS Tables */
+table.donnees {
     width: 100%;
     border-collapse: collapse;
     font-size: 0.9em;
@@ -108,7 +155,7 @@ table.offre {
     overflow: hidden;
 }
 
-table.offre thead tr {
+table.donnees thead tr {
     background-color: var(--main-color);
     color: #ffffff;
     text-align: left;
@@ -116,27 +163,27 @@ table.offre thead tr {
     font-size: 18px;
 }
 
-table.offre th, table.offre td {
+table.donnees th, table.donnees td {
     padding: 12px 15px;
 }
 
-table.offre tbody tr {
+table.donnees tbody tr {
     border-bottom: 1px solid #dddddd;
 }
 
-table.offre tbody tr:nth-of-type(odd) {
+table.donnees tbody tr:nth-of-type(odd) {
     background-color: #ffffff;
 }
 
-table.offre tbody tr:nth-of-type(even) {
+table.donnees tbody tr:nth-of-type(even) {
     background-color: #f3f3f3;
 }
 
-table.offre tbody tr:last-of-type {
+table.donnees tbody tr:last-of-type {
     border-bottom: 2px solid var(--main-color);
 }
 
-table.offre tbody tr:hover {
+table.donnees tbody tr:hover {
     font-weight: bold;
     color: var(--main-color);
 }

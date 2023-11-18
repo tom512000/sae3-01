@@ -7,7 +7,7 @@
     </form>
 {% endblock %}
 
-{% block title %}Offres{% endblock %}
+{% block title %}📋 Offres{% endblock %}
 
 {% block body %}
     <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
@@ -35,7 +35,7 @@
     <ul class="liste_offres">
         {% for Offre in Offres %}
             <li class="ligne_offre">
-                <table class="offre">
+                <table class="donnees">
                     <thead>
                         <tr>
                             <th>Recruteur·se</th>
@@ -49,7 +49,7 @@
                     <tbody>
                         <tr>
                             <td>{{ Offre.nomOffre }}</td>
-                            <td><a  href="entreprise/{{ Offre.getEntreprise().getId() }}">{{ Offre.getEntreprise().getNomEnt() }}</a></td>
+                            <td><a href="entreprise/{{ Offre.getEntreprise().getId() }}">{{ Offre.getEntreprise().getNomEnt() }}</a></td>
                             <td>{{ Offre.getJourDeb() }}</td>
                             <td>{{ Offre.nbPlace }}</td>
                             <td>{{ Offre.duree }} jours</td>

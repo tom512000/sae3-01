@@ -7,29 +7,38 @@
     </form>
 {% endblock %}
 
-{% block title %}Hello EntrepriseController!{% endblock %}
+{% block title %}🏭 Entreprises{% endblock %}
 
 {% block body %}
     {% if Entreprises|length > 1  %}
-        <h1>Liste des entreprises</h1>
-        <ul>
+        <div class="entreprise_menu">
+            <h1>LISTE DES ENTREPRISES</h1>
+        </div>
+        <ul class="liste_entreprises">
             {% for Entreprise in Entreprises %}
-                <li>
-                    <table>
+                <li class="ligne_entreprise">
+                    <table class="donnees">
                         <thead>
                         <tr>
-                            <th colspan="2">{{ Entreprise.nomEnt }}</th>
+                            <th>Entreprise</th>
+                            <th>Informations</th>
+                            <th>Site</th>
                         </tr>
                         </thead>
+                        <tbody>
                         <tr>
-                            <td colspan="2">{{ Entreprise.adresse }}</td>
+                            <td rowspan="2">{{ Entreprise.nomEnt }}</td>
+                            <td>{{ Entreprise.adresse }}</td>
+                            <td rowspan="2" class="link">
+                                <a href="{{ Entreprise.siteWeb }}" target="_blank">
+                                    <img class="link" src="{{ 'img/link.svg' }}" alt="Link icon">
+                                </a>
+                            </td>
                         </tr>
                         <tr>
-                            <td colspan="2">{{ Entreprise.mail }}</td>
+                            <td rowspan="2">{{ Entreprise.mail }}</td>
                         </tr>
-                        <tr>
-                            <td colspan="2">{{ Entreprise.siteWeb }}</td>
-                        </tr>
+                        </tbody>
                     </table>
                 </li>
                 <br>
