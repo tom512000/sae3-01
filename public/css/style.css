@@ -33,6 +33,10 @@ div.container-fluid img {
     height: 30px;
 }
 
+a.btn-connection {
+    margin-left: 25px;
+}
+
 form.d-flex button, a.btn-connection {
     border-color: var(--main-color);
 }
@@ -42,8 +46,15 @@ form.d-flex button:hover, a.btn-connection:hover {
     background-color: var(--main-color);
 }
 
-button.navbar-toggler {
-    margin-left: 30px;
+li.nav-item a {
+    border-radius: 10px;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+li.nav-item a:hover {
+    background-color: var(--main-color);
+    border-radius: 10px;
 }
 
 div.carousel-item {

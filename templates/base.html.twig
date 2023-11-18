@@ -11,37 +11,6 @@
     {% endblock %}
 </head>
 <body>
-    <!--<nav class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">Accueil</a>
-            {% if is_granted('IS_AUTHENTICATED') %}
-                <a class="btn btn-outline-danger" href="/logout">Deconnexion</a>
-            {% else %}
-                <a class="btn btn-outline-success" href="/login">Se Connecter</a>
-            {% endif %}
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Menu
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/offre">Offres</a></li>
-                            <li><a class="dropdown-item" href="/entreprise">Entreprise</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                {% block form %}
-                {% endblock %}
-            </div>
-        </div>
-    </nav>-->
-
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <nav class="navbar bg-body-tertiary">
@@ -52,29 +21,24 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active text-white fs-5" aria-current="page" href="/">Accueil</a>
+                        <a class="nav-link active text-white fs-5 text-primary" aria-current="page" href="/">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active text-white fs-5" href="/offre">Offres</a>
+                        <a class="nav-link active text-white fs-5 text-primary" href="/offre">Offres</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active text-white fs-5" href="/entreprise">Entreprises</a>
+                        <a class="nav-link active text-white fs-5 text-primary" href="/entreprise">Entreprises</a>
                     </li>
                 </ul>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search">
                     <button class="btn btn-outline-success text-white" type="submit">🔎</button>
                 </form>
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 {% if is_granted('IS_AUTHENTICATED') %}
                     <a class="btn btn-outline-danger text-white btn-connection" href="/logout">Deconnexion</a>
                 {% else %}
                     <a class="btn btn-outline-success text-white btn-connection" href="/login">Se Connecter</a>
                 {% endif %}
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                </ul>
             </div>
         </div>
     </nav>
