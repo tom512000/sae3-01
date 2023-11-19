@@ -30,10 +30,8 @@
                         <a class="nav-link active text-white fs-5 text-primary" href="/entreprise">Entreprises</a>
                     </li>
                 </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search">
-                    <button class="btn btn-outline-success text-white" type="submit">🔎</button>
-                </form>
+                {% block form %}
+                {% endblock %}
                 {% if is_granted('IS_AUTHENTICATED') %}
                     <a class="btn btn-outline-danger text-white btn-connection" href="/logout">Deconnexion</a>
                 {% else %}
