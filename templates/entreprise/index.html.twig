@@ -3,69 +3,89 @@
 {% block form %}
     <form class="d-flex" role="search" action="{{ path('app_entreprise_index') }}" method="get">
         <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search" name="textRecherche" value="{{ textRecherche|default }}">
-        <button class="btn btn-outline-success" type="submit">Rechercher</button>
+        <button class="btn btn-outline-success" type="submit">🔎</button>
     </form>
 {% endblock %}
 
 {% block title %}🏭 Entreprises{% endblock %}
 
 {% block body %}
-    {% if Entreprises|length > 1  %}
+    {# Quand on clic sur le lien pour recherche une entreprise spécifique d'une offre #}
+    {% if not Entreprises is iterable %}
         <div class="entreprise_menu">
-            <h1>LISTE DES ENTREPRISES</h1>
+            <h1>DETAIL DE L'ENTREPRISE</h1>
         </div>
+
         <ul class="liste_entreprises">
-            {% for Entreprise in Entreprises %}
-                <li class="ligne_entreprise">
-                    <table class="donnees">
-                        <thead>
-                        <tr>
-                            <th>Entreprise</th>
-                            <th>Informations</th>
-                            <th>Site</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td rowspan="2">{{ Entreprise.nomEnt }}</td>
-                            <td>{{ Entreprise.adresse }}</td>
-                            <td rowspan="2" class="link">
-                                <a href="{{ Entreprise.siteWeb }}" target="_blank">
-                                    <img class="link" src="{{ 'img/link.svg' }}" alt="Link icon">
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td rowspan="2">{{ Entreprise.mail }}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </li>
-                <br>
-                <br>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <h1>Détails de l'entreprise</h1>
-        <ul>
-            <li>
-                <table>
+            <li class="ligne_entreprise">
+                <table class="donnees">
                     <thead>
                     <tr>
-                        <th colspan="2">{{ Entreprises.nomEnt }}</th>
+                        <th>Entreprise</th>
+                        <th>Informations</th>
+                        <th>Site</th>
                     </tr>
                     </thead>
+                    <tbody>
                     <tr>
-                        <td colspan="2">{{ Entreprises.adresse }}</td>
+                        <td rowspan="2">{{ Entreprises.nomEnt }}</td>
+                        <td>{{ Entreprises.adresse }}</td>
+                        <td rowspan="2" class="link">
+                            <a href="{{ Entreprises.siteWeb }}" target="_blank">
+                                <img class="link" src="{{ '/img/link.svg' }}" alt="Link icon">
+                            </a>
+                        </td>
                     </tr>
                     <tr>
-                        <td colspan="2">{{ Entreprises.mail }}</td>
+                        <td rowspan="2">{{ Entreprises.mail }}</td>
                     </tr>
-                    <tr>
-                        <td colspan="2">{{ Entreprises.siteWeb }}</td>
-                    </tr>
+                    </tbody>
                 </table>
             </li>
         </ul>
+
+    {% else %}
+        {# Quand on recherche ou non une entreprise #}
+        {% if Entreprises|length > 0  %}
+            <div class="entreprise_menu">
+                <h1>LISTE DES ENTREPRISES</h1>
+            </div>
+            <ul class="liste_entreprises">
+                {% for Entreprise in Entreprises %}
+                    <li class="ligne_entreprise">
+                        <table class="donnees">
+                            <thead>
+                            <tr>
+                                <th>Entreprise</th>
+                                <th>Informations</th>
+                                <th>Site</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td rowspan="2">{{ Entreprise.nomEnt }}</td>
+                                <td>{{ Entreprise.adresse }}</td>
+                                <td rowspan="2" class="link">
+                                    <a href="{{ Entreprise.siteWeb }}" target="_blank">
+                                        <img class="link" src="{{ '/img/link.svg' }}" alt="Link icon">
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">{{ Entreprise.mail }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </li>
+                    <br>
+                    <br>
+                {% endfor %}
+            </ul>
+        {% else %}
+            {# Quand aucun entreprise n'à été trouver #}
+            <div class="entreprise_menu">
+                <h1>Aucune entreprise trouver</h1>
+            </div>
+        {% endif %}
     {% endif %}
 {% endblock %}
