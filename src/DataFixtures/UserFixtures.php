@@ -11,7 +11,7 @@ class UserFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        UserFactory::createOne(['lastName'=>'Valentin','firstName'=>'Cladel','email'=>'valentin.cladel@gmail.com']);
+        UserFactory::createOne(['lastName'=>'Valentin','firstName'=>'Cladel','email'=>'valentin.cladel@gmail.com','roles'=>['ROLE_ADMIN']]);
         UserFactory::createMany(10);
     }
 }
