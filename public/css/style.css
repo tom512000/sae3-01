@@ -1,6 +1,8 @@
-/* Police d'écriture */
+/* Polices d'écriture */
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cabin:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
 
 /* CSS global */
 :root {
@@ -8,7 +10,7 @@
     --main-color: #E43719;
     /* Rouge foncé RGB(92, 25, 22)  */
     --second-color: #5C1916;
-    /* Gris foncé RGB(48, 48, 48)   */
+    /* Gris foncé  RGB(48, 48, 48)  */
     --third-color: #303030;
 }
 
@@ -24,9 +26,14 @@ img {
     user-select: none;
 }
 
-html, body {
+html {
     width: 100%;
-    height: auto;
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
     background-color: var(--third-color);
 }
 
@@ -186,4 +193,61 @@ table.donnees tbody tr:last-of-type {
 table.donnees tbody tr:hover {
     font-weight: bold;
     color: var(--main-color);
+}
+
+/* CSS security/index.html.twig */
+form.login_bloc {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(100% - 98px);
+    background: url("../img/fond_login.avif") no-repeat center;
+    background-size: cover;
+}
+
+div.relative_bloc {
+    position: absolute;
+}
+
+div.login_form {
+    width: 30%;
+    height: 80%;
+    position: relative;
+    padding: 25px;
+    border-radius: 20px;
+    background-color: var(--third-color);
+    box-shadow: 8px 8px 0 #000000;
+}
+
+div.login_form h1 {
+    text-align: center;
+    color: #ffffff;
+    font-family: 'Archivo Black', sans-serif;
+}
+
+div.login_form input {
+    margin-bottom: 20px;
+    margin-top: 5px;
+}
+
+div.login_form label {
+    color: #ffffff;
+    font-family: 'Raleway', sans-serif;
+}
+
+div.login_form button {
+    width: calc(100% - 50px);
+    height: 38px;
+    position: absolute;
+    bottom: 22px;
+    left: 0;
+    margin-left: 25px;
+    border: 1px solid var(--third-color);
+    border-radius: 5px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    color: white;
+    background-color: var(--main-color);
 }

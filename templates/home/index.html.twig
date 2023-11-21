@@ -1,13 +1,16 @@
 {% extends 'base.html.twig' %}
 
+{% block icon %}
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.0em%22 font-size=%2296%22>🏠</text></svg>">
+{% endblock %}
+{% block title %}Accueil{% endblock %}
+
 {% block form %}
     <form class="d-flex" role="search" action="{{ path('app_offre_index') }}" method="get">
         <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search" name="textRechercheEntreprise" value="{{ textRechercheEntreprise|default }}">
         <button class="btn btn-outline-success" type="submit">🔎</button>
     </form>
 {% endblock %}
-
-{% block title %}🏠 Accueil{% endblock %}
 
 {% block body %}
 <h1>Accueil</h1>
