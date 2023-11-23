@@ -33,7 +33,11 @@
                 </ul>
                 {% block form %}
                 {% endblock %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a class="btn btn-outline-danger text-white btn-connection" href="/admin">Dashboard</a>
+                {% endif %}
                 {% if is_granted('IS_AUTHENTICATED') %}
+                    <a class="btn btn-outline-danger text-white btn-connection" href="/profil">Profil</a>
                     <a class="btn btn-outline-danger text-white btn-connection" href="/logout">Deconnexion</a>
                 {% else %}
                     <a class="btn btn-outline-success text-white btn-connection" href="/login">Se Connecter</a>
