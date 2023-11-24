@@ -47,14 +47,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->inscrires = new ArrayCollection();
     }
     #[ORM\Column(type: 'string')]
-    private string $cv;
+    private ?string $cv = null;
 
-    public function getCv(): string
+    public function getCv(): ?string
     {
         return $this->cv;
     }
 
-    public function setCv(string $cv): self
+    public function setCv(?string $cv): self
     {
         $this->cv = $cv;
 
@@ -62,14 +62,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     #[ORM\Column(type: 'string')]
-    private string $lettreMotiv;
+    private ?string $lettreMotiv = null;
 
-    public function getLettreMotiv(): string
+    public function getLettreMotiv(): ?string
     {
         return $this->lettreMotiv;
     }
 
-    public function setLettreMotiv(string $lettreMotiv): self
+    public function setLettreMotiv(?string $lettreMotiv): self
     {
         $this->lettreMotiv = $lettreMotiv;
 
