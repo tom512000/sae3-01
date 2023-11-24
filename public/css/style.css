@@ -52,6 +52,14 @@ li.nav-item a {
     margin-right: 3px;
 }
 
+li.dropdown a {
+    border-radius: 5px;
+}
+
+li.dropdown a:hover {
+    border-radius: 5px;
+}
+
 li.nav-item a:hover {
     background-color: var(--main-color);
     border-radius: 10px;
@@ -114,15 +122,6 @@ div.entreprise_menu {
     background: url("../img/entreprise.jpg") no-repeat 75% 25%;
     background-size: cover;
     margin-bottom: 40px;
-}
-
-div.entreprise_menu h1 {
-    position: relative;
-    padding-top: 400px;
-    margin-left: 730px;
-    color: #ffffff;
-    text-shadow: #000000 1px 0 10px;
-    font-family: 'Cabin', sans-serif;
 }
 
 ul.liste_entreprises {
