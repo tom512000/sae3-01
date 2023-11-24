@@ -11,12 +11,12 @@ class Inscrire
 {
     #[ORM\Id]
     #[ORM\ManyToOne(inversedBy: 'inscrires')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name:"idOffre", referencedColumnName:"id")]
     private ?Offre $Offre = null;
 
     #[ORM\Id]
     #[ORM\ManyToOne(inversedBy: 'inscrires')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name:"idUser", referencedColumnName:"id")]
     private ?User $User = null;
 
     #[ORM\Column]

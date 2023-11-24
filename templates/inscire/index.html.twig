@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}InscireController!{% endblock %}
+
+{% block body %}
+    {% for inscription in inscriptions %}
+        <li>{{ inscription.Offre.nomOffre }}</li>
+    {% endfor %}
+{% endblock %}
