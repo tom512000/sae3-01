@@ -37,6 +37,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\Column(type: 'string')]
+    private string $cv;
+
+    public function getCv(): string
+    {
+        return $this->cv;
+    }
+
+    public function setCv(string $cv): self
+    {
+        $this->cv = $cv;
+
+        return $this;
+    }
+
+    #[ORM\Column(type: 'string')]
+    private string $lettreMotiv;
+
+    public function getLettreMotiv(): string
+    {
+        return $this->lettreMotiv;
+    }
+
+    public function setLettreMotiv(string $lettreMotiv): self
+    {
+        $this->lettreMotiv = $lettreMotiv;
+
+        return $this;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
