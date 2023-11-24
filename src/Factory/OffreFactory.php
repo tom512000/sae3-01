@@ -5,6 +5,7 @@ namespace App\Factory;
 use App\Entity\Offre;
 use App\Repository\EntrepriseRepository;
 use App\Repository\OffreRepository;
+use App\Repository\TypeRepository;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\RepositoryProxy;
@@ -37,12 +38,14 @@ final class OffreFactory extends ModelFactory
      */
     private \Transliterator $transliterator;
     private EntrepriseRepository  $entrepriseRepository;
+    private TypeRepository  $typeRepository;
 
-    public function __construct(EntrepriseRepository $entrepriseRepository)
+    public function __construct(EntrepriseRepository $entrepriseRepository, TypeRepository $typeRepository)
     {
         parent::__construct();
         $this->transliterator = \Transliterator::create('Any-Lower; Latin-ASCII; Lower()');
         $this->entrepriseRepository = $entrepriseRepository;
+        $this->typeRepository = $typeRepository;
     }
 
     /**
@@ -53,9 +56,10 @@ final class OffreFactory extends ModelFactory
     protected function getDefaults(): array
     {
         $existingEntrepriseIds = $this->entrepriseRepository->findEntreprises();
+        $existingTypesIds = $this->typeRepository->findTypesIds();
 
         return [
-            'ID_type' => self::faker()->randomNumber(),
+            'Type' => self::faker()->randomElement($existingTypesIds),
             'entreprise' => self::faker()->randomElement($existingEntrepriseIds),
             'duree' => self::faker()->numberBetween($min = 5, $max = 300),
             'jourDeb' => self::faker()->dateTime(),
