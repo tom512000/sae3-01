@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\OffreRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -43,6 +45,14 @@ class Offre
     #[ORM\Column(length:255, nullable:true)]
 
     private ?string $descrip = null;
+
+    #[ORM\OneToMany(mappedBy: 'Offre', targetEntity: Inscrire::class)]
+    private Collection $inscrires;
+
+    public function __construct()
+    {
+        $this->inscrires = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -141,6 +151,36 @@ class Offre
     public function setDescrip(?string $descrip): static
     {
         $this->descrip = $descrip;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Inscrire>
+     */
+    public function getInscrires(): Collection
+    {
+        return $this->inscrires;
+    }
+
+    public function addInscrire(Inscrire $inscrire): static
+    {
+        if (!$this->inscrires->contains($inscrire)) {
+            $this->inscrires->add($inscrire);
+            $inscrire->setOffre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInscrire(Inscrire $inscrire): static
+    {
+        if ($this->inscrires->removeElement($inscrire)) {
+            // set the owning side to null (unless already changed)
+            if ($inscrire->getOffre() === $this) {
+                $inscrire->setOffre(null);
+            }
+        }
 
         return $this;
     }

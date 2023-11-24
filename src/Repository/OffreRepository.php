@@ -69,5 +69,12 @@ class OffreRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function findOffresIds(): array
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->orderBy('o.nomOffre', 'ASC');
+        return $qb->getQuery()->getResult();
+    }
+
 }
 

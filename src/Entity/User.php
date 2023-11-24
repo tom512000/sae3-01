@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -37,6 +39,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\OneToMany(mappedBy: 'User', targetEntity: Inscrire::class)]
+    private Collection $inscrires;
+
+    public function __construct()
+    {
+        $this->inscrires = new ArrayCollection();
+    }
     #[ORM\Column(type: 'string')]
     private string $cv;
 
@@ -205,5 +214,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, Inscrire>
+     */
+    public function getInscrires(): Collection
+    {
+        return $this->inscrires;
+    }
+
+    public function addInscrire(Inscrire $inscrire): static
+    {
+        if (!$this->inscrires->contains($inscrire)) {
+            $this->inscrires->add($inscrire);
+            $inscrire->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInscrire(Inscrire $inscrire): static
+    {
+        if ($this->inscrires->removeElement($inscrire)) {
+            // set the owning side to null (unless already changed)
+            if ($inscrire->getUser() === $this) {
+                $inscrire->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }
