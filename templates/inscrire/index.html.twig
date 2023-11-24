@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}InscireController!{% endblock %}
+
+{% block body %}
+    <h1>Vos inscriptions</h1>
+    <ul class="liste_offres">
+        {% for inscription in inscriptions %}
+            <li class="ligne_offre">
+                <table class="donnees">
+                    <thead>
+                    <tr>
+                        <th>Nom de l'offre</th>
+                        <th>Entreprise</th>
+                        <th>Jour</th>
+                        <th>Place·s</th>
+                        <th>Durée</th>
+                        <th>Lieu</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{ inscription.Offre.nomOffre }}</td>
+                        <td><a href="entreprise/{{ inscription.Offre.getEntreprise().getId() }}">{{ inscription.Offre.getEntreprise().getNomEnt() }}</a></td>
+                        <td>{{ inscription.Offre.getJourDebString() }}</td>
+                        <td>{{ inscription.Offre.nbPlace }}</td>
+                        <td>{{ inscription.Offre.duree }} jours</td>
+                        <td>{{ inscription.Offre.lieux }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">{{ inscription.Offre.getDescrip() }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </li>
+            <br>
+            <br>
+        {% endfor %}
+    </ul>
+{% endblock %}

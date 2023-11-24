@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Factory\EntrepriseFactory;
+use App\Factory\InscrireFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -12,7 +12,7 @@ class InscrireFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        EntrepriseFactory::createMany(10);
+        InscrireFactory::createMany(60);
     }
     public function getDependencies()
     {
