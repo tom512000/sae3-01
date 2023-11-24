@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Security;
 
 class InscireController extends AbstractController
 {
-    #[Route('/inscire', name: 'app_inscire')]
+    #[Route('/inscription', name: 'app_inscire')]
     public function index(InscrireRepository $inscrireRepository, Security $security): Response
     {
         $user = $security->getUser();

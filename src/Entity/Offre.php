@@ -124,6 +124,12 @@ class Offre
         return $this->jourDeb;
     }
 
+    public function getJourDebString(): string
+    {
+        return $this->jourDeb->format('d F Y');
+    }
+
+
     public function setJourDeb(\DateTimeInterface $jourDeb): static
     {
         $this->jourDeb = $jourDeb;
