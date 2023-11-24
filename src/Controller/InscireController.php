@@ -20,7 +20,7 @@ class InscireController extends AbstractController
 
             $inscriptions = $inscrireRepository->findByUserId($userId);
 
-            return $this->render('inscire/index.html.twig', [
+            return $this->render('inscrire/index.html.twig', [
                 'inscriptions' => $inscriptions,
             ]);
         } else {
