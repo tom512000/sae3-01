@@ -33,6 +33,7 @@ Ensuite, sur GitLab, <span style="color: green">acceptez le merge-request</span>
 
 ### Scripts
 - `composer start` : Lance le serveur web de test.
+- `composer stop` : Arrête le serveur web de test.
 - `composer test:cs` : Lance la commande de vérification du code par PHP CS Fixer.
 - `composer fix:cs` : Lance la commande de correction du code par PHP CS Fixer.
 - `composer test:codeception` : Nettoie le répertoire « _output » et le code généré par Codeception, initialise la base de données de test et lance les tests de Codeception.

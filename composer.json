@@ -85,6 +85,9 @@
             "Composer\\Config::disableProcessTimeout",
             "symfony serve"
         ],
+        "stop": [
+            "symfony server:stop"
+        ],
         "fix:cs": [
             "php-cs-fixer fix"
         ],
@@ -111,6 +114,7 @@
     },
     "scripts-descriptions": {
         "start" : "Run Test Web server",
+        "stop" : "Stop Test Web server",
         "fix:cs": "Fix PHP code with PHP CS Fixer",
         "test:cs" : "Test PHP code with PHP CS Fixer",
         "test:codeception" : "Nettoie le répertoire « _output » et le code généré par Codeception, initialise la base de données de test et lance les tests de Codeception",

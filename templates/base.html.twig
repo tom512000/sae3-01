@@ -31,16 +31,18 @@
                         <a class="nav-link active text-white fs-5 text-primary" href="/entreprise">Entreprises</a>
                     </li>
                 </ul>
-                {% block form %}
-                {% endblock %}
-                {% if is_granted('ROLE_ADMIN') %}
-                    <a class="btn btn-outline-danger text-white btn-connection" href="/admin">Dashboard</a>
-                {% endif %}
-                {% if is_granted('IS_AUTHENTICATED') %}
-                    <a class="btn btn-outline-danger text-white btn-connection" href="/profil">Profil</a>
-                    <a class="btn btn-outline-danger text-white btn-connection" href="/logout">Deconnexion</a>
-                {% else %}
+                {% block form %}{% endblock %}
+                {% if not is_granted('IS_AUTHENTICATED') %}
                     <a class="btn btn-outline-success text-white btn-connection" href="/login">Se Connecter</a>
+                {% else %}
+                    <a class="btn btn-outline-danger text-white btn-connection" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown ⤵️</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="btn btn-outline-danger" href="/profil">Profil</a></li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li><a class="btn btn-outline-danger" href="/admin">Dashboard</a></li>
+                        {% endif %}
+                    </ul>
+                    <a class="btn btn-outline-danger text-white btn-connection" href="/logout">Deconnexion</a>
                 {% endif %}
             </div>
         </div>
