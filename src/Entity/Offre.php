@@ -16,9 +16,6 @@ class Offre
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $ID_type = null;
-
 
     #[ORM\ManyToOne(targetEntity:Entreprise::class)]
     #[ORM\JoinColumn(name:"idEntreprise", referencedColumnName:"id")]
@@ -49,6 +46,10 @@ class Offre
     #[ORM\OneToMany(mappedBy: 'Offre', targetEntity: Inscrire::class)]
     private Collection $inscrires;
 
+    #[ORM\ManyToOne(inversedBy: 'offres')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Type $Type = null;
+
     public function __construct()
     {
         $this->inscrires = new ArrayCollection();
@@ -59,17 +60,6 @@ class Offre
         return $this->id;
     }
 
-    public function getIDType(): ?int
-    {
-        return $this->ID_type;
-    }
-
-    public function setIDType(int $ID_type): static
-    {
-        $this->ID_type = $ID_type;
-
-        return $this;
-    }
 
     public function getEntreprise(): ?Entreprise
     {
@@ -187,6 +177,18 @@ class Offre
                 $inscrire->setOffre(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getType(): ?Type
+    {
+        return $this->Type;
+    }
+
+    public function setType(?Type $Type): static
+    {
+        $this->Type = $Type;
 
         return $this;
     }
