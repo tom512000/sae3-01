@@ -22,21 +22,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active text-white fs-5 text-primary" aria-current="page" href="/">Accueil</a>
+                            <a class="nav-link fs-5" aria-current="page" href="/">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active text-white fs-5 text-primary" href="/offre">Offres</a>
+                            <a class="nav-link fs-5" href="/offre">Offres</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active text-white fs-5 text-primary" href="/entreprise">Entreprises</a>
+                            <a class="nav-link fs-5" href="/entreprise">Entreprises</a>
                         </li>
-                    </ul>
-                    {% block form %}{% endblock %}
-                    {% if not is_granted('IS_AUTHENTICATED') %}
-                        <a class="btn btn-outline-success text-white btn-connection" href="/login">Se Connecter</a>
-                    {% else %}
-                        <div class="dropdown">
-                            <a class="btn btn-outline-danger text-white btn-connection dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mon compte</a>
+                        <li class="nav-item dropdown fs-5">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mon compte</a>
                             <ul class="dropdown-menu">
                                 <li>
                                     <a class="btn btn-outline-danger dropdown-item" href="/profil">Mon Profil</a>
@@ -50,7 +45,12 @@
                                     </li>
                                 {% endif %}
                             </ul>
-                        </div>
+                        </li>
+                    </ul>
+                    {% block form %}{% endblock %}
+                    {% if not is_granted('IS_AUTHENTICATED') %}
+                        <a class="btn btn-outline-success text-white btn-connection" href="/login">Se Connecter</a>
+                    {% else %}
                         <a class="btn btn-outline-danger text-white btn-connection" href="/logout">Deconnexion</a>
                     {% endif %}
                 </div>

@@ -34,6 +34,7 @@ html {
 body {
     width: 100%;
     height: 100%;
+    margin-top: 64px;
     background-color: var(--third-color);
 }
 
@@ -46,43 +47,22 @@ a.btn-connection {
     margin-left: 25px;
 }
 
-/*li.nav-item a {
-    border-radius: 10px;
-    margin-left: 3px;
-    margin-right: 3px;
-}
-
-li.nav-item a:hover {
-    background-color: var(--main-color);
-    border-radius: 10px;
-}*/
-
 body > nav.navbar {
     background-color: var(--third-color);
     border-bottom: 2px solid var(--main-color);
 }
 
-ul.navbar-nav li {
-    position: relative;
+ul.navbar-nav > li {
     font-family: 'Cabin', sans-serif;
 }
 
-ul.navbar-nav li:hover {
-    cursor: pointer;
+.navbar-nav > li.nav-item > a {
+    color: #ffffff;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav > li.nav-item > a:hover {
     color: var(--main-color);
-}
-
-ul.navbar-nav li::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    border-bottom: 3px solid var(--main-color);
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-ul.navbar-nav li:hover::after {
-    opacity: 1;
 }
 
 /* CSS Formulaires */
