@@ -12,50 +12,56 @@
     {% endblock %}
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <nav class="navbar bg-body-tertiary">
-                <div class="container-fluid">
-                    <img src="{{ asset('img/logo.png') }}" alt="Logo">
-                </div>
-            </nav>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active text-white fs-5 text-primary" aria-current="page" href="/">Accueil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active text-white fs-5 text-primary" href="/offre">Offres</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active text-white fs-5 text-primary" href="/entreprise">Entreprises</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active text-white fs-5 text-primary" href="/inscription">inscription</a>
-                    </li>
-                </ul>
-                {% block form %}{% endblock %}
-                {% if not is_granted('IS_AUTHENTICATED') %}
-                    <a class="btn btn-outline-success text-white btn-connection" href="/login">Se Connecter</a>
-                {% else %}
-                    <a class="btn btn-outline-danger text-white btn-connection" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown ⤵️</a>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+                <img src="{{ asset('img/logo.png') }}" alt="Logo">
+            </div>
+        </nav>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active text-white fs-5 text-primary" aria-current="page" href="/">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active text-white fs-5 text-primary" href="/offre">Offres</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active text-white fs-5 text-primary" href="/entreprise">Entreprises</a>
+                </li>
+            </ul>
+            {% block form %}{% endblock %}
+            {% if not is_granted('IS_AUTHENTICATED') %}
+                <a class="btn btn-outline-success text-white btn-connection" href="/login">Se Connecter</a>
+            {% else %}
+                <div class="dropdown">
+                    <a class="btn btn-outline-danger text-white btn-connection dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mon compte</a>
                     <ul class="dropdown-menu">
-                        <li><a class="btn btn-outline-danger" href="/profil">Profil</a></li>
+                        <li>
+                            <a class="btn btn-outline-danger dropdown-item" href="/profil">Mon Profil</a>
+                        </li>
+                        <li>
+                            <a class="btn btn-outline-danger dropdown-item" href="/inscription">Mes Inscriptions</a>
+                        </li>
                         {% if is_granted('ROLE_ADMIN') %}
-                            <li><a class="btn btn-outline-danger" href="/admin">Dashboard</a></li>
+                            <li>
+                                <a class="btn btn-outline-danger dropdown-item" href="/admin">Tableau de bord</a>
+                            </li>
                         {% endif %}
                     </ul>
-                    <a class="btn btn-outline-danger text-white btn-connection" href="/logout">Deconnexion</a>
-                {% endif %}
-            </div>
+                </div>
+                <a class="btn btn-outline-danger text-white btn-connection" href="/logout">Deconnexion</a>
+            {% endif %}
         </div>
-    </nav>
+    </div>
+</nav>
 
-    {% block body %}
-    {% endblock %}
+{% block body %}
+{% endblock %}
 
-    {% block javascripts %}
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    {% endblock %}
-    </body>
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+{% endblock %}
+</body>
 </html>
