@@ -24,7 +24,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Sae3 01');
+            ->setTitle('EduTech Dashboard');
     }
 
     public function configureMenuItems(): iterable
@@ -33,5 +33,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Entreprises', 'fas fa-list', Entreprise::class);
         yield MenuItem::linkToCrud('Offres', 'fas fa-list', Offre::class);
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-list', User::class);
+        yield MenuItem::linkToUrl('Accueil','fa fa-home','/');
     }
 }

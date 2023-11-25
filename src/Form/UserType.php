@@ -4,8 +4,10 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class UserType extends AbstractType
 {
@@ -20,8 +22,32 @@ class UserType extends AbstractType
             ->add('email')
             ->add('roles')
             ->add('password')
-            ->add('cv')
-            ->add('lettreMotiv')
+            ->add('cv', FileType::class, [
+                'label' => 'cv (PDF)', 'mapped' => false,'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '9024k',
+                        'mimeTypes' => [
+                            'application/pdf',
+                            'application/x-pdf',
+                        ],
+                        'mimeTypesMessage' => 'Veuillez uploader un pdf valide',
+                    ])
+                ],
+            ])
+            ->add('lettreMotiv', FileType::class, [
+                'label' => 'Lettre de Motivation (PDF)', 'mapped' => false,'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '9024k',
+                        'mimeTypes' => [
+                            'application/pdf',
+                            'application/x-pdf',
+                        ],
+                        'mimeTypesMessage' => 'Veuillez uploader un pdf valide',
+                    ])
+                ],
+            ])
         ;
     }
 
