@@ -21,31 +21,6 @@ class OffreRepository extends ServiceEntityRepository
         parent::__construct($registry, Offre::class);
     }
 
-//    /**
-//     * @return Offre[] Returns an array of Offre objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('o')
-//            ->andWhere('o.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('o.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Offre
-//    {
-//        return $this->createQueryBuilder('o')
-//            ->andWhere('o.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
-
     public function findByRecent():array{
         $qb = $this->createQueryBuilder('o')
             ->select('o')
@@ -76,5 +51,14 @@ class OffreRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function findByEntrepriseId(int $id): array
+{
+    $qb = $this->createQueryBuilder('o')
+        ->where('o.entreprise = :idEnt')
+        ->orderBy('o.nomOffre', 'ASC');
+    $qb->setParameter('idEnt', $id);
+
+    return $qb->getQuery()->getResult();
+}
 }
 
