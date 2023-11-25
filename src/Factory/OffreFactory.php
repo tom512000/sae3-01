@@ -57,6 +57,12 @@ final class OffreFactory extends ModelFactory
     {
         $existingEntrepriseIds = $this->entrepriseRepository->findEntreprises();
         $existingTypesIds = $this->typeRepository->findTypesIds();
+        $level = self::faker()->numberBetween($min = 0, $max = 5);
+        if ($level == 0){
+            $level = 'BAC';
+        }else{
+            $level = 'BAC +'.$level;
+        }
 
         return [
             'Type' => self::faker()->randomElement($existingTypesIds),
@@ -67,6 +73,7 @@ final class OffreFactory extends ModelFactory
             'nbPlace' => self::faker()->numberBetween($min = 2, $max = 40),
             'nomOffre' => self::faker()->name(),
             'descrip' => self::faker()->realText(),
+            'level' => $level,
         ];
     }
 
