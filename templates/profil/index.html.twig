@@ -12,5 +12,18 @@
     <p>Prenom : {{ app.user.lastName }}</p>
     <p>Téléphone : {{ app.user.phone }}</p>
     <p>Adresse mail : {{ app.user.email }}</p>
+    <p>Date de Naissance : {{ app.user.dateNais }}</p>
+    {% if app.user.cv %}
+        <p>CV enregistré : <a href="{{ asset('uploads/pdf/' ~ app.user.cv) }}">CV (PDF)</a></p>
+    {% else %}
+        <p>CV enregistré : Aucun</p>
+    {% endif %}
+    {% if app.user.lettreMotiv %}
+        <p>Lettre de motivation enregistrée : <a href="{{ asset('uploads/pdf/' ~ app.user.lettreMotiv) }}">Lettre de motivation (PDF)</a></p>
+    {% else %}
+        <p>Lettre de motivation enregistrée : Aucune</p>
+    {% endif %}
+
+    <button type="button" href="/profil/modif">Modifier mon profil</button>
 
 {% endblock %}
