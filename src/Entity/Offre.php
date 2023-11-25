@@ -50,9 +50,16 @@ class Offre
     #[ORM\JoinColumn(nullable: false)]
     private ?Type $Type = null;
 
+    #[ORM\Column(length: 64, nullable: true)]
+    private ?string $level = null;
+
+    #[ORM\OneToMany(mappedBy: 'offre', targetEntity: SkillDemander::class)]
+    private Collection $skillDemanders;
+
     public function __construct()
     {
         $this->inscrires = new ArrayCollection();
+        $this->skillDemanders = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -189,6 +196,48 @@ class Offre
     public function setType(?Type $Type): static
     {
         $this->Type = $Type;
+
+        return $this;
+    }
+
+    public function getLevel(): ?string
+    {
+        return $this->level;
+    }
+
+    public function setLevel(?string $level): static
+    {
+        $this->level = $level;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SkillDemander>
+     */
+    public function getSkillDemanders(): Collection
+    {
+        return $this->skillDemanders;
+    }
+
+    public function addSkillDemander(SkillDemander $skillDemander): static
+    {
+        if (!$this->skillDemanders->contains($skillDemander)) {
+            $this->skillDemanders->add($skillDemander);
+            $skillDemander->setOffre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSkillDemander(SkillDemander $skillDemander): static
+    {
+        if ($this->skillDemanders->removeElement($skillDemander)) {
+            // set the owning side to null (unless already changed)
+            if ($skillDemander->getOffre() === $this) {
+                $skillDemander->setOffre(null);
+            }
+        }
 
         return $this;
     }
