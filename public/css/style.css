@@ -57,12 +57,14 @@ li.nav-item a:hover {
     border-radius: 10px;
 }*/
 
-ul.navbar-nav {
-    font-family: 'Cabin', sans-serif;
+body > nav.navbar {
+    background-color: var(--third-color);
+    border-bottom: 2px solid var(--main-color);
 }
 
 ul.navbar-nav li {
     position: relative;
+    font-family: 'Cabin', sans-serif;
 }
 
 ul.navbar-nav li:hover {
