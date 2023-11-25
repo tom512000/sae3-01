@@ -22,4 +22,14 @@ class OffreController extends AbstractController
             'textRecherche' => $textRechercher,
         ]);
     }
+
+    #[Route('/entreprise/offre/{entrepriseId}', name: 'app_offre_OffreEntreprise', requirements: ['entrepriseId' => '\d+'])]
+    public function OffreEntreprise(int $entrepriseId, OffreRepository $offreRepository): Response
+    {
+        $Offres = $offreRepository->findByEntrepriseId($entrepriseId);
+
+        return $this->render('offre/index.html.twig', [
+            'Offres'=>$Offres,
+        ]);
+    }
 }
