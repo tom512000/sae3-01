@@ -4,12 +4,14 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
@@ -22,10 +24,9 @@ class ProfileController extends AbstractController
         return $this->render('profil/index.html.twig');
     }
 
-    #[Route('/profil/modif', name: 'app_product_new')]
-    public function new(Request $request, SluggerInterface $slugger): Response
+    #[Route('/profil/modif', name: 'app_profile_modif')]
+    public function new(EntityManagerInterface $entityManager,#[CurrentUser] User $user,Request $request, SluggerInterface $slugger): Response
     {
-        $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
@@ -39,7 +40,7 @@ class ProfileController extends AbstractController
 
                 try {
                     $cvFile->move(
-                        $this->getParameter('brochures_directory'),
+                        $this->getParameter('PDF_files'),
                         $newFilename
                     );
                 } catch (FileException $e) {
@@ -63,6 +64,9 @@ class ProfileController extends AbstractController
                 }
                 $user->setLettreMotiv($newFilename);
             }
+
+            $entityManager->flush();
+
             return $this->redirectToRoute('app_profile');
         }
 
