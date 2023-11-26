@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block icon %}
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.0em%22 font-size=%2296%22>📋</text></svg>">
+{% endblock %}
+{% block title %}Offres{% endblock %}
+
+{% block body %}
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
+        <div class="carousel-inner">
+            <div class="carousel-item active carousel1">
+                <h1 class="carousel_titre">DÉCOUVREZ DES OFFRES ATTRAYANTES</h1>
+            </div>
+            <div class="carousel-item carousel2">
+                <h1 class="carousel_titre">EXPLOREZ DES OPPORTUNITÉS PROFESSIONNELLES</h1>
+            </div>
+            <div class="carousel-item carousel3">
+                <h1 class="carousel_titre">INTERAGISSEZ AVEC DES EXPERTS</h1>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <br>
+    <ul class="liste_offres">
+        <li class="ligne_offre">
+            <table class="donnees">
+                <thead>
+                <tr>
+                    <th>Nom de l'offre</th>
+                    <th>Entreprise</th>
+                    <th>Jour</th>
+                    <th>Place·s</th>
+                    <th>Durée</th>
+                    <th>Lieu</th>
+                    <th>Type</th>
+                    <th>Niveau requis</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ Offre.nomOffre }}</td>
+                    <td><a href="entreprise/{{ Offre.getEntreprise().getId() }}">{{ Offre.getEntreprise().getNomEnt() }}</a></td>
+                    <td>{{ Offre.getJourDebString() }}</td>
+                    <td>{{ Offre.nbPlace }}</td>
+                    <td>{{ Offre.duree }} jours</td>
+                    <td>{{ Offre.lieux }}</td>
+                    <td>{{ Offre.Type.libelle }}</td>
+                    <td>{{ Offre.level }}</td>
+                </tr>
+                <tr>
+                    <td colspan="8">{{ Offre.getDescrip() }}</td>
+                </tr>
+                <thead>
+                    <tr>
+                        <th colspan="8">skills requis</th>
+                    </tr>
+                </thead>
+                <tr>
+                    {% for skillDemander in Offre.skillDemanders %}
+                        <td>{{ skillDemander.skill.libelle }}</td>
+                    {% endfor %}
+                </tr>
+                </tbody>
+            </table>
+        </li>
+    </ul>
+{% endblock %}
