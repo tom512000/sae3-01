@@ -46,7 +46,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->inscrires = new ArrayCollection();
     }
-    #[ORM\Column(type: 'string')]
+    #[ORM\Column(type: 'string', nullable: true)]
     private ?string $cv = null;
 
     public function getCv(): ?string
@@ -61,7 +61,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    #[ORM\Column(type: 'string')]
+    #[ORM\Column(type: 'string', nullable: true)]
     private ?string $lettreMotiv = null;
 
     public function getLettreMotiv(): ?string

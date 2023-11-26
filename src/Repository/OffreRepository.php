@@ -30,19 +30,7 @@ class OffreRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function search(string $searchText = ''): array
-    {
-        $qb = $this->createQueryBuilder('o')
-            ->orderBy('o.nomOffre', 'ASC');
 
-        if (!empty($searchText)) {
-            $qb->andWhere($qb->expr()->orX(
-                $qb->expr()->like('o.nomOffre', ':searchText')
-            ))->setParameter('searchText', '%'.$searchText.'%');
-        }
-
-        return $qb->getQuery()->getResult();
-    }
 
     public function findOffresIds(): array
     {
@@ -52,13 +40,39 @@ class OffreRepository extends ServiceEntityRepository
     }
 
     public function findByEntrepriseId(int $id): array
-{
-    $qb = $this->createQueryBuilder('o')
-        ->where('o.entreprise = :idEnt')
-        ->orderBy('o.nomOffre', 'ASC');
-    $qb->setParameter('idEnt', $id);
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->where('o.entreprise = :idEnt')
+            ->orderBy('o.nomOffre', 'ASC');
+        $qb->setParameter('idEnt', $id);
 
-    return $qb->getQuery()->getResult();
-}
+        return $qb->getQuery()->getResult();
+    }
+
+
+
+
+    public function findByTypeAndText(int $type, string $searchText = ''): array
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->orderBy('o.nomOffre', 'ASC');
+
+        if ($type != 0){
+            $qb = $this->createQueryBuilder('o')
+                ->join('o.Type', 't')
+                ->where('t.id = :type')
+                ->setParameter('type', $type)
+                ->orderBy('o.nomOffre', 'ASC');
+        }
+
+
+        if (!empty($searchText)) {
+            $qb->andWhere($qb->expr()->orX(
+                $qb->expr()->like('o.nomOffre', ':searchText')
+            ))->setParameter('searchText', '%' . $searchText . '%');
+        }
+
+        return $qb->getQuery()->getResult();
+    }
 }
 
