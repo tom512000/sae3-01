@@ -48,4 +48,14 @@ class OffreController extends AbstractController
             'entrepriseId' => $entrepriseId
         ]);
     }
+
+    #[Route('/offre/{offreId}', name: 'app_offre_show', requirements: ['offreId' => '\d+'])]
+    public function show(OffreRepository $offreRepository, int $offreId): Response
+    {
+        $Offre = $offreRepository->find($offreId);
+
+        return $this->render('offre/show.html.twig',[
+            'Offre'=>$Offre
+        ]);
+    }
 }
