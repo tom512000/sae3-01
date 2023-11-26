@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Factory\UserFactory;
 use App\Form\UserType;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
+use http\Exception\InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -16,15 +18,16 @@ use Symfony\Component\Security\Http\Attribute\CurrentUser;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-#[IsGranted('ROLE_USER')]
 class ProfileController extends AbstractController
 {
+    #[IsGranted('ROLE_USER')]
     #[Route('/profil', name: 'app_profile')]
     public function index(): Response
     {
         return $this->render('profil/index.html.twig');
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/profil/modif', name: 'app_profile_modif')]
     public function modif(EntityManagerInterface $entityManager,#[CurrentUser] User $user,Request $request, SluggerInterface $slugger): Response
     {
@@ -76,8 +79,8 @@ class ProfileController extends AbstractController
         ]);
     }
 
-    #[Route('/profil/new', name: 'app_profile_new')]
-    public function new(EntityManagerInterface $entityManager,Request $request, SluggerInterface $slugger): Response
+    #[Route('/newUser', name: 'app_profile_new')]
+    public function new(Request $request, SluggerInterface $slugger): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -118,9 +121,13 @@ class ProfileController extends AbstractController
                 $user->setLettreMotiv($newFilename);
             }
 
-            UserFactory::createOne(['lastName'=>$user->getLastName(),'firstName'=>$user->getFirstName(),'email'=>$user->getEmail(),'dateNais'=>$user->getDateNais(),'phone'=>$user->getPhone(),'cv'=>$user->getCv(),'lettreMotiv'=>$user->getLettreMotiv()]);
+            try{
+                UserFactory::createOne(['lastName'=>$user->getLastName(),'firstName'=>$user->getFirstName(),'email'=>$user->getEmail(),'dateNais'=>$user->getDateNais(),'phone'=>$user->getPhone(),'cv'=>$user->getCv(),'lettreMotiv'=>$user->getLettreMotiv()]);
+            } catch (UniqueConstraintViolationException) {
+                return $this->redirectToRoute('app_profile_new');
+            }
 
-            return $this->redirectToRoute('app_profile');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('profil/new.html.twig', [
