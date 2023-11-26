@@ -7,6 +7,7 @@ use App\Repository\EntrepriseRepository;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\RepositoryProxy;
+use function Zenstruck\Foundry\faker;
 
 /**
  * @extends ModelFactory<Entreprise>
@@ -52,12 +53,14 @@ final class EntrepriseFactory extends ModelFactory
         $nomEnt = self::faker()->company();
         $email = $this->generateEmail($nomEnt);
         $siteWeb = $this->generateSiteWeb($nomEnt);
+        $logo = $this->generateLogo($nomEnt);
 
         return [
             'adresse' => self::faker()->address(),
             'nomEnt' => $nomEnt,
             'mail'=>$email,
             'siteWeb' => $siteWeb,
+            'logo'=> $logo,
         ];
     }
 
@@ -88,6 +91,13 @@ final class EntrepriseFactory extends ModelFactory
         $normalizedName = $this->normalizeName(strtr($Name, array(' ' => '.')));
 
         return $normalizedName.'@'.self::faker()->domainName();
+    }
+
+    protected function generateLogo($Name): string
+    {
+        $color1 = self::faker()->safeColorName();
+        $color2 = self::faker()->safeColorName();
+        return "https://placehold.co/500x500/{$color1}/{$color2}?text={$Name}";
     }
 
     protected function generateSiteWeb($Name): string
