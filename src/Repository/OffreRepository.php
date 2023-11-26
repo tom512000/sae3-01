@@ -39,17 +39,28 @@ class OffreRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findByEntrepriseId(int $id): array
+    public function findByTypeAndTextByEntrepriseId(int $id,int $type, string $searchText = ''): array
     {
         $qb = $this->createQueryBuilder('o')
             ->where('o.entreprise = :idEnt')
-            ->orderBy('o.nomOffre', 'ASC');
-        $qb->setParameter('idEnt', $id);
+            ->orderBy('o.jourDeb', 'ASC')
+            ->setParameter('idEnt', $id);
+
+        if ($type != 0){
+            $qb->join('o.Type', 't')
+                ->andwhere('t.id = :type')
+                ->setParameter('type', $type);
+        }
+
+
+        if (!empty($searchText)) {
+            $qb->andWhere($qb->expr()->orX(
+                $qb->expr()->like('o.nomOffre', ':searchText')
+            ))->setParameter('searchText', '%' . $searchText . '%');
+        }
 
         return $qb->getQuery()->getResult();
     }
-
-
 
 
     public function findByTypeAndText(int $type, string $searchText = ''): array

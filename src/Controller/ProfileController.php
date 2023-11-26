@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Factory\UserFactory;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -117,7 +118,7 @@ class ProfileController extends AbstractController
                 $user->setLettreMotiv($newFilename);
             }
 
-            $entityManager->flush();
+            UserFactory::createOne(['lastName'=>$user->getLastName(),'firstName'=>$user->getFirstName(),'email'=>$user->getEmail(),'dateNais'=>$user->getDateNais(),'phone'=>$user->getPhone(),'cv'=>$user->getCv(),'lettreMotiv'=>$user->getLettreMotiv()]);
 
             return $this->redirectToRoute('app_profile');
         }

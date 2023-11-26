@@ -71,7 +71,11 @@ final class OffreFactory extends ModelFactory
             'jourDeb' => self::faker()->dateTime(),
             'lieux' => self::faker()->address(),
             'nbPlace' => self::faker()->numberBetween($min = 2, $max = 40),
+<<<<<<< HEAD
             'nomOffre' => self::faker()->image,
+=======
+            'nomOffre' => self::faker()->jobTitle(),
+>>>>>>> aee0ed23af9d711d547d312d9b21ced97874fb09
             'descrip' => self::faker()->realText(),
             'level' => $level,
         ];
