@@ -7,37 +7,44 @@
 
 {% block body %}
     <h1>Vos inscriptions</h1>
-    <ul class="liste_offres">
+    <div class="bloc_offres">
         {% for inscription in inscriptions %}
-            <li class="ligne_offre">
-                <table class="donnees">
-                    <thead>
-                    <tr>
-                        <th>Nom de l'offre</th>
-                        <th>Entreprise</th>
-                        <th>Jour</th>
-                        <th>Place·s</th>
-                        <th>Durée</th>
-                        <th>Lieu</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>{{ inscription.Offre.nomOffre }}</td>
-                        <td><a href="entreprise/{{ inscription.Offre.getEntreprise().getId() }}">{{ inscription.Offre.getEntreprise().getNomEnt() }}</a></td>
-                        <td>{{ inscription.Offre.getJourDebString() }}</td>
-                        <td>{{ inscription.Offre.nbPlace }}</td>
-                        <td>{{ inscription.Offre.duree }} jours</td>
-                        <td>{{ inscription.Offre.lieux }}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="6">{{ inscription.Offre.getDescrip() }}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </li>
-            <br>
+            <div class="bloc_offre">
+                <div class="bloc_offre_img">
+                    <div class="bloc_1"></div>
+                    <div class="bloc_2">
+                        <a href="entreprise/{{ inscription.Offre.getEntreprise().getId() }}">
+                            <img src="{{ inscription.Offre.getEntreprise().getLogo() }}" alt="Logo de {{ inscription.Offre.getEntreprise().getNomEnt() }}"/>
+                        </a>
+                    </div>
+                </div>
+                <div class="bloc_offre_txt">
+                    <div class="infos1">
+                        <div class="infos1_1 fs-5">
+                            {{ inscription.Offre.nomOffre }}
+                        </div>
+                        <div class="infos1_2">
+                            <div class="infos1_2_1">
+                                {{ inscription.Offre.getJourDebString() }}
+                            </div>
+                            <div class="infos1_2_2">
+                                {{ inscription.Offre.type.libelle }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="infos2">
+                        <div class="infos2_1">
+                            {{ inscription.Offre.nbPlace }} place(s)
+                        </div>
+                        <div class="infos2_2">
+                            {{ inscription.Offre.lieux }}
+                        </div>
+                    </div>
+                    <p class="description">{{ inscription.Offre.getDescrip() }}</p>
+                    <p class="duree"><span>Durée :</span> {{ inscription.Offre.duree }} jour(s)</p>
+                </div>
+            </div>
             <br>
         {% endfor %}
-    </ul>
+    </div>
 {% endblock %}
