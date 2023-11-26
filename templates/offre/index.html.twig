@@ -42,38 +42,9 @@
         </button>
     </div>
     <br>
-    <ul class="liste_offres">
+    <div class="bloc_offres">
         {% for Offre in Offres %}
-            <li class="ligne_offre">
-                <table class="donnees">
-                    <thead>
-                        <tr>
-                            <th>Recruteur·se</th>
-                            <th>Entreprise</th>
-                            <th>Jour</th>
-                            <th>Place·s</th>
-                            <th>Durée</th>
-                            <th>Lieu</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><a href="offre/{{ Offre.id }}"> {{ Offre.nomOffre }}</a></td>
-                            <td><a href="entreprise/{{ Offre.getEntreprise().getId() }}">{{ Offre.getEntreprise().getNomEnt() }}</a></td>
-                            <td>{{ Offre.getJourDebString() }}</td>
-                            <td>{{ Offre.nbPlace }}</td>
-                            <td>{{ Offre.duree }} jours</td>
-                            <td>{{ Offre.lieux }}</td>
-                            <td>{{ Offre.Type.libelle }}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="6">{{ Offre.getDescrip() }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </li>
-            <br>
-            <br>
+            {{ include('offre/_offre.html.twig') }}
         {% endfor %}
-    </ul>
+    </div>
 {% endblock %}

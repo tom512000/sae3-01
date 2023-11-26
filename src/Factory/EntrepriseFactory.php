@@ -50,7 +50,7 @@ final class EntrepriseFactory extends ModelFactory
      */
     protected function getDefaults(): array
     {
-        $nomEnt = self::faker()->name();
+        $nomEnt = self::faker()->company();
         $email = $this->generateEmail($nomEnt);
         $siteWeb = $this->generateSiteWeb($nomEnt);
         $logo = $this->generateLogo($nomEnt);
@@ -95,8 +95,8 @@ final class EntrepriseFactory extends ModelFactory
 
     protected function generateLogo($Name): string
     {
-        $color1 = self::faker()->safeColorName();
-        $color2 = self::faker()->safeColorName();
+        $color1 = substr(self::faker()->safeHexColor(), 1);
+        $color2 = substr(self::faker()->safeHexColor(), 1);
         return "https://placehold.co/500x500/{$color1}/{$color2}?text={$Name}";
     }
 
