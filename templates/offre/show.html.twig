@@ -8,13 +8,6 @@
 {% block form %}
     <form class="d-flex" role="search" action="{{ path('app_offre_index') }}" method="get">
         <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search" name="textRecherche" value="{{ textRecherche|default }}">
-        {% for type in types %}
-
-            <label>
-            <input type='radio' name='type' value='{{ type.id }}'>
-            </label>{{ type.libelle }}<br>
-
-        {% endfor %}
         <button class="btn btn-outline-success" type="submit">🔎</button>
     </form>
 {% endblock %}
@@ -42,42 +35,49 @@
         </button>
     </div>
     <br>
-    <div class="bloc_offres">
-        {% for Offre in Offres %}
-            <div class="bloc_offre">
-                <div class="bloc_offre_img">
-                    <div class="bloc_1"></div>
-                    <div class="bloc_2">
-
-                    </div>
-                </div>
-                <div class="bloc_offre_txt">
-                    <div class="infos1">
-                        <div class="infos1_1 fs-5">
-                            {{ Offre.nomOffre }}
-                        </div>
-                        <div class="infos1_2">
-                            <div class="infos1_2_1">
-                                {{ Offre.getJourDebString() }}
-                            </div>
-                            <div class="infos1_2_2">
-                                {{ Offre.type.libelle }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="infos2">
-                        <div class="infos2_1">
-                            {{ Offre.nbPlace }} place(s)
-                        </div>
-                        <div class="infos2_2">
-                            {{ Offre.lieux }}
-                        </div>
-                    </div>
-                    <p class="description">{{ Offre.getDescrip() }}</p>
-                    <p class="duree"><span>Durée :</span> {{ Offre.duree }} jour(s)</p>
-                </div>
-            </div>
-            <br>
-        {% endfor %}
-    </div>
+    <ul class="liste_offres">
+        <li class="ligne_offre">
+            <table class="donnees">
+                <thead>
+                <tr>
+                    <th>Nom de l'offre</th>
+                    <th>Entreprise</th>
+                    <th>Jour</th>
+                    <th>Place·s</th>
+                    <th>Durée</th>
+                    <th>Lieu</th>
+                    <th>Type</th>
+                    <th>Niveau requis</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ Offre.nomOffre }}</td>
+                    <td><a href="entreprise/{{ Offre.getEntreprise().getId() }}">{{ Offre.getEntreprise().getNomEnt() }}</a></td>
+                    <td>{{ Offre.getJourDebString() }}</td>
+                    <td>{{ Offre.nbPlace }}</td>
+                    <td>{{ Offre.duree }} jours</td>
+                    <td>{{ Offre.lieux }}</td>
+                    <td>{{ Offre.Type.libelle }}</td>
+                    <td>{{ Offre.level }}</td>
+                </tr>
+                <tr>
+                    <td colspan="8">{{ Offre.getDescrip() }}</td>
+                </tr>
+                {% if Offre.skillDemanders|length >0 %}
+                    <thead>
+                        <tr>
+                            <th colspan="8">skills requis</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        {% for skillDemander in Offre.skillDemanders %}
+                            <td>{{ skillDemander.skill.libelle }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endif %}
+                </tbody>
+            </table>
+        </li>
+    </ul>
 {% endblock %}

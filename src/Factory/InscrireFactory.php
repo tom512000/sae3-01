@@ -57,12 +57,13 @@ final class InscrireFactory extends ModelFactory
         $existingOffresIds = $this->offreRepository->findOffresIds();
         $existingUsersIds = $this->userRepository->findUsersIds();
 
+        $uniqueCombination = $this->getUniqueCombination($existingOffresIds, $existingUsersIds);
 
         return [
             'Status' => self::faker()->randomNumber(),
             'dateDemande' => self::faker()->dateTime(),
-            'Offre' => self::faker()->randomElement($existingOffresIds),
-            'User' => self::faker()->randomElement($existingUsersIds),
+            'Offre' => $uniqueCombination['offre'],
+            'User' => $uniqueCombination['user'],
         ];
     }
 
@@ -79,5 +80,18 @@ final class InscrireFactory extends ModelFactory
     protected static function getClass(): string
     {
         return Inscrire::class;
+    }
+
+    private function getUniqueCombination(array $offres, array $users): array
+    {
+        $offre = self::faker()->randomElement($offres);
+        $user = self::faker()->randomElement($users);
+
+        while (InscrireFactory::repository()->findOneBy(['Offre' => $offre, 'User' => $user])) {
+            $offre = self::faker()->randomElement($offres);
+            $user = self::faker()->randomElement($users);
+        }
+
+        return ['offre' => $offre, 'user' => $user];
     }
 }
