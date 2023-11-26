@@ -104,16 +104,122 @@ h1.carousel_titre {
     font-family: 'Cabin', sans-serif;
 }
 
-ul.liste_offres {
+div.bloc_offres {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
-    margin: 0;
-    padding: 0;
 }
 
-li.ligne_offre {
-    width: auto;
-    margin-right: 10%;
-    margin-left: 10%;
+div.bloc_offre {
+    display: flex;
+    width: 900px;
+    height: 270px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+div.bloc_offre_img {
+    width: 25%;
+    height: auto;
+    background-color: red;
+}
+
+div.bloc_offre_img div.bloc_1 {
+    width: 10px;
+    height: 100%;
+    background-color: var(--second-color);
+}
+
+div.bloc_offre_img div.bloc_2 {
+
+}
+
+div.bloc_offre_txt {
+    width: 75%;
+    height: auto;
+}
+
+div.bloc_offre_txt div.infos1 {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 30%;
+}
+
+div.bloc_offre_txt div.infos1_1 {
+    display: flex;
+    align-items: center;
+    width: 60%;
+    height: 100%;
+    padding-left: 20px;
+    font-weight: bold;
+    color: var(--second-color);
+}
+
+div.bloc_offre_txt div.infos1_2 {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    height: 100%;
+}
+
+div.infos1_2 div.infos1_2_1 {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding-left: 20px;
+}
+
+div.infos1_2 div.infos1_2_2 {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding-left: 20px;
+    font-weight: bold;
+    color: var(--second-color);
+}
+
+div.bloc_offre_txt div.infos2 {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 20%;
+    padding-left: 20px;
+    font-weight: bold;
+}
+
+div.infos2 div.infos2_1 {
+    display: flex;
+    align-items: center;
+    width: 20%;
+    height: 100%;
+}
+
+div.infos2 div.infos2_2 {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    height: 100%;
+}
+
+div.bloc_offre_txt p.description {
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: justify;
+    opacity: 0.7;
+}
+
+div.bloc_offre_txt p.duree {
+    height: 30px;
+    padding-left: 20px;
+}
+
+div.bloc_offre_txt p.duree span {
+    font-weight: bold;
 }
 
 /* CSS entreprise/index.html.twig */
@@ -147,51 +253,6 @@ td.link {
 img.link {
     width: 35px;
     height: 35px;
-}
-
-/* CSS Tables */
-table.donnees {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.9em;
-    font-family: 'Comfortaa', sans-serif;
-    min-width: 400px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    border-radius: 10px 10px 0 0;
-    overflow: hidden;
-}
-
-table.donnees thead tr {
-    background-color: var(--main-color);
-    color: #ffffff;
-    text-align: left;
-    font-weight: bolder;
-    font-size: 18px;
-}
-
-table.donnees th, table.donnees td {
-    padding: 12px 15px;
-}
-
-table.donnees tbody tr {
-    border-bottom: 1px solid #dddddd;
-}
-
-table.donnees tbody tr:nth-of-type(odd) {
-    background-color: #ffffff;
-}
-
-table.donnees tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-}
-
-table.donnees tbody tr:last-of-type {
-    border-bottom: 2px solid var(--main-color);
-}
-
-table.donnees tbody tr:hover {
-    font-weight: bold;
-    color: var(--main-color);
 }
 
 /* CSS security/index.html.twig */

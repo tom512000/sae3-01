@@ -30,6 +30,7 @@
                         <li class="nav-item">
                             <a class="nav-link fs-5" href="/entreprise">Entreprises</a>
                         </li>
+                        {% if is_granted('IS_AUTHENTICATED') %}
                         <li class="nav-item dropdown fs-5">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mon compte</a>
                             <ul class="dropdown-menu">
@@ -46,12 +47,13 @@
                                 {% endif %}
                             </ul>
                         </li>
+                        {% endif %}
                     </ul>
                     {% block form %}{% endblock %}
-                    {% if not is_granted('IS_AUTHENTICATED') %}
-                        <a class="btn btn-outline-success text-white btn-connection" href="/login">Se Connecter</a>
-                    {% else %}
+                    {% if is_granted('IS_AUTHENTICATED') %}
                         <a class="btn btn-outline-danger text-white btn-connection" href="/logout">Deconnexion</a>
+                    {% else %}
+                        <a class="btn btn-outline-success text-white btn-connection" href="/login">Se Connecter</a>
                     {% endif %}
                 </div>
             </div>

@@ -49,7 +49,7 @@ final class EntrepriseFactory extends ModelFactory
      */
     protected function getDefaults(): array
     {
-        $nomEnt = self::faker()->name();
+        $nomEnt = self::faker()->company();
         $email = $this->generateEmail($nomEnt);
         $siteWeb = $this->generateSiteWeb($nomEnt);
 
