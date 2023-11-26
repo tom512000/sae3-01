@@ -58,7 +58,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{ Offre.nomOffre }}</td>
+                            <td><a href="offre/{{ Offre.id }}"> {{ Offre.nomOffre }}</a></td>
                             <td><a href="entreprise/{{ Offre.getEntreprise().getId() }}">{{ Offre.getEntreprise().getNomEnt() }}</a></td>
                             <td>{{ Offre.getJourDebString() }}</td>
                             <td>{{ Offre.nbPlace }}</td>
