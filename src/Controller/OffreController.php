@@ -30,13 +30,22 @@ class OffreController extends AbstractController
         ]);
     }
 
-    #[Route('/entreprise/offre/{entrepriseId}', name: 'app_offre_OffreEntreprise', requirements: ['entrepriseId' => '\d+'])]
-    public function OffreEntreprise(int $entrepriseId, OffreRepository $offreRepository): Response
+    #[Route('/entreprise/offre', name: 'app_offre_OffreEntreprise', requirements: ['entrepriseId' => '\d+'])]
+    public function OffreEntreprise(OffreRepository $offreRepository, Request $request, TypeRepository $typeRepository): Response
     {
-        $Offres = $offreRepository->findByEntrepriseId($entrepriseId);
+        $textRechercher = $request->query->get('textRecherche', '');
+        $typeRechercher = $request->query->get('type', 0);
+        $entrepriseId = $request->query->get('entrepriseId');
 
-        return $this->render('offre/index.html.twig', [
+        $Offres = $offreRepository->findByTypeAndTextByEntrepriseId($entrepriseId,$typeRechercher, $textRechercher);
+        $types = $typeRepository->findAll();
+
+
+        return $this->render('entreprise/offre/index.html.twig', [
+            'types' => $types,
+            'textRecherche' => $textRechercher,
             'Offres'=>$Offres,
+            'entrepriseId' => $entrepriseId
         ]);
     }
 }
