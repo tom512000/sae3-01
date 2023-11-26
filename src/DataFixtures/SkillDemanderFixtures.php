@@ -8,7 +8,7 @@ use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 
-class SkilDemanderlFixtures extends Fixture implements DependentFixtureInterface
+class SkillDemanderFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
