@@ -8,6 +8,13 @@
 {% block form %}
     <form class="d-flex" role="search" action="{{ path('app_offre_index') }}" method="get">
         <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search" name="textRecherche" value="{{ textRecherche|default }}">
+        {% for type in types %}
+
+            <label>
+            <input type='radio' name='type' value='{{ type.id }}'>
+            </label>{{ type.libelle }}<br>
+
+        {% endfor %}
         <button class="btn btn-outline-success" type="submit">🔎</button>
     </form>
 {% endblock %}
@@ -57,6 +64,7 @@
                             <td>{{ Offre.nbPlace }}</td>
                             <td>{{ Offre.duree }} jours</td>
                             <td>{{ Offre.lieux }}</td>
+                            <td>{{ Offre.Type.libelle }}</td>
                         </tr>
                         <tr>
                             <td colspan="6">{{ Offre.getDescrip() }}</td>
