@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\EntrepriseRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Faker\Provider\Image;
 
 #[ORM\Entity(repositoryClass: EntrepriseRepository::class)]
 class Entreprise
@@ -23,6 +24,21 @@ class Entreprise
 
     #[ORM\Column(length: 128)]
     private ?string $siteWeb = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $logo = null;
+
+    public function getLogo(): ?string
+    {
+        return $this->logo;
+    }
+
+    public function setLogo(string $logo): static
+    {
+        $this->logo=$logo;
+
+        return $this;
+    }
 
     public function getId(): ?int
     {
