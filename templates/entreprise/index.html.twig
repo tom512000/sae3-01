@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block body %}
-    {# Quand on clic sur le lien pour recherche une entreprise spécifique d'une offre #}
+    {# Affichage des détails d'une entreprise #}
     {% if not Entreprises is iterable %}
         <div class="entreprise_menu">
             <h1>DETAIL DE L'ENTREPRISE</h1>
@@ -54,50 +54,28 @@
         </ul>
 
     {% else %}
-        {# Quand on recherche ou non une entreprise #}
+        {# Affichage de la liste de toutes les entreprises #}
         {% if Entreprises|length > 0  %}
             <div class="entreprise_menu">
                 <h1 class="carousel_titre">LISTE DES ENTREPRISES</h1>
             </div>
-            <ul class="liste_entreprises">
+            <br>
+            <div class="bloc_entreprises">
                 {% for Entreprise in Entreprises %}
-                    <li class="ligne_entreprise">
-                        <table class="donnees">
-                            <thead>
-                            <tr>
-                                <th>Entreprise</th>
-                                <th>Informations</th>
-                                <th>Site</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td rowspan="2">{{ Entreprise.nomEnt }}</td>
-                                <td>{{ Entreprise.adresse }}</td>
-                                <td rowspan="2" class="link">
-                                    <a href="{{ Entreprise.siteWeb }}" target="_blank">
-                                        <img class="link" src="{{ '/img/link.svg' }}" alt="Link icon">
-                                    </a>
-                                </td>
-                                <td>
-                                    <form class="d-flex" role="search" action="/entreprise/offre " method="get">
-                                        <input class="form-control me-2" type="hidden" placeholder="Rechercher" aria-label="Search" name="entrepriseId" value="{{ Entreprise.id }}">
-                                        <button class="btn btn-outline-success" type="submit">Toutes les offres</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td rowspan="2">{{ Entreprise.mail }}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </li>
-                    <br>
-                    <br>
+                    <div class="bloc_entreprise">
+                        <div class="bord"></div>
+                        <div class="infos_entreprise">
+                            <a href="entreprise/{{ Entreprise.id }}">
+                                <img src="{{ Entreprise.logo }}" alt="Logo de {{ Entreprise.nomEnt }}"/>
+                            </a>
+                            <h3>{{ Entreprise.nomEnt }}</h3>
+                            <p>{{ nbOffres[Entreprise.getId()] }} annonces en ligne</p>
+                        </div>
+                    </div>
                 {% endfor %}
-            </ul>
+            </div>
         {% else %}
-            {# Quand aucun entreprise n'à été trouver #}
+            {# Affichage d'un message si aucune entreprise n'est trouvée #}
             <div class="entreprise_menu">
                 <h1>Aucune entreprise trouver</h1>
             </div>

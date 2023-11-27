@@ -40,12 +40,14 @@ class OffreController extends AbstractController
         $Offres = $offreRepository->findByTypeAndTextByEntrepriseId($entrepriseId,$typeRechercher, $textRechercher);
         $types = $typeRepository->findAll();
 
+        $nbOffres = $offreRepository->findNbOffreByEntreprise($entrepriseId);
 
         return $this->render('entreprise/offre/index.html.twig', [
             'types' => $types,
             'textRecherche' => $textRechercher,
             'Offres'=>$Offres,
-            'entrepriseId' => $entrepriseId
+            'entrepriseId' => $entrepriseId,
+            'nbOffres' => $nbOffres
         ]);
     }
 

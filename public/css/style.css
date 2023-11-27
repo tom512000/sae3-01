@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Cabin:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=K2D:wght@300&display=swap');
 
 /* CSS global */
 :root {
@@ -76,6 +77,14 @@ form.d-flex button:hover, a.btn-connection:hover {
 }
 
 /* CSS offre/index.html.twig */
+div.radio-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+}
+
 div.carousel-item {
     height: 500px;
 }
@@ -96,6 +105,7 @@ div.carousel3 {
 }
 
 h1.carousel_titre {
+    display: inline-block;
     position: relative;
     top: 380px;
     left: 30px;
@@ -265,8 +275,6 @@ div.infos3 p.duree span,
     font-weight: bold;
 }
 
-
-
 /* CSS entreprise/index.html.twig */
 div.entreprise_menu {
     height: 500px;
@@ -275,29 +283,63 @@ div.entreprise_menu {
     margin-bottom: 40px;
 }
 
-ul.liste_entreprises {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+div.bloc_entreprises {
     display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
     flex-wrap: wrap;
+    width: 100%;
 }
 
-li.ligne_entreprise {
-    width: 40%;
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-bottom: 40px;
-    box-sizing: border-box;
+div.bloc_entreprise {
+    width: 220px;
+    height: 300px;
+    margin: 0 10px 30px 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #e7e7e7;
+    border: 2px solid #e7e7e7;
+    box-shadow: 0 0 15px #000000;
 }
 
-td.link {
-    width: 35px;
+div.bloc_entreprise > div.bord {
+    width: 100%;
+    height: 7px;
+    background-color: var(--second-color);
 }
 
-img.link {
-    width: 35px;
-    height: 35px;
+div.infos_entreprise {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+}
+
+div.infos_entreprise > a {
+    width: 150px;
+    height: 150px;
+}
+
+div.infos_entreprise > a > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+div.infos_entreprise > h3 {
+    text-align: center;
+    font-family: 'Cabin', sans-serif;
+    color: var(--main-color);
+}
+
+div.infos_entreprise > p {
+    padding: 3px 5px 3px 5px;
+    border-radius: 10px;
+    color: var(--second-color);
+    font-family: 'K2D', sans-serif;
+    background-color: rgba(228, 55, 25, 0.7);
 }
 
 /* CSS security/index.html.twig */
