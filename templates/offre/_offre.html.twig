@@ -10,7 +10,7 @@
     <div class="bloc_offre_txt">
         <div class="infos1">
             <div class="infos1_1 fs-5">
-                {{ Offre.nomOffre }}
+                <a href="offre/{{ Offre.id }}">{{ Offre.nomOffre }}</a>
             </div>
             <div class="infos1_2">
                 <div class="infos1_2_1">
@@ -30,7 +30,9 @@
             </div>
         </div>
         <p class="description">{{ Offre.getDescrip() }}</p>
-        <p class="duree"><span>Durée :</span> {{ Offre.duree }} jour(s)</p>
+        <div class="infos3">
+            <p class="duree"><span>Durée :</span> {{ Offre.duree }} jour(s)</p>
+            <p class="niveau"><span>Niveau requis :</span> {{ Offre.level }}</p>
+        </div>
     </div>
 </div>
-<br>
