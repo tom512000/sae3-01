@@ -9,13 +9,13 @@
     <form class="d-flex" role="search" action="/entreprise/offre" method="get">
         <input class="form-control me-2" type="search" placeholder="Rechercher " aria-label="Search" name="textRecherche" value="{{ textRecherche|default }}">
         <input class="form-control me-2" type="hidden" aria-label="Search" name="entrepriseId" value="{{ entrepriseId }}">
+
         {% for type in types %}
-
             <label>
-            <input type='radio' name='type' value='{{ type.id }}'>
+                <input type='radio' name='type' value='{{ type.id }}'>
             </label>{{ type.libelle }}<br>
-
         {% endfor %}
+
         <button class="btn btn-outline-success" type="submit">🔎</button>
     </form>
 {% endblock %}

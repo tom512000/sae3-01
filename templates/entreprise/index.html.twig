@@ -13,49 +13,36 @@
 {% endblock %}
 
 {% block body %}
+
     {# Affichage des détails d'une entreprise #}
     {% if not Entreprises is iterable %}
         <div class="entreprise_menu">
-            <h1>DETAIL DE L'ENTREPRISE</h1>
+            <h1 class="carousel_titre">DÉTAILS DE L'ENTREPRISE</h1>
+        </div>
+        <div class="details_entreprise">
+            <img src="{{ Entreprises.getLogo() }}" alt="Logo de {{ Entreprises.getNomEnt() }}"/>
+            <div class="details_entreprise_1">
+                <h1>{{ Entreprises.nomEnt }}</h1>
+                <p>{{ nbOffres }} annonces en ligne</p>
+            </div>
+            <div class="details_entreprise_2">
+                <h2>INFORMATIONS</h2>
+                <p>{{ Entreprises.adresse }}</p>
+                <p>{{ Entreprises.mail }}</p>
+                <p><a href="{{ Entreprises.siteWeb }}">Site de {{ Entreprises.getNomEnt() }}</a></p>
+            </div>
+            <div class="details_entreprise_3">
+                <form role="search" action="/entreprise/offre " method="get">
+                    <input class="form-control" type="hidden" placeholder="Rechercher" aria-label="Search" name="entrepriseId" value="{{ Entreprises.id }}">
+                    <button class="btn-offres-entreprise" type="submit">Voir toutes les offres</button>
+                </form>
+            </div>
         </div>
 
-        <ul class="liste_entreprises">
-            <li class="ligne_entreprise">
-                <table class="donnees">
-                    <thead>
-                    <tr>
-                        <th>Entreprise</th>
-                        <th>Informations</th>
-                        <th>Site</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td rowspan="2">{{ Entreprises.nomEnt }}</td>
-                        <td>{{ Entreprises.adresse }}</td>
-                        <td rowspan="2" class="link">
-                            <a href="{{ Entreprises.siteWeb }}" target="_blank">
-                                <img class="link" src="{{ '/img/link.svg' }}" alt="Link icon">
-                            </a>
-                        </td>
-                        <td>
-                            <form class="d-flex" role="search" action="/entreprise/offre " method="get">
-                                <input class="form-control me-2" type="hidden" aria-label="Search" name="entrepriseId" value="{{ Entreprises.id }}">
-                                <button class="btn btn-outline-success" type="submit">Toutes les offres</button>
-                            </form>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td rowspan="2">{{ Entreprises.mail }}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </li>
-        </ul>
-
     {% else %}
+
         {# Affichage de la liste de toutes les entreprises #}
-        {% if Entreprises|length > 0  %}
+        {% if Entreprises|length > 0 %}
             <div class="entreprise_menu">
                 <h1 class="carousel_titre">LISTE DES ENTREPRISES</h1>
             </div>
@@ -74,11 +61,14 @@
                     </div>
                 {% endfor %}
             </div>
+
         {% else %}
+
             {# Affichage d'un message si aucune entreprise n'est trouvée #}
             <div class="entreprise_menu">
                 <h1>Aucune entreprise trouver</h1>
             </div>
+
         {% endif %}
     {% endif %}
 {% endblock %}
