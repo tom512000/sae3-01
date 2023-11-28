@@ -7,14 +7,13 @@
 
 {% block form %}
     <form class="d-flex" role="search" action="{{ path('app_offre_index') }}" method="get">
+        <div class="radio-group">
+            {% for type in types %}
+                <input id="typeOffre" type="radio" name="type" value="{{ type.id }}">
+                <label for="typeOffre">{{ type.libelle }}</label>
+            {% endfor %}
+        </div>
         <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search" name="textRecherche" value="{{ textRecherche|default }}">
-        {% for type in types %}
-
-            <label>
-            <input type='radio' name='type' value='{{ type.id }}'>
-            </label>{{ type.libelle }}<br>
-
-        {% endfor %}
         <button class="btn btn-outline-success" type="submit">🔎</button>
     </form>
 {% endblock %}

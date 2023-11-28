@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Offre;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -52,7 +54,6 @@ class OffreRepository extends ServiceEntityRepository
                 ->setParameter('type', $type);
         }
 
-
         if (!empty($searchText)) {
             $qb->andWhere($qb->expr()->orX(
                 $qb->expr()->like('o.nomOffre', ':searchText')
@@ -61,7 +62,6 @@ class OffreRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
     }
-
 
     public function findByTypeAndText(int $type, string $searchText = ''): array
     {
@@ -76,7 +76,6 @@ class OffreRepository extends ServiceEntityRepository
                 ->orderBy('o.nomOffre', 'ASC');
         }
 
-
         if (!empty($searchText)) {
             $qb->andWhere($qb->expr()->orX(
                 $qb->expr()->like('o.nomOffre', ':searchText')
@@ -84,6 +83,21 @@ class OffreRepository extends ServiceEntityRepository
         }
 
         return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
+    public function findNbOffreByEntreprise(int $id)
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->select('count(o.id)')
+            ->where('o.entreprise = :idEnt')
+            ->groupBy('o.entreprise')
+            ->setParameter('idEnt', $id);
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 }
 

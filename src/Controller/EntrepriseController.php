@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\EntrepriseRepository;
+use App\Repository\OffreRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,14 +14,21 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class EntrepriseController extends AbstractController
 {
     #[Route('/entreprise', name: 'app_entreprise_index')]
-    public function index(EntrepriseRepository $EntrepriseRepository, Request $request): Response
+    public function index(EntrepriseRepository $EntrepriseRepository, Request $request, OffreRepository $offreRepository): Response
     {
         $textRechercheEntreprise = $request->query->get('textRecherche', '');
         $Entreprises = $EntrepriseRepository->search($textRechercheEntreprise);
 
+        $nbOffres = [];
+
+        foreach ($Entreprises as $Entreprise) {
+            $nbOffres[$Entreprise->getId()] = $offreRepository->findNbOffreByEntreprise($Entreprise->getId());
+        }
+
         return $this->render('entreprise/index.html.twig', [
             'Entreprises'=>$Entreprises,
             'textRechercheEntreprise' => $textRechercheEntreprise,
+            'nbOffres' => $nbOffres
         ]);
     }
 
