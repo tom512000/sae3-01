@@ -5,6 +5,9 @@ namespace App\Repository;
 use App\Entity\Inscrire;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\Security;
+use App\Entity\User;
+use App\Entity\Offre;
 
 /**
  * @extends ServiceEntityRepository<Inscrire>
@@ -21,31 +24,6 @@ class InscrireRepository extends ServiceEntityRepository
         parent::__construct($registry, Inscrire::class);
     }
 
-//    /**
-//     * @return Inscrire[] Returns an array of Inscrire objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('i')
-//            ->andWhere('i.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('i.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Inscrire
-//    {
-//        return $this->createQueryBuilder('i')
-//            ->andWhere('i.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
-
     public function findByUserId(int $userId) : array
     {
         return $this->createQueryBuilder('i')
@@ -54,5 +32,71 @@ class InscrireRepository extends ServiceEntityRepository
             ->setParameter('userId', $userId)
             ->getQuery()
             ->getResult();
+    }
+
+    public function IsInscrit(int $idOffre, Security $security):bool
+    {
+        $user = $security->getUser();
+        if ($user) {
+        $userId = $user->getId();
+        return $this->findOneBy(['Offre' => $idOffre, 'User' => $userId]) != null;
+        }
+        return false;
+    }
+
+    public function inscription(Offre $Offre, Security $security):void{
+
+        $user = $security->getUser();
+
+        if ($user instanceof User) {
+            $userId = $user->getId();
+            $offreId= $Offre->getId();
+
+            $inscrire = $this->createQueryBuilder('i')
+                ->select('i')
+                ->where('i.User = :userId')
+                ->andWhere('i.Offre = :offreId')
+                ->setParameters([
+                    'userId' => $userId,
+                    'offreId' => $offreId,
+                ])
+                ->getQuery()
+                ->getOneOrNullResult();
+
+            if ($inscrire === null) {
+                $inscrire = new Inscrire();
+                $inscrire->setUser($user);
+                $inscrire->setOffre($Offre);
+                $inscrire->setStatus(1);
+                $inscrire->setDateDemande(new \DateTime());
+
+                $this->_em->persist($inscrire);
+                $this->_em->flush();
+            }
+        }
+    }
+    public function desinscription(Offre $Offre, Security $security):void
+    {
+        $user = $security->getUser();
+
+        if ($user instanceof User) {
+            $userId = $user->getId();
+
+            $inscrire = $this->createQueryBuilder('i')
+                ->select('i')
+                ->where('i.User = :userId')
+                ->andWhere('i.Offre = :offreId')
+                ->setParameters([
+                    'userId' => $userId,
+                    'offreId' => $Offre->getId(),
+                ])
+                ->getQuery()
+                ->getOneOrNullResult();
+
+            if ($inscrire !== null) {
+                $this->_em->remove($inscrire);
+                $this->_em->flush();
+            }
+        }
     }
 }
