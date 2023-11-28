@@ -39,4 +39,14 @@ class InscireController extends AbstractController
         }
         return $this->redirectToRoute('app_inscire');
     }
+
+    #[Route('/desinscription/{idOffre}', name: 'app_inscire_desinscription', requirements: ['idOffre' => '\d+'])]
+    public function desinscription(int $idOffre,InscrireRepository $inscrireRepository,
+                                OffreRepository $offreRepository, Security $security){
+        $offre = $offreRepository->find($idOffre);
+        if ($offre != null){
+            $inscrireRepository->desinscription($offre,$security);
+        }
+        return $this->redirectToRoute('app_inscire');
+    }
 }

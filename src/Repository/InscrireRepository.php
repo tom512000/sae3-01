@@ -75,4 +75,28 @@ class InscrireRepository extends ServiceEntityRepository
             }
         }
     }
+    public function desinscription(Offre $Offre, Security $security):void
+    {
+        $user = $security->getUser();
+
+        if ($user instanceof User) {
+            $userId = $user->getId();
+
+            $inscrire = $this->createQueryBuilder('i')
+                ->select('i')
+                ->where('i.User = :userId')
+                ->andWhere('i.Offre = :offreId')
+                ->setParameters([
+                    'userId' => $userId,
+                    'offreId' => $Offre->getId(),
+                ])
+                ->getQuery()
+                ->getOneOrNullResult();
+
+            if ($inscrire !== null) {
+                $this->_em->remove($inscrire);
+                $this->_em->flush();
+            }
+        }
+    }
 }
