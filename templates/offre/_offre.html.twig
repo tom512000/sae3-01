@@ -2,7 +2,7 @@
     <div class="bloc_offre_img">
         <div class="bloc_1"></div>
         <div class="bloc_2">
-            <a href="entreprise/{{ Offre.getEntreprise().getId() }}">
+            <a href="/entreprise/{{ Offre.getEntreprise().getId() }}">
                 <img src="{{ Offre.getEntreprise().getLogo() }}" alt="Logo de {{ Offre.getEntreprise().getNomEnt() }}"/>
             </a>
         </div>
@@ -10,7 +10,7 @@
     <div class="bloc_offre_txt">
         <div class="infos1">
             <div class="infos1_1 fs-5">
-                <a href="offre/{{ Offre.id }}">{{ Offre.nomOffre }}</a>
+                <a href="/offre/{{ Offre.id }}">{{ Offre.nomOffre }}</a>
             </div>
             <div class="infos1_2">
                 <div class="infos1_2_1">
@@ -33,6 +33,9 @@
         <div class="infos3">
             <p class="duree"><span>Durée :</span> {{ Offre.duree }} jour(s)</p>
             <p class="niveau"><span>Niveau requis :</span> {{ Offre.level }}</p>
+            {% if (inscription[Offre.id] == null) %}
+                <p>est pas inscrit</p>
+            {% endif %}
         </div>
     </div>
 </div>

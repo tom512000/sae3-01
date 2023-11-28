@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Inscrire;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * @extends ServiceEntityRepository<Inscrire>
@@ -21,31 +22,6 @@ class InscrireRepository extends ServiceEntityRepository
         parent::__construct($registry, Inscrire::class);
     }
 
-//    /**
-//     * @return Inscrire[] Returns an array of Inscrire objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('i')
-//            ->andWhere('i.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('i.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Inscrire
-//    {
-//        return $this->createQueryBuilder('i')
-//            ->andWhere('i.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
-
     public function findByUserId(int $userId) : array
     {
         return $this->createQueryBuilder('i')
@@ -54,5 +30,13 @@ class InscrireRepository extends ServiceEntityRepository
             ->setParameter('userId', $userId)
             ->getQuery()
             ->getResult();
+    }
+
+    public function IsInscrit(int $idOffre, Security $security):bool
+    {
+        $user = $security->getUser();
+
+        $userId = $user->getId();
+        return $this->findOneBy(['Offre' => $idOffre, 'User' => $userId]) == null;
     }
 }
