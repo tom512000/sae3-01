@@ -77,12 +77,12 @@
                     </tr>
                 {% endif %}
                 <tr>
-                    {% if (IsInscrit) %}
-                        <form class="d-flex" role="search" action="{{ path('app_offre_index') }}" method="get">
+                    {% if (inscription) %}
+                        <form action="{{ path('app_inscire_inscription', {'idOffre': Offre.id}) }}" method="get">
                             <button class="btn btn-outline-success" type="submit">s'inscrire</button>
                         </form>
                     {% else %}
-                        <form class="d-flex" role="search" action="{{ path('app_offre_index') }}" method="get">
+                        <form action="{{ path('app_inscire_inscription', {'idOffre': Offre.id}) }}" method="get">
                             <button class="btn btn-outline-success" type="submit">Se désincrire</button>
                         </form>
                     {% endif %}

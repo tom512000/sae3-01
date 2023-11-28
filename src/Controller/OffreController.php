@@ -68,7 +68,7 @@ class OffreController extends AbstractController
         $Inscrit = $inscrireRepository->IsInscrit($offreId, $security);
         return $this->render('offre/show.html.twig',[
             'Offre'=>$Offre,
-            'IsInscrit' => $Inscrit
+            'inscription' => $Inscrit
         ]);
     }
 }
