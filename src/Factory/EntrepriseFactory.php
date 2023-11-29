@@ -95,8 +95,8 @@ final class EntrepriseFactory extends ModelFactory
 
     protected function generateLogo($Name): string
     {
-        $color1 = substr(self::faker()->safeHexColor(), 1);
-        $color2 = substr(self::faker()->safeHexColor(), 1);
+        $color1 = substr(self::faker()->hexColor(), 1);
+        $color2 = substr(self::faker()->hexColor(), 1);
         return "https://placehold.co/500x500/{$color1}/{$color2}?text={$Name}";
     }
 

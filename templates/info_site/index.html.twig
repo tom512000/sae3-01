@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}A Propos de Nous{% endblock %}
+
+{% block body %}
+<style>
+    body{display: flex;justify-content: center; text-align: center; color: white}
+    .equipe {display: flex;flex-direction: row;justify-content: center}
+    .membre {display: flex;flex-direction: column;margin-left: 50px;margin-right: 50px}
+</style>
+
+<div class="example-wrapper">
+    <h1>A Propos d'EduTech</h1><br><br><br>
+
+    <h3>Qui Sommes Nous ?</h3><br>
+
+    <p>Bienvenue chez EduTech, votre partenaire dévoué dans la recherche de stages et d'alternances. Fondée par un groupe passionné de quatre membres, notre équipe partage une vision commune : faciliter le chemin des étudiants vers des opportunités professionnelles enrichissantes.</p>
+
+    <p>À EduTech, nous comprenons les défis auxquels sont confrontés les étudiants lorsqu'ils cherchent à démarrer leur carrière. C'est pourquoi nous avons uni nos forces pour créer une plateforme dynamique et inclusive, dédiée à guider chaque étudiant vers le succès professionnel.</p>
+
+    <p>Notre mission est claire : connecter les étudiants talentueux avec des stages et des opportunités d'alternance adaptés à leurs compétences et aspirations. Grâce à une approche personnalisée, nous nous efforçons de comprendre les besoins uniques de chaque étudiant, facilitant ainsi une transition fluide de l'éducation à la carrière.</p>
+
+    <p>Ce qui nous distingue chez EduTech, c'est notre engagement envers l'excellence, l'innovation et l'inclusion. Nous croyons en la puissance de l'éducation et de l'expérience pratique pour façonner des carrières exceptionnelles. En travaillant main dans la main avec les étudiants et les entreprises, nous construisons des ponts vers des opportunités prometteuses.</p>
+
+    <p>Rejoignez-nous dans cette aventure passionnante où l'éducation rencontre l'industrie. Chez EduTech, nous sommes plus qu'une équipe, nous sommes une communauté déterminée à ouvrir les portes du succès professionnel pour chaque étudiant. Ensemble, faisons de chaque opportunité une réalité.</p>
+
+    <p>Découvrez le monde d'EduTech, où votre avenir prend vie.</p>
+
+    <br><br><h3>L'Equipe</h3><br><br>
+    <div class="equipe">
+        <div class="membre"><img src="{{ asset('img/valentin.jpg') }}" alt="Cladel Valentin" width="210px" height="300px"><p>Développeur back-end</p><p>"CA MARCHE PAS"</p></div>
+        <div class="membre"><img src="{{ asset('img/baptiste.png') }}" alt="Simon Baptiste" width="300px" height="300px"><p>Développeur back-end</p><p>"Go en mettre 2000"</p></div>
+        <div class="membre"><img src="{{ asset('img/tom.png') }}" alt="Sikora Tom" width="300px" height="300px"><p>Développeur Font-end</p><p>"Franchement je trouve ca immonde"</p></div>
+        <div class="membre"><img src="{{ asset('img/camille.png') }}" alt="Bourga Camille" width="300px" height="300px"><p>Testeur</p><p>"Je vais bientôt commencer t'inquiètes"</p></div>
+    </div>
+</div>
+{% endblock %}
