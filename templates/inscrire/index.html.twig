@@ -6,6 +6,9 @@
 {% block title %}Inscriptions{% endblock %}
 
 {% block body %}
+    <style>
+        body {background: url("{{ asset('img/background.png') }}") fixed center;background-size: cover}
+    </style>
     <h1>Vos inscriptions</h1>
     <div class="bloc_offres">
         {% for inscription in inscriptions %}

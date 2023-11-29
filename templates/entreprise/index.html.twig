@@ -13,6 +13,9 @@
 {% endblock %}
 
 {% block body %}
+    <style>
+        body {background: url("{{ asset('img/background.png') }}") fixed center;background-size: cover}
+    </style>
 
     {# Affichage des détails d'une entreprise #}
     {% if not Entreprises is iterable %}
