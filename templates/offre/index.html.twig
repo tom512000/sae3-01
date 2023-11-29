@@ -7,12 +7,30 @@
 
 {% block form %}
     <form class="d-flex" role="search" action="{{ path('app_offre_index') }}" method="get">
-        <div class="radio-group">
+        <div class="radio-group" style="display: flex; flex-direction: column">
             {% for type in types %}
                 <input id="typeOffre" type="radio" name="type" value="{{ type.id }}">
                 <label for="typeOffre">{{ type.libelle }}</label>
             {% endfor %}
         </div>
+
+        <div style="margin-right: 20px; margin-left: 20px">
+            <label for="niveau">Bac +</label>
+            <input type="number" id="niveau" name="niveau" min="0" max="5" placeholder="bac" style="width: 50px;" >
+        </div>
+        <div >
+            <label for="date">Date de début</label>
+            <input type="date" id="date" name="date" placeholder="Date">
+
+            <div class="radio-group" style="margin-top: -22px">
+                <label for="dateFiltre">Avant</label>
+                <input id="dateFiltre" type="radio" name="dateFiltre" value="1">
+
+                <label for="dateFiltre">Apres</label>
+                <input id="dateFiltre" type="radio" name="dateFiltre" value="2">
+            </div>
+        </div>
+
         <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search" name="textRecherche" value="{{ textRecherche|default }}">
         <button class="btn btn-outline-success" type="submit">🔎</button>
     </form>

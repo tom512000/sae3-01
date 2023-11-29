@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\InscrireRepository;
 use App\Repository\OffreRepository;
 use App\Repository\TypeRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,13 +16,19 @@ use Symfony\Component\Security\Core\Security;
 #[IsGranted('ROLE_USER')]
 class OffreController extends AbstractController
 {
+    /**
+     * @throws \Exception
+     */
     #[Route('/offre', name: 'app_offre_index')]
     public function index(OffreRepository $offreRepository, Request $request, TypeRepository $typeRepository, InscrireRepository $inscrireRepository, Security $security): Response
     {
         $textRechercher = $request->query->get('textRecherche', '');
         $typeRechercher = $request->query->get('type', 0);
+        $niveauRechercher = (int) $request->query->get('niveau', -1);
+        $dateRechercher = $request->query->get('date', '');
+        $dateFiltreRechercher = $request->query->get('dateFiltre', 0);
 
-        $Offres = $offreRepository->findByTypeAndText($typeRechercher, $textRechercher);
+        $Offres = $offreRepository->findByFilter($typeRechercher, $textRechercher, $niveauRechercher, $dateRechercher, $dateFiltreRechercher);
 
         $types = $typeRepository->findAll();
 
@@ -40,18 +47,25 @@ class OffreController extends AbstractController
         ]);
     }
 
+    /**
+     * @throws NonUniqueResultException
+     */
     #[Route('/entreprise/offre', name: 'app_offre_OffreEntreprise', requirements: ['entrepriseId' => '\d+'])]
     public function OffreEntreprise(OffreRepository $offreRepository, Request $request, TypeRepository $typeRepository, InscrireRepository $inscrireRepository, Security $security): Response
     {
         $textRechercher = $request->query->get('textRecherche', '');
         $typeRechercher = $request->query->get('type', 0);
         $entrepriseId = $request->query->get('entrepriseId');
+        $niveauRechercher = (int) $request->query->get('niveau', -1);;
+        $dateRechercher = $request->query->get('date', '');
+        $dateFiltreRechercher = $request->query->get('dateFiltre', 0);
 
-        $Offres = $offreRepository->findByTypeAndTextByEntrepriseId($entrepriseId,$typeRechercher, $textRechercher);
+        $Offres = $offreRepository->findByFilterByEntrepriseId($entrepriseId,$typeRechercher, $textRechercher, $niveauRechercher, $dateRechercher, $dateFiltreRechercher);
         $types = $typeRepository->findAll();
 
         $nbOffres = $offreRepository->findNbOffreByEntreprise($entrepriseId);
 
+        $inscription = [];
         foreach ($Offres as $Offre) {
             $inscription[$Offre->getId()] = $inscrireRepository->IsInscrit($Offre->getId(), $security);
         }

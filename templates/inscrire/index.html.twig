@@ -46,7 +46,11 @@
                     <p class="description">{{ inscription.Offre.getDescrip() }}</p>
                     <p class="duree"><span>Durée :</span> {{ inscription.Offre.duree }} jour(s)</p>
                 </div>
+                <form action="{{ path('app_inscire_desinscription', {'idOffre': inscription.Offre.id}) }}" method="get">
+                    <button class="btn btn-outline-success" type="submit">Se désincrire</button>
+                </form>
             </div>
+
             <br>
         {% endfor %}
     </div>
