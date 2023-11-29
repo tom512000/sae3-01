@@ -6,6 +6,7 @@ use App\Entity\Offre;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -26,7 +27,7 @@ class OffreRepository extends ServiceEntityRepository
     public function findByRecent():array{
         $qb = $this->createQueryBuilder('o')
             ->select('o')
-            ->orderBy('o.jourDeb', 'ASC') // Assuming you want to order by the 'jourDeb' field
+            ->orderBy('o.jourDeb', 'ASC')
             ->setMaxResults(10);
 
         return $qb->getQuery()->getResult();
@@ -41,53 +42,27 @@ class OffreRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findByTypeAndTextByEntrepriseId(int $id,int $type, string $searchText = ''): array
+    public function findByFilterByEntrepriseId(int $id,int $type, string $searchText, int $niveau, string $date, int $dateFiltre): array
     {
         $qb = $this->createQueryBuilder('o')
             ->where('o.entreprise = :idEnt')
-            ->orderBy('o.jourDeb', 'ASC')
             ->setParameter('idEnt', $id);
 
-        if ($type != 0){
-            $qb->join('o.Type', 't')
-                ->andwhere('t.id = :type')
-                ->setParameter('type', $type);
-        }
-
-        if (!empty($searchText)) {
-            $qb->andWhere($qb->expr()->orX(
-                $qb->expr()->like('o.nomOffre', ':searchText')
-            ))->setParameter('searchText', '%' . $searchText . '%');
-        }
-
-        return $qb->getQuery()->getResult();
+        return $this->Filter($type, $qb, $searchText, $niveau, $date, $dateFiltre);
     }
 
-    public function findByTypeAndText(int $type, string $searchText = ''): array
+    /**
+     * @throws \Exception
+     */
+    public function findByFilter(int $type, string $searchText, int $niveau, string $date, int $dateFiltre): array
     {
-        $qb = $this->createQueryBuilder('o')
-            ->orderBy('o.nomOffre', 'ASC');
+        $qb = $this->createQueryBuilder('o');
 
-        if ($type != 0){
-            $qb = $this->createQueryBuilder('o')
-                ->join('o.Type', 't')
-                ->where('t.id = :type')
-                ->setParameter('type', $type)
-                ->orderBy('o.nomOffre', 'ASC');
-        }
-
-        if (!empty($searchText)) {
-            $qb->andWhere($qb->expr()->orX(
-                $qb->expr()->like('o.nomOffre', ':searchText')
-            ))->setParameter('searchText', '%' . $searchText . '%');
-        }
-
-        return $qb->getQuery()->getResult();
+        return $this->Filter($type, $qb, $searchText, $niveau, $date, $dateFiltre);
     }
 
     /**
      * @throws NonUniqueResultException
-     * @throws NoResultException
      */
     public function findNbOffreByEntreprise(int $id) : int
     {
@@ -102,6 +77,60 @@ class OffreRepository extends ServiceEntityRepository
         } catch (\Doctrine\ORM\NoResultException $e) {
             return 0;
         }
+    }
+
+    /**
+     * @param int $type
+     * @param QueryBuilder $qb
+     * @param string $searchText
+     * @param string $niveau
+     * @param string $date
+     * @return float|int|mixed|string
+     * @throws \Exception
+     */
+    protected function Filter(int $type, QueryBuilder $qb, string $searchText, int $niveau, string $date, int $dateFiltre): mixed
+    {
+        if ($type != 0) {
+            $qb->join('o.Type', 't')
+                ->andwhere('t.id = :type')
+                ->setParameter('type', $type);
+        }
+
+        if (!empty($searchText)) {
+            $qb->andWhere($qb->expr()->orX(
+                $qb->expr()->like('UPPER(o.nomOffre)', 'UPPER(:searchText)')
+            ))->setParameter('searchText', '%' . $searchText . '%');
+        }
+
+        if (!empty($niveau) && $niveau != -1) {
+            if ($niveau == 0) {
+                $qb->andWhere('o.level = :niveau')
+                    ->setParameter('niveau', 'BAC');
+            } else {
+                $qb->andWhere('o.level = :niveau')
+                    ->setParameter('niveau', 'BAC +' . $niveau);
+            }
+        }
+
+        if (!empty($date)) {
+            $formattedDate = new \DateTime($date);
+
+            if ($dateFiltre == 1) {
+                $qb->andWhere('o.jourDeb < :date')
+                    ->setParameter('date', $formattedDate);
+            } elseif ($dateFiltre == 2) {
+                $qb->andWhere('o.jourDeb > :date')
+                    ->setParameter('date', $formattedDate);
+            }
+            else{
+                $qb->andWhere('o.jourDeb = :date')
+                    ->setParameter('date', $formattedDate);
+            }
+        }
+
+        $qb -> addOrderBy('o.nomOffre');
+
+        return $qb->getQuery()->getResult();
     }
 }
 
