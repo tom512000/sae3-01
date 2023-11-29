@@ -6,6 +6,9 @@
 {% block title %}Profil{% endblock %}
 
 {% block body %}
+    <style>
+        body {background: url("{{ asset('img/background-info.png') }}") fixed center;background-size: cover}
+    </style>
     <h1>Profil :</h1>
 
     <p>Nom : {{ app.user.firstName }}</p>
