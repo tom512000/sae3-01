@@ -89,7 +89,7 @@ class OffreRepository extends ServiceEntityRepository
      * @throws NonUniqueResultException
      * @throws NoResultException
      */
-    public function findNbOffreByEntreprise(int $id)
+    public function findNbOffreByEntreprise(int $id) : int
     {
         $qb = $this->createQueryBuilder('o')
             ->select('count(o.id)')
@@ -97,7 +97,11 @@ class OffreRepository extends ServiceEntityRepository
             ->groupBy('o.entreprise')
             ->setParameter('idEnt', $id);
 
-        return $qb->getQuery()->getSingleScalarResult();
+        try {
+            return $qb->getQuery()->getSingleScalarResult();
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return 0;
+        }
     }
 }
 

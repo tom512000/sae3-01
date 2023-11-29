@@ -12,7 +12,7 @@ class OffreFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        OffreFactory::createMany(120);
+        OffreFactory::createMany(220);
     }
 
     public function getDependencies()
