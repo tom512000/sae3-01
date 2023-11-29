@@ -78,13 +78,14 @@
                 {% endif %}
                 <tr>
                     {% if (inscription) %}
-                        <form action="{{ path('app_inscire_inscription', {'idOffre': Offre.id}) }}" method="get">
-                            <button class="btn btn-outline-success" type="submit">s'inscrire</button>
-                        </form>
-                    {% else %}
                         <form action="{{ path('app_inscire_desinscription', {'idOffre': Offre.id}) }}" method="get">
                             <button class="btn btn-outline-success" type="submit">Se désincrire</button>
                         </form>
+                    {% else %}
+                        <form action="{{ path('app_inscire_inscription', {'idOffre': Offre.id}) }}" method="get">
+                            <button class="btn btn-outline-success" type="submit">s'inscrire</button>
+                        </form>
+
                     {% endif %}
                 </tr>
                 </tbody>

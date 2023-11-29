@@ -11,6 +11,6 @@ class EntrepriseFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        EntrepriseFactory::createMany(20);
+        EntrepriseFactory::createMany(80);
     }
 }

@@ -12,7 +12,7 @@ class InscrireFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        InscrireFactory::createMany(60);
+        InscrireFactory::createMany(80);
     }
     public function getDependencies()
     {

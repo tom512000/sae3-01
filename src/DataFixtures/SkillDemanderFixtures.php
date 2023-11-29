@@ -12,7 +12,7 @@ class SkillDemanderFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        SkillDemanderFactory::createMany(20);
+        SkillDemanderFactory::createMany(600);
     }
 
     public function getDependencies(): array
