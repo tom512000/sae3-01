@@ -4,9 +4,26 @@
 
 {% block body %}
 <style>
-    body{display: flex;justify-content: center; text-align: center;background: url("{{ asset('img/background-info.png') }}") fixed center;background-size: cover}
-    .equipe {display: flex;flex-direction: row;justify-content: center}
-    .membre {display: flex;flex-direction: column;margin-left: 50px;margin-right: 50px}
+    body {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        background: url("{{ asset('img/background-info.png') }}") fixed center;
+        background-size: cover
+    }
+
+    .equipe {
+        display: flex;
+        flex-direction: row;
+        justify-content: center
+    }
+
+    .membre {
+        display: flex;
+        flex-direction: column;
+        margin-left: 50px;
+        margin-right: 50px
+    }
 </style>
 
 <div class="example-wrapper">

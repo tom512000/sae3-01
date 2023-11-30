@@ -38,7 +38,6 @@ body {
     width: 100%;
     height: 100%;
     margin-top: 64px;
-    //background-color: var(--third-color);
     background: url("../img/background.png") fixed center;
     background-size: cover;
 }
@@ -70,7 +69,25 @@ ul.navbar-nav > li {
     color: var(--main-color);
 }
 
-/* CSS Formulaires */
+div.titre_page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    margin: 65px 0 30px 0;
+    border-bottom: 2px solid var(--third-color);
+    background: url("../img/fond-carousel.gif") no-repeat center;
+    background-size: cover;
+}
+
+div.titre_page > h1 {
+    margin: 0;
+    color: #ffffff;
+    text-shadow: #000000 1px 0 10px;
+    font-family: 'Cabin', sans-serif;
+}
+
 form.d-flex button, a.btn-connection {
     border-color: var(--main-color);
 }
@@ -162,35 +179,6 @@ div.radio-group {
     justify-content: space-around;
     align-items: center;
     height: 100%;
-}
-
-div.carousel-item {
-    height: 500px;
-}
-
-div.carousel1 {
-    background: url("../img/carousel1.jpg") no-repeat center;
-    background-size: cover;
-}
-
-div.carousel2 {
-    background: url("../img/carousel2.jpg") no-repeat center;
-    background-size: cover;
-}
-
-div.carousel3 {
-    background: url("../img/carousel3.jpg") no-repeat center;
-    background-size: cover;
-}
-
-h1.carousel_titre {
-    display: inline-block;
-    position: relative;
-    top: 380px;
-    left: 30px;
-    color: #ffffff;
-    text-shadow: #000000 1px 0 10px;
-    font-family: 'Cabin', sans-serif;
 }
 
 div.bloc_offres {
