@@ -6,7 +6,7 @@
 {% block title %}Offres{% endblock %}
 
 {% block form %}
-    <form class="d-flex" role="search" action="{{ path('app_offre_index') }}" method="get">
+    <form role="search" action="{{ path('app_offre_index') }}" method="get" style="display: none;">
         <div class="radio-group" style="display: flex; flex-direction: column">
             {% for type in types %}
                 <input id="typeOffre" type="radio" name="type" value="{{ type.id }}">
@@ -18,7 +18,7 @@
             <label for="niveau">Bac +</label>
             <input type="number" id="niveau" name="niveau" min="0" max="5" placeholder="bac" style="width: 50px;" >
         </div>
-        <div >
+        <div>
             <label for="date">Date de début</label>
             <input type="date" id="date" name="date" placeholder="Date">
 
@@ -40,28 +40,9 @@
     <style>
         body {background: url("{{ asset('img/background.png') }}") fixed center;background-size: cover}
     </style>
-    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
-        <div class="carousel-inner">
-            <div class="carousel-item active carousel1">
-                <h1 class="carousel_titre">DÉCOUVREZ DES OFFRES ATTRAYANTES</h1>
-            </div>
-            <div class="carousel-item carousel2">
-                <h1 class="carousel_titre">EXPLOREZ DES OPPORTUNITÉS PROFESSIONNELLES</h1>
-            </div>
-            <div class="carousel-item carousel3">
-                <h1 class="carousel_titre">INTERAGISSEZ AVEC DES EXPERTS</h1>
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+    <div class="titre_page">
+        <h1>LISTE DES OFFRES</h1>
     </div>
-    <br>
     <div class="bloc_offres">
         {% for Offre in Offres %}
             {{ include('offre/_offre.html.twig') }}
