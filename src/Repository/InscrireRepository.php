@@ -99,4 +99,26 @@ class InscrireRepository extends ServiceEntityRepository
             }
         }
     }
+
+    public function getInscriptions(array $offres, Security $security): array
+    {
+        $offreIds = array_map(function (Offre $offre) {
+            return $offre->getId();
+        }, $offres);
+
+        $qb = $this->createQueryBuilder('i')
+            ->andWhere('i.Offre IN (:offreIds)')
+            ->andWhere('i.User = :user')
+            ->setParameter('offreIds', $offreIds)
+            ->setParameter('user', $security->getUser());
+
+        $inscriptions = $qb->getQuery()->getResult();
+
+        $result = [];
+        foreach ($inscriptions as $inscription) {
+            $result[$inscription->getOffre()->getId()] = $inscription;
+        }
+
+        return $result;
+    }
 }

@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Entreprise;
 use App\Repository\EntrepriseRepository;
 use App\Repository\OffreRepository;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,10 +35,12 @@ class EntrepriseController extends AbstractController
     }
 
     #[Route('/entreprise/{entrepriseId}', name: 'app_entreprise_show', requirements: ['entrepriseId' => '\d+'])]
-    public function show(int $entrepriseId,EntrepriseRepository $EntrepriseRepository, OffreRepository $offreRepository, Request $request): Response
+    public function show(
+        #[MapEntity(expr: 'repository.find(entrepriseId)')]
+        Entreprise $Entreprises,
+        OffreRepository $offreRepository, Request $request): Response
     {
         $textRechercheEntreprise = $request->query->get('textRecherche', '');
-        $Entreprises = $EntrepriseRepository->find($entrepriseId);
 
         if (!$Entreprises) {
             throw $this->createNotFoundException("Entreprise n'a pas été trouver ");
