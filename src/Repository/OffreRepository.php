@@ -90,6 +90,11 @@ class OffreRepository extends ServiceEntityRepository
      */
     protected function Filter(int $type, QueryBuilder $qb, string $searchText, int $niveau, string $date, int $dateFiltre): mixed
     {
+        $qb ->leftJoin('o.inscrires', 'i')
+            ->leftJoin('o.skillDemanders','ski')
+            ->addSelect('i')
+            ->addSelect('ski');
+
         if ($type != 0) {
             $qb->join('o.Type', 't')
                 ->andwhere('t.id = :type')

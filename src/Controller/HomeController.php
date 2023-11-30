@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Offre;
 use App\Repository\InscrireRepository;
 use App\Repository\OffreRepository;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

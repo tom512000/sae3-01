@@ -33,15 +33,20 @@
         <div class="infos3">
             <p class="duree"><span>Durée :</span> {{ Offre.duree }} jour(s)</p>
             <p class="niveau"><span>Niveau requis :</span> {{ Offre.level }}</p>
-            {% if (inscription[Offre.id] != null) %}
-                <form action="{{ path('app_inscire_desinscription', {'idOffre': Offre.id}) }}" method="get">
-                    <button class="btn btn-outline-success" type="submit">Se désincrire</button>
-                </form>
+            {% if inscription[Offre.id] is defined %}
+                {% if inscription[Offre.id] is not null %}
+                    <form action="{{ path('app_inscire_desinscription', {'idOffre': Offre.id}) }}" method="get">
+                        <button class="btn btn-outline-success" type="submit">Se désincrire</button>
+                    </form>
+                {% else %}
+                    <form action="{{ path('app_inscire_inscription', {'idOffre': Offre.id}) }}" method="get">
+                        <button class="btn btn-outline-success" type="submit">s'inscrire</button>
+                    </form>
+                {% endif %}
             {% else %}
                 <form action="{{ path('app_inscire_inscription', {'idOffre': Offre.id}) }}" method="get">
                     <button class="btn btn-outline-success" type="submit">s'inscrire</button>
                 </form>
-
             {% endif %}
         </div>
     </div>

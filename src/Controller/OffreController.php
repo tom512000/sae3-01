@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Offre;
+use App\Entity\Type;
 use App\Repository\InscrireRepository;
 use App\Repository\OffreRepository;
 use App\Repository\TypeRepository;
 use Doctrine\ORM\NonUniqueResultException;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,10 +20,21 @@ use Symfony\Component\Security\Core\Security;
 class OffreController extends AbstractController
 {
     /**
+     * @param OffreRepository $offreRepository
+     * @param Request $request
+     * @param TypeRepository $typeRepository
+     * @param InscrireRepository $inscrireRepository
+     * @param Security $security
+     * @param array $Offres
+     * @return Response
      * @throws \Exception
      */
     #[Route('/offre', name: 'app_offre_index')]
-    public function index(OffreRepository $offreRepository, Request $request, TypeRepository $typeRepository, InscrireRepository $inscrireRepository, Security $security): Response
+    public function index(OffreRepository $offreRepository,
+                          Request $request,
+                          TypeRepository $typeRepository,
+                          InscrireRepository $inscrireRepository,
+                          Security $security): Response
     {
         $textRechercher = $request->query->get('textRecherche', '');
         $typeRechercher = $request->query->get('type', 0);
@@ -32,11 +46,7 @@ class OffreController extends AbstractController
 
         $types = $typeRepository->findAll();
 
-        $inscription = [];
-
-        foreach ($Offres as $Offre) {
-            $inscription[$Offre->getId()] = $inscrireRepository->IsInscrit($Offre->getId(), $security);
-        }
+        $inscription = $inscrireRepository->getInscriptions($Offres, $security);
 
 
         return $this->render('offre/index.html.twig', [
@@ -80,9 +90,13 @@ class OffreController extends AbstractController
     }
 
     #[Route('/offre/{offreId}', name: 'app_offre_show', requirements: ['offreId' => '\d+'])]
-    public function show(OffreRepository $offreRepository, int $offreId,InscrireRepository $inscrireRepository, Security $security): Response
+    public function show(
+        #[MapEntity(class: 'App\Entity\Offre', expr: 'repository.find(offreId)')]
+        Offre $Offre,
+        int $offreId,
+        InscrireRepository $inscrireRepository,
+        Security $security): Response
     {
-        $Offre = $offreRepository->find($offreId);
         $Inscrit = $inscrireRepository->IsInscrit($offreId, $security);
         return $this->render('offre/show.html.twig',[
             'Offre'=>$Offre,
