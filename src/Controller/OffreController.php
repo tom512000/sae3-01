@@ -75,10 +75,8 @@ class OffreController extends AbstractController
 
         $nbOffres = $offreRepository->findNbOffreByEntreprise($entrepriseId);
 
-        $inscription = [];
-        foreach ($Offres as $Offre) {
-            $inscription[$Offre->getId()] = $inscrireRepository->IsInscrit($Offre->getId(), $security);
-        }
+        $inscription = $inscrireRepository->getInscriptions($Offres, $security);
+
         return $this->render('entreprise/offre/index.html.twig', [
             'types' => $types,
             'textRecherche' => $textRechercher,

@@ -24,11 +24,9 @@ class HomeController extends AbstractController
     public function home(OffreRepository $offreRepository, InscrireRepository $inscrireRepository, Security $security): Response
     {
         $Offres = $offreRepository->findByRecent();
-        $inscription = [];
 
-        foreach ($Offres as $Offre) {
-            $inscription[$Offre->getId()] = $inscrireRepository->IsInscrit($Offre->getId(), $security);
-        }
+        $inscription = $inscrireRepository->getInscriptions($Offres, $security);
+
 
         return $this->render('home/index.html.twig',[
             'Offres'=>$Offres,
