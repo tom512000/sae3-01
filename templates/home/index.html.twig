@@ -1,9 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block icon %}
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.0em%22 font-size=%2296%22>🏠</text></svg>">
-{% endblock %}
+{% block icon %}🏠{% endblock %}
 {% block title %}Accueil{% endblock %}
+{% block background %}{{ asset('img/background.png') }}{% endblock %}
 
 {% block form %}
     <form class="d-flex" role="search" action="{{ path('app_offre_index') }}" method="get">
@@ -13,11 +12,7 @@
 {% endblock %}
 
 {% block body %}
-<style>
-    body {background: url("{{ asset('img/background.png') }}") fixed center;background-size: cover}
-</style>
-
-<h1>Accueil</h1>
+    <h1>Accueil</h1>
     <h1>Liste des recentes Offres</h1>
     <br>
     <div class="bloc_offres">

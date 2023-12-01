@@ -1,9 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block icon %}
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.0em%22 font-size=%2296%22>📋</text></svg>">
-{% endblock %}
+{% block icon %}📋{% endblock %}
 {% block title %}Offres{% endblock %}
+{% block background %}{{ asset('img/background-info.png') }}{% endblock %}
 
 {% block form %}
     <form class="d-flex" role="search" action="{{ path('app_offre_index') }}" method="get">
@@ -13,9 +12,6 @@
 {% endblock %}
 
 {% block body %}
-    <style>
-        body {background: url("{{ asset('img/background-info.png') }}") fixed center;background-size: cover}
-    </style>
     <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
         <div class="carousel-inner">
             <div class="carousel-item active carousel1">

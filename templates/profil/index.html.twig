@@ -1,16 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block icon %}
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.0em%22 font-size=%2296%22>👤</text></svg>">
-{% endblock %}
+{% block icon %}👤{% endblock %}
 {% block title %}Profil{% endblock %}
+{% block background %}{{ asset('img/background-info.png') }}{% endblock %}
 
 {% block body %}
-    <style>
-        body {background: url("{{ asset('img/background-info.png') }}") fixed center;background-size: cover}
-    </style>
     <h1>Profil :</h1>
-
     <p>Nom : {{ app.user.firstName }}</p>
     <p>Prenom : {{ app.user.lastName }}</p>
     <p>Téléphone : {{ app.user.phone }}</p>
@@ -26,7 +21,5 @@
     {% else %}
         <p>Lettre de motivation enregistrée : Aucune</p>
     {% endif %}
-
     <a href="/profil/modif"><button type="button" href="/profil/modif">Modifier mon profil</button></a>
-
 {% endblock %}
