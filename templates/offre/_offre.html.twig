@@ -35,17 +35,17 @@
             <p class="niveau"><span>Niveau requis :</span> {{ Offre.level }}</p>
             {% if inscription[Offre.id] is defined %}
                 {% if inscription[Offre.id] is not null %}
-                    <form action="{{ path('app_inscire_desinscription', {'idOffre': Offre.id}) }}" method="get">
-                        <button class="btn btn-outline-success" type="submit">Se désincrire</button>
+                    <form class="inscrip-button" action="{{ path('app_inscire_desinscription', {'idOffre': Offre.id}) }}" method="get">
+                        <button class="btn btn-danger" type="submit">Se désincrire</button>
                     </form>
                 {% else %}
-                    <form action="{{ path('app_inscire_inscription', {'idOffre': Offre.id}) }}" method="get">
-                        <button class="btn btn-outline-success" type="submit">s'inscrire</button>
+                    <form class="inscrip-button" action="{{ path('app_inscire_inscription', {'idOffre': Offre.id}) }}" method="get">
+                        <button class="btn btn-success" type="submit">s'inscrire</button>
                     </form>
                 {% endif %}
             {% else %}
-                <form action="{{ path('app_inscire_inscription', {'idOffre': Offre.id}) }}" method="get">
-                    <button class="btn btn-outline-success" type="submit">S'inscrire</button>
+                <form class="inscrip-button" action="{{ path('app_inscire_inscription', {'idOffre': Offre.id}) }}" method="get">
+                    <button class="btn btn-success" type="submit">S'inscrire</button>
                 </form>
             {% endif %}
         </div>
