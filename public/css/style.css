@@ -42,6 +42,19 @@ body {
     background-size: cover;
 }
 
+/* Barre de défilement */
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--main-color);
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--third-color);
+}
+
 /* CSS templates/base.html.twig */
 div.container-fluid img {
     height: 30px;
@@ -183,6 +196,79 @@ footer > div.footer_2 {
 footer > p {
     color: #ffffff;
     font-family: 'K2D', sans-serif;
+}
+
+/* CSS home/index.html.twig */
+div.menu_bloc {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 220px;
+    border-bottom: 2px solid var(--main-color);
+    background-color: var(--fourth-color);
+}
+
+div.menu_bloc > h1 {
+    margin: 0;
+    font-family: 'Comfortaa', sans-serif;
+    color: var(--main-color);
+}
+
+div.menu_items {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 800px;
+}
+
+div.menu_items > h3 {
+    margin: 0;
+    font-family: 'K2D', sans-serif;
+}
+
+div.menu_items > h3 > a {
+    text-decoration: none;
+    color: var(--main-color);
+}
+
+div.menu_items > h3 > a:hover {
+    color: var(--second-color);
+}
+
+div.menu_items > div.barre {
+    width: 3px;
+    height: 25px;
+    border-radius: 10px;
+    background-color: var(--main-color);
+}
+
+div.titre_home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+}
+
+div.titre_home > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 900px;
+    height: 100%;
+    border-radius: 10px ;
+    overflow: hidden;
+    background-color: var(--fourth-color);
+    border: 2px solid var(--fourth-color);
+    box-shadow: 0 0 15px #000000;
+}
+
+div.titre_home > div > h1 {
+    margin: 0;
+    font-family: 'Archivo Black', sans-serif;
+    color: var(--second-color);
 }
 
 /* CSS offre/index.html.twig */
