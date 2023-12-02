@@ -61,8 +61,12 @@
     </div>
     <br>
     <div class="bloc_offres">
-        {% for Offre in Offres %}
-            {{ include('offre/_offre.html.twig') }}
-        {% endfor %}
+        {% if Offres is empty %}
+            <h1>Aucune offre pour cette entreprise</h1>
+        {% else %}
+            {% for Offre in Offres %}
+                {{ include('offre/_offre.html.twig') }}
+            {% endfor %}
+        {% endif %}
     </div>
 {% endblock %}

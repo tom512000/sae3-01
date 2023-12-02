@@ -26,7 +26,10 @@ class OffreRepository extends ServiceEntityRepository
 
     public function findByRecent():array{
         $qb = $this->createQueryBuilder('o')
-            ->select('o')
+            ->select('o', 'entreprise', 'Type','inscrires')
+            ->leftJoin('o.entreprise', 'entreprise')
+            ->leftJoin('o.inscrires', 'inscrires')
+            ->leftJoin('o.Type', 'Type')
             ->orderBy('o.jourDeb', 'ASC')
             ->setMaxResults(10);
 
@@ -64,19 +67,27 @@ class OffreRepository extends ServiceEntityRepository
     /**
      * @throws NonUniqueResultException
      */
-    public function findNbOffreByEntreprise(int $id) : int
+    public function findNbOffresByEntreprisesReturnArray(array $entreprises): array
     {
         $qb = $this->createQueryBuilder('o')
-            ->select('count(o.id)')
-            ->where('o.entreprise = :idEnt')
+            ->select('IDENTITY(o.entreprise) as entrepriseId, COUNT(o.id) as nbOffers')
+            ->where('o.entreprise IN (:entreprises)')
             ->groupBy('o.entreprise')
-            ->setParameter('idEnt', $id);
+            ->setParameter('entreprises', $entreprises);
 
-        try {
-            return $qb->getQuery()->getSingleScalarResult();
-        } catch (\Doctrine\ORM\NoResultException $e) {
-            return 0;
+        $results = $qb->getQuery()->getResult();
+
+        $nbOffres = [];
+        for($i = 0; $i<count($entreprises);$i++) {
+            $nbOffres[$entreprises[$i]->getId()] = 0;
         }
+
+
+        foreach ($results as $result) {
+            $nbOffres[$result['entrepriseId']] = $result['nbOffers'];
+        }
+
+        return $nbOffres;
     }
 
     /**
@@ -90,10 +101,12 @@ class OffreRepository extends ServiceEntityRepository
      */
     protected function Filter(int $type, QueryBuilder $qb, string $searchText, int $niveau, string $date, int $dateFiltre): mixed
     {
-        $qb ->leftJoin('o.inscrires', 'i')
-            ->leftJoin('o.skillDemanders','ski')
-            ->addSelect('i')
-            ->addSelect('ski');
+        $qb ->select('o', 'entreprise', 'Type','inscrires')
+            ->leftJoin('o.entreprise', 'entreprise')
+            ->leftJoin('o.inscrires', 'inscrires')
+            ->leftJoin('o.Type', 'Type')
+            ->leftJoin('inscrires.User','User');
+
 
         if ($type != 0) {
             $qb->join('o.Type', 't')
@@ -136,6 +149,20 @@ class OffreRepository extends ServiceEntityRepository
         $qb -> addOrderBy('o.nomOffre');
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function findById(int $id):Offre
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->select('o', 'entreprise', 'Type','inscrires')
+            ->leftJoin('o.entreprise', 'entreprise')
+            ->leftJoin('o.inscrires', 'inscrires')
+            ->leftJoin('o.Type', 'Type')
+            ->where('o.id = :id')
+            ->orderBy('o.jourDeb', 'ASC')
+            ->setParameter('id',$id);
+
+        return $qb->getQuery()->getOneOrNullResult();
     }
 }
 

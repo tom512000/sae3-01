@@ -45,4 +45,20 @@ class SkillDemanderRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function getSkillLibellesByOffreId(int $offreId): array
+    {
+        $qb = $this->createQueryBuilder('skillDe')
+            ->select('s.libelle')
+            ->leftJoin('skillDe.skill', 's')
+            ->where('skillDe.offre = :id')
+            ->orderBy('s.libelle', 'ASC')
+            ->setParameter('id', $offreId);
+
+        $results = $qb->getQuery()->getResult();
+
+        $libelles = array_column($results, 'libelle');
+
+        return $libelles;
+    }
 }
