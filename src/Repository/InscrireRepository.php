@@ -27,8 +27,13 @@ class InscrireRepository extends ServiceEntityRepository
     public function findByUserId(int $userId) : array
     {
         return $this->createQueryBuilder('i')
+            ->select('i','User','Offre','entreprise','Type')
             ->join('i.User', 'u')
             ->andWhere('u.id = :userId')
+            ->leftJoin('i.User','User')
+            ->leftJoin('i.Offre','Offre')
+            ->leftJoin('Offre.entreprise','entreprise')
+            ->leftJoin('Offre.Type','Type')
             ->setParameter('userId', $userId)
             ->getQuery()
             ->getResult();

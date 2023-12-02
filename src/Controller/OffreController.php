@@ -6,6 +6,7 @@ use App\Entity\Offre;
 use App\Entity\Type;
 use App\Repository\InscrireRepository;
 use App\Repository\OffreRepository;
+use App\Repository\SkillDemanderRepository;
 use App\Repository\TypeRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
@@ -19,22 +20,28 @@ use Symfony\Component\Security\Core\Security;
 #[IsGranted('ROLE_USER')]
 class OffreController extends AbstractController
 {
-    /**
-     * @param OffreRepository $offreRepository
-     * @param Request $request
-     * @param TypeRepository $typeRepository
-     * @param InscrireRepository $inscrireRepository
-     * @param Security $security
-     * @param array $Offres
-     * @return Response
-     * @throws \Exception
-     */
+    private OffreRepository $offreRepository;
+    private TypeRepository $typeRepository;
+    private InscrireRepository $inscrireRepository;
+    private Security $security;
+    private SkillDemanderRepository $skillDemanderRepository;
+
+    public function __construct(
+        OffreRepository $offreRepository,
+        TypeRepository $typeRepository,
+        InscrireRepository $inscrireRepository,
+        Security $security,
+        SkillDemanderRepository $skillDemanderRepository
+    ) {
+        $this->offreRepository = $offreRepository;
+        $this->typeRepository = $typeRepository;
+        $this->inscrireRepository = $inscrireRepository;
+        $this->security = $security;
+        $this->skillDemanderRepository = $skillDemanderRepository;
+    }
+
     #[Route('/offre', name: 'app_offre_index')]
-    public function index(OffreRepository $offreRepository,
-                          Request $request,
-                          TypeRepository $typeRepository,
-                          InscrireRepository $inscrireRepository,
-                          Security $security): Response
+    public function index(Request $request): Response
     {
         $textRechercher = $request->query->get('textRecherche', '');
         $typeRechercher = $request->query->get('type', 0);
@@ -42,63 +49,56 @@ class OffreController extends AbstractController
         $dateRechercher = $request->query->get('date', '');
         $dateFiltreRechercher = $request->query->get('dateFiltre', 0);
 
-        $Offres = $offreRepository->findByFilter($typeRechercher, $textRechercher, $niveauRechercher, $dateRechercher, $dateFiltreRechercher);
-
-        $types = $typeRepository->findAll();
-
-        $inscription = $inscrireRepository->getInscriptions($Offres, $security);
-
+        $Offres = $this->offreRepository->findByFilter($typeRechercher, $textRechercher, $niveauRechercher, $dateRechercher, $dateFiltreRechercher);
+        $types = $this->typeRepository->findAll();
+        $inscription = $this->inscrireRepository->getInscriptions($Offres, $this->security);
 
         return $this->render('offre/index.html.twig', [
-            'Offres'=>$Offres,
+            'Offres' => $Offres,
             'textRecherche' => $textRechercher,
             'types' => $types,
-            'inscription' => $inscription
+            'inscription' => $inscription,
         ]);
     }
 
-    /**
-     * @throws NonUniqueResultException
-     */
     #[Route('/entreprise/offre', name: 'app_offre_OffreEntreprise', requirements: ['entrepriseId' => '\d+'])]
-    public function OffreEntreprise(OffreRepository $offreRepository, Request $request, TypeRepository $typeRepository, InscrireRepository $inscrireRepository, Security $security): Response
+    public function OffreEntreprise(Request $request): Response
     {
         $textRechercher = $request->query->get('textRecherche', '');
         $typeRechercher = $request->query->get('type', 0);
         $entrepriseId = $request->query->get('entrepriseId');
-        $niveauRechercher = (int) $request->query->get('niveau', -1);;
+        $niveauRechercher = (int) $request->query->get('niveau', -1);
         $dateRechercher = $request->query->get('date', '');
         $dateFiltreRechercher = $request->query->get('dateFiltre', 0);
 
-        $Offres = $offreRepository->findByFilterByEntrepriseId($entrepriseId,$typeRechercher, $textRechercher, $niveauRechercher, $dateRechercher, $dateFiltreRechercher);
-        $types = $typeRepository->findAll();
-
-        $nbOffres = $offreRepository->findNbOffreByEntreprise($entrepriseId);
-
-        $inscription = $inscrireRepository->getInscriptions($Offres, $security);
+        $Offres = $this->offreRepository->findByFilterByEntrepriseId($entrepriseId, $typeRechercher, $textRechercher, $niveauRechercher, $dateRechercher, $dateFiltreRechercher);
+        $types = $this->typeRepository->findAll();
+        $inscription = $this->inscrireRepository->getInscriptions($Offres, $this->security);
 
         return $this->render('entreprise/offre/index.html.twig', [
             'types' => $types,
             'textRecherche' => $textRechercher,
-            'Offres'=>$Offres,
+            'Offres' => $Offres,
             'entrepriseId' => $entrepriseId,
-            'nbOffres' => $nbOffres,
-            'inscription' => $inscription
+            'inscription' => $inscription,
         ]);
     }
 
     #[Route('/offre/{offreId}', name: 'app_offre_show', requirements: ['offreId' => '\d+'])]
     public function show(
-        #[MapEntity(class: 'App\Entity\Offre', expr: 'repository.find(offreId)')]
+        #[MapEntity(class: 'App\Entity\Offre', expr: 'repository.findById(offreId)')]
         Offre $Offre,
         int $offreId,
-        InscrireRepository $inscrireRepository,
         Security $security): Response
     {
-        $Inscrit = $inscrireRepository->IsInscrit($offreId, $security);
+        $Inscrit = $this->inscrireRepository->IsInscrit($offreId, $security);
+
+        $skills = $this->skillDemanderRepository->getSkillLibellesByOffreId($offreId);
+
         return $this->render('offre/show.html.twig',[
             'Offre'=>$Offre,
-            'inscription' => $Inscrit
+            'inscription' => $Inscrit,
+            'skills' => $skills
         ]);
     }
 }

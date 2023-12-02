@@ -63,15 +63,15 @@
                 <tr>
                     <td colspan="8">{{ Offre.getDescrip() }}</td>
                 </tr>
-                {% if Offre.skillDemanders|length >0 %}
+                {% if skills|length >0 %}
                     <thead>
                         <tr>
                             <th colspan="8">skills requis</th>
                         </tr>
                     </thead>
                     <tr>
-                        {% for skillDemander in Offre.skillDemanders %}
-                            <td>{{ skillDemander.skill.libelle }}</td>
+                        {% for skill in skills %}
+                            <td>{{ skill }}</td>
                         {% endfor %}
                     </tr>
                 {% endif %}
