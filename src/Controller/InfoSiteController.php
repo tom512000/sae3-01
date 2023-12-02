@@ -15,4 +15,20 @@ class InfoSiteController extends AbstractController
             'controller_name' => 'InfoSiteController',
         ]);
     }
+
+    #[Route('/mentions-legales', name: 'app_mentions')]
+    public function mentions(): Response
+    {
+        return $this->render('info_site/mentions.html.twig', [
+            'controller_name' => 'InfoSiteController',
+        ]);
+    }
+
+    #[Route('/conditions-generales-d-utilisation', name: 'app_conditions')]
+    public function conditions(): Response
+    {
+        return $this->render('info_site/conditions.html.twig', [
+            'controller_name' => 'InfoSiteController',
+        ]);
+    }
 }
