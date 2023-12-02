@@ -15,22 +15,28 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted('ROLE_USER')]
 class EntrepriseController extends AbstractController
 {
+    private $entrepriseRepository;
+    private $offreRepository;
+
+    public function __construct(EntrepriseRepository $entrepriseRepository, OffreRepository $offreRepository)
+    {
+        $this->entrepriseRepository = $entrepriseRepository;
+        $this->offreRepository = $offreRepository;
+    }
+
     #[Route('/entreprise', name: 'app_entreprise_index')]
-    public function index(EntrepriseRepository $EntrepriseRepository, Request $request, OffreRepository $offreRepository): Response
+    public function index(Request $request): Response
     {
         $textRechercheEntreprise = $request->query->get('textRecherche', '');
-        $Entreprises = $EntrepriseRepository->search($textRechercheEntreprise);
 
-        $nbOffres = [];
+        $entreprises = $this->entrepriseRepository->search($textRechercheEntreprise);
 
-        foreach ($Entreprises as $Entreprise) {
-            $nbOffres[$Entreprise->getId()] = $offreRepository->findNbOffreByEntreprise($Entreprise->getId());
-        }
+        $nbOffres = $this->offreRepository->findNbOffresByEntreprisesReturnArray($entreprises);
 
         return $this->render('entreprise/index.html.twig', [
-            'Entreprises'=>$Entreprises,
+            'Entreprises' => $entreprises,
             'textRechercheEntreprise' => $textRechercheEntreprise,
-            'nbOffres' => $nbOffres
+            'nbOffres' => $nbOffres,
         ]);
     }
 
@@ -38,7 +44,7 @@ class EntrepriseController extends AbstractController
     public function show(
         #[MapEntity(expr: 'repository.find(entrepriseId)')]
         Entreprise $Entreprises,
-        OffreRepository $offreRepository, Request $request): Response
+        Request $request): Response
     {
         $textRechercheEntreprise = $request->query->get('textRecherche', '');
 
@@ -46,8 +52,7 @@ class EntrepriseController extends AbstractController
             throw $this->createNotFoundException("Entreprise n'a pas été trouver ");
         }
 
-        $nbOffres = $offreRepository->findNbOffreByEntreprise($Entreprises->getId());
-
+        $nbOffres = $this->offreRepository->findNbOffresByEntreprisesReturnArray([$Entreprises])[$Entreprises->getId()];
         return $this->render('entreprise/index.html.twig', [
             'Entreprises'=>$Entreprises,
             'textRechercheEntreprise' => $textRechercheEntreprise,
