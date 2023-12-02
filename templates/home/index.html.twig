@@ -12,8 +12,24 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Accueil</h1>
-    <h1>Liste des recentes Offres</h1>
+    <div class="menu_bloc">
+        <h1>ACCUEIL</h1>
+        <div class="menu_items">
+            <h3><a href="{{ path('app_offre_index') }}">Offres</a></h3>
+            <div class="barre"></div>
+            <h3><a href="{{ path('app_entreprise_index') }}">Entreprises</a></h3>
+            <div class="barre"></div>
+            <h3><a href="{{ path('app_profile') }}">Mon profil</a></h3>
+            <div class="barre"></div>
+            <h3><a href="{{ path('app_a-propos') }}">À propos de nous</a></h3>
+        </div>
+    </div>
+    <br>
+    <div class="titre_home">
+        <div>
+            <h1>Offres récentes</h1>
+        </div>
+    </div>
     <br>
     <div class="bloc_offres">
         {% for Offre in Offres %}
