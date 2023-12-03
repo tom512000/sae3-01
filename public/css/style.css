@@ -272,7 +272,7 @@ div.titre_offre {
 
 div.titre_offre > h1 {
     font-size: 65px;
-    background: -webkit-linear-gradient(var(--second-color),var(--main-color));
+    background: -webkit-linear-gradient(var(--second-color), var(--main-color));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-family: 'Impact', sans-serif;
@@ -516,26 +516,38 @@ div.infos3 p.duree span,
     font-weight: bold;
 }
 
-.custom-pagination {
+div.custom-pagination {
     display: flex;
     justify-content: center;
 }
 
-.custom-pagination a {
+div.custom-pagination a {
     display: block;
-    padding: 4px 8px; /* Taille des boutons ici (Hauteur, Largeur)*/
+    padding: 4px 8px;
     text-decoration: none;
     color: #333;
     background-color: #eee;
     border: 1px solid var(--main-color);
-    border-radius: 4px;
+    border-radius: 3px;
     transition: background-color 0.3s ease;
 }
 
-.custom-pagination span {
+div.custom-pagination span {
     color: black;
     font-size: 20px;
-    background-color: var(--main-color);
+}
+
+div.pagination {
+    margin-bottom: 2px;
+}
+
+div.pagination span.current {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 8px;
+    color: var(--fourth-color);
+    background-color: var(--second-color);
 }
 
 /* CSS entreprise/index.html.twig */
