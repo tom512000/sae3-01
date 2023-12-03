@@ -4,44 +4,43 @@
 {% block title %}Offres{% endblock %}
 {% block background %}{{ asset('img/background.png') }}{% endblock %}
 
-{% block form %}
-    <form role="search" action="{{ path('app_offre_index') }}" method="get" style="display: none;">
-        <div class="radio-group" style="display: flex; flex-direction: column">
-            {% for type in types %}
-                <input id="typeOffre" type="radio" name="type" value="{{ type.id }}">
-                <label for="typeOffre">{{ type.libelle }}</label>
-            {% endfor %}
-        </div>
-
-        <div style="margin-right: 20px; margin-left: 20px">
-            <label for="niveau">Bac +</label>
-            <input type="number" id="niveau" name="niveau" min="0" max="5" placeholder="bac" style="width: 50px;" >
-        </div>
-        <div>
-            <label for="date">Date de début</label>
-            <input type="date" id="date" name="date" placeholder="Date">
-
-            <div class="radio-group" style="margin-top: -22px">
-                <label for="dateFiltre">Avant</label>
-                <input id="dateFiltre" type="radio" name="dateFiltre" value="1">
-
-                <label for="dateFiltre">Apres</label>
-                <input id="dateFiltre" type="radio" name="dateFiltre" value="2">
-            </div>
-        </div>
-
-        <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search" name="textRecherche" value="{{ textRecherche|default }}">
-        <button class="btn btn-outline-success" type="submit">🔎</button>
-    </form>
-{% endblock %}
-
 {% block body %}
-    <div class="titre_page">
+    <div class="titre_offre">
         <h1>LISTE DES OFFRES</h1>
-        <div class="bloc_tri">
-            <p>OPTIONS DE TRI ICI</p>
-            <p>(plus ou moins)</p>
-        </div>
+        <form class="form_offre" role="search" action="{{ path('app_offre_index') }}" method="get">
+            <div class="radio_group">
+                {% for type in types %}
+                    {% set uniqueId = 'typeOffre' ~ type.id %}
+                    <div>
+                        <input id="{{ uniqueId }}" type="radio" name="type" value="{{ type.id }}">
+                        <label for="{{ uniqueId }}">{{ type.libelle }}</label>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="niveau_bac">
+                <label for="niveau">Bac +</label>
+                <input class="btn-outline-success" type="number" id="niveau" name="niveau" min="-1" max="5" placeholder="bac" value="-1">
+            </div>
+            <div class="radio_date">
+                <label for="date">Date de début</label>
+                <input type="date" id="date" name="date" placeholder="Date">
+            </div>
+            <div class="date_filtre">
+                <div>
+                    <input id="dateFiltre1" type="radio" name="dateFiltre" value="1">
+                    <label for="dateFiltre1">Avant</label>
+                </div>
+                <div>
+                    <input id="dateFiltre2" type="radio" name="dateFiltre" value="2">
+                    <label for="dateFiltre2">Apres</label>
+                </div>
+            </div>
+            <div class="search">
+                <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search" name="textRecherche" value="{{ textRecherche|default }}">
+                <button class="btn btn-outline-success style" type="submit">🔎</button>
+            </div>
+            <button class="btn btn-outline-success style" type="submit">Effacer</button>
+        </form>
     </div>
     <div class="bloc_offres">
         {% for Offre in Offres %}
