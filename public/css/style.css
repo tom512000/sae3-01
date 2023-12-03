@@ -819,3 +819,31 @@ div.conditions_bloc_2 > p > a {
 div.conditions_bloc_2 > p > a:hover {
     color: var(--second-color);
 }
+
+
+.custom-pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.custom-pagination a {
+    display: block;
+    padding: 4px 8px; /* Taille des boutons ici (Hauteur, Largeur)*/
+    text-decoration: none;
+    color: #333;
+    background-color: #eee;
+    border: 1px solid var(--main-color);
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.custom-pagination span {
+    color: black;
+    font-size: 20px;
+    background-color: var(--main-color);
+}
+
+
+.custom-pagination a:hover {
+    background-color: #b7b6b6;
+}

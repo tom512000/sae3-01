@@ -9,6 +9,7 @@ use App\Repository\OffreRepository;
 use App\Repository\SkillDemanderRepository;
 use App\Repository\TypeRepository;
 use Doctrine\ORM\NonUniqueResultException;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,7 +42,7 @@ class OffreController extends AbstractController
     }
 
     #[Route('/offre', name: 'app_offre_index')]
-    public function index(Request $request): Response
+    public function index(Request $request, PaginatorInterface $paginator): Response
     {
         $textRechercher = $request->query->get('textRecherche', '');
         $typeRechercher = $request->query->get('type', 0);
@@ -49,17 +50,25 @@ class OffreController extends AbstractController
         $dateRechercher = $request->query->get('date', '');
         $dateFiltreRechercher = $request->query->get('dateFiltre', 0);
 
-        $Offres = $this->offreRepository->findByFilter($typeRechercher, $textRechercher, $niveauRechercher, $dateRechercher, $dateFiltreRechercher);
+        $query = $this->offreRepository->findByFilter($typeRechercher, $textRechercher, $niveauRechercher, $dateRechercher, $dateFiltreRechercher);
+
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            14  # Nombre d'offre par page
+        );
+
         $types = $this->typeRepository->findAll();
-        $inscription = $this->inscrireRepository->getInscriptions($Offres, $this->security);
+        $inscription = $this->inscrireRepository->getInscriptions($pagination->getItems(), $this->security);
 
         return $this->render('offre/index.html.twig', [
-            'Offres' => $Offres,
+            'Offres' => $pagination,
             'textRecherche' => $textRechercher,
             'types' => $types,
             'inscription' => $inscription,
         ]);
     }
+
 
     #[Route('/entreprise/offre', name: 'app_offre_OffreEntreprise', requirements: ['entrepriseId' => '\d+'])]
     public function OffreEntreprise(Request $request): Response
