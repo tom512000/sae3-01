@@ -5,7 +5,7 @@
 {% block background %}{{ asset('img/background.png') }}{% endblock %}
 
 {% block form %}
-    <form class="d-flex" role="search" action="{{ path('app_entreprise_index') }}" method="get">
+    <form class="d-flex" role="search" action="{{ path('app_offre_OffreEntreprise') }}" method="get">
         <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search" name="textRecherche" value="{{ textRecherche|default }}">
         <button class="btn btn-outline-success" type="submit">🔎</button>
     </form>
@@ -15,8 +15,8 @@
 
     {# Affichage des détails d'une entreprise #}
     {% if not Entreprises is iterable %}
-        <div class="entreprise_menu">
-            <h1 class="carousel_titre">DÉTAILS DE L'ENTREPRISE</h1>
+        <div class="titre_entreprises">
+            <h1>DÉTAILS DE L'ENTREPRISE</h1>
         </div>
         <div class="details_entreprise">
             <img src="{{ Entreprises.getLogo() }}" alt="Logo de {{ Entreprises.getNomEnt() }}"/>
@@ -42,8 +42,8 @@
 
         {# Affichage de la liste de toutes les entreprises #}
         {% if Entreprises|length > 0 %}
-            <div class="entreprise_menu">
-                <h1 class="carousel_titre">LISTE DES ENTREPRISES</h1>
+            <div class="titre_entreprises">
+                <h1>LISTE DES ENTREPRISES</h1>
             </div>
             <br>
             <div class="bloc_entreprises">
