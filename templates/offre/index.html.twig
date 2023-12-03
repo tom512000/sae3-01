@@ -48,4 +48,7 @@
             {{ include('offre/_offre.html.twig') }}
         {% endfor %}
     </div>
+    <div class="pagination custom-pagination">
+        {{ knp_pagination_render(Offres) }}
+    </div>
 {% endblock %}
