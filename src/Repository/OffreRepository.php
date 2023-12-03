@@ -120,7 +120,7 @@ class OffreRepository extends ServiceEntityRepository
             ))->setParameter('searchText', '%' . $searchText . '%');
         }
 
-        if (!empty($niveau) && $niveau != -1) {
+        if ($niveau != -1) {
             if ($niveau == 0) {
                 $qb->andWhere('o.level = :niveau')
                     ->setParameter('niveau', 'BAC');
