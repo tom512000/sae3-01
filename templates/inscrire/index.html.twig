@@ -5,48 +5,59 @@
 {% block background %}{{ asset('img/background.png') }}{% endblock %}
 
 {% block body %}
-    <h1>Vos inscriptions</h1>
+    <div class="titre_offre">
+        <h1>Vos inscriptions</h1>
+    </div>
     <div class="bloc_offres">
-        {% for inscription in inscriptions %}
-            <div class="bloc_offre">
-                <div class="bloc_offre_img">
-                    <div class="bloc_1"></div>
-                    <div class="bloc_2">
-                        <a href="entreprise/{{ inscription.Offre.getEntreprise().getId() }}">
-                            <img src="{{ inscription.Offre.getEntreprise().getLogo() }}" alt="Logo de {{ inscription.Offre.getEntreprise().getNomEnt() }}"/>
-                        </a>
+        {% if inscriptions is empty %}
+        <div class="bloc_offres_vide">
+            <h1>Aucunes offres disponibles</h1>
+        </div>
+        {% else %}
+            {% for inscription in inscriptions %}
+                <div class="bloc_offre">
+                    <div class="bloc_offre_img">
+                        <div class="bloc_1"></div>
+                        <div class="bloc_2">
+                            <a href="entreprise/{{ inscription.Offre.getEntreprise().getId() }}">
+                                <img src="{{ inscription.Offre.getEntreprise().getLogo() }}" alt="Logo de {{ inscription.Offre.getEntreprise().getNomEnt() }}"/>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="bloc_offre_txt">
+                        <div class="infos1">
+                            <div class="infos1_1 fs-5">
+                                <a href="/offre/{{ inscription.Offre.id }}">{{ inscription.Offre.nomOffre }}</a>
+                            </div>
+                            <div class="infos1_2">
+                                <div class="infos1_2_1">
+                                    {{ inscription.Offre.getJourDebString() }}
+                                </div>
+                                <div class="infos1_2_2">
+                                    {{ inscription.Offre.type.libelle }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="infos2">
+                            <div class="infos2_1">
+                                {{ inscription.Offre.nbPlace }} place(s)
+                            </div>
+                            <div class="infos2_2">
+                                {{ inscription.Offre.lieux }}
+                            </div>
+                        </div>
+                        <p class="description">{{ inscription.Offre.getDescrip() }}</p>
+                        <div class="infos3">
+                            <p class="duree"><span>Durée :</span> {{ inscription.Offre.duree }} jour(s)</p>
+                            <p class="niveau"><span>Niveau requis :</span> {{ inscription.offre.level }}</p>
+                            <form class="inscrip-button" action="{{ path('app_inscire_desinscription', {'idOffre': inscription.Offre.id}) }}" method="get">
+                                <button class="btn btn-danger" type="submit">Se désincrire</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-                <div class="bloc_offre_txt">
-                    <div class="infos1">
-                        <div class="infos1_1 fs-5">
-                            {{ inscription.Offre.nomOffre }}
-                        </div>
-                        <div class="infos1_2">
-                            <div class="infos1_2_1">
-                                {{ inscription.Offre.getJourDebString() }}
-                            </div>
-                            <div class="infos1_2_2">
-                                {{ inscription.Offre.type.libelle }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="infos2">
-                        <div class="infos2_1">
-                            {{ inscription.Offre.nbPlace }} place(s)
-                        </div>
-                        <div class="infos2_2">
-                            {{ inscription.Offre.lieux }}
-                        </div>
-                    </div>
-                    <p class="description">{{ inscription.Offre.getDescrip() }}</p>
-                    <p class="duree"><span>Durée :</span> {{ inscription.Offre.duree }} jour(s)</p>
-                </div>
-                <form action="{{ path('app_inscire_desinscription', {'idOffre': inscription.Offre.id}) }}" method="get">
-                    <button class="btn btn-outline-success" type="submit">Se désincrire</button>
-                </form>
-            </div>
-            <br>
-        {% endfor %}
+                <br>
+            {% endfor %}
+        {% endif %}
     </div>
 {% endblock %}

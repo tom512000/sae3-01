@@ -21,6 +21,7 @@ class InscireController extends AbstractController
         if ($user) {
             $userId = $user->getId();
 
+
             $inscriptions = $inscrireRepository->findByUserId($userId);
 
             return $this->render('inscrire/index.html.twig', [
