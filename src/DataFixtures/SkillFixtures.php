@@ -5,7 +5,6 @@ namespace App\DataFixtures;
 use App\Factory\SkillFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-;
 
 class SkillFixtures extends Fixture
 {

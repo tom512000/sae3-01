@@ -6,7 +6,6 @@ use App\Factory\InscrireFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-;
 
 class InscrireFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -14,7 +13,7 @@ class InscrireFixtures extends Fixture implements DependentFixtureInterface
     {
         InscrireFactory::createMany(80);
     }
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             UserFixtures::class,

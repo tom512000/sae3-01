@@ -2,8 +2,8 @@
 
 namespace App\Entity;
 
-use App\Repository\InscrireRepository;
 use App\Repository\OffreRepository;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -34,7 +34,7 @@ class Offre
 
     #[ORM\Column(type:Types::DATE_MUTABLE)]
 
-    private ?\DateTimeInterface $jourDeb = null;
+    private ?DateTimeInterface $jourDeb = null;
 
     #[ORM\Column]
     private ?int $nbPlace = null;
@@ -117,7 +117,7 @@ class Offre
         return $this;
     }
 
-    public function getJourDeb(): ?\DateTimeInterface
+    public function getJourDeb(): ?DateTimeInterface
     {
         return $this->jourDeb;
     }
@@ -128,7 +128,7 @@ class Offre
     }
 
 
-    public function setJourDeb(\DateTimeInterface $jourDeb): static
+    public function setJourDeb(DateTimeInterface $jourDeb): static
     {
         $this->jourDeb = $jourDeb;
 

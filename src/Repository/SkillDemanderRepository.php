@@ -57,8 +57,6 @@ class SkillDemanderRepository extends ServiceEntityRepository
 
         $results = $qb->getQuery()->getResult();
 
-        $libelles = array_column($results, 'libelle');
-
-        return $libelles;
+        return array_column($results, 'libelle');
     }
 }

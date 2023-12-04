@@ -4,10 +4,10 @@ namespace App\Factory;
 
 use App\Entity\Entreprise;
 use App\Repository\EntrepriseRepository;
+use Transliterator;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\RepositoryProxy;
-use function Zenstruck\Foundry\faker;
 
 /**
  * @extends ModelFactory<Entreprise>
@@ -35,12 +35,12 @@ final class EntrepriseFactory extends ModelFactory
      *
      * @todo inject services if required
      */
-    private \Transliterator $transliterator;
+    private Transliterator $transliterator;
 
     public function __construct()
     {
         parent::__construct();
-        $this->transliterator = \Transliterator::create('Any-Lower; Latin-ASCII; Lower()');
+        $this->transliterator = Transliterator::create('Any-Lower; Latin-ASCII; Lower()');
     }
 
     /**
@@ -97,7 +97,7 @@ final class EntrepriseFactory extends ModelFactory
     {
         $color1 = substr(self::faker()->hexColor(), 1);
         $color2 = substr(self::faker()->hexColor(), 1);
-        return "https://placehold.co/500x500/{$color1}/{$color2}?text={$Name}";
+        return "https://placehold.co/500x500/$color1/$color2?text=$Name";
     }
 
     protected function generateSiteWeb($Name): string

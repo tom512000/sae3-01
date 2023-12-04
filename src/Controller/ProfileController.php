@@ -46,7 +46,7 @@ class ProfileController extends AbstractController
                         $this->getParameter('PDF_files'),
                         $newFilename
                     );
-                } catch (FileException $e) {
+                } catch (FileException) {
                 }
                 $user->setCv($newFilename);
             }
@@ -63,7 +63,7 @@ class ProfileController extends AbstractController
                         $this->getParameter('brochures_directory'),
                         $newFilename
                     );
-                } catch (FileException $e) {
+                } catch (FileException) {
                 }
                 $user->setLettreMotiv($newFilename);
             }
@@ -98,7 +98,7 @@ class ProfileController extends AbstractController
                         $this->getParameter('PDF_files'),
                         $newFilename
                     );
-                } catch (FileException $e) {
+                } catch (FileException) {
                 }
                 $user->setCv($newFilename);
             }
@@ -115,16 +115,12 @@ class ProfileController extends AbstractController
                         $this->getParameter('brochures_directory'),
                         $newFilename
                     );
-                } catch (FileException $e) {
+                } catch (FileException) {
                 }
                 $user->setLettreMotiv($newFilename);
             }
 
-            try{
-                UserFactory::createOne(['lastName'=>$user->getLastName(),'firstName'=>$user->getFirstName(),'email'=>$user->getEmail(),'dateNais'=>$user->getDateNais(),'phone'=>$user->getPhone(),'cv'=>$user->getCv(),'lettreMotiv'=>$user->getLettreMotiv()]);
-            } catch (UniqueConstraintViolationException) {
-                return $this->redirectToRoute('app_profile_new');
-            }
+            UserFactory::createOne(['lastName'=>$user->getLastName(),'firstName'=>$user->getFirstName(),'email'=>$user->getEmail(),'dateNais'=>$user->getDateNais(),'phone'=>$user->getPhone(),'cv'=>$user->getCv(),'lettreMotiv'=>$user->getLettreMotiv()]);
 
             return $this->redirectToRoute('app_login');
         }

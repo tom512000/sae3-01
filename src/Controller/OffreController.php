@@ -3,12 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Offre;
-use App\Entity\Type;
 use App\Repository\InscrireRepository;
 use App\Repository\OffreRepository;
 use App\Repository\SkillDemanderRepository;
 use App\Repository\TypeRepository;
-use Doctrine\ORM\NonUniqueResultException;
+use Exception;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -41,6 +40,9 @@ class OffreController extends AbstractController
         $this->skillDemanderRepository = $skillDemanderRepository;
     }
 
+    /**
+     * @throws Exception
+     */
     #[Route('/offre', name: 'app_offre_index')]
     public function index(Request $request, PaginatorInterface $paginator): Response
     {
@@ -70,6 +72,9 @@ class OffreController extends AbstractController
     }
 
 
+    /**
+     * @throws Exception
+     */
     #[Route('/entreprise/offre', name: 'app_offre_OffreEntreprise', requirements: ['entrepriseId' => '\d+'])]
     public function OffreEntreprise(Request $request): Response
     {
