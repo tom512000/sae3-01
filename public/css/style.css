@@ -732,7 +732,6 @@ form.login_bloc {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: calc(100% - 98px);
     background: url("../img/fond_login.avif") no-repeat center;
     background-size: cover;
 }
@@ -743,9 +742,10 @@ div.relative_bloc {
 
 div.login_form {
     width: 30%;
-    height: 80%;
+    height: 100%;
     position: relative;
-    padding: 25px;
+    padding: 25px 25px 80px 25px;
+    margin: 50px 0 50px 0;
     border-radius: 20px;
     background-color: var(--third-color);
     box-shadow: 8px 8px 0 #000000;
@@ -784,6 +784,19 @@ div.login_form button {
 
 div.login_form button:hover {
     background-color: var(--second-color);
+}
+
+h4.register_account {
+    color: var(--fourth-color);
+}
+
+h4.register_account > a {
+    text-decoration: none;
+    color: var(--main-color);
+}
+
+h4.register_account > a:hover {
+    opacity: 0.8;
 }
 
 /* CSS info_site/index.html.twig */
