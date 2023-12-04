@@ -15,7 +15,7 @@ class OffreFixtures extends Fixture implements DependentFixtureInterface
         OffreFactory::createMany(220);
     }
 
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             EntrepriseFixtures::class

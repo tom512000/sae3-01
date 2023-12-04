@@ -3,11 +3,12 @@
 namespace App\Repository;
 
 use App\Entity\Offre;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 
 /**
  * @extends ServiceEntityRepository<Offre>
@@ -45,7 +46,10 @@ class OffreRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findByFilterByEntrepriseId(int $id,int $type, string $searchText, int $niveau, string $date, int $dateFiltre): array
+    /**
+     * @throws Exception
+     */
+    public function findByFilterByEntrepriseId(int $id, int $type, string $searchText, int $niveau, string $date, int $dateFiltre): array
     {
         $qb = $this->createQueryBuilder('o')
             ->where('o.entreprise = :idEnt')
@@ -55,7 +59,7 @@ class OffreRepository extends ServiceEntityRepository
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function findByFilter(int $type, string $searchText, int $niveau, string $date, int $dateFiltre): array
     {
@@ -94,10 +98,11 @@ class OffreRepository extends ServiceEntityRepository
      * @param int $type
      * @param QueryBuilder $qb
      * @param string $searchText
-     * @param string $niveau
+     * @param int $niveau
      * @param string $date
+     * @param int $dateFiltre
      * @return float|int|mixed|string
-     * @throws \Exception
+     * @throws Exception
      */
     protected function Filter(int $type, QueryBuilder $qb, string $searchText, int $niveau, string $date, int $dateFiltre): mixed
     {
@@ -131,7 +136,7 @@ class OffreRepository extends ServiceEntityRepository
         }
 
         if (!empty($date)) {
-            $formattedDate = new \DateTime($date);
+            $formattedDate = new DateTime($date);
 
             if ($dateFiltre == 1) {
                 $qb->andWhere('o.jourDeb < :date')
@@ -151,6 +156,9 @@ class OffreRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * @throws NonUniqueResultException
+     */
     public function findById(int $id):Offre
     {
         $qb = $this->createQueryBuilder('o')

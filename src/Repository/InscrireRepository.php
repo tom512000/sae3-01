@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Inscrire;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Security;
 use App\Entity\User;
@@ -49,6 +51,9 @@ class InscrireRepository extends ServiceEntityRepository
         return false;
     }
 
+    /**
+     * @throws NonUniqueResultException
+     */
     public function inscription(Offre $Offre, Security $security):void{
 
         $user = $security->getUser();
@@ -73,13 +78,17 @@ class InscrireRepository extends ServiceEntityRepository
                 $inscrire->setUser($user);
                 $inscrire->setOffre($Offre);
                 $inscrire->setStatus(1);
-                $inscrire->setDateDemande(new \DateTime());
+                $inscrire->setDateDemande(new DateTime());
 
                 $this->_em->persist($inscrire);
                 $this->_em->flush();
             }
         }
     }
+
+    /**
+     * @throws NonUniqueResultException
+     */
     public function desinscription(Offre $Offre, Security $security):void
     {
         $user = $security->getUser();

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Entreprise;
 use App\Repository\EntrepriseRepository;
 use App\Repository\OffreRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,8 +16,8 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted('ROLE_USER')]
 class EntrepriseController extends AbstractController
 {
-    private $entrepriseRepository;
-    private $offreRepository;
+    private EntrepriseRepository $entrepriseRepository;
+    private OffreRepository $offreRepository;
 
     public function __construct(EntrepriseRepository $entrepriseRepository, OffreRepository $offreRepository)
     {
@@ -24,6 +25,9 @@ class EntrepriseController extends AbstractController
         $this->offreRepository = $offreRepository;
     }
 
+    /**
+     * @throws NonUniqueResultException
+     */
     #[Route('/entreprise', name: 'app_entreprise_index')]
     public function index(Request $request): Response
     {
@@ -40,6 +44,9 @@ class EntrepriseController extends AbstractController
         ]);
     }
 
+    /**
+     * @throws NonUniqueResultException
+     */
     #[Route('/entreprise/{entrepriseId}', name: 'app_entreprise_show', requirements: ['entrepriseId' => '\d+'])]
     public function show(
         #[MapEntity(expr: 'repository.find(entrepriseId)')]
@@ -47,10 +54,6 @@ class EntrepriseController extends AbstractController
         Request $request): Response
     {
         $textRechercheEntreprise = $request->query->get('textRecherche', '');
-
-        if (!$Entreprises) {
-            throw $this->createNotFoundException("Entreprise n'a pas été trouver ");
-        }
 
         $nbOffres = $this->offreRepository->findNbOffresByEntreprisesReturnArray([$Entreprises])[$Entreprises->getId()];
         return $this->render('entreprise/index.html.twig', [

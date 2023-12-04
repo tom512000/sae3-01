@@ -5,7 +5,6 @@ namespace App\DataFixtures;
 use App\Factory\EntrepriseFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-;
 
 class EntrepriseFixtures extends Fixture
 {

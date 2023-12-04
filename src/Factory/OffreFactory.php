@@ -6,6 +6,7 @@ use App\Entity\Offre;
 use App\Repository\EntrepriseRepository;
 use App\Repository\OffreRepository;
 use App\Repository\TypeRepository;
+use Transliterator;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\RepositoryProxy;
@@ -36,14 +37,14 @@ final class OffreFactory extends ModelFactory
      *
      * @todo inject services if required
      */
-    private \Transliterator $transliterator;
+    private Transliterator $transliterator;
     private EntrepriseRepository  $entrepriseRepository;
     private TypeRepository  $typeRepository;
 
     public function __construct(EntrepriseRepository $entrepriseRepository, TypeRepository $typeRepository)
     {
         parent::__construct();
-        $this->transliterator = \Transliterator::create('Any-Lower; Latin-ASCII; Lower()');
+        $this->transliterator = Transliterator::create('Any-Lower; Latin-ASCII; Lower()');
         $this->entrepriseRepository = $entrepriseRepository;
         $this->typeRepository = $typeRepository;
     }
@@ -57,7 +58,7 @@ final class OffreFactory extends ModelFactory
     {
         $existingEntrepriseIds = $this->entrepriseRepository->findEntreprises();
         $existingTypesIds = $this->typeRepository->findTypesIds();
-        $level = self::faker()->numberBetween($min = 0, $max = 5);
+        $level = self::faker()->numberBetween(0, 5);
         if ($level == 0){
             $level = 'BAC';
         }else{
@@ -67,10 +68,10 @@ final class OffreFactory extends ModelFactory
         return [
             'Type' => self::faker()->randomElement($existingTypesIds),
             'entreprise' => self::faker()->randomElement($existingEntrepriseIds),
-            'duree' => self::faker()->numberBetween($min = 5, $max = 300),
+            'duree' => self::faker()->numberBetween(5, 300),
             'jourDeb' => self::faker()->dateTime(),
             'lieux' => self::faker()->address(),
-            'nbPlace' => self::faker()->numberBetween($min = 2, $max = 40),
+            'nbPlace' => self::faker()->numberBetween(2, 40),
             'nomOffre' => self::faker()->jobTitle(),
             'descrip' => self::faker()->realText(),
             'level' => $level,

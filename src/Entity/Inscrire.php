@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\InscrireRepository;
+use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -23,7 +24,7 @@ class Inscrire
     private ?int $Status = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $dateDemande = null;
+    private ?DateTimeInterface $dateDemande = null;
 
     public function getOffre(): ?Offre
     {
@@ -61,12 +62,12 @@ class Inscrire
         return $this;
     }
 
-    public function getDateDemande(): ?\DateTimeInterface
+    public function getDateDemande(): ?DateTimeInterface
     {
         return $this->dateDemande;
     }
 
-    public function setDateDemande(\DateTimeInterface $dateDemande): static
+    public function setDateDemande(DateTimeInterface $dateDemande): static
     {
         $this->dateDemande = $dateDemande;
 
