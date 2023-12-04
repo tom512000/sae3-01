@@ -60,7 +60,7 @@ final class InscrireFactory extends ModelFactory
         $uniqueCombination = $this->getUniqueCombination($existingOffresIds, $existingUsersIds);
 
         return [
-            'Status' => self::faker()->randomNumber(),
+            'Status' => self::faker()->numberBetween(1, 3),
             'dateDemande' => self::faker()->dateTime(),
             'Offre' => $uniqueCombination['offre'],
             'User' => $uniqueCombination['user'],

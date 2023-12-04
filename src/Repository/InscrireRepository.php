@@ -53,6 +53,7 @@ class InscrireRepository extends ServiceEntityRepository
 
     /**
      * @throws NonUniqueResultException
+     * @throws \Exception
      */
     public function inscription(Offre $Offre, Security $security):void{
 
@@ -77,7 +78,10 @@ class InscrireRepository extends ServiceEntityRepository
                 $inscrire = new Inscrire();
                 $inscrire->setUser($user);
                 $inscrire->setOffre($Offre);
-                $inscrire->setStatus(1);
+
+                $randomStatus = random_int(1, 3);
+                $inscrire->setStatus($randomStatus);
+
                 $inscrire->setDateDemande(new DateTime());
 
                 $this->_em->persist($inscrire);

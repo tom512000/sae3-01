@@ -34,6 +34,9 @@
         </button>
     </div>
     <br>
+
+    {% set placesRestantes = nbInscriptionAccepter[Offre.id] is defined ? (Offre.nbPlace - nbInscriptionAccepter[Offre.id]) : Offre.nbPlace %}
+
     <ul class="liste_offres">
         <li class="ligne_offre">
             <table class="donnees">
@@ -42,7 +45,7 @@
                     <th>Nom de l'offre</th>
                     <th>Entreprise</th>
                     <th>Jour</th>
-                    <th>Place·s</th>
+                    <th>place(s) restantes</th>
                     <th>Durée</th>
                     <th>Lieu</th>
                     <th>Type</th>
@@ -54,7 +57,7 @@
                     <td>{{ Offre.nomOffre }}</td>
                     <td><a href="/entreprise/{{ Offre.getEntreprise().getId() }}">{{ Offre.getEntreprise().getNomEnt() }}</a></td>
                     <td>{{ Offre.getJourDebString() }}</td>
-                    <td>{{ Offre.nbPlace }}</td>
+                    <td>{{ placesRestantes }}</td>
                     <td>{{ Offre.duree }} jours</td>
                     <td>{{ Offre.lieux }}</td>
                     <td>{{ Offre.Type.libelle }}</td>
@@ -76,19 +79,27 @@
                     </tr>
                 {% endif %}
                 <tr>
-                    {% if inscription[Offre.id] is defined %}
-                        {% if inscription[Offre.id] is not null %}
-                            <form action="{{ path('app_inscire_desinscription', {'idOffre': Offre.id}) }}" method="get">
-                                <button class="btn btn-outline-success" type="submit">Se désincrire</button>
-                            </form>
+                    {% if placesRestantes > 1 %}
+
+                        {% if inscription[Offre.id] is defined %}
+                            {% if inscription[Offre.id] is not null%}
+                                <form class="inscrip-button" action="{{ path('app_inscire_desinscription', {'idOffre': Offre.id}) }}" method="get">
+                                    <button class="btn btn-danger" type="submit">Se désincrire</button>
+                                </form>
+                            {% else %}
+                                <form class="inscrip-button" action="{{ path('app_inscire_inscription', {'idOffre': Offre.id}) }}" method="get">
+                                    <button class="btn btn-success" type="submit">s'inscrire</button>
+                                </form>
+                            {% endif %}
                         {% else %}
-                            <form action="{{ path('app_inscire_inscription', {'idOffre': Offre.id}) }}" method="get">
-                                <button class="btn btn-outline-success" type="submit">s'inscrire</button>
+                            <form class="inscrip-button" action="{{ path('app_inscire_inscription', {'idOffre': Offre.id}) }}" method="get">
+                                <button class="btn btn-success" type="submit">S'inscrire</button>
                             </form>
                         {% endif %}
-                    {% else %}
-                        <form action="{{ path('app_inscire_inscription', {'idOffre': Offre.id}) }}" method="get">
-                            <button class="btn btn-outline-success" type="submit">s'inscrire</button>
+
+                    {% elseif inscription[Offre.id] is defined and inscription[Offre.id] is not null%}
+                        <form class="inscrip-button" action="{{ path('app_inscire_desinscription', {'idOffre': Offre.id}) }}" method="get">
+                            <button class="btn btn-danger" type="submit">Se désincrire</button>
                         </form>
                     {% endif %}
                 </tr>

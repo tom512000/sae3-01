@@ -172,5 +172,34 @@ class OffreRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getOneOrNullResult();
     }
+
+    public function getNbInscriptionsAccepter(array $offres): array
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->select('o.id as offre_id, COUNT(i.User) as nbInscriptionsAccepter')
+            ->leftJoin('o.inscrires', 'i')
+            ->where('o IN (:offres)')
+            ->andWhere('i.Status = :status')
+            ->setParameter('offres', $offres)
+            ->setParameter('status', 1)
+            ->groupBy('o.id');
+
+        $queryResult = $qb->getQuery()->getScalarResult();
+
+        $result = [];
+
+        for($i = 0; $i<count($offres);$i++) {
+            $result[$i] = 0;
+        }
+
+        foreach ($queryResult as $row) {
+            $result[$row['offre_id']] = (int)$row['nbInscriptionsAccepter'];
+        }
+
+        return $result;
+    }
+
+
+
 }
 
