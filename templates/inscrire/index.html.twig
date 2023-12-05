@@ -15,7 +15,9 @@
         </div>
         {% else %}
             {% for inscription in inscriptions %}
+
                 <div class="bloc_offre">
+
                     <div class="bloc_offre_img">
                         <div class="bloc_1"></div>
                         <div class="bloc_2">
@@ -24,7 +26,15 @@
                             </a>
                         </div>
                     </div>
-                    <div class="bloc_offre_txt">
+
+                        {% if (inscription.Status == 1) %}
+                            <div class="bloc_offre_txt" style="background-color: green">
+                        {% elseif  (inscription.Status == 2)%}
+                            <div class="bloc_offre_txt">
+                        {% else %}
+                            <div class="bloc_offre_txt" style="background-color: red">
+                        {% endif %}
+
                         <div class="infos1">
                             <div class="infos1_1 fs-5">
                                 <a href="/offre/{{ inscription.Offre.id }}">{{ inscription.Offre.nomOffre }}</a>

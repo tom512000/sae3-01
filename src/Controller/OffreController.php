@@ -62,12 +62,15 @@ class OffreController extends AbstractController
 
         $types = $this->typeRepository->findAll();
         $inscription = $this->inscrireRepository->getInscriptions($pagination->getItems(), $this->security);
+        $nbInscriptionAccepter = $this->offreRepository->getNbInscriptionsAccepter($pagination->getItems());
+
 
         return $this->render('offre/index.html.twig', [
             'Offres' => $pagination,
             'textRecherche' => $textRechercher,
             'types' => $types,
             'inscription' => $inscription,
+            'nbInscriptionAccepter' => $nbInscriptionAccepter
         ]);
     }
 
@@ -89,12 +92,15 @@ class OffreController extends AbstractController
         $types = $this->typeRepository->findAll();
         $inscription = $this->inscrireRepository->getInscriptions($Offres, $this->security);
 
+        $nbInscriptionAccepter = $this->offreRepository->getNbInscriptionsAccepter($Offres);
+
         return $this->render('entreprise/offre/index.html.twig', [
             'types' => $types,
             'textRecherche' => $textRechercher,
             'Offres' => $Offres,
             'entrepriseId' => $entrepriseId,
             'inscription' => $inscription,
+            'nbInscriptionAccepter' => $nbInscriptionAccepter
         ]);
     }
 
@@ -109,10 +115,14 @@ class OffreController extends AbstractController
 
         $skills = $this->skillDemanderRepository->getSkillLibellesByOffreId($offreId);
 
+        $nbInscriptionAccepter = $this->offreRepository->getNbInscriptionsAccepter([$Offre]);
+
+
         return $this->render('offre/show.html.twig',[
             'Offre'=>$Offre,
             'inscription' => $Inscrit,
-            'skills' => $skills
+            'skills' => $skills,
+            'nbInscriptionAccepter' => $nbInscriptionAccepter
         ]);
     }
 }
