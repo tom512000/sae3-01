@@ -25,8 +25,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private string $phone;
     #[ORM\Column]
     private int $status;
-    #[ORM\Column(length: 10)]
-    private string $dateNais;
+    #[ORM\Column(type: 'date',length: 10)]
+    private \DateTimeInterface $dateNais;
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
@@ -152,14 +152,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return string
      */
-    public  function getDateNais(): string{
+    public  function getDateNais(): \DateTimeInterface{
         return $this->dateNais;
+    }
+
+    public function getDateNaisString(): string
+    {
+        return $this->dateNais->format('d F Y');
     }
 
     /**
      * @param string $dateNais
      */
-    public  function setDateNais(string $dateNais):void {
+    public  function setDateNais(\DateTimeInterface $dateNais):void {
         $this->dateNais = $dateNais;
     }
 

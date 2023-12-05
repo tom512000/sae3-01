@@ -60,7 +60,7 @@ class ProfileController extends AbstractController
 
                 try {
                     $motiFile->move(
-                        $this->getParameter('brochures_directory'),
+                        $this->getParameter('PDF_files'),
                         $newFilename
                     );
                 } catch (FileException) {
@@ -112,7 +112,7 @@ class ProfileController extends AbstractController
 
                 try {
                     $motiFile->move(
-                        $this->getParameter('brochures_directory'),
+                        $this->getParameter('PDF_files'),
                         $newFilename
                     );
                 } catch (FileException) {
