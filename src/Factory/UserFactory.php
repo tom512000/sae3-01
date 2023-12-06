@@ -27,7 +27,7 @@ final class UserFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'dateNais' => self::faker()->date('d/m/Y'),
+            'dateNais' => self::faker()->dateTime,
             'email' => self::faker()->email(),
             'firstName' => self::faker()->firstName(),
             'lastName' => self::faker()->lastName(),
