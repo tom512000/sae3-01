@@ -12,99 +12,64 @@
 {% endblock %}
 
 {% block body %}
-    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
-        <div class="carousel-inner">
-            <div class="carousel-item active carousel1">
-                <h1 class="carousel_titre">DÉCOUVREZ DES OFFRES ATTRAYANTES</h1>
-            </div>
-            <div class="carousel-item carousel2">
-                <h1 class="carousel_titre">EXPLOREZ DES OPPORTUNITÉS PROFESSIONNELLES</h1>
-            </div>
-            <div class="carousel-item carousel3">
-                <h1 class="carousel_titre">INTERAGISSEZ AVEC DES EXPERTS</h1>
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-    <br>
-
     {% set placesRestantes = nbInscriptionAccepter[Offre.id] is defined ? (Offre.nbPlace - nbInscriptionAccepter[Offre.id]) : Offre.nbPlace %}
 
-    <ul class="liste_offres">
-        <li class="ligne_offre">
-            <table class="donnees">
-                <thead>
-                <tr>
-                    <th>Nom de l'offre</th>
-                    <th>Entreprise</th>
-                    <th>Jour</th>
-                    <th>place(s) restantes</th>
-                    <th>Durée</th>
-                    <th>Lieu</th>
-                    <th>Type</th>
-                    <th>Niveau requis</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>{{ Offre.nomOffre }}</td>
-                    <td><a href="/entreprise/{{ Offre.getEntreprise().getId() }}">{{ Offre.getEntreprise().getNomEnt() }}</a></td>
-                    <td>{{ Offre.getJourDebString() }}</td>
-                    <td>{{ placesRestantes }}</td>
-                    <td>{{ Offre.duree }} jours</td>
-                    <td>{{ Offre.lieux }}</td>
-                    <td>{{ Offre.Type.libelle }}</td>
-                    <td>{{ Offre.level }}</td>
-                </tr>
-                <tr>
-                    <td colspan="8">{{ Offre.getDescrip() }}</td>
-                </tr>
-                {% if skills|length >0 %}
-                    <thead>
-                        <tr>
-                            <th colspan="8">skills requis</th>
-                        </tr>
-                    </thead>
-                    <tr>
-                        {% for skill in skills %}
-                            <td>{{ skill }}</td>
-                        {% endfor %}
-                    </tr>
-                {% endif %}
-                <tr>
-                    {% if placesRestantes > 1 %}
-
-                        {% if inscription[Offre.id] is defined %}
-                            {% if inscription[Offre.id] is not null%}
-                                <form class="inscrip-button" action="{{ path('app_inscire_desinscription', {'idOffre': Offre.id}) }}" method="get">
-                                    <button class="btn btn-danger" type="submit">Se désincrire</button>
-                                </form>
-                            {% else %}
-                                <form class="inscrip-button" action="{{ path('app_inscire_inscription', {'idOffre': Offre.id}) }}" method="get">
-                                    <button class="btn btn-success" type="submit">s'inscrire</button>
-                                </form>
-                            {% endif %}
+    <div class="bloc_offre_infos">
+        <div class="bloc_offre_infos_1">
+            <h2>{{ Offre.nomOffre }}</h2>
+            <a href="/entreprise/{{ Offre.getEntreprise().getId() }}">
+                <img src="{{ Offre.getEntreprise().getLogo() }}" alt="Logo de {{ Offre.getEntreprise().getNomEnt() }}"/>
+            </a>
+        </div>
+        <div class="bloc_offre_infos_2">
+            <p>Début du {{ Offre.Type.libelle }} le {{ Offre.getJourDebString() }} à l'adresse : {{ Offre.lieux }}.</p>
+            <h4>Description</h4>
+            <p>{{ Offre.getDescrip() }}</p>
+        </div>
+        <div class="bloc_offre_infos_3">
+            <div>
+                <h4>Niveau</h4>
+                <p>{{ Offre.level }}</p>
+            </div>
+            <div>
+                <h4>Durée</h4>
+                <p>{{ Offre.duree }} jours</p>
+            </div>
+            <div>
+                <h4>Places restantes</h4>
+                <p>{{ placesRestantes }} places</p>
+            </div>
+            <div>
+                {% if placesRestantes > 1 %}
+                    {% if inscription[Offre.id] is defined %}
+                        {% if inscription[Offre.id] is not null%}
+                            <form class="inscrip-button" action="{{ path('app_inscire_desinscription', {'idOffre': Offre.id}) }}" method="get">
+                                <button class="btn btn-danger show_button" type="submit">Se désincrire</button>
+                            </form>
                         {% else %}
                             <form class="inscrip-button" action="{{ path('app_inscire_inscription', {'idOffre': Offre.id}) }}" method="get">
-                                <button class="btn btn-success" type="submit">S'inscrire</button>
+                                <button class="btn btn-success show_button" type="submit">S'inscrire</button>
                             </form>
                         {% endif %}
-
-                    {% elseif inscription[Offre.id] is defined and inscription[Offre.id] is not null%}
-                        <form class="inscrip-button" action="{{ path('app_inscire_desinscription', {'idOffre': Offre.id}) }}" method="get">
-                            <button class="btn btn-danger" type="submit">Se désincrire</button>
+                    {% else %}
+                        <form class="inscrip-button" action="{{ path('app_inscire_inscription', {'idOffre': Offre.id}) }}" method="get">
+                            <button class="btn btn-success show_button" type="submit">S'inscrire</button>
                         </form>
                     {% endif %}
-                </tr>
-                </tbody>
-            </table>
-        </li>
-    </ul>
+                {% elseif inscription[Offre.id] is defined and inscription[Offre.id] is not null%}
+                    <form class="inscrip-button" action="{{ path('app_inscire_desinscription', {'idOffre': Offre.id}) }}" method="get">
+                        <button class="btn btn-danger show_button" type="submit">Se désincrire</button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+        <div class="bloc_offre_infos_4">
+            <h4>Compétences</h4>
+            {% if skills|length > 0 %}
+                {% for skill in skills %}
+                    <p>{{ skill }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}
