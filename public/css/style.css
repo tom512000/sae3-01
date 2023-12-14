@@ -30,6 +30,10 @@ img {
     user-select: none;
 }
 
+a {
+    text-decoration: none;
+}
+
 html {
     width: 100%;
     height: 100%;
@@ -78,6 +82,7 @@ a.btn-connection {
     margin-left: 25px;
 }
 
+/* Barre du menu */
 body > nav.navbar {
     background-color: var(--third-color);
     border-bottom: 2px solid var(--main-color);
@@ -105,6 +110,7 @@ form.d-flex button:hover, a.btn-connection:hover {
     background-color: var(--main-color);
 }
 
+/* Barre du footer */
 footer {
     display: flex;
     flex-direction: column;
@@ -280,6 +286,45 @@ div.titre_offre > h1 {
     font-family: 'Impact', sans-serif;
 }
 
+div.bloc_legende {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 70%;
+}
+
+div.bloc_legende > div {
+    display: flex;
+    align-items: center;
+    width: 230px;
+}
+
+div.bloc_legende p {
+    margin: 0 0 0 15px;
+    font-family: 'Lexend', sans-serif;
+}
+
+div.bloc_legende_1 {
+    border: 1px solid var(--main-color);
+    width: 20px;
+    height: 20px;
+    background-color: #5EB85E;
+}
+
+div.bloc_legende_2 {
+    border: 1px solid var(--main-color);
+    width: 20px;
+    height: 20px;
+    background-color: #87CEEB;
+}
+
+div.bloc_legende_3 {
+    border: 1px solid var(--main-color);
+    width: 20px;
+    height: 20px;
+    background-color: #FF9AA2;
+}
+
 form.form_offre {
     display: flex;
     justify-content: space-evenly;
@@ -379,7 +424,7 @@ div.bloc_offre {
     display: flex;
     width: 900px;
     height: 270px;
-    margin-bottom: 40px;
+    margin: 0 25px 25px 40px;
     border-radius: 10px;
     overflow: hidden;
     background-color: var(--fourth-color);
@@ -393,10 +438,15 @@ div.bloc_offre_img {
     height: auto;
 }
 
-div.bloc_offre_img div.bloc_1 {
+div.bloc_offre_img > div.bloc_1 {
     width: 10px;
     height: 100%;
     background-color: var(--second-color);
+}
+
+div.bloc_1_inscrire {
+    width: 10px;
+    height: 100%;
 }
 
 div.bloc_offre_img div.bloc_2 {
@@ -524,6 +574,10 @@ div.infos3 p.niveau {
 
 div.infos3 form.inscrip-button {
     margin-right: 60px;
+}
+
+form.inscrip-button > button {
+    transition: background-color 0.3s ease;
 }
 
 div.infos3 p.duree span,
@@ -735,7 +789,6 @@ div.details_entreprise_2 > p {
 }
 
 div.details_entreprise_2 > p > a {
-    text-decoration: none;
     font-weight: bold;
     color: var(--main-color);
 }
@@ -873,7 +926,8 @@ div.login_form button {
 }
 
 div.login_form button:hover {
-    background-color: var(--second-color);
+    opacity: 0.65;
+    transition: color 0.3s ease;
 }
 
 h4.register_account {
@@ -881,7 +935,6 @@ h4.register_account {
 }
 
 h4.register_account > a {
-    text-decoration: none;
     color: var(--main-color);
 }
 
@@ -1040,7 +1093,6 @@ div.conditions_bloc_2 > p {
 }
 
 div.conditions_bloc_2 > p > a {
-    text-decoration: none;
     color: var(--main-color);
 }
 
@@ -1108,7 +1160,6 @@ div.mentions_bloc_2 > p {
 }
 
 div.mentions_bloc_2 > p > a {
-    text-decoration: none;
     color: var(--main-color);
 }
 

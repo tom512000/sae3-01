@@ -7,6 +7,20 @@
 {% block body %}
     <div class="titre_offre">
         <h1>Vos inscriptions</h1>
+        <div class="bloc_legende">
+            <div>
+                <div class="bloc_legende_1"></div>
+                <p>Inscription acceptée</p>
+            </div>
+            <div>
+                <div class="bloc_legende_2"></div>
+                <p>Inscription en attente</p>
+            </div>
+            <div>
+                <div class="bloc_legende_3"></div>
+                <p>Inscription refusée</p>
+            </div>
+        </div>
     </div>
     <div class="bloc_offres">
         {% if inscriptions is empty %}
@@ -15,26 +29,22 @@
         </div>
         {% else %}
             {% for inscription in inscriptions %}
-
                 <div class="bloc_offre">
-
                     <div class="bloc_offre_img">
-                        <div class="bloc_1"></div>
+                        {% if (inscription.Status == 1) %}
+                            <div class="bloc_1_inscrire" style="background-color: #5EB85E"></div>
+                        {% elseif  (inscription.Status == 2)%}
+                            <div class="bloc_1_inscrire" style="background-color: #87CEEB"></div>
+                        {% else %}
+                            <div class="bloc_1_inscrire" style="background-color: #FF9AA2"></div>
+                        {% endif %}
                         <div class="bloc_2">
                             <a href="entreprise/{{ inscription.Offre.getEntreprise().getId() }}">
                                 <img src="{{ inscription.Offre.getEntreprise().getLogo() }}" alt="Logo de {{ inscription.Offre.getEntreprise().getNomEnt() }}"/>
                             </a>
                         </div>
                     </div>
-
-                        {% if (inscription.Status == 1) %}
-                            <div class="bloc_offre_txt" style="background-color: green">
-                        {% elseif  (inscription.Status == 2)%}
-                            <div class="bloc_offre_txt">
-                        {% else %}
-                            <div class="bloc_offre_txt" style="background-color: red">
-                        {% endif %}
-
+                    <div class="bloc_offre_txt">
                         <div class="infos1">
                             <div class="infos1_1 fs-5">
                                 <a href="/offre/{{ inscription.Offre.id }}">{{ inscription.Offre.nomOffre }}</a>
