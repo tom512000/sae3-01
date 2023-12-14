@@ -8,6 +8,11 @@ use Doctrine\Persistence\ObjectManager;
 
 class SkillFixtures extends Fixture
 {
+    /**
+     * Charge les fixtures avec l'EntityManager fourni.
+     *
+     * @param ObjectManager $manager L'EntityManager utilisé pour persister les objets
+     */
     public function load(ObjectManager $manager): void
     {
         $competences = [
@@ -69,6 +74,7 @@ class SkillFixtures extends Fixture
             'Évaluation des performances',
             'Planification d\'événements'
         ];
+
         for ($i = 0; $i < count($competences); $i++) {
             SkillFactory::createOne(['libelle' => $competences[$i]]);
         }

@@ -1,7 +1,5 @@
 <?php
 
-// src/Factory/UserFactory.php
-
 namespace App\Factory;
 
 use App\Entity\User;
@@ -12,17 +10,19 @@ final class UserFactory extends ModelFactory
 {
     private UserPasswordHasherInterface $passwordHasher;
 
+    /**
+     * Constructeur de la factory.
+     */
     public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
         parent::__construct();
-
         $this->passwordHasher = $passwordHasher;
     }
 
     /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
+     * Définit les valeurs par défaut lors de la création d'un User.
      *
-     * @todo add your default values here
+     * @return array Tableau des valeurs par défaut.
      */
     protected function getDefaults(): array
     {
@@ -38,15 +38,25 @@ final class UserFactory extends ModelFactory
         ];
     }
 
+    /**
+     * Méthode d'initialisation de la factory.
+     *
+     * @return UserFactory Instance de la factory.
+     */
     protected function initialize(): self
     {
         return $this
             ->afterInstantiate(function(User $user) {
                 $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPassword()));
-    })
-    ;
+            })
+        ;
     }
 
+    /**
+     * Retourne la classe de l'entité gérée par la factory.
+     *
+     * @return string Nom de la classe User.
+     */
     protected static function getClass(): string
     {
         return User::class;

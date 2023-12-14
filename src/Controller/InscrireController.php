@@ -11,8 +11,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 
-class InscireController extends AbstractController
+class InscrireController extends AbstractController
 {
+    /**
+     * Affiche la liste des inscriptions de l'utilisateur connecté.
+     *
+     * @param InscrireRepository $inscrireRepository Le repository des inscriptions
+     * @param Security $security Le service de sécurité Symfony
+     *
+     * @return Response La réponse HTTP de la liste des inscriptions
+     */
     #[Route('/inscription', name: 'app_inscire')]
     public function index(InscrireRepository $inscrireRepository, Security $security): Response
     {
@@ -20,8 +28,6 @@ class InscireController extends AbstractController
 
         if ($user) {
             $userId = $user->getId();
-
-
             $inscriptions = $inscrireRepository->findByUserId($userId);
 
             return $this->render('inscrire/index.html.twig', [
@@ -33,7 +39,15 @@ class InscireController extends AbstractController
     }
 
     /**
+     * Inscrit l'utilisateur à une offre spécifique.
+     *
      * @throws NonUniqueResultException
+     *
+     * @param Offre $offre L'offre à laquelle l'utilisateur souhaite s'inscrire
+     * @param InscrireRepository $inscrireRepository Le repository des inscriptions
+     * @param Security $security Le service de sécurité Symfony
+     *
+     * @return Response La réponse HTTP de l'inscription
      */
     #[Route('/inscription/{idOffre}', name: 'app_inscire_inscription', requirements: ['idOffre' => '\d+'])]
     public function inscription(
@@ -41,14 +55,23 @@ class InscireController extends AbstractController
         Offre $offre,
         InscrireRepository $inscrireRepository,
         Security $security
-    ): Response {
+    ): Response
+    {
         $inscrireRepository->inscription($offre, $security);
 
         return $this->redirectToRoute('app_inscire');
     }
 
     /**
+     * Désinscrit l'utilisateur d'une offre spécifique.
+     *
      * @throws NonUniqueResultException
+     *
+     * @param Offre $offre L'offre dont l'utilisateur souhaite se désinscrire
+     * @param InscrireRepository $inscrireRepository Le repository des inscriptions
+     * @param Security $security Le service de sécurité Symfony
+     *
+     * @return Response La réponse HTTP de la désinscription
      */
     #[Route('/desinscription/{idOffre}', name: 'app_inscire_desinscription', requirements: ['idOffre' => '\d+'])]
     public function desinscription(
@@ -56,7 +79,8 @@ class InscireController extends AbstractController
         Offre $offre,
         InscrireRepository $inscrireRepository,
         Security $security
-    ): Response {
+    ): Response
+    {
         $inscrireRepository->desinscription($offre, $security);
 
         return $this->redirectToRoute('app_inscire');

@@ -21,21 +21,41 @@ class Type
     #[ORM\OneToMany(mappedBy: 'Type', targetEntity: Offre::class)]
     private Collection $offres;
 
+    /**
+     * Constructeur de la classe Type.
+     */
     public function __construct()
     {
         $this->offres = new ArrayCollection();
     }
 
+    /**
+     * Obtient l'ID du Type.
+     *
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Obtient le libellé du Type.
+     *
+     * @return string|null
+     */
     public function getLibelle(): ?string
     {
         return $this->libelle;
     }
 
+    /**
+     * Définit le libellé du Type.
+     *
+     * @param string $libelle
+     *
+     * @return $this
+     */
     public function setLibelle(string $libelle): static
     {
         $this->libelle = $libelle;
@@ -43,29 +63,9 @@ class Type
         return $this;
     }
 
-    public function addInscrire(Inscrire $inscrire): static
-    {
-        if (!$this->inscrires->contains($inscrire)) {
-            $this->inscrires->add($inscrire);
-            $inscrire->setOffre($this);
-        }
-
-        return $this;
-    }
-
-    public function removeInscrire(Inscrire $inscrire): static
-    {
-        if ($this->inscrires->removeElement($inscrire)) {
-            // set the owning side to null (unless already changed)
-            if ($inscrire->getOffre() === $this) {
-                $inscrire->setOffre(null);
-            }
-        }
-
-        return $this;
-    }
-
     /**
+     * Obtient la collection des Offres liées à ce Type.
+     *
      * @return Collection<int, Offre>
      */
     public function getOffres(): Collection
@@ -73,6 +73,13 @@ class Type
         return $this->offres;
     }
 
+    /**
+     * Ajoute une relation Offre à ce Type.
+     *
+     * @param Offre $offre
+     *
+     * @return $this
+     */
     public function addOffre(Offre $offre): static
     {
         if (!$this->offres->contains($offre)) {
@@ -83,10 +90,16 @@ class Type
         return $this;
     }
 
+    /**
+     * Supprime une relation Offre de ce Type.
+     *
+     * @param Offre $offre
+     *
+     * @return $this
+     */
     public function removeOffre(Offre $offre): static
     {
         if ($this->offres->removeElement($offre)) {
-            // set the owning side to null (unless already changed)
             if ($offre->getType() === $this) {
                 $offre->setType(null);
             }

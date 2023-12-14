@@ -15,18 +15,32 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted('ROLE_ADMIN')]
 class DashboardController extends AbstractDashboardController
 {
+    /**
+     * Affiche le tableau de bord de l'administration.
+     *
+     * @return Response La réponse HTTP du tableau de bord
+     */
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
         return $this->render('admin/index.html.twig');
     }
 
+    /**
+     * Configure les paramètres du tableau de bord.
+     *
+     * @return Dashboard La configuration du tableau de bord
+     */
     public function configureDashboard(): Dashboard
     {
-        return Dashboard::new()
-            ->setTitle('EduTech Dashboard');
+        return Dashboard::new()->setTitle('EduTech Dashboard');
     }
 
+    /**
+     * Configure les éléments du menu de l'interface d'administration.
+     *
+     * @return iterable Une collection d'éléments de menu EasyAdmin
+     */
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');

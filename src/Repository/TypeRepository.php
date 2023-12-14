@@ -16,15 +16,26 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class TypeRepository extends ServiceEntityRepository
 {
+    /**
+     * Constructeur de la classe.
+     *
+     * @param ManagerRegistry $registry Le service ManagerRegistry.
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Type::class);
     }
 
+    /**
+     * Recherche les identifiants de tous les types.
+     *
+     * @return Type[] Un tableau d'objets Type ordonnés par libellé.
+     */
     public function findTypesIds(): array
     {
         $qb = $this->createQueryBuilder('t')
             ->orderBy('t.libelle', 'ASC');
+
         return $qb->getQuery()->getResult();
     }
 }

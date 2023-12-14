@@ -16,36 +16,23 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class SkillDemanderRepository extends ServiceEntityRepository
 {
+    /**
+     * Constructeur de la classe.
+     *
+     * @param ManagerRegistry $registry Le service ManagerRegistry.
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, SkillDemander::class);
     }
 
-//    /**
-//     * @return SkillDemander[] Returns an array of SkillDemander objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('s.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?SkillDemander
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
-
+    /**
+     * Obtient les libellés des compétences demandées pour une offre spécifique.
+     *
+     * @param int $offreId L'identifiant de l'offre.
+     *
+     * @return array Un tableau contenant les libellés des compétences demandées pour l'offre donnée.
+     */
     public function getSkillLibellesByOffreId(int $offreId): array
     {
         $qb = $this->createQueryBuilder('skillDe')

@@ -18,11 +18,21 @@ class SkillDemander
     #[ORM\JoinColumn(nullable: false)]
     private ?Offre $offre = null;
 
+    /**
+     * Obtient la compétence associée à la demande de compétence.
+     */
     public function getSkill(): ?Skill
     {
         return $this->skill;
     }
 
+    /**
+     * Définit la compétence associée à la demande de compétence.
+     *
+     * @param Skill|null $skill La compétence à définir.
+     *
+     * @return SkillDemander L'instance actuelle de la demande de compétence.
+     */
     public function setSkill(?Skill $skill): static
     {
         $this->skill = $skill;
@@ -30,11 +40,21 @@ class SkillDemander
         return $this;
     }
 
+    /**
+     * Obtient l'offre associée à la demande de compétence.
+     */
     public function getOffre(): ?Offre
     {
         return $this->offre;
     }
 
+    /**
+     * Définit l'offre associée à la demande de compétence.
+     *
+     * @param Offre|null $offre L'offre à définir.
+     *
+     * @return SkillDemander L'instance actuelle de la demande de compétence.
+     */
     public function setOffre(?Offre $offre): static
     {
         $this->offre = $offre;

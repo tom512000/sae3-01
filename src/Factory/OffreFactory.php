@@ -32,15 +32,16 @@ use Zenstruck\Foundry\RepositoryProxy;
  */
 final class OffreFactory extends ModelFactory
 {
-    /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
-     *
-     * @todo inject services if required
-     */
     private Transliterator $transliterator;
     private EntrepriseRepository  $entrepriseRepository;
     private TypeRepository  $typeRepository;
 
+    /**
+     * Constructeur de la factory.
+     *
+     * @param EntrepriseRepository $entrepriseRepository
+     * @param TypeRepository $typeRepository
+     */
     public function __construct(EntrepriseRepository $entrepriseRepository, TypeRepository $typeRepository)
     {
         parent::__construct();
@@ -50,18 +51,19 @@ final class OffreFactory extends ModelFactory
     }
 
     /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
+     * Définit les valeurs par défaut lors de la création d'une offre.
      *
-     * @todo add your default values here
+     * @return array Tableau des valeurs par défaut.
      */
     protected function getDefaults(): array
     {
         $existingEntrepriseIds = $this->entrepriseRepository->findEntreprises();
         $existingTypesIds = $this->typeRepository->findTypesIds();
         $level = self::faker()->numberBetween(0, 5);
-        if ($level == 0){
+
+        if ($level == 0) {
             $level = 'BAC';
-        }else{
+        } else {
             $level = 'BAC +'.$level;
         }
 
@@ -78,25 +80,35 @@ final class OffreFactory extends ModelFactory
         ];
     }
 
+    /**
+     * Normalise un nom en convertissant les caractères spéciaux.
+     *
+     * @param string $name Nom à normaliser.
+     *
+     * @return string Nom normalisé.
+     */
     protected function normalizeName($name): string
     {
         $name = str_replace('/[^a-z]+/', '-', $name);
+
         return $this->transliterator->transliterate($name);
     }
 
-
-
-
     /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
+     * Méthode d'initialisation de la factory.
+     *
+     * @return OffreFactory Instance de la factory.
      */
     protected function initialize(): self
     {
-        return $this
-            // ->afterInstantiate(function(Offre $offre): void {})
-        ;
+        return $this;
     }
 
+    /**
+     * Retourne la classe de l'entité gérée par la factory.
+     *
+     * @return string Nom de la classe Offre.
+     */
     protected static function getClass(): string
     {
         return Offre::class;

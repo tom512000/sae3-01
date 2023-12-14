@@ -35,11 +35,11 @@ final class InscrireFactory extends ModelFactory
     private userRepository  $userRepository;
 
     /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
+     * Constructeur de la factory.
      *
-     * @todo inject services if required
+     * @param OffreRepository $offreRepository
+     * @param UserRepository $userRepository
      */
-
     public function __construct(OffreRepository $offreRepository, userRepository $userRepository)
     {
         parent::__construct();
@@ -48,9 +48,9 @@ final class InscrireFactory extends ModelFactory
     }
 
     /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
+     * Définit les valeurs par défaut lors de la création d'une inscription.
      *
-     * @todo add your default values here
+     * @return array Tableau des valeurs par défaut.
      */
     protected function getDefaults(): array
     {
@@ -68,20 +68,33 @@ final class InscrireFactory extends ModelFactory
     }
 
     /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
+     * Méthode d'initialisation de la factory.
+     *
+     * @return InscrireFactory Instance de la factory.
      */
     protected function initialize(): self
     {
-        return $this
-            // ->afterInstantiate(function(Inscrire $inscrire): void {})
-        ;
+        return $this;
     }
 
+    /**
+     * Retourne la classe de l'entité gérée par la factory.
+     *
+     * @return string Nom de la classe Inscrire.
+     */
     protected static function getClass(): string
     {
         return Inscrire::class;
     }
 
+    /**
+     * Génère une combinaison unique d'offre et d'utilisateur.
+     *
+     * @param array $offres Liste des identifiants d'offres existantes.
+     * @param array $users Liste des identifiants d'utilisateurs existants.
+     *
+     * @return array Tableau associatif contenant une offre et un utilisateur.
+     */
     private function getUniqueCombination(array $offres, array $users): array
     {
         $offre = self::faker()->randomElement($offres);

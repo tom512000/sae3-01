@@ -21,21 +21,37 @@ class Skill
     #[ORM\OneToMany(mappedBy: 'skill', targetEntity: SkillDemander::class)]
     private Collection $skillDemanders;
 
+    /**
+     * Constructeur de la classe Skill.
+     */
     public function __construct()
     {
         $this->skillDemanders = new ArrayCollection();
     }
 
+    /**
+     * Obtient l'identifiant de la compétence.
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Obtient le libellé de la compétence.
+     */
     public function getLibelle(): ?string
     {
         return $this->libelle;
     }
 
+    /**
+     * Définit le libellé de la compétence.
+     *
+     * @param string $libelle Le libellé de la compétence à définir.
+     *
+     * @return Skill L'instance actuelle de la compétence.
+     */
     public function setLibelle(string $libelle): static
     {
         $this->libelle = $libelle;
@@ -44,6 +60,8 @@ class Skill
     }
 
     /**
+     * Obtient la collection de demandes de compétences associée à la compétence.
+     *
      * @return Collection<int, SkillDemander>
      */
     public function getSkillDemanders(): Collection
@@ -51,6 +69,13 @@ class Skill
         return $this->skillDemanders;
     }
 
+    /**
+     * Ajoute une demande de compétence à la collection associée à la compétence.
+     *
+     * @param SkillDemander $skillDemander La demande de compétence à ajouter.
+     *
+     * @return Skill L'instance actuelle de la compétence.
+     */
     public function addSkillDemander(SkillDemander $skillDemander): static
     {
         if (!$this->skillDemanders->contains($skillDemander)) {
@@ -61,10 +86,16 @@ class Skill
         return $this;
     }
 
+    /**
+     * Supprime une demande de compétence de la collection associée à la compétence.
+     *
+     * @param SkillDemander $skillDemander La demande de compétence à supprimer.
+     *
+     * @return Skill L'instance actuelle de la compétence.
+     */
     public function removeSkillDemander(SkillDemander $skillDemander): static
     {
         if ($this->skillDemanders->removeElement($skillDemander)) {
-            // set the owning side to null (unless already changed)
             if ($skillDemander->getSkill() === $this) {
                 $skillDemander->setSkill(null);
             }

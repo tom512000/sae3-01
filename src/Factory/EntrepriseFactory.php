@@ -20,7 +20,6 @@ use Zenstruck\Foundry\RepositoryProxy;
  * @method static Entreprise|Proxy last(string $sortedField = 'id')
  * @method static Entreprise|Proxy random(array $attributes = [])
  * @method static Entreprise|Proxy randomOrCreate(array $attributes = [])
- * @method static EntrepriseRepository|RepositoryProxy repository()
  * @method static Entreprise[]|Proxy[] all()
  * @method static Entreprise[]|Proxy[] createMany(int $number, array|callable $attributes = [])
  * @method static Entreprise[]|Proxy[] createSequence(iterable|callable $sequence)
@@ -30,13 +29,11 @@ use Zenstruck\Foundry\RepositoryProxy;
  */
 final class EntrepriseFactory extends ModelFactory
 {
-    /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
-     *
-     * @todo inject services if required
-     */
     private Transliterator $transliterator;
 
+    /**
+     * Constructeur de la factory.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -44,9 +41,9 @@ final class EntrepriseFactory extends ModelFactory
     }
 
     /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
+     * Définit les valeurs par défaut lors de la création d'une entreprise.
      *
-     * @todo add your default values here
+     * @return array Tableau des valeurs par défaut.
      */
     protected function getDefaults(): array
     {
@@ -65,27 +62,46 @@ final class EntrepriseFactory extends ModelFactory
     }
 
     /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
+     * Méthode d'initialisation de la factory.
+     *
+     * @return EntrepriseFactory Instance de la factory.
      */
     protected function initialize(): self
     {
-        return $this
-            // ->afterInstantiate(function(Entreprise $entreprise): void {})
-        ;
+        return $this;
     }
 
+    /**
+     * Retourne la classe de l'entité gérée par la factory.
+     *
+     * @return string Nom de la classe Entreprise.
+     */
     protected static function getClass(): string
     {
         return Entreprise::class;
     }
 
-
+    /**
+     * Normalise le nom en remplaçant les caractères non alphabétiques par des tirets et translittère le résultat.
+     *
+     * @param mixed $name Nom à normaliser.
+     *
+     * @return string Nom normalisé.
+     */
     protected function normalizeName($name): string
     {
         $name = str_replace('/[^a-z]+/', '-', $name);
+
         return $this->transliterator->transliterate($name);
     }
 
+    /**
+     * Génère une adresse e-mail en utilisant le nom normalisé.
+     *
+     * @param string $name Nom de l'entreprise.
+     *
+     * @return string Adresse e-mail générée.
+     */
     protected function generateEmail($Name): string
     {
         $normalizedName = $this->normalizeName(strtr($Name, array(' ' => '.')));
@@ -93,14 +109,29 @@ final class EntrepriseFactory extends ModelFactory
         return $normalizedName.'@'.self::faker()->domainName();
     }
 
-    protected function generateLogo($Name): string
+    /**
+     * Génère une URL pour le logo en utilisant des couleurs aléatoires et le nom de l'entreprise.
+     *
+     * @param string $Name Nom de l'entreprise.
+     *
+     * @return string URL du logo générée.
+     */
+    protected function generateLogo(string $Name): string
     {
         $color1 = substr(self::faker()->hexColor(), 1);
         $color2 = substr(self::faker()->hexColor(), 1);
+
         return "https://placehold.co/500x500/$color1/$color2?text=$Name";
     }
 
-    protected function generateSiteWeb($Name): string
+    /**
+     * Génère une URL pour le site web en utilisant le nom normalisé.
+     *
+     * @param string $Name Nom de l'entreprise.
+     *
+     * @return string URL du site web générée.
+     */
+    protected function generateSiteWeb(string $Name): string
     {
         $normalizedName = $this->normalizeName(strtr($Name, array(' ' => '')));
 

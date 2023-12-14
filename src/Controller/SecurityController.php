@@ -10,6 +10,13 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
+    /**
+     * Affiche le formulaire de connexion.
+     *
+     * @param AuthenticationUtils $authenticationUtils Utilitaire d'authentification Symfony
+     *
+     * @return Response La réponse HTTP du formulaire de connexion
+     */
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -23,6 +30,11 @@ class SecurityController extends AbstractController
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
+    /**
+     * Gère la déconnexion de l'utilisateur.
+     *
+     * @throws LogicException Cette méthode peut être vide - elle sera interceptée par la clé de déconnexion sur votre pare-feu.
+     */
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {

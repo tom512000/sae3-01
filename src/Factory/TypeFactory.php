@@ -30,9 +30,7 @@ use Zenstruck\Foundry\RepositoryProxy;
 final class TypeFactory extends ModelFactory
 {
     /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
-     *
-     * @todo inject services if required
+     * Constructeur de la factory.
      */
     public function __construct()
     {
@@ -40,9 +38,9 @@ final class TypeFactory extends ModelFactory
     }
 
     /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
+     * Définit les valeurs par défaut lors de la création d'un Type.
      *
-     * @todo add your default values here
+     * @return array Tableau des valeurs par défaut.
      */
     protected function getDefaults(): array
     {
@@ -52,15 +50,20 @@ final class TypeFactory extends ModelFactory
     }
 
     /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
+     * Méthode d'initialisation de la factory.
+     *
+     * @return TypeFactory Instance de la factory.
      */
     protected function initialize(): self
     {
-        return $this
-            // ->afterInstantiate(function(Type $type): void {})
-        ;
+        return $this;
     }
 
+    /**
+     * Retourne la classe de l'entité gérée par la factory.
+     *
+     * @return string Nom de la classe Type.
+     */
     protected static function getClass(): string
     {
         return Type::class;
