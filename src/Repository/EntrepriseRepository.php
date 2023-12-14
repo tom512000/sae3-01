@@ -16,36 +16,23 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class EntrepriseRepository extends ServiceEntityRepository
 {
+    /**
+     * Méthode du constructeur.
+     *
+     * @param ManagerRegistry $registry Le service ManagerRegistry.
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Entreprise::class);
     }
 
-//    /**
-//     * @return Entreprise[] Returns an array of Entreprise objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('e.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Entreprise
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
-
+    /**
+     * Recherche des entreprises en fonction d'un texte de recherche.
+     *
+     * @param string $searchText Le texte à rechercher dans les noms d'entreprise.
+     *
+     * @return Entreprise[] Un tableau d'objets Entreprise correspondant aux critères de recherche.
+     */
     public function search(string $searchText = ''): array
     {
         $qb = $this->createQueryBuilder('e')
@@ -60,11 +47,15 @@ class EntrepriseRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * Récupérer toutes les entreprises.
+     *
+     * @return Entreprise[] Un tableau de tous les objets Entreprise.
+     */
     public function findEntreprises(): array
     {
         $qb = $this->createQueryBuilder('e')
             ->orderBy('e.nomEnt', 'ASC');
         return $qb->getQuery()->getResult();
     }
-
 }

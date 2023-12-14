@@ -26,13 +26,22 @@ class OffreController extends AbstractController
     private Security $security;
     private SkillDemanderRepository $skillDemanderRepository;
 
+    /**
+     * Constructeur du contrôleur.
+     *
+     * @param OffreRepository $offreRepository Le repository des offres
+     * @param TypeRepository $typeRepository Le repository des types
+     * @param InscrireRepository $inscrireRepository Le repository des inscriptions
+     * @param Security $security Le service de sécurité Symfony
+     * @param SkillDemanderRepository $skillDemanderRepository Le repository des compétences demandées
+     */
     public function __construct(
         OffreRepository $offreRepository,
         TypeRepository $typeRepository,
         InscrireRepository $inscrireRepository,
         Security $security,
-        SkillDemanderRepository $skillDemanderRepository
-    ) {
+        SkillDemanderRepository $skillDemanderRepository)
+    {
         $this->offreRepository = $offreRepository;
         $this->typeRepository = $typeRepository;
         $this->inscrireRepository = $inscrireRepository;
@@ -41,7 +50,14 @@ class OffreController extends AbstractController
     }
 
     /**
+     * Affiche la liste des offres avec possibilité de filtrage.
+     *
      * @throws Exception
+     *
+     * @param Request $request La requête HTTP
+     * @param PaginatorInterface $paginator Le service de pagination
+     *
+     * @return Response La réponse HTTP de la liste des offres
      */
     #[Route('/offre', name: 'app_offre_index')]
     public function index(Request $request, PaginatorInterface $paginator): Response
@@ -57,13 +73,12 @@ class OffreController extends AbstractController
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
-            14  # Nombre d'offre par page
+            14  # Nombre d'offres par page
         );
 
         $types = $this->typeRepository->findAll();
         $inscription = $this->inscrireRepository->getInscriptions($pagination->getItems(), $this->security);
         $nbInscriptionAccepter = $this->offreRepository->getNbInscriptionsAccepter($pagination->getItems());
-
 
         return $this->render('offre/index.html.twig', [
             'Offres' => $pagination,
@@ -74,9 +89,14 @@ class OffreController extends AbstractController
         ]);
     }
 
-
     /**
+     * Affiche les offres d'une entreprise spécifique avec possibilité de filtrage.
+     *
      * @throws Exception
+     *
+     * @param Request $request La requête HTTP
+     *
+     * @return Response La réponse HTTP de la liste des offres d'une entreprise
      */
     #[Route('/entreprise/offre', name: 'app_offre_OffreEntreprise', requirements: ['entrepriseId' => '\d+'])]
     public function OffreEntreprise(Request $request): Response
@@ -91,7 +111,6 @@ class OffreController extends AbstractController
         $Offres = $this->offreRepository->findByFilterByEntrepriseId($entrepriseId, $typeRechercher, $textRechercher, $niveauRechercher, $dateRechercher, $dateFiltreRechercher);
         $types = $this->typeRepository->findAll();
         $inscription = $this->inscrireRepository->getInscriptions($Offres, $this->security);
-
         $nbInscriptionAccepter = $this->offreRepository->getNbInscriptionsAccepter($Offres);
 
         return $this->render('entreprise/offre/index.html.twig', [
@@ -104,6 +123,17 @@ class OffreController extends AbstractController
         ]);
     }
 
+    /**
+     * Affiche les détails d'une offre spécifique.
+     *
+     * @Route('/offre/{offreId}', name: 'app_offre_show', requirements: ['offreId' => '\d+'])
+     *
+     * @param Offre $Offre L'offre à afficher
+     * @param int $offreId L'identifiant de l'offre
+     * @param Security $security Le service de sécurité Symfony
+     *
+     * @return Response La réponse HTTP des détails de l'offre
+     */
     #[Route('/offre/{offreId}', name: 'app_offre_show', requirements: ['offreId' => '\d+'])]
     public function show(
         #[MapEntity(class: 'App\Entity\Offre', expr: 'repository.findById(offreId)')]
@@ -112,11 +142,8 @@ class OffreController extends AbstractController
         Security $security): Response
     {
         $Inscrit = $this->inscrireRepository->IsInscrit($offreId, $security);
-
         $skills = $this->skillDemanderRepository->getSkillLibellesByOffreId($offreId);
-
         $nbInscriptionAccepter = $this->offreRepository->getNbInscriptionsAccepter([$Offre]);
-
 
         return $this->render('offre/show.html.twig',[
             'Offre'=>$Offre,

@@ -7,6 +7,7 @@ use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 use Symfony\Component\Security\Core\Security;
 use App\Entity\User;
 use App\Entity\Offre;
@@ -21,12 +22,24 @@ use App\Entity\Offre;
  */
 class InscrireRepository extends ServiceEntityRepository
 {
+    /**
+     * Constructeur de la classe.
+     *
+     * @param ManagerRegistry $registry Le service ManagerRegistry.
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Inscrire::class);
     }
 
-    public function findByUserId(int $userId) : array
+    /**
+     * Recherche les inscriptions d'un utilisateur.
+     *
+     * @param int $userId L'identifiant de l'utilisateur.
+     *
+     * @return Inscrire[] Un tableau d'objets Inscrire correspondant à l'utilisateur donné.
+     */
+    public function findByUserId(int $userId): array
     {
         return $this->createQueryBuilder('i')
             ->select('i','User','Offre','entreprise','Type')
@@ -41,22 +54,37 @@ class InscrireRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function IsInscrit(int $idOffre, Security $security):bool
+    /**
+     * Vérifie si un utilisateur est inscrit à une offre donnée.
+     *
+     * @param int      $idOffre   L'identifiant de l'offre.
+     * @param Security $security  Le service de sécurité Symfony.
+     *
+     * @return bool True si l'utilisateur est inscrit, sinon false.
+     */
+    public function IsInscrit(int $idOffre, Security $security): bool
     {
         $user = $security->getUser();
+
         if ($user) {
         $userId = $user->getId();
-        return $this->findOneBy(['Offre' => $idOffre, 'User' => $userId]) != null;
+            return $this->findOneBy(['Offre' => $idOffre, 'User' => $userId]) != null;
         }
+
         return false;
     }
 
     /**
+     * Inscription d'un utilisateur à une offre.
+     *
+     * @param Offre    $Offre     L'objet Offre auquel l'utilisateur s'inscrit.
+     * @param Security $security  Le service de sécurité Symfony.
+     *
      * @throws NonUniqueResultException
-     * @throws \Exception
+     * @throws Exception
      */
-    public function inscription(Offre $Offre, Security $security):void{
-
+    public function inscription(Offre $Offre, Security $security): void
+    {
         $user = $security->getUser();
 
         if ($user instanceof User) {
@@ -91,9 +119,14 @@ class InscrireRepository extends ServiceEntityRepository
     }
 
     /**
+     * Désinscription d'un utilisateur d'une offre.
+     *
+     * @param Offre    $Offre     L'objet Offre de laquelle l'utilisateur se désinscrit.
+     * @param Security $security  Le service de sécurité Symfony.
+     *
      * @throws NonUniqueResultException
      */
-    public function desinscription(Offre $Offre, Security $security):void
+    public function desinscription(Offre $Offre, Security $security): void
     {
         $user = $security->getUser();
 
@@ -118,6 +151,14 @@ class InscrireRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Récupère les inscriptions d'un utilisateur pour un ensemble d'offres données.
+     *
+     * @param Offre[]  $offres    Un tableau d'objets Offre.
+     * @param Security $security  Le service de sécurité Symfony.
+     *
+     * @return array Un tableau associatif avec les identifiants d'offres comme clés et les objets Inscrire correspondants.
+     */
     public function getInscriptions(array $offres, Security $security): array
     {
         $offreIds = array_map(function (Offre $offre) {

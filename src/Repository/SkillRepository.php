@@ -16,15 +16,26 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class SkillRepository extends ServiceEntityRepository
 {
+    /**
+     * Constructeur de la classe.
+     *
+     * @param ManagerRegistry $registry Le service ManagerRegistry.
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Skill::class);
     }
 
+    /**
+     * Recherche les identifiants de toutes les compétences.
+     *
+     * @return Skill[] Un tableau d'objets Skill ordonnés par libellé.
+     */
     public function findSkillsIds()
     {
         $qb = $this->createQueryBuilder('s')
             ->orderBy('s.libelle', 'ASC');
+
         return $qb->getQuery()->getResult();
     }
 }

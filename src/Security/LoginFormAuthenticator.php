@@ -21,10 +21,22 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
     public const LOGIN_ROUTE = 'app_login';
 
+    /**
+     * Constructeur.
+     *
+     * @param UrlGeneratorInterface $urlGenerator Le service de génération d'URL.
+     */
     public function __construct(private readonly UrlGeneratorInterface $urlGenerator)
     {
     }
 
+    /**
+     * Authentifie l'utilisateur en fonction du formulaire de connexion soumis.
+     *
+     * @param Request $request La requête actuelle.
+     *
+     * @return Passport Le passeport d'authentification.
+     */
     public function authenticate(Request $request): Passport
     {
         $email = $request->request->get('email', '');
@@ -35,18 +47,36 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
             new UserBadge($email),
             new PasswordCredentials($request->request->get('password', '')),
             [
-                new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),            ]
+                new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),
+            ]
         );
     }
 
+    /**
+     * Gère le succès de l'authentification.
+     *
+     * @param Request        $request      La requête actuelle.
+     * @param TokenInterface $token        Le jeton d'authentification.
+     * @param string         $firewallName Le nom du pare-feu.
+     *
+     * @return Response|null La réponse après une authentification réussie.
+     */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
+
         return new RedirectResponse('/');
     }
 
+    /**
+     * Obtient l'URL de connexion.
+     *
+     * @param Request $request La requête actuelle.
+     *
+     * @return string L'URL de connexion.
+     */
     protected function getLoginUrl(Request $request): string
     {
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);

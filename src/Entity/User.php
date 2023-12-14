@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -17,75 +18,75 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+
     #[ORM\Column(length: 180)]
     private string $firstName;
+
     #[ORM\Column(length: 180)]
     private string $lastName;
+
     #[ORM\Column(length: 20)]
     private string $phone;
+
     #[ORM\Column]
     private int $status;
+
     #[ORM\Column(type: 'date',length: 10)]
     private \DateTimeInterface $dateNais;
+
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
     #[ORM\Column]
     private array $roles = [];
 
-    /**
-     * @var ?string The hashed password
-     */
     #[ORM\Column]
     private ?string $password = null;
 
     #[ORM\OneToMany(mappedBy: 'User', targetEntity: Inscrire::class)]
     private Collection $inscrires;
 
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $lettreMotiv = null;
+
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $cv = null;
+
+    /**
+     * Constructeur de la classe User.
+     */
     public function __construct()
     {
         $this->inscrires = new ArrayCollection();
     }
-    #[ORM\Column(type: 'string', nullable: true)]
-    private ?string $cv = null;
 
-    public function getCv(): ?string
-    {
-        return $this->cv;
-    }
-
-    public function setCv(?string $cv): self
-    {
-        $this->cv = $cv;
-
-        return $this;
-    }
-
-    #[ORM\Column(type: 'string', nullable: true)]
-    private ?string $lettreMotiv = null;
-
-    public function getLettreMotiv(): ?string
-    {
-        return $this->lettreMotiv;
-    }
-
-    public function setLettreMotiv(?string $lettreMotiv): self
-    {
-        $this->lettreMotiv = $lettreMotiv;
-
-        return $this;
-    }
-
+    /**
+     * Obtient l'ID de l'utilisateur.
+     *
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Obtient l'adresse email de l'utilisateur.
+     *
+     * @return string|null
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
+    /**
+     * Définit l'adresse email de l'utilisateur.
+     *
+     * @param string $email
+     *
+     * @return $this
+     */
     public function setEmail(string $email): static
     {
         $this->email = $email;
@@ -94,84 +95,121 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return ?string
+     * Obtient le prénom de l'utilisateur.
+     *
+     * @return string|null
      */
-    public  function getFirstName(): ?string{
+    public  function getFirstName(): ?string
+    {
         return $this->firstName;
     }
 
     /**
-     * @param ?string $firstName
+     * Définit le prénom de l'utilisateur.
+     *
+     * @param string|null $firstName
      */
-    public  function setFirstName(?string $firstName):void {
+    public function setFirstName(?string $firstName): void
+    {
         $this->firstName = $firstName;
     }
 
     /**
+     * Obtient le nom de famille de l'utilisateur.
+     *
      * @return string
      */
-    public  function getLastName(): string{
+    public function getLastName(): string
+    {
         return $this->lastName;
     }
 
     /**
+     * Définit le nom de famille de l'utilisateur.
+     *
      * @param string $lastName
      */
-    public  function setLastName(string $lastName):void {
+    public function setLastName(string $lastName): void
+    {
         $this->lastName = $lastName;
     }
 
     /**
-     * @return ?string
+     * Obtient le numéro de téléphone de l'utilisateur.
+     *
+     * @return string|null
      */
-    public  function getPhone(): ?string{
+    public function getPhone(): ?string
+    {
         return $this->phone;
     }
 
     /**
+     * Définit le numéro de téléphone de l'utilisateur.
+     *
      * @param string $phone
      */
-    public  function setPhone(string $phone):void {
+    public function setPhone(string $phone): void
+    {
         $this->phone = $phone;
     }
 
     /**
+     * Obtient le statut de l'utilisateur.
+     *
      * @return int
      */
-    public  function getStatus(): int{
+    public function getStatus(): int
+    {
         return $this->status;
     }
 
     /**
+     * Définit le statut de l'utilisateur.
+     *
      * @param int $status
      */
-    public  function setStatus(int $status):void {
+    public function setStatus(int $status): void
+    {
         $this->status = $status;
     }
 
     /**
-     * @return string
+     * Obtient la date de naissance de l'utilisateur.
+     *
+     * @return DateTimeInterface
      */
-    public  function getDateNais(): \DateTimeInterface{
+    public function getDateNais(): DateTimeInterface
+    {
         return $this->dateNais;
     }
 
+    /**
+     * Obtient la date de naissance de l'utilisateur sous forme de chaîne formatée.
+     *
+     * @return string
+     */
     public function getDateNaisString(): string
     {
         return $this->dateNais->format('d F Y');
     }
 
     /**
-     * @param string $dateNais
+     * Définit la date de naissance de l'utilisateur.
+     *
+     * @param DateTimeInterface $dateNais
      */
-    public  function setDateNais(\DateTimeInterface $dateNais):void {
+    public function setDateNais(DateTimeInterface $dateNais): void
+    {
         $this->dateNais = $dateNais;
     }
 
     /**
-     * A visual identifier that represents this user.
+     * Obtient un identifiant visuel représentant cet utilisateur.
      *
      * @see UserInterface
+     *
+     * @return string
      */
     public function getUserIdentifier(): string
     {
@@ -179,17 +217,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
+     * Obtient les rôles de l'utilisateur.
+     *
      * @see UserInterface
+     *
+     * @return array
      */
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }
 
+    /**
+     * Définit les rôles de l'utilisateur.
+     *
+     * @param array $roles
+     *
+     * @return $this
+     */
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
@@ -198,13 +246,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
+     * Obtient le mot de passe de l'utilisateur.
+     *
      * @see PasswordAuthenticatedUserInterface
+     *
+     * @return string
      */
     public function getPassword(): string
     {
         return $this->password;
     }
 
+    /**
+     * Définit le mot de passe de l'utilisateur.
+     *
+     * @param string $password
+     *
+     * @return $this
+     */
     public function setPassword(string $password): static
     {
         $this->password = $password;
@@ -213,15 +272,67 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @see UserInterface
+     * Obtient la lettre de motivation de l'utilisateur.
+     *
+     * @return string|null
      */
-    public function eraseCredentials(): void
+    public function getLettreMotiv(): ?string
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        return $this->lettreMotiv;
     }
 
     /**
+     * Définit la lettre de motivation de l'utilisateur.
+     *
+     * @param string|null $lettreMotiv
+     *
+     * @return $this
+     */
+    public function setLettreMotiv(?string $lettreMotiv): self
+    {
+        $this->lettreMotiv = $lettreMotiv;
+
+        return $this;
+    }
+
+    /**
+     * Obtient le chemin vers le fichier du CV de l'utilisateur.
+     *
+     * @return string|null
+     */
+    public function getCv(): ?string
+    {
+        return $this->cv;
+    }
+
+    /**
+     * Définit le chemin vers le fichier du CV de l'utilisateur.
+     *
+     * @param string|null $cv
+     *
+     * @return $this
+     */
+    public function setCv(?string $cv): self
+    {
+        $this->cv = $cv;
+
+        return $this;
+    }
+
+    /**
+     * Efface les informations de connexion sensibles.
+     *
+     * @see UserInterface
+     *
+     * Cette méthode est vide car aucune information sensible n'est stockée en permanence.
+     */
+    public function eraseCredentials(): void
+    {
+    }
+
+    /**
+     * Obtient la collection des inscriptions de l'utilisateur.
+     *
      * @return Collection<int, Inscrire>
      */
     public function getInscrires(): Collection
@@ -229,6 +340,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->inscrires;
     }
 
+    /**
+     * Ajoute une inscription à la collection des inscriptions de l'utilisateur.
+     *
+     * @param Inscrire $inscrire
+     *
+     * @return $this
+     */
     public function addInscrire(Inscrire $inscrire): static
     {
         if (!$this->inscrires->contains($inscrire)) {
@@ -239,10 +357,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * Supprime une inscription de la collection des inscriptions de l'utilisateur.
+     *
+     * @param Inscrire $inscrire
+     *
+     * @return $this
+     */
     public function removeInscrire(Inscrire $inscrire): static
     {
         if ($this->inscrires->removeElement($inscrire)) {
-            // set the owning side to null (unless already changed)
             if ($inscrire->getUser() === $this) {
                 $inscrire->setUser(null);
             }

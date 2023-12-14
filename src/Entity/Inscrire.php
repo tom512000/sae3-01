@@ -26,11 +26,21 @@ class Inscrire
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?DateTimeInterface $dateDemande = null;
 
+    /**
+     * Obtient l'offre à laquelle l'utilisateur est inscrit.
+     */
     public function getOffre(): ?Offre
     {
         return $this->Offre;
     }
 
+    /**
+     * Définit l'offre à laquelle l'utilisateur est inscrit.
+     *
+     * @param Offre|null $Offre L'offre à définir.
+     *
+     * @return Inscrire L'instance actuelle de l'inscription.
+     */
     public function setOffre(?Offre $Offre): static
     {
         $this->Offre = $Offre;
@@ -38,11 +48,21 @@ class Inscrire
         return $this;
     }
 
+    /**
+     * Obtient l'utilisateur inscrit.
+     */
     public function getUser(): ?User
     {
         return $this->User;
     }
 
+    /**
+     * Définit l'utilisateur inscrit.
+     *
+     * @param User|null $User L'utilisateur à définir.
+     *
+     * @return Inscrire L'instance actuelle de l'inscription.
+     */
     public function setUser(?User $User): static
     {
         $this->User = $User;
@@ -50,11 +70,21 @@ class Inscrire
         return $this;
     }
 
+    /**
+     * Obtient le statut de l'inscription.
+     */
     public function getStatus(): ?int
     {
         return $this->Status;
     }
 
+    /**
+     * Définit le statut de l'inscription.
+     *
+     * @param int|null $Status Le statut à définir.
+     *
+     * @return Inscrire L'instance actuelle de l'inscription.
+     */
     public function setStatus(int $Status): static
     {
         $this->Status = $Status;
@@ -62,11 +92,21 @@ class Inscrire
         return $this;
     }
 
+    /**
+     * Obtient la date de la demande d'inscription.
+     */
     public function getDateDemande(): ?DateTimeInterface
     {
         return $this->dateDemande;
     }
 
+    /**
+     * Définit la date de la demande d'inscription.
+     *
+     * @param DateTimeInterface|null $dateDemande La date à définir.
+     *
+     * @return Inscrire L'instance actuelle de l'inscription.
+     */
     public function setDateDemande(DateTimeInterface $dateDemande): static
     {
         $this->dateDemande = $dateDemande;

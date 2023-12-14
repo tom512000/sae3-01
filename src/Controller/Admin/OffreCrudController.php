@@ -7,19 +7,13 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class OffreCrudController extends AbstractCrudController
 {
+    /**
+     * Retourne le nom de la classe de l'entité gérée par ce contrôleur.
+     *
+     * @return string Le nom de la classe de l'entité
+     */
     public static function getEntityFqcn(): string
     {
         return Offre::class;
     }
-
-    /*
-    public function configureFields(string $pageName): iterable
-    {
-        return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
-        ];
-    }
-    */
 }

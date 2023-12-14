@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Factory\UserFactory;
 use App\Form\UserType;
-use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -19,6 +18,11 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ProfileController extends AbstractController
 {
+    /**
+     * Affiche la page de profil de l'utilisateur.
+     *
+     * @return Response La réponse HTTP de la page de profil
+     */
     #[IsGranted('ROLE_USER')]
     #[Route('/profil', name: 'app_profile')]
     public function index(): Response
@@ -26,6 +30,16 @@ class ProfileController extends AbstractController
         return $this->render('profil/index.html.twig');
     }
 
+    /**
+     * Modifie les informations du profil de l'utilisateur.
+     *
+     * @param EntityManagerInterface $entityManager Le gestionnaire d'entités Doctrine
+     * @param User $user L'utilisateur actuel (@CurrentUser)
+     * @param Request $request La requête HTTP
+     * @param SluggerInterface $slugger Le service de génération de slug Symfony
+     *
+     * @return Response La réponse HTTP de la page de modification de profil
+     */
     #[IsGranted('ROLE_USER')]
     #[Route('/profil/modif', name: 'app_profile_modif')]
     public function modif(EntityManagerInterface $entityManager,#[CurrentUser] User $user,Request $request, SluggerInterface $slugger): Response
@@ -34,6 +48,7 @@ class ProfileController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             /** @var UploadedFile $cvFile */
             $cvFile = $form->get('cv')->getData();
             if ($cvFile) {
@@ -48,6 +63,7 @@ class ProfileController extends AbstractController
                     );
                 } catch (FileException) {
                 }
+
                 $user->setCv($newFilename);
             }
 
@@ -65,6 +81,7 @@ class ProfileController extends AbstractController
                     );
                 } catch (FileException) {
                 }
+
                 $user->setLettreMotiv($newFilename);
             }
 
@@ -78,6 +95,14 @@ class ProfileController extends AbstractController
         ]);
     }
 
+    /**
+     * Crée un nouvel utilisateur avec les informations fournies.
+     *
+     * @param Request $request La requête HTTP
+     * @param SluggerInterface $slugger Le service de génération de slug Symfony
+     *
+     * @return Response La réponse HTTP de la page de création d'utilisateur
+     */
     #[Route('/newUser', name: 'app_profile_new')]
     public function new(Request $request, SluggerInterface $slugger): Response
     {
@@ -86,6 +111,7 @@ class ProfileController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             /** @var UploadedFile $cvFile */
             $cvFile = $form->get('cv')->getData();
             if ($cvFile) {
@@ -100,6 +126,7 @@ class ProfileController extends AbstractController
                     );
                 } catch (FileException) {
                 }
+
                 $user->setCv($newFilename);
             }
 
@@ -117,10 +144,19 @@ class ProfileController extends AbstractController
                     );
                 } catch (FileException) {
                 }
+
                 $user->setLettreMotiv($newFilename);
             }
 
-            UserFactory::createOne(['lastName'=>$user->getLastName(),'firstName'=>$user->getFirstName(),'email'=>$user->getEmail(),'dateNais'=>$user->getDateNais(),'phone'=>$user->getPhone(),'cv'=>$user->getCv(),'lettreMotiv'=>$user->getLettreMotiv()]);
+            UserFactory::createOne([
+                'lastName' => $user->getLastName(),
+                'firstName' => $user->getFirstName(),
+                'email' => $user->getEmail(),
+                'dateNais' => $user->getDateNais(),
+                'phone' => $user->getPhone(),
+                'cv' => $user->getCv(),
+                'lettreMotiv' => $user->getLettreMotiv()
+            ]);
 
             return $this->redirectToRoute('app_login');
         }

@@ -33,10 +33,12 @@ final class SkillDemanderFactory extends ModelFactory
 {
     private OffreRepository  $offreRepository;
     private SkillRepository $skillRepository;
+
     /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
+     * Constructeur de la factory.
      *
-     * @todo inject services if required
+     * @param OffreRepository $offreRepository
+     * @param SkillRepository $skillRepository
      */
     public function __construct(OffreRepository $offreRepository, skillRepository $skillRepository)
     {
@@ -46,9 +48,9 @@ final class SkillDemanderFactory extends ModelFactory
     }
 
     /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
+     * Définit les valeurs par défaut lors de la création d'un SkillDemander.
      *
-     * @todo add your default values here
+     * @return array Tableau des valeurs par défaut.
      */
     protected function getDefaults(): array
     {
@@ -64,20 +66,33 @@ final class SkillDemanderFactory extends ModelFactory
     }
 
     /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
+     * Méthode d'initialisation de la factory.
+     *
+     * @return SkillDemanderFactory Instance de la factory.
      */
     protected function initialize(): self
     {
-        return $this
-            // ->afterInstantiate(function(SkillDemander $skillDemander): void {})
-        ;
+        return $this;
     }
 
+    /**
+     * Retourne la classe de l'entité gérée par la factory.
+     *
+     * @return string Nom de la classe SkillDemander.
+     */
     protected static function getClass(): string
     {
         return SkillDemander::class;
     }
 
+    /**
+     * Génère une combinaison unique d'offre et de skill.
+     *
+     * @param array $offres Tableau des IDs des offres existantes.
+     * @param array $skills Tableau des IDs des skills existants.
+     *
+     * @return array Tableau contenant une combinaison unique d'offre et de skill.
+     */
     private function getUniqueCombination(array $offres, array $skills): array
     {
         $offre = self::faker()->randomElement($offres);
