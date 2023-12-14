@@ -24,9 +24,7 @@
         <div class="infos2">
             <div class="infos2_1">
                 {% set placesRestantes = nbInscriptionAccepter[Offre.id] is defined ? (Offre.nbPlace - nbInscriptionAccepter[Offre.id]) : Offre.nbPlace %}
-
                 {{ placesRestantes  }} place(s) restantes
-
             </div>
             <div class="infos2_2">
                 {{ Offre.lieux }}
@@ -45,7 +43,7 @@
                         </form>
                     {% else %}
                         <form class="inscrip-button" action="{{ path('app_inscire_inscription', {'idOffre': Offre.id}) }}" method="get">
-                            <button class="btn btn-success" type="submit">s'inscrire</button>
+                            <button class="btn btn-success" type="submit">S'inscrire</button>
                         </form>
                     {% endif %}
                 {% else %}

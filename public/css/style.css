@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cabin:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=K2D:wght@300&display=swap');
 
@@ -35,8 +36,9 @@ html {
 }
 
 body {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    height: 100%;
     margin-top: 64px;
     background: url("../img/background.png") fixed center;
     background-size: cover;
@@ -367,8 +369,8 @@ div.bloc_offres_vide > h1 {
 div.bloc_offres {
     display: flex;
     flex-direction: row;
+    justify-content: center;
     align-items: center;
-    justify-content: space-around;
     flex-wrap: wrap;
     width: 100%;
 }
@@ -520,7 +522,7 @@ div.infos3 p.niveau {
     height: 30px;
 }
 
-div.infos3 .inscrip-button {
+div.infos3 form.inscrip-button {
     margin-right: 60px;
 }
 
@@ -561,6 +563,94 @@ div.pagination span.current {
     padding: 4px 8px;
     color: var(--fourth-color);
     background-color: var(--second-color);
+}
+
+/* CSS offre/show.html.twig */
+div.bloc_offre_infos {
+    display: flex;
+    flex: 1;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    background-color: var(--fourth-color);
+}
+
+div.bloc_offre_infos > div {
+    width: 300px;
+    height: 300px;
+    margin: 25px;
+}
+
+div.bloc_offre_infos_1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+div.bloc_offre_infos_1 > h2 {
+    font-family: 'K2D', sans-serif;
+    font-weight: bold;
+}
+
+div.bloc_offre_infos_1 > a {
+    width: 200px;
+    height: 200px;
+}
+
+div.bloc_offre_infos_1 > a > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+}
+
+div.bloc_offre_infos_2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+div.bloc_offre_infos_2 > h4 {
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: bold;
+}
+
+div.bloc_offre_infos_2 > p {
+    font-family: 'Lexend', sans-serif;
+    text-align: justify;
+}
+
+div.bloc_offre_infos_2 > p:first-child {
+    font-weight: bold;
+}
+
+div.bloc_offre_infos_3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+div.bloc_offre_infos_3 h4 {
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: bold;
+}
+
+div.bloc_offre_infos_3 p {
+    font-family: 'Lexend', sans-serif;
+}
+
+div.bloc_offre_infos_3 button.show_button {
+    width: 100%;
+}
+
+div.bloc_offre_infos_4 > h4 {
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: bold;
+}
+
+div.bloc_offre_infos_4 > p {
+    font-family: 'Lexend', sans-serif;
 }
 
 /* CSS entreprise/index.html.twig */
@@ -968,7 +1058,6 @@ div.mentions_bloc {
     flex-direction: column;
     width: 100%;
 }
-
 
 div.mentions_bloc_1 {
     display: flex;
