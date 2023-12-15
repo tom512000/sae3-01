@@ -27,13 +27,25 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('firstName',null,['label' => 'Nom'])
-            ->add('lastName',null,['label' => 'Prénom'])
-            ->add('phone',TelType::class,['label' => 'Numéro de Téléphone'])
-            ->add('dateNais',BirthdayType::class,['label' => 'Date de Naissance'])
-            ->add('email',EmailType::class,['label' => 'Adresse Email'])
+            ->add('firstName',null, [
+                'label' => 'Nom'
+            ])
+            ->add('lastName',null, [
+                'label' => 'Prénom'
+            ])
+            ->add('phone',TelType::class, [
+                'label' => 'Numéro de Téléphone'
+            ])
+            ->add('dateNais',BirthdayType::class, [
+                'label' => 'Date de Naissance'
+            ])
+            ->add('email',EmailType::class, [
+                'label' => 'Adresse Email'
+            ])
             ->add('cv', FileType::class, [
-                'label' => 'cv (PDF)', 'mapped' => false,'required' => false,
+                'label' => 'cv (PDF)',
+                'mapped' => false,
+                'required' => false,
                 'constraints' => [
                     new File([
                         'maxSize' => '9024k',
@@ -46,7 +58,9 @@ class UserType extends AbstractType
                 ],
             ])
             ->add('lettreMotiv', FileType::class, [
-                'label' => 'Lettre de Motivation (PDF)', 'mapped' => false,'required' => false,
+                'label' => 'Lettre de Motivation (PDF)',
+                'mapped' => false,
+                'required' => false,
                 'constraints' => [
                     new File([
                         'maxSize' => '9024k',
@@ -58,7 +72,9 @@ class UserType extends AbstractType
                     ])
                 ],
             ])
-            ->add('save', SubmitType::class, ['label' => 'Sauvegarder'])
+            ->add('save', SubmitType::class, [
+                'label' => 'Sauvegarder'
+            ])
         ;
     }
 
