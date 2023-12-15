@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\Entreprise;
 use App\Entity\Offre;
+use App\Entity\Skill;
+use App\Entity\Type;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -47,6 +49,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Entreprises', 'fas fa-list', Entreprise::class);
         yield MenuItem::linkToCrud('Offres', 'fas fa-list', Offre::class);
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-list', User::class);
+        yield MenuItem::linkToCrud('Compétences', 'fas fa-list', Skill::class);
+        yield MenuItem::linkToCrud('Types', 'fas fa-list', Type::class);
         yield MenuItem::linkToUrl('Accueil','fa fa-home','/');
     }
 }

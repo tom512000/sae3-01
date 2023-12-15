@@ -5,6 +5,10 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TelephoneField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -28,15 +32,14 @@ class UserCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            'firstName',
-            'lastName',
-            'phone',
-            'status',
-            'dateNais',
-            'email',
+            TextField::new('firstName','Nom de famille'),
+            TextField::new('lastName','Prénom'),
+            TelephoneField::new('phone','Numéro de Téléphone'),
+            DateField::new('dateNais','Date de Naissance'),
+            EmailField::new('email','Adresse Mail'),
             ArrayField::new('roles')
                 ->formatValue(function ($value) {
-                    if ($value == 'ROLE_USER'){
+                    if ($value == ['ROLE_USER']){
                         return 'Utilisateur';
                     } else {
                         return 'Admin';
