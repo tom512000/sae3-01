@@ -7,6 +7,8 @@ use App\Factory\UserFactory;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -164,5 +166,29 @@ class ProfileController extends AbstractController
         return $this->render('profil/new.html.twig', [
             'form' => $form,
         ]);
+    }
+
+    #[IsGranted('ROLE_USER')]
+    #[Route('/profil/delete', name: 'app_profile_delete')]
+    public function delete(EntityManagerInterface $entityManager, #[CurrentUser] User $user, Request $request): Response
+    {
+        $form = $this->createForm(FormType::class);
+        $form->add('Delete', SubmitType::class, ['label' => 'Supprimer']);
+        $form->add('Cancel', SubmitType::class, ['label' => 'Annuler']);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid() && ($form->getClickedButton() === $form->get('Delete'))) {
+            $qb=$entityManager->createQueryBuilder()->delete('App:Inscrire','i')->where('i.User = ?1')->setParameter(1,$user);
+            $query=$qb->getQuery();
+            $query->execute();
+            $entityManager->remove($user);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_home');
+        } elseif ($form->isSubmitted() && $form->isValid()) {
+            return $this->redirectToRoute('app_profile');
+        }
+
+        return $this->render('profil/delete.html.twig', ['user' => $user, 'form' => $form]);
     }
 }
