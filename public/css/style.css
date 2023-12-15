@@ -43,6 +43,8 @@ body {
     display: flex;
     flex-direction: column;
     width: 100%;
+    height: 100%;
+    min-height: 100vh;
     margin-top: 64px;
     background: url("../img/background.png") fixed center;
     background-size: cover;
@@ -118,6 +120,7 @@ footer {
     align-items: center;
     width: 100%;
     height: 200px;
+    margin-top: auto;
     border-top: 10px solid var(--main-color);
     background-color: var(--third-color);
 }
@@ -198,12 +201,13 @@ div.menu_bloc {
     align-items: center;
     width: 100%;
     height: 220px;
+    padding: 50px;
     border-bottom: 2px solid var(--main-color);
     background-color: var(--fourth-color);
 }
 
 div.menu_bloc > h1 {
-    margin: 0;
+    margin-bottom: 20px;
     font-family: 'Comfortaa', sans-serif;
     color: var(--main-color);
 }
@@ -271,7 +275,7 @@ div.titre_offre {
     align-items: center;
     width: 100%;
     height: 300px;
-    padding-bottom: 10px;
+    padding: 40px;
     margin-bottom: 40px;
     border-bottom: 2px solid darkred;
     background: url("../img/background-info.png") no-repeat center;
@@ -279,6 +283,7 @@ div.titre_offre {
 }
 
 div.titre_offre > h1 {
+    margin-bottom: 30px;
     font-size: 65px;
     background: -webkit-linear-gradient(var(--second-color), var(--main-color));
     -webkit-background-clip: text;
@@ -435,7 +440,6 @@ div.bloc_offre {
 div.bloc_offre_img {
     display: flex;
     width: 25%;
-    height: auto;
 }
 
 div.bloc_offre_img > div.bloc_1 {
@@ -474,7 +478,6 @@ div.bloc_offre_img div.bloc_2 a img {
 
 div.bloc_offre_txt {
     width: 75%;
-    height: auto;
 }
 
 div.bloc_offre_txt div.infos1 {
@@ -585,6 +588,7 @@ div.infos3 p.duree span,
     font-weight: bold;
 }
 
+/* Menu de pagination */
 div.custom-pagination {
     display: flex;
     justify-content: center;
@@ -715,6 +719,7 @@ div.titre_entreprises {
     align-items: center;
     width: 100%;
     height: 150px;
+    padding: 50px;
     border-bottom: 2px solid darkred;
     background: url("../img/background-info.png") no-repeat center;
     background-size: cover;
@@ -875,8 +880,6 @@ form.login_bloc {
     justify-content: center;
     align-items: center;
     width: 100%;
-    background: url("../img/fond_login.avif") no-repeat center;
-    background-size: cover;
 }
 
 div.relative_bloc {
@@ -884,39 +887,34 @@ div.relative_bloc {
 }
 
 div.login_form {
-    width: 30%;
+    display: flex;
+    flex-direction: column;
+    width: 40%;
     height: 100%;
     position: relative;
-    padding: 25px 25px 80px 25px;
-    margin: 50px 0 50px 0;
+    padding: 25px;
+    margin: 50px;
     border-radius: 20px;
     background-color: var(--third-color);
     box-shadow: 8px 8px 0 #000000;
 }
 
-div.login_form h1 {
+div.login_form > h1 {
     text-align: center;
     color: #ffffff;
     font-family: 'Archivo Black', sans-serif;
 }
 
-div.login_form input {
-    margin-bottom: 20px;
-    margin-top: 5px;
-}
-
-div.login_form label {
+div.login_form > label {
+    margin-top: 10px;
     color: #ffffff;
     font-family: 'Raleway', sans-serif;
 }
 
 div.login_form button {
-    width: calc(100% - 50px);
+    width: 100%;
     height: 38px;
-    position: absolute;
-    bottom: 22px;
-    left: 0;
-    margin-left: 25px;
+    margin-top: 40px;
     border: 1px solid var(--third-color);
     border-radius: 5px;
     font-family: 'Raleway', sans-serif;
@@ -931,6 +929,7 @@ div.login_form button:hover {
 }
 
 h4.register_account {
+    margin-top: 15px;
     color: var(--fourth-color);
 }
 
