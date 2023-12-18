@@ -50,6 +50,9 @@
       <PhpSpecSuiteConfiguration>
         <option name="myPath" value="$PROJECT_DIR$" />
       </PhpSpecSuiteConfiguration>
+      <PhpSpecSuiteConfiguration>
+        <option name="myPath" value="$PROJECT_DIR$/../../../PHP-Web/symfony-contacts" />
+      </PhpSpecSuiteConfiguration>
     </suites>
   </component>
 </project>

@@ -81,7 +81,7 @@ class Inscrire
     /**
      * Définit le statut de l'inscription.
      *
-     * @param int|null $Status Le statut à définir.
+     * @param int $Status Le statut à définir.
      *
      * @return Inscrire L'instance actuelle de l'inscription.
      */
@@ -103,7 +103,7 @@ class Inscrire
     /**
      * Définit la date de la demande d'inscription.
      *
-     * @param DateTimeInterface|null $dateDemande La date à définir.
+     * @param DateTimeInterface $dateDemande La date à définir.
      *
      * @return Inscrire L'instance actuelle de l'inscription.
      */
