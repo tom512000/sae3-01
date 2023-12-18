@@ -15,7 +15,11 @@ class TypeFixtures extends Fixture
      */
     public function load(ObjectManager $manager): void
     {
-        TypeFactory::createOne(['libelle'=>'STAGE']);
-        TypeFactory::createOne(['libelle'=>'ALTERNANCE']);
+        TypeFactory::createOne([
+            'libelle' => 'STAGE'
+        ]);
+        TypeFactory::createOne([
+            'libelle' => 'ALTERNANCE'
+        ]);
     }
 }

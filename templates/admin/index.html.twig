@@ -1,1 +1,72 @@
 {% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block page_title %}Tableau de bord{% endblock %}
+
+{% block content_title %}
+    <h1>Tableau de bord</h1>
+{% endblock %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Accueil</h3>
+                </div>
+                <div class="card-body">
+                    <a href="http://localhost:8000/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CEntrepriseCrudController" class="btn btn-primary">Retourner à l'accueil</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Entreprises</h3>
+                </div>
+                <div class="card-body">
+                    <a href="http://localhost:8000/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CEntrepriseCrudController" class="btn btn-primary">Voir plus</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Offres</h3>
+                </div>
+                <div class="card-body">
+                    <a href="http://localhost:8000/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5COffreCrudController" class="btn btn-primary">Voir plus</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Utilisateurs</h3>
+                </div>
+                <div class="card-body">
+                    <a href="http://localhost:8000/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CUserCrudController" class="btn btn-primary">Voir plus</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Compétences</h3>
+                </div>
+                <div class="card-body">
+                    <a href="http://localhost:8000/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CSkillCrudController" class="btn btn-primary">Voir plus</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Types</h3>
+                </div>
+                <div class="card-body">
+                    <a href="http://localhost:8000/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CTypeCrudController" class="btn btn-primary">Voir plus</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -76,7 +76,9 @@ class SkillFixtures extends Fixture
         ];
 
         for ($i = 0; $i < count($competences); $i++) {
-            SkillFactory::createOne(['libelle' => $competences[$i]]);
+            SkillFactory::createOne([
+                'libelle' => $competences[$i]
+            ]);
         }
     }
 }
