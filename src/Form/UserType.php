@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -41,6 +42,9 @@ class UserType extends AbstractType
             ])
             ->add('email',EmailType::class, [
                 'label' => 'Adresse Email'
+            ])
+            ->add('password',PasswordType::class, [
+                'label' => 'Mot de Passe'
             ])
             ->add('cv', FileType::class, [
                 'label' => 'cv (PDF)',
