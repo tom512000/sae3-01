@@ -29,9 +29,9 @@ class SkillDemander
     /**
      * Définit la compétence associée à la demande de compétence.
      *
-     * @param Skill|null $skill La compétence à définir.
+     * @param Skill|null $skill la compétence à définir
      *
-     * @return SkillDemander L'instance actuelle de la demande de compétence.
+     * @return skillDemander L'instance actuelle de la demande de compétence
      */
     public function setSkill(?Skill $skill): static
     {
@@ -51,9 +51,9 @@ class SkillDemander
     /**
      * Définit l'offre associée à la demande de compétence.
      *
-     * @param Offre|null $offre L'offre à définir.
+     * @param offre|null $offre L'offre à définir
      *
-     * @return SkillDemander L'instance actuelle de la demande de compétence.
+     * @return skillDemander L'instance actuelle de la demande de compétence
      */
     public function setOffre(?Offre $offre): static
     {

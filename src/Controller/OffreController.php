@@ -7,15 +7,14 @@ use App\Repository\InscrireRepository;
 use App\Repository\OffreRepository;
 use App\Repository\SkillDemanderRepository;
 use App\Repository\TypeRepository;
-use Exception;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[IsGranted('ROLE_USER')]
 class OffreController extends AbstractController
@@ -29,10 +28,10 @@ class OffreController extends AbstractController
     /**
      * Constructeur du contrôleur.
      *
-     * @param OffreRepository $offreRepository Le repository des offres
-     * @param TypeRepository $typeRepository Le repository des types
-     * @param InscrireRepository $inscrireRepository Le repository des inscriptions
-     * @param Security $security Le service de sécurité Symfony
+     * @param OffreRepository         $offreRepository         Le repository des offres
+     * @param TypeRepository          $typeRepository          Le repository des types
+     * @param InscrireRepository      $inscrireRepository      Le repository des inscriptions
+     * @param Security                $security                Le service de sécurité Symfony
      * @param SkillDemanderRepository $skillDemanderRepository Le repository des compétences demandées
      */
     public function __construct(
@@ -52,12 +51,12 @@ class OffreController extends AbstractController
     /**
      * Affiche la liste des offres avec possibilité de filtrage.
      *
-     * @throws Exception
-     *
-     * @param Request $request La requête HTTP
+     * @param Request            $request   La requête HTTP
      * @param PaginatorInterface $paginator Le service de pagination
      *
      * @return Response La réponse HTTP de la liste des offres
+     *
+     * @throws \Exception
      */
     #[Route('/offre', name: 'app_offre_index')]
     public function index(Request $request, PaginatorInterface $paginator): Response
@@ -73,7 +72,7 @@ class OffreController extends AbstractController
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
-            14  # Nombre d'offres par page
+            14  // Nombre d'offres par page
         );
 
         $types = $this->typeRepository->findAll();
@@ -85,18 +84,18 @@ class OffreController extends AbstractController
             'textRecherche' => $textRechercher,
             'types' => $types,
             'inscription' => $inscription,
-            'nbInscriptionAccepter' => $nbInscriptionAccepter
+            'nbInscriptionAccepter' => $nbInscriptionAccepter,
         ]);
     }
 
     /**
      * Affiche les offres d'une entreprise spécifique avec possibilité de filtrage.
      *
-     * @throws Exception
-     *
      * @param Request $request La requête HTTP
      *
      * @return Response La réponse HTTP de la liste des offres d'une entreprise
+     *
+     * @throws \Exception
      */
     #[Route('/entreprise/offre', name: 'app_offre_OffreEntreprise', requirements: ['entrepriseId' => '\d+'])]
     public function OffreEntreprise(Request $request): Response
@@ -119,7 +118,7 @@ class OffreController extends AbstractController
             'Offres' => $Offres,
             'entrepriseId' => $entrepriseId,
             'inscription' => $inscription,
-            'nbInscriptionAccepter' => $nbInscriptionAccepter
+            'nbInscriptionAccepter' => $nbInscriptionAccepter,
         ]);
     }
 
@@ -128,8 +127,8 @@ class OffreController extends AbstractController
      *
      * @Route('/offre/{offreId}', name: 'app_offre_show', requirements: ['offreId' => '\d+'])
      *
-     * @param Offre $Offre L'offre à afficher
-     * @param int $offreId L'identifiant de l'offre
+     * @param Offre    $Offre    L'offre à afficher
+     * @param int      $offreId  L'identifiant de l'offre
      * @param Security $security Le service de sécurité Symfony
      *
      * @return Response La réponse HTTP des détails de l'offre
@@ -145,11 +144,11 @@ class OffreController extends AbstractController
         $skills = $this->skillDemanderRepository->getSkillLibellesByOffreId($offreId);
         $nbInscriptionAccepter = $this->offreRepository->getNbInscriptionsAccepter([$Offre]);
 
-        return $this->render('offre/show.html.twig',[
-            'Offre'=>$Offre,
+        return $this->render('offre/show.html.twig', [
+            'Offre' => $Offre,
             'inscription' => $Inscrit,
             'skills' => $skills,
-            'nbInscriptionAccepter' => $nbInscriptionAccepter
+            'nbInscriptionAccepter' => $nbInscriptionAccepter,
         ]);
     }
 }

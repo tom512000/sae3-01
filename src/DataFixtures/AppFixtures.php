@@ -10,7 +10,7 @@ class AppFixtures extends Fixture
     /**
      * Charge les données dans la base de données.
      *
-     * @param ObjectManager $manager L'instance de l'ObjectManager pour interagir avec la base de données.
+     * @param objectManager $manager L'instance de l'ObjectManager pour interagir avec la base de données
      */
     public function load(ObjectManager $manager): void
     {

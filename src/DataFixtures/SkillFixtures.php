@@ -72,12 +72,12 @@ class SkillFixtures extends Fixture
             'Connaissance des nouvelles technologies',
             'Écoute active',
             'Évaluation des performances',
-            'Planification d\'événements'
+            'Planification d\'événements',
         ];
 
-        for ($i = 0; $i < count($competences); $i++) {
+        for ($i = 0; $i < count($competences); ++$i) {
             SkillFactory::createOne([
-                'libelle' => $competences[$i]
+                'libelle' => $competences[$i],
             ]);
         }
     }

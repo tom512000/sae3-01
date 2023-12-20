@@ -48,9 +48,9 @@ class Skill
     /**
      * Définit le libellé de la compétence.
      *
-     * @param string $libelle Le libellé de la compétence à définir.
+     * @param string $libelle le libellé de la compétence à définir
      *
-     * @return Skill L'instance actuelle de la compétence.
+     * @return skill L'instance actuelle de la compétence
      */
     public function setLibelle(string $libelle): static
     {
@@ -72,9 +72,9 @@ class Skill
     /**
      * Ajoute une demande de compétence à la collection associée à la compétence.
      *
-     * @param SkillDemander $skillDemander La demande de compétence à ajouter.
+     * @param SkillDemander $skillDemander la demande de compétence à ajouter
      *
-     * @return Skill L'instance actuelle de la compétence.
+     * @return skill L'instance actuelle de la compétence
      */
     public function addSkillDemander(SkillDemander $skillDemander): static
     {
@@ -89,9 +89,9 @@ class Skill
     /**
      * Supprime une demande de compétence de la collection associée à la compétence.
      *
-     * @param SkillDemander $skillDemander La demande de compétence à supprimer.
+     * @param SkillDemander $skillDemander la demande de compétence à supprimer
      *
-     * @return Skill L'instance actuelle de la compétence.
+     * @return skill L'instance actuelle de la compétence
      */
     public function removeSkillDemander(SkillDemander $skillDemander): static
     {

@@ -32,19 +32,19 @@ class UserCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('firstName','Nom de famille'),
-            TextField::new('lastName','Prénom'),
-            TelephoneField::new('phone','Numéro de Téléphone'),
-            DateField::new('dateNais','Date de Naissance'),
-            EmailField::new('email','Adresse Mail'),
+            TextField::new('firstName', 'Nom de famille'),
+            TextField::new('lastName', 'Prénom'),
+            TelephoneField::new('phone', 'Numéro de Téléphone'),
+            DateField::new('dateNais', 'Date de Naissance'),
+            EmailField::new('email', 'Adresse Mail'),
             ArrayField::new('roles')
                 ->formatValue(function ($value) {
-                    if ($value == ['ROLE_USER']){
+                    if ($value == ['ROLE_USER']) {
                         return 'Utilisateur';
                     } else {
                         return 'Admin';
                     }
-                })
+                }),
         ];
     }
 }

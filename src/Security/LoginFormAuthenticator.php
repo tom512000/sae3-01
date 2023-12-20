@@ -24,7 +24,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     /**
      * Constructeur.
      *
-     * @param UrlGeneratorInterface $urlGenerator Le service de génération d'URL.
+     * @param UrlGeneratorInterface $urlGenerator le service de génération d'URL
      */
     public function __construct(private readonly UrlGeneratorInterface $urlGenerator)
     {
@@ -33,9 +33,9 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     /**
      * Authentifie l'utilisateur en fonction du formulaire de connexion soumis.
      *
-     * @param Request $request La requête actuelle.
+     * @param Request $request la requête actuelle
      *
-     * @return Passport Le passeport d'authentification.
+     * @return Passport le passeport d'authentification
      */
     public function authenticate(Request $request): Passport
     {
@@ -55,11 +55,11 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     /**
      * Gère le succès de l'authentification.
      *
-     * @param Request        $request      La requête actuelle.
-     * @param TokenInterface $token        Le jeton d'authentification.
-     * @param string         $firewallName Le nom du pare-feu.
+     * @param Request        $request      la requête actuelle
+     * @param TokenInterface $token        le jeton d'authentification
+     * @param string         $firewallName le nom du pare-feu
      *
-     * @return Response|null La réponse après une authentification réussie.
+     * @return Response|null la réponse après une authentification réussie
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
@@ -73,9 +73,9 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     /**
      * Obtient l'URL de connexion.
      *
-     * @param Request $request La requête actuelle.
+     * @param Request $request la requête actuelle
      *
-     * @return string L'URL de connexion.
+     * @return string L'URL de connexion
      */
     protected function getLoginUrl(Request $request): string
     {

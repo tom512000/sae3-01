@@ -3,12 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Offre;
-use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
-use Exception;
 
 /**
  * @extends ServiceEntityRepository<Offre>
@@ -23,7 +21,7 @@ class OffreRepository extends ServiceEntityRepository
     /**
      * Constructeur de la classe.
      *
-     * @param ManagerRegistry $registry Le service ManagerRegistry.
+     * @param ManagerRegistry $registry le service ManagerRegistry
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -33,12 +31,12 @@ class OffreRepository extends ServiceEntityRepository
     /**
      * Recherche les offres les plus récentes.
      *
-     * @return Offre[] Un tableau d'objets Offre correspondant aux offres les plus récentes.
+     * @return Offre[] un tableau d'objets Offre correspondant aux offres les plus récentes
      */
     public function findByRecent(): array
     {
         $qb = $this->createQueryBuilder('o')
-            ->select('o', 'entreprise', 'Type','inscrires')
+            ->select('o', 'entreprise', 'Type', 'inscrires')
             ->leftJoin('o.entreprise', 'entreprise')
             ->leftJoin('o.inscrires', 'inscrires')
             ->leftJoin('o.Type', 'Type')
@@ -51,7 +49,7 @@ class OffreRepository extends ServiceEntityRepository
     /**
      * Recherche les identifiants de toutes les offres.
      *
-     * @return array Un tableau d'objets Offre ordonnés par nom d'offre.
+     * @return array un tableau d'objets Offre ordonnés par nom d'offre
      */
     public function findOffresIds(): array
     {
@@ -64,16 +62,16 @@ class OffreRepository extends ServiceEntityRepository
     /**
      * Recherche les offres en fonction des filtres fournis, pour une entreprise spécifique.
      *
-     * @param int    $id          L'identifiant de l'entreprise.
-     * @param int    $type        L'identifiant du type d'offre (0 pour tous).
-     * @param string $searchText  Le texte de recherche.
-     * @param int    $niveau      Le niveau d'études requis (-1 pour tous).
-     * @param string $date        La date limite de début.
-     * @param int    $dateFiltre  Le filtre de date (1 pour avant, 2 pour après, 3 pour exacte).
+     * @param int    $id         L'identifiant de l'entreprise
+     * @param int    $type       L'identifiant du type d'offre (0 pour tous)
+     * @param string $searchText le texte de recherche
+     * @param int    $niveau     le niveau d'études requis (-1 pour tous)
+     * @param string $date       la date limite de début
+     * @param int    $dateFiltre le filtre de date (1 pour avant, 2 pour après, 3 pour exacte)
      *
-     * @return array Un tableau d'objets Offre correspondant aux critères de recherche.
+     * @return array un tableau d'objets Offre correspondant aux critères de recherche
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function findByFilterByEntrepriseId(int $id, int $type, string $searchText, int $niveau, string $date, int $dateFiltre): array
     {
@@ -87,15 +85,15 @@ class OffreRepository extends ServiceEntityRepository
     /**
      * Recherche les offres en fonction des filtres fournis.
      *
-     * @param int    $type        L'identifiant du type d'offre (0 pour tous).
-     * @param string $searchText  Le texte de recherche.
-     * @param int    $niveau      Le niveau d'études requis (-1 pour tous).
-     * @param string $date        La date limite de début.
-     * @param int    $dateFiltre  Le filtre de date (1 pour avant, 2 pour après, 3 pour exacte).
+     * @param int    $type       L'identifiant du type d'offre (0 pour tous)
+     * @param string $searchText le texte de recherche
+     * @param int    $niveau     le niveau d'études requis (-1 pour tous)
+     * @param string $date       la date limite de début
+     * @param int    $dateFiltre le filtre de date (1 pour avant, 2 pour après, 3 pour exacte)
      *
-     * @return array Un tableau d'objets Offre correspondant aux critères de recherche.
+     * @return array un tableau d'objets Offre correspondant aux critères de recherche
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function findByFilter(int $type, string $searchText, int $niveau, string $date, int $dateFiltre): array
     {
@@ -107,9 +105,9 @@ class OffreRepository extends ServiceEntityRepository
     /**
      * Recherche le nombre d'offres par entreprise et retourne un tableau associatif.
      *
-     * @param array $entreprises Un tableau d'objets Entreprise.
+     * @param array $entreprises un tableau d'objets Entreprise
      *
-     * @return array Un tableau associatif avec les identifiants d'entreprises comme clés et le nombre d'offres comme valeurs.
+     * @return array un tableau associatif avec les identifiants d'entreprises comme clés et le nombre d'offres comme valeurs
      */
     public function findNbOffresByEntreprisesReturnArray(array $entreprises): array
     {
@@ -122,7 +120,7 @@ class OffreRepository extends ServiceEntityRepository
         $results = $qb->getQuery()->getResult();
 
         $nbOffres = [];
-        for($i = 0; $i<count($entreprises);$i++) {
+        for ($i = 0; $i < count($entreprises); ++$i) {
             $nbOffres[$entreprises[$i]->getId()] = 0;
         }
 
@@ -136,26 +134,26 @@ class OffreRepository extends ServiceEntityRepository
     /**
      * Filtrage des offres en fonction des critères fournis.
      *
-     * @param int          $type        L'identifiant du type d'offre (0 pour tous).
-     * @param QueryBuilder $qb          L'objet QueryBuilder.
-     * @param string       $searchText  Le texte de recherche.
-     * @param int          $niveau      Le niveau d'études requis (-1 pour tous).
-     * @param string       $date        La date limite de début.
-     * @param int          $dateFiltre  Le filtre de date (1 pour avant, 2 pour après, 3 pour exacte).
+     * @param int          $type       L'identifiant du type d'offre (0 pour tous)
+     * @param QueryBuilder $qb         L'objet QueryBuilder
+     * @param string       $searchText le texte de recherche
+     * @param int          $niveau     le niveau d'études requis (-1 pour tous)
+     * @param string       $date       la date limite de début
+     * @param int          $dateFiltre le filtre de date (1 pour avant, 2 pour après, 3 pour exacte)
      *
-     * @return array Un tableau d'objets Offre correspondant aux critères de recherche.
+     * @return array un tableau d'objets Offre correspondant aux critères de recherche
      *
-     * @throws Exception
+     * @throws \Exception
      */
     protected function Filter(int $type, QueryBuilder $qb, string $searchText, int $niveau, string $date, int $dateFiltre): mixed
     {
-        $qb ->select('o', 'entreprise', 'Type','inscrires')
+        $qb->select('o', 'entreprise', 'Type', 'inscrires')
             ->leftJoin('o.entreprise', 'entreprise')
             ->leftJoin('o.inscrires', 'inscrires')
             ->leftJoin('o.Type', 'Type')
-            ->leftJoin('inscrires.User','User');
+            ->leftJoin('inscrires.User', 'User');
 
-        if ($type != 0) {
+        if (0 != $type) {
             $qb->join('o.Type', 't')
                 ->andwhere('t.id = :type')
                 ->setParameter('type', $type);
@@ -167,8 +165,8 @@ class OffreRepository extends ServiceEntityRepository
             ))->setParameter('searchText', '%'.$searchText.'%');
         }
 
-        if ($niveau != -1) {
-            if ($niveau == 0) {
+        if (-1 != $niveau) {
+            if (0 == $niveau) {
                 $qb->andWhere('o.level = :niveau')
                     ->setParameter('niveau', 'BAC');
             } else {
@@ -178,22 +176,21 @@ class OffreRepository extends ServiceEntityRepository
         }
 
         if (!empty($date)) {
-            $formattedDate = new DateTime($date);
+            $formattedDate = new \DateTime($date);
 
-            if ($dateFiltre == 1) {
+            if (1 == $dateFiltre) {
                 $qb->andWhere('o.jourDeb < :date')
                     ->setParameter('date', $formattedDate);
-            } elseif ($dateFiltre == 2) {
+            } elseif (2 == $dateFiltre) {
                 $qb->andWhere('o.jourDeb > :date')
                     ->setParameter('date', $formattedDate);
-            }
-            else{
+            } else {
                 $qb->andWhere('o.jourDeb = :date')
                     ->setParameter('date', $formattedDate);
             }
         }
 
-        $qb -> addOrderBy('o.nomOffre');
+        $qb->addOrderBy('o.nomOffre');
 
         return $qb->getQuery()->getResult();
     }
@@ -201,22 +198,22 @@ class OffreRepository extends ServiceEntityRepository
     /**
      * Recherche une offre par son identifiant.
      *
-     * @param int $id L'identifiant de l'offre.
+     * @param int $id L'identifiant de l'offre
      *
-     * @return Offre L'objet Offre correspondant à l'identifiant donné, ou null si non trouvé.
+     * @return offre L'objet Offre correspondant à l'identifiant donné, ou null si non trouvé
      *
      * @throws NonUniqueResultException
      */
     public function findById(int $id): Offre
     {
         $qb = $this->createQueryBuilder('o')
-            ->select('o', 'entreprise', 'Type','inscrires')
+            ->select('o', 'entreprise', 'Type', 'inscrires')
             ->leftJoin('o.entreprise', 'entreprise')
             ->leftJoin('o.inscrires', 'inscrires')
             ->leftJoin('o.Type', 'Type')
             ->where('o.id = :id')
             ->orderBy('o.jourDeb', 'ASC')
-            ->setParameter('id',$id);
+            ->setParameter('id', $id);
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -224,9 +221,9 @@ class OffreRepository extends ServiceEntityRepository
     /**
      * Obtient le nombre d'inscriptions acceptées pour un ensemble d'offres.
      *
-     * @param array $offres Un tableau d'objets Offre.
+     * @param array $offres un tableau d'objets Offre
      *
-     * @return array Un tableau associatif avec les identifiants d'offres comme clés et le nombre d'inscriptions acceptées comme valeurs.
+     * @return array un tableau associatif avec les identifiants d'offres comme clés et le nombre d'inscriptions acceptées comme valeurs
      */
     public function getNbInscriptionsAccepter(array $offres): array
     {
@@ -243,12 +240,12 @@ class OffreRepository extends ServiceEntityRepository
 
         $result = [];
 
-        for($i = 0; $i<count($offres);$i++) {
+        for ($i = 0; $i < count($offres); ++$i) {
             $result[$i] = 0;
         }
 
         foreach ($queryResult as $row) {
-            $result[$row['offre_id']] = (int)$row['nbInscriptionsAccepter'];
+            $result[$row['offre_id']] = (int) $row['nbInscriptionsAccepter'];
         }
 
         return $result;

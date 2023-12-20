@@ -22,29 +22,29 @@ class UserType extends AbstractType
     /**
      * Construit le formulaire avec les champs nécessaires.
      *
-     * @param FormBuilderInterface $builder Le constructeur de formulaire.
-     * @param array                $options Les options du formulaire.
+     * @param FormBuilderInterface $builder le constructeur de formulaire
+     * @param array                $options les options du formulaire
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('firstName',null, [
-                'label' => 'Nom'
+            ->add('firstName', null, [
+                'label' => 'Nom',
             ])
-            ->add('lastName',null, [
-                'label' => 'Prénom'
+            ->add('lastName', null, [
+                'label' => 'Prénom',
             ])
-            ->add('phone',TelType::class, [
-                'label' => 'Numéro de Téléphone'
+            ->add('phone', TelType::class, [
+                'label' => 'Numéro de Téléphone',
             ])
-            ->add('dateNais',BirthdayType::class, [
-                'label' => 'Date de Naissance'
+            ->add('dateNais', BirthdayType::class, [
+                'label' => 'Date de Naissance',
             ])
-            ->add('email',EmailType::class, [
-                'label' => 'Adresse Email'
+            ->add('email', EmailType::class, [
+                'label' => 'Adresse Email',
             ])
-            ->add('password',PasswordType::class, [
-                'label' => 'Mot de Passe'
+            ->add('password', PasswordType::class, [
+                'label' => 'Mot de Passe',
             ])
             ->add('cv', FileType::class, [
                 'label' => 'cv (PDF)',
@@ -58,7 +58,7 @@ class UserType extends AbstractType
                             'application/x-pdf',
                         ],
                         'mimeTypesMessage' => 'Veuillez uploader un pdf valide',
-                    ])
+                    ]),
                 ],
             ])
             ->add('lettreMotiv', FileType::class, [
@@ -73,11 +73,11 @@ class UserType extends AbstractType
                             'application/x-pdf',
                         ],
                         'mimeTypesMessage' => 'Veuillez uploader un pdf valide',
-                    ])
+                    ]),
                 ],
             ])
             ->add('save', SubmitType::class, [
-                'label' => 'Sauvegarder'
+                'label' => 'Sauvegarder',
             ])
         ;
     }
@@ -85,7 +85,7 @@ class UserType extends AbstractType
     /**
      * Configure les options du formulaire.
      *
-     * @param OptionsResolver $resolver Le résolveur d'options.
+     * @param OptionsResolver $resolver le résolveur d'options
      */
     public function configureOptions(OptionsResolver $resolver): void
     {

@@ -1,0 +1,16 @@
+actor: ControllerTester
+suite_namespace: App\Tests\Controller
+modules:
+    # enable helpers as array
+    enabled:
+        - Symfony:
+              app_path: 'src'
+              environment: 'test'
+        - Asserts:
+
+        - Doctrine2:
+            depends: Symfony
+            cleanup: true
+
+        - \App\Tests\Support\Helper\EntityManagerReset:
+            depends: Symfony

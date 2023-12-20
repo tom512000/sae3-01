@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -31,7 +30,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private int $status;
 
-    #[ORM\Column(type: 'date',length: 10)]
+    #[ORM\Column(type: 'date', length: 10)]
     private \DateTimeInterface $dateNais;
 
     #[ORM\Column(length: 180, unique: true)]
@@ -62,8 +61,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Obtient l'ID de l'utilisateur.
-     *
-     * @return int|null
      */
     public function getId(): ?int
     {
@@ -72,8 +69,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Obtient l'adresse email de l'utilisateur.
-     *
-     * @return string|null
      */
     public function getEmail(): ?string
     {
@@ -82,8 +77,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Définit l'adresse email de l'utilisateur.
-     *
-     * @param string $email
      *
      * @return $this
      */
@@ -96,18 +89,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Obtient le prénom de l'utilisateur.
-     *
-     * @return string|null
      */
-    public  function getFirstName(): ?string
+    public function getFirstName(): ?string
     {
         return $this->firstName;
     }
 
     /**
      * Définit le prénom de l'utilisateur.
-     *
-     * @param string|null $firstName
      */
     public function setFirstName(?string $firstName): void
     {
@@ -116,8 +105,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Obtient le nom de famille de l'utilisateur.
-     *
-     * @return string
      */
     public function getLastName(): string
     {
@@ -126,8 +113,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Définit le nom de famille de l'utilisateur.
-     *
-     * @param string $lastName
      */
     public function setLastName(string $lastName): void
     {
@@ -136,8 +121,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Obtient le numéro de téléphone de l'utilisateur.
-     *
-     * @return string|null
      */
     public function getPhone(): ?string
     {
@@ -146,8 +129,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Définit le numéro de téléphone de l'utilisateur.
-     *
-     * @param string $phone
      */
     public function setPhone(string $phone): void
     {
@@ -156,8 +137,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Obtient le statut de l'utilisateur.
-     *
-     * @return int
      */
     public function getStatus(): int
     {
@@ -166,8 +145,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Définit le statut de l'utilisateur.
-     *
-     * @param int $status
      */
     public function setStatus(int $status): void
     {
@@ -176,18 +153,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Obtient la date de naissance de l'utilisateur.
-     *
-     * @return DateTimeInterface
      */
-    public function getDateNais(): DateTimeInterface
+    public function getDateNais(): \DateTimeInterface
     {
         return $this->dateNais;
     }
 
     /**
      * Obtient la date de naissance de l'utilisateur sous forme de chaîne formatée.
-     *
-     * @return string
      */
     public function getDateNaisString(): string
     {
@@ -196,10 +169,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Définit la date de naissance de l'utilisateur.
-     *
-     * @param DateTimeInterface $dateNais
      */
-    public function setDateNais(DateTimeInterface $dateNais): void
+    public function setDateNais(\DateTimeInterface $dateNais): void
     {
         $this->dateNais = $dateNais;
     }
@@ -208,8 +179,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Obtient un identifiant visuel représentant cet utilisateur.
      *
      * @see UserInterface
-     *
-     * @return string
      */
     public function getUserIdentifier(): string
     {
@@ -220,8 +189,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Obtient les rôles de l'utilisateur.
      *
      * @see UserInterface
-     *
-     * @return array
      */
     public function getRoles(): array
     {
@@ -233,8 +200,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Définit les rôles de l'utilisateur.
-     *
-     * @param array $roles
      *
      * @return $this
      */
@@ -249,8 +214,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Obtient le mot de passe de l'utilisateur.
      *
      * @see PasswordAuthenticatedUserInterface
-     *
-     * @return string
      */
     public function getPassword(): string
     {
@@ -259,8 +222,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Définit le mot de passe de l'utilisateur.
-     *
-     * @param string $password
      *
      * @return $this
      */
@@ -273,8 +234,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Obtient la lettre de motivation de l'utilisateur.
-     *
-     * @return string|null
      */
     public function getLettreMotiv(): ?string
     {
@@ -283,8 +242,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Définit la lettre de motivation de l'utilisateur.
-     *
-     * @param string|null $lettreMotiv
      *
      * @return $this
      */
@@ -297,8 +254,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Obtient le chemin vers le fichier du CV de l'utilisateur.
-     *
-     * @return string|null
      */
     public function getCv(): ?string
     {
@@ -307,8 +262,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Définit le chemin vers le fichier du CV de l'utilisateur.
-     *
-     * @param string|null $cv
      *
      * @return $this
      */
@@ -343,8 +296,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Ajoute une inscription à la collection des inscriptions de l'utilisateur.
      *
-     * @param Inscrire $inscrire
-     *
      * @return $this
      */
     public function addInscrire(Inscrire $inscrire): static
@@ -359,8 +310,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Supprime une inscription de la collection des inscriptions de l'utilisateur.
-     *
-     * @param Inscrire $inscrire
      *
      * @return $this
      */

@@ -4,9 +4,8 @@ namespace App\DataFixtures;
 
 use App\Factory\SkillDemanderFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-
+use Doctrine\Persistence\ObjectManager;
 
 class SkillDemanderFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -29,7 +28,7 @@ class SkillDemanderFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             OffreFixtures::class,
-            SkillFixtures::class
+            SkillFixtures::class,
         ];
     }
 }

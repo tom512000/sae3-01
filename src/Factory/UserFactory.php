@@ -22,7 +22,7 @@ final class UserFactory extends ModelFactory
     /**
      * Définit les valeurs par défaut lors de la création d'un User.
      *
-     * @return array Tableau des valeurs par défaut.
+     * @return array tableau des valeurs par défaut
      */
     protected function getDefaults(): array
     {
@@ -41,12 +41,12 @@ final class UserFactory extends ModelFactory
     /**
      * Méthode d'initialisation de la factory.
      *
-     * @return UserFactory Instance de la factory.
+     * @return UserFactory instance de la factory
      */
     protected function initialize(): self
     {
         return $this
-            ->afterInstantiate(function(User $user) {
+            ->afterInstantiate(function (User $user) {
                 $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPassword()));
             })
         ;
@@ -55,7 +55,7 @@ final class UserFactory extends ModelFactory
     /**
      * Retourne la classe de l'entité gérée par la factory.
      *
-     * @return string Nom de la classe User.
+     * @return string nom de la classe User
      */
     protected static function getClass(): string
     {

@@ -19,7 +19,7 @@ class EntrepriseRepository extends ServiceEntityRepository
     /**
      * Méthode du constructeur.
      *
-     * @param ManagerRegistry $registry Le service ManagerRegistry.
+     * @param ManagerRegistry $registry le service ManagerRegistry
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -29,9 +29,9 @@ class EntrepriseRepository extends ServiceEntityRepository
     /**
      * Recherche des entreprises en fonction d'un texte de recherche.
      *
-     * @param string $searchText Le texte à rechercher dans les noms d'entreprise.
+     * @param string $searchText le texte à rechercher dans les noms d'entreprise
      *
-     * @return Entreprise[] Un tableau d'objets Entreprise correspondant aux critères de recherche.
+     * @return Entreprise[] un tableau d'objets Entreprise correspondant aux critères de recherche
      */
     public function search(string $searchText = ''): array
     {
@@ -50,12 +50,13 @@ class EntrepriseRepository extends ServiceEntityRepository
     /**
      * Récupérer toutes les entreprises.
      *
-     * @return Entreprise[] Un tableau de tous les objets Entreprise.
+     * @return Entreprise[] un tableau de tous les objets Entreprise
      */
     public function findEntreprises(): array
     {
         $qb = $this->createQueryBuilder('e')
             ->orderBy('e.nomEnt', 'ASC');
+
         return $qb->getQuery()->getResult();
     }
 }
