@@ -1,15 +1,16 @@
 <?php
 
 
-namespace App\Tests\Controller\Offre;
+namespace App\Tests\Controller\Home;
 
 use App\Factory\EntrepriseFactory;
 use App\Factory\OffreFactory;
 use App\Factory\TypeFactory;
 use App\Tests\Support\ControllerTester;
+
 class IndexCest
 {
-    public function _before(ControllerTester $I)
+    public function _before(ControllerTester $I): void
     {
         EntrepriseFactory::createMany(10);
         TypeFactory::createOne([
@@ -19,15 +20,19 @@ class IndexCest
             'libelle' => 'ALTERNANCE',
         ]);
         OffreFactory::createMany(20);
+
     }
 
     // tests
-    public function testOffrePage(ControllerTester $I): void
+    public function testHomePage(ControllerTester $I): void
     {
-        $I->amOnPage('/offre');
+        $I->amOnPage('/home');
         $I->seeResponseCodeIs(200);
-        $I->see('Offres', 'title');
-        $I->see('LISTE DES OFFRES', '.titre_offre h1');
+        $I->see('Accueil', 'title');
+        $I->see('ACCUEIL', '.menu_bloc h1');
+        $I->seeNumberOfElements('.menu_bloc h3 a', 4);
+        $I->see('Offres récentes', '.titre_home h1');
+        $I->seeNumberOfElements('.bloc_offre', 10);
 
     }
 }
