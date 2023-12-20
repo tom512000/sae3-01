@@ -47,9 +47,9 @@ class Entreprise
     /**
      * Définit le nom de l'entreprise.
      *
-     * @param string $nomEnt Le nom de l'entreprise.
+     * @param string $nomEnt le nom de l'entreprise
      *
-     * @return Entreprise L'instance actuelle de l'entreprise.
+     * @return entreprise L'instance actuelle de l'entreprise
      */
     public function setNomEnt(string $nomEnt): static
     {
@@ -69,9 +69,9 @@ class Entreprise
     /**
      * Définit l'adresse de l'entreprise.
      *
-     * @param string $adresse L'adresse de l'entreprise.
+     * @param string $adresse L'adresse de l'entreprise
      *
-     * @return Entreprise L'instance actuelle de l'entreprise.
+     * @return entreprise L'instance actuelle de l'entreprise
      */
     public function setAdresse(string $adresse): static
     {
@@ -91,9 +91,9 @@ class Entreprise
     /**
      * Définit le site web de l'entreprise.
      *
-     * @param string $siteWeb Le site web de l'entreprise.
+     * @param string $siteWeb le site web de l'entreprise
      *
-     * @return Entreprise L'instance actuelle de l'entreprise.
+     * @return entreprise L'instance actuelle de l'entreprise
      */
     public function setSiteWeb(string $siteWeb): static
     {
@@ -113,9 +113,9 @@ class Entreprise
     /**
      * Définit l'adresse e-mail de l'entreprise.
      *
-     * @param string $mail L'adresse e-mail de l'entreprise.
+     * @param string $mail L'adresse e-mail de l'entreprise
      *
-     * @return Entreprise L'instance actuelle de l'entreprise.
+     * @return entreprise L'instance actuelle de l'entreprise
      */
     public function setMail(string $mail): static
     {
@@ -135,13 +135,13 @@ class Entreprise
     /**
      * Définit le chemin du logo de l'entreprise.
      *
-     * @param string $logo Le chemin du logo de l'entreprise.
+     * @param string $logo le chemin du logo de l'entreprise
      *
-     * @return Entreprise L'instance actuelle de l'entreprise.
+     * @return entreprise L'instance actuelle de l'entreprise
      */
     public function setLogo(string $logo): static
     {
-        $this->logo=$logo;
+        $this->logo = $logo;
 
         return $this;
     }

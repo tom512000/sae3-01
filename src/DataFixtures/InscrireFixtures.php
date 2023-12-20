@@ -4,8 +4,8 @@ namespace App\DataFixtures;
 
 use App\Factory\InscrireFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Persistence\ObjectManager;
 
 class InscrireFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -28,7 +28,7 @@ class InscrireFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             UserFixtures::class,
-            OffreFixtures::class
+            OffreFixtures::class,
         ];
     }
 }

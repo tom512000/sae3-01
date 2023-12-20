@@ -19,7 +19,7 @@ class TypeRepository extends ServiceEntityRepository
     /**
      * Constructeur de la classe.
      *
-     * @param ManagerRegistry $registry Le service ManagerRegistry.
+     * @param ManagerRegistry $registry le service ManagerRegistry
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -29,7 +29,7 @@ class TypeRepository extends ServiceEntityRepository
     /**
      * Recherche les identifiants de tous les types.
      *
-     * @return Type[] Un tableau d'objets Type ordonnés par libellé.
+     * @return Type[] un tableau d'objets Type ordonnés par libellé
      */
     public function findTypesIds(): array
     {

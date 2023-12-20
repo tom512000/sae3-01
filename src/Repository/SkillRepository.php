@@ -19,7 +19,7 @@ class SkillRepository extends ServiceEntityRepository
     /**
      * Constructeur de la classe.
      *
-     * @param ManagerRegistry $registry Le service ManagerRegistry.
+     * @param ManagerRegistry $registry le service ManagerRegistry
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -29,7 +29,7 @@ class SkillRepository extends ServiceEntityRepository
     /**
      * Recherche les identifiants de toutes les compétences.
      *
-     * @return Skill[] Un tableau d'objets Skill ordonnés par libellé.
+     * @return Skill[] un tableau d'objets Skill ordonnés par libellé
      */
     public function findSkillsIds()
     {

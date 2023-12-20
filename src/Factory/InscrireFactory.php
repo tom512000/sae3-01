@@ -13,32 +13,29 @@ use Zenstruck\Foundry\RepositoryProxy;
 /**
  * @extends ModelFactory<Inscrire>
  *
- * @method        Inscrire|Proxy create(array|callable $attributes = [])
- * @method static Inscrire|Proxy createOne(array $attributes = [])
- * @method static Inscrire|Proxy find(object|array|mixed $criteria)
- * @method static Inscrire|Proxy findOrCreate(array $attributes)
- * @method static Inscrire|Proxy first(string $sortedField = 'id')
- * @method static Inscrire|Proxy last(string $sortedField = 'id')
- * @method static Inscrire|Proxy random(array $attributes = [])
- * @method static Inscrire|Proxy randomOrCreate(array $attributes = [])
+ * @method        Inscrire|Proxy                     create(array|callable $attributes = [])
+ * @method static Inscrire|Proxy                     createOne(array $attributes = [])
+ * @method static Inscrire|Proxy                     find(object|array|mixed $criteria)
+ * @method static Inscrire|Proxy                     findOrCreate(array $attributes)
+ * @method static Inscrire|Proxy                     first(string $sortedField = 'id')
+ * @method static Inscrire|Proxy                     last(string $sortedField = 'id')
+ * @method static Inscrire|Proxy                     random(array $attributes = [])
+ * @method static Inscrire|Proxy                     randomOrCreate(array $attributes = [])
  * @method static InscrireRepository|RepositoryProxy repository()
- * @method static Inscrire[]|Proxy[] all()
- * @method static Inscrire[]|Proxy[] createMany(int $number, array|callable $attributes = [])
- * @method static Inscrire[]|Proxy[] createSequence(iterable|callable $sequence)
- * @method static Inscrire[]|Proxy[] findBy(array $attributes)
- * @method static Inscrire[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
- * @method static Inscrire[]|Proxy[] randomSet(int $number, array $attributes = [])
+ * @method static Inscrire[]|Proxy[]                 all()
+ * @method static Inscrire[]|Proxy[]                 createMany(int $number, array|callable $attributes = [])
+ * @method static Inscrire[]|Proxy[]                 createSequence(iterable|callable $sequence)
+ * @method static Inscrire[]|Proxy[]                 findBy(array $attributes)
+ * @method static Inscrire[]|Proxy[]                 randomRange(int $min, int $max, array $attributes = [])
+ * @method static Inscrire[]|Proxy[]                 randomSet(int $number, array $attributes = [])
  */
 final class InscrireFactory extends ModelFactory
 {
-    private OffreRepository  $offreRepository;
-    private userRepository  $userRepository;
+    private OffreRepository $offreRepository;
+    private userRepository $userRepository;
 
     /**
      * Constructeur de la factory.
-     *
-     * @param OffreRepository $offreRepository
-     * @param UserRepository $userRepository
      */
     public function __construct(OffreRepository $offreRepository, userRepository $userRepository)
     {
@@ -50,7 +47,7 @@ final class InscrireFactory extends ModelFactory
     /**
      * Définit les valeurs par défaut lors de la création d'une inscription.
      *
-     * @return array Tableau des valeurs par défaut.
+     * @return array tableau des valeurs par défaut
      */
     protected function getDefaults(): array
     {
@@ -70,7 +67,7 @@ final class InscrireFactory extends ModelFactory
     /**
      * Méthode d'initialisation de la factory.
      *
-     * @return InscrireFactory Instance de la factory.
+     * @return InscrireFactory instance de la factory
      */
     protected function initialize(): self
     {
@@ -80,7 +77,7 @@ final class InscrireFactory extends ModelFactory
     /**
      * Retourne la classe de l'entité gérée par la factory.
      *
-     * @return string Nom de la classe Inscrire.
+     * @return string nom de la classe Inscrire
      */
     protected static function getClass(): string
     {
@@ -90,10 +87,10 @@ final class InscrireFactory extends ModelFactory
     /**
      * Génère une combinaison unique d'offre et d'utilisateur.
      *
-     * @param array $offres Liste des identifiants d'offres existantes.
-     * @param array $users Liste des identifiants d'utilisateurs existants.
+     * @param array $offres liste des identifiants d'offres existantes
+     * @param array $users  liste des identifiants d'utilisateurs existants
      *
-     * @return array Tableau associatif contenant une offre et un utilisateur.
+     * @return array tableau associatif contenant une offre et un utilisateur
      */
     private function getUniqueCombination(array $offres, array $users): array
     {

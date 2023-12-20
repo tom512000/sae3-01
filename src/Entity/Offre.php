@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\OffreRepository;
-use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -17,8 +16,8 @@ class Offre
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(targetEntity:Entreprise::class)]
-    #[ORM\JoinColumn(name:"idEntreprise", referencedColumnName:"id")]
+    #[ORM\ManyToOne(targetEntity: Entreprise::class)]
+    #[ORM\JoinColumn(name: 'idEntreprise', referencedColumnName: 'id')]
     private ?Entreprise $entreprise = null;
 
     #[ORM\Column(length: 128)]
@@ -30,13 +29,13 @@ class Offre
     #[ORM\Column(length: 128)]
     private ?string $lieux = null;
 
-    #[ORM\Column(type:Types::DATE_MUTABLE)]
-    private ?DateTimeInterface $jourDeb = null;
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $jourDeb = null;
 
     #[ORM\Column]
     private ?int $nbPlace = null;
 
-    #[ORM\Column(length:255, nullable:true)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $descrip = null;
 
     #[ORM\OneToMany(mappedBy: 'Offre', targetEntity: Inscrire::class)]
@@ -80,9 +79,9 @@ class Offre
     /**
      * Définit l'entreprise associée à l'offre.
      *
-     * @param Entreprise|null $entreprise L'entreprise à définir.
+     * @param entreprise|null $entreprise L'entreprise à définir
      *
-     * @return Offre L'instance actuelle de l'offre.
+     * @return offre L'instance actuelle de l'offre
      */
     public function setEntreprise(?Entreprise $entreprise): static
     {
@@ -102,9 +101,9 @@ class Offre
     /**
      * Définit le nom de l'offre.
      *
-     * @param string $nomOffre Le nom de l'offre à définir.
+     * @param string $nomOffre le nom de l'offre à définir
      *
-     * @return Offre L'instance actuelle de l'offre.
+     * @return offre L'instance actuelle de l'offre
      */
     public function setNomOffre(string $nomOffre): static
     {
@@ -124,9 +123,9 @@ class Offre
     /**
      * Définit la durée de l'offre.
      *
-     * @param int $duree La durée de l'offre à définir.
+     * @param int $duree la durée de l'offre à définir
      *
-     * @return Offre L'instance actuelle de l'offre.
+     * @return offre L'instance actuelle de l'offre
      */
     public function setDuree(int $duree): static
     {
@@ -146,9 +145,9 @@ class Offre
     /**
      * Définit le lieu de l'offre.
      *
-     * @param string $lieux Le lieu de l'offre à définir.
+     * @param string $lieux le lieu de l'offre à définir
      *
-     * @return Offre L'instance actuelle de l'offre.
+     * @return offre L'instance actuelle de l'offre
      */
     public function setLieux(string $lieux): static
     {
@@ -160,7 +159,7 @@ class Offre
     /**
      * Obtient la date de début de l'offre.
      */
-    public function getJourDeb(): ?DateTimeInterface
+    public function getJourDeb(): ?\DateTimeInterface
     {
         return $this->jourDeb;
     }
@@ -176,11 +175,11 @@ class Offre
     /**
      * Définit la date de début de l'offre.
      *
-     * @param DateTimeInterface|null $jourDeb La date de début à définir.
+     * @param \DateTimeInterface|null $jourDeb la date de début à définir
      *
-     * @return Offre L'instance actuelle de l'offre.
+     * @return offre L'instance actuelle de l'offre
      */
-    public function setJourDeb(DateTimeInterface $jourDeb): static
+    public function setJourDeb(\DateTimeInterface $jourDeb): static
     {
         $this->jourDeb = $jourDeb;
 
@@ -198,9 +197,9 @@ class Offre
     /**
      * Définit le nombre de places de l'offre.
      *
-     * @param int $nbPlace Le nombre de places à définir.
+     * @param int $nbPlace le nombre de places à définir
      *
-     * @return Offre L'instance actuelle de l'offre.
+     * @return offre L'instance actuelle de l'offre
      */
     public function setNbPlace(int $nbPlace): static
     {
@@ -220,9 +219,9 @@ class Offre
     /**
      * Définit la description de l'offre.
      *
-     * @param string|null $descrip La description à définir.
+     * @param string|null $descrip la description à définir
      *
-     * @return Offre L'instance actuelle de l'offre.
+     * @return offre L'instance actuelle de l'offre
      */
     public function setDescrip(?string $descrip): static
     {
@@ -244,9 +243,9 @@ class Offre
     /**
      * Ajoute une inscription à la collection d'inscriptions associée à l'offre.
      *
-     * @param Inscrire $inscrire L'inscription à ajouter.
+     * @param inscrire $inscrire L'inscription à ajouter
      *
-     * @return Offre L'instance actuelle de l'offre.
+     * @return offre L'instance actuelle de l'offre
      */
     public function addInscrire(Inscrire $inscrire): static
     {
@@ -261,9 +260,9 @@ class Offre
     /**
      * Supprime une inscription de la collection d'inscriptions associée à l'offre.
      *
-     * @param Inscrire $inscrire L'inscription à supprimer.
+     * @param inscrire $inscrire L'inscription à supprimer
      *
-     * @return Offre L'instance actuelle de l'offre.
+     * @return offre L'instance actuelle de l'offre
      */
     public function removeInscrire(Inscrire $inscrire): static
     {
@@ -287,9 +286,9 @@ class Offre
     /**
      * Définit le type associé à l'offre.
      *
-     * @param Type|null $Type Le type à définir.
+     * @param Type|null $Type le type à définir
      *
-     * @return Offre L'instance actuelle de l'offre.
+     * @return offre L'instance actuelle de l'offre
      */
     public function setType(?Type $Type): static
     {
@@ -309,9 +308,9 @@ class Offre
     /**
      * Définit le niveau de l'offre.
      *
-     * @param string|null $level Le niveau à définir.
+     * @param string|null $level le niveau à définir
      *
-     * @return Offre L'instance actuelle de l'offre.
+     * @return offre L'instance actuelle de l'offre
      */
     public function setLevel(?string $level): static
     {
@@ -333,9 +332,9 @@ class Offre
     /**
      * Ajoute une demande de compétence à la collection associée à l'offre.
      *
-     * @param SkillDemander $skillDemander La demande de compétence à ajouter.
+     * @param SkillDemander $skillDemander la demande de compétence à ajouter
      *
-     * @return Offre L'instance actuelle de l'offre.
+     * @return offre L'instance actuelle de l'offre
      */
     public function addSkillDemander(SkillDemander $skillDemander): static
     {
@@ -350,9 +349,9 @@ class Offre
     /**
      * Supprime une demande de compétence de la collection associée à l'offre.
      *
-     * @param SkillDemander $skillDemander La demande de compétence à supprimer.
+     * @param SkillDemander $skillDemander la demande de compétence à supprimer
      *
-     * @return Offre L'instance actuelle de l'offre.
+     * @return offre L'instance actuelle de l'offre
      */
     public function removeSkillDemander(SkillDemander $skillDemander): static
     {

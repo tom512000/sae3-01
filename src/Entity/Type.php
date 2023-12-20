@@ -31,8 +31,6 @@ class Type
 
     /**
      * Obtient l'ID du Type.
-     *
-     * @return int|null
      */
     public function getId(): ?int
     {
@@ -41,8 +39,6 @@ class Type
 
     /**
      * Obtient le libellé du Type.
-     *
-     * @return string|null
      */
     public function getLibelle(): ?string
     {
@@ -51,8 +47,6 @@ class Type
 
     /**
      * Définit le libellé du Type.
-     *
-     * @param string $libelle
      *
      * @return $this
      */
@@ -76,8 +70,6 @@ class Type
     /**
      * Ajoute une relation Offre à ce Type.
      *
-     * @param Offre $offre
-     *
      * @return $this
      */
     public function addOffre(Offre $offre): static
@@ -92,8 +84,6 @@ class Type
 
     /**
      * Supprime une relation Offre de ce Type.
-     *
-     * @param Offre $offre
      *
      * @return $this
      */

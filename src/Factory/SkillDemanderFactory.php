@@ -13,32 +13,29 @@ use Zenstruck\Foundry\RepositoryProxy;
 /**
  * @extends ModelFactory<SkillDemander>
  *
- * @method        SkillDemander|Proxy create(array|callable $attributes = [])
- * @method static SkillDemander|Proxy createOne(array $attributes = [])
- * @method static SkillDemander|Proxy find(object|array|mixed $criteria)
- * @method static SkillDemander|Proxy findOrCreate(array $attributes)
- * @method static SkillDemander|Proxy first(string $sortedField = 'id')
- * @method static SkillDemander|Proxy last(string $sortedField = 'id')
- * @method static SkillDemander|Proxy random(array $attributes = [])
- * @method static SkillDemander|Proxy randomOrCreate(array $attributes = [])
+ * @method        SkillDemander|Proxy                     create(array|callable $attributes = [])
+ * @method static SkillDemander|Proxy                     createOne(array $attributes = [])
+ * @method static SkillDemander|Proxy                     find(object|array|mixed $criteria)
+ * @method static SkillDemander|Proxy                     findOrCreate(array $attributes)
+ * @method static SkillDemander|Proxy                     first(string $sortedField = 'id')
+ * @method static SkillDemander|Proxy                     last(string $sortedField = 'id')
+ * @method static SkillDemander|Proxy                     random(array $attributes = [])
+ * @method static SkillDemander|Proxy                     randomOrCreate(array $attributes = [])
  * @method static SkillDemanderRepository|RepositoryProxy repository()
- * @method static SkillDemander[]|Proxy[] all()
- * @method static SkillDemander[]|Proxy[] createMany(int $number, array|callable $attributes = [])
- * @method static SkillDemander[]|Proxy[] createSequence(iterable|callable $sequence)
- * @method static SkillDemander[]|Proxy[] findBy(array $attributes)
- * @method static SkillDemander[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
- * @method static SkillDemander[]|Proxy[] randomSet(int $number, array $attributes = [])
+ * @method static SkillDemander[]|Proxy[]                 all()
+ * @method static SkillDemander[]|Proxy[]                 createMany(int $number, array|callable $attributes = [])
+ * @method static SkillDemander[]|Proxy[]                 createSequence(iterable|callable $sequence)
+ * @method static SkillDemander[]|Proxy[]                 findBy(array $attributes)
+ * @method static SkillDemander[]|Proxy[]                 randomRange(int $min, int $max, array $attributes = [])
+ * @method static SkillDemander[]|Proxy[]                 randomSet(int $number, array $attributes = [])
  */
 final class SkillDemanderFactory extends ModelFactory
 {
-    private OffreRepository  $offreRepository;
+    private OffreRepository $offreRepository;
     private SkillRepository $skillRepository;
 
     /**
      * Constructeur de la factory.
-     *
-     * @param OffreRepository $offreRepository
-     * @param SkillRepository $skillRepository
      */
     public function __construct(OffreRepository $offreRepository, skillRepository $skillRepository)
     {
@@ -50,7 +47,7 @@ final class SkillDemanderFactory extends ModelFactory
     /**
      * Définit les valeurs par défaut lors de la création d'un SkillDemander.
      *
-     * @return array Tableau des valeurs par défaut.
+     * @return array tableau des valeurs par défaut
      */
     protected function getDefaults(): array
     {
@@ -68,7 +65,7 @@ final class SkillDemanderFactory extends ModelFactory
     /**
      * Méthode d'initialisation de la factory.
      *
-     * @return SkillDemanderFactory Instance de la factory.
+     * @return SkillDemanderFactory instance de la factory
      */
     protected function initialize(): self
     {
@@ -78,7 +75,7 @@ final class SkillDemanderFactory extends ModelFactory
     /**
      * Retourne la classe de l'entité gérée par la factory.
      *
-     * @return string Nom de la classe SkillDemander.
+     * @return string nom de la classe SkillDemander
      */
     protected static function getClass(): string
     {
@@ -88,10 +85,10 @@ final class SkillDemanderFactory extends ModelFactory
     /**
      * Génère une combinaison unique d'offre et de skill.
      *
-     * @param array $offres Tableau des IDs des offres existantes.
-     * @param array $skills Tableau des IDs des skills existants.
+     * @param array $offres tableau des IDs des offres existantes
+     * @param array $skills tableau des IDs des skills existants
      *
-     * @return array Tableau contenant une combinaison unique d'offre et de skill.
+     * @return array tableau contenant une combinaison unique d'offre et de skill
      */
     private function getUniqueCombination(array $offres, array $skills): array
     {

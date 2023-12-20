@@ -19,7 +19,7 @@ class SkillDemanderRepository extends ServiceEntityRepository
     /**
      * Constructeur de la classe.
      *
-     * @param ManagerRegistry $registry Le service ManagerRegistry.
+     * @param ManagerRegistry $registry le service ManagerRegistry
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -29,9 +29,9 @@ class SkillDemanderRepository extends ServiceEntityRepository
     /**
      * Obtient les libellés des compétences demandées pour une offre spécifique.
      *
-     * @param int $offreId L'identifiant de l'offre.
+     * @param int $offreId L'identifiant de l'offre
      *
-     * @return array Un tableau contenant les libellés des compétences demandées pour l'offre donnée.
+     * @return array un tableau contenant les libellés des compétences demandées pour l'offre donnée
      */
     public function getSkillLibellesByOffreId(int $offreId): array
     {

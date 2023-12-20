@@ -1,4 +1,13 @@
 {
+    "codeception/codeception": {
+        "version": "5.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "2.3",
+            "ref": "89689e24507d8cb2c4a7937ece549db3836b608c"
+        }
+    },
     "doctrine/doctrine-bundle": {
         "version": "2.11",
         "recipe": {

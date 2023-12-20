@@ -4,11 +4,12 @@
     <option name="configurations">
       <list>
         <Configuration>
-          <option name="path" value="$PROJECT_DIR$/tests" />
+          <option name="namespace" value="App\Tests" />
+          <option name="path" value="/PHP-Web/symfony-contacts/tests" />
         </Configuration>
         <Configuration>
           <option name="namespace" value="App\Tests" />
-          <option name="path" value="$PROJECT_DIR$/../../../PHP-Web/symfony-contacts/tests" />
+          <option name="path" value="$PROJECT_DIR$/tests" />
         </Configuration>
       </list>
     </option>

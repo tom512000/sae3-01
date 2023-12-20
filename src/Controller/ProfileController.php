@@ -36,21 +36,20 @@ class ProfileController extends AbstractController
      * Modifie les informations du profil de l'utilisateur.
      *
      * @param EntityManagerInterface $entityManager Le gestionnaire d'entités Doctrine
-     * @param User $user L'utilisateur actuel (@CurrentUser)
-     * @param Request $request La requête HTTP
-     * @param SluggerInterface $slugger Le service de génération de slug Symfony
+     * @param User                   $user          L'utilisateur actuel (@CurrentUser)
+     * @param Request                $request       La requête HTTP
+     * @param SluggerInterface       $slugger       Le service de génération de slug Symfony
      *
      * @return Response La réponse HTTP de la page de modification de profil
      */
     #[IsGranted('ROLE_USER')]
     #[Route('/profil/modif', name: 'app_profile_modif')]
-    public function modif(EntityManagerInterface $entityManager,#[CurrentUser] User $user,Request $request, SluggerInterface $slugger): Response
+    public function modif(EntityManagerInterface $entityManager, #[CurrentUser] User $user, Request $request, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             /** @var UploadedFile $cvFile */
             $cvFile = $form->get('cv')->getData();
             if ($cvFile) {
@@ -100,7 +99,7 @@ class ProfileController extends AbstractController
     /**
      * Crée un nouvel utilisateur avec les informations fournies.
      *
-     * @param Request $request La requête HTTP
+     * @param Request          $request La requête HTTP
      * @param SluggerInterface $slugger Le service de génération de slug Symfony
      *
      * @return Response La réponse HTTP de la page de création d'utilisateur
@@ -113,7 +112,6 @@ class ProfileController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             /** @var UploadedFile $cvFile */
             $cvFile = $form->get('cv')->getData();
             if ($cvFile) {
@@ -157,7 +155,7 @@ class ProfileController extends AbstractController
                 'dateNais' => $user->getDateNais(),
                 'phone' => $user->getPhone(),
                 'cv' => $user->getCv(),
-                'lettreMotiv' => $user->getLettreMotiv()
+                'lettreMotiv' => $user->getLettreMotiv(),
             ]);
 
             return $this->redirectToRoute('app_login');
@@ -178,8 +176,8 @@ class ProfileController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() && ($form->getClickedButton() === $form->get('Delete'))) {
-            $qb=$entityManager->createQueryBuilder()->delete('App:Inscrire','i')->where('i.User = ?1')->setParameter(1,$user);
-            $query=$qb->getQuery();
+            $qb = $entityManager->createQueryBuilder()->delete('App:Inscrire', 'i')->where('i.User = ?1')->setParameter(1, $user);
+            $query = $qb->getQuery();
             $query->execute();
             $entityManager->remove($user);
             $entityManager->flush();

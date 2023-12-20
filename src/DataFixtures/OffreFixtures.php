@@ -4,9 +4,8 @@ namespace App\DataFixtures;
 
 use App\Factory\OffreFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-
+use Doctrine\Persistence\ObjectManager;
 
 class OffreFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -28,7 +27,7 @@ class OffreFixtures extends Fixture implements DependentFixtureInterface
     public function getDependencies(): array
     {
         return [
-            EntrepriseFixtures::class
+            EntrepriseFixtures::class,
         ];
     }
 }

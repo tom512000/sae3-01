@@ -22,7 +22,7 @@ class EntrepriseController extends AbstractController
      * Constructeur du contrôleur.
      *
      * @param EntrepriseRepository $entrepriseRepository Le repository des entreprises
-     * @param OffreRepository $offreRepository Le repository des offres
+     * @param OffreRepository      $offreRepository      Le repository des offres
      */
     public function __construct(EntrepriseRepository $entrepriseRepository, OffreRepository $offreRepository)
     {
@@ -55,7 +55,7 @@ class EntrepriseController extends AbstractController
      * Affiche les détails d'une entreprise.
      *
      * @param Entreprise $Entreprises L'entreprise à afficher
-     * @param Request $request La requête HTTP
+     * @param Request    $request     La requête HTTP
      *
      * @return Response La réponse HTTP
      */
@@ -69,7 +69,7 @@ class EntrepriseController extends AbstractController
         $nbOffres = $this->offreRepository->findNbOffresByEntreprisesReturnArray([$Entreprises])[$Entreprises->getId()];
 
         return $this->render('entreprise/index.html.twig', [
-            'Entreprises'=>$Entreprises,
+            'Entreprises' => $Entreprises,
             'textRechercheEntreprise' => $textRechercheEntreprise,
             'nbOffres' => $nbOffres,
         ]);

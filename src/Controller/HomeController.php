@@ -25,9 +25,9 @@ class HomeController extends AbstractController
     /**
      * Affiche la page d'accueil.
      *
-     * @param OffreRepository $offreRepository Le repository des offres
+     * @param OffreRepository    $offreRepository    Le repository des offres
      * @param InscrireRepository $inscrireRepository Le repository des inscriptions
-     * @param Security $security Le service de sécurité Symfony
+     * @param Security           $security           Le service de sécurité Symfony
      *
      * @return Response La réponse HTTP de la page d'accueil
      */
@@ -37,9 +37,9 @@ class HomeController extends AbstractController
         $Offres = $offreRepository->findByRecent();
         $inscription = $inscrireRepository->getInscriptions($Offres, $security);
 
-        return $this->render('home/index.html.twig',[
-            'Offres'=>$Offres,
-            'inscription' => $inscription
+        return $this->render('home/index.html.twig', [
+            'Offres' => $Offres,
+            'inscription' => $inscription,
         ]);
     }
 }

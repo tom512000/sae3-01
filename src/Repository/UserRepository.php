@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 
 /**
  * @extends ServiceEntityRepository<User>
+ *
  * @implements PasswordUpgraderInterface<User>
  *
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -23,7 +24,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * Constructeur de la classe.
      *
-     * @param ManagerRegistry $registry Le service ManagerRegistry.
+     * @param ManagerRegistry $registry le service ManagerRegistry
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -47,7 +48,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * Recherche les identifiants de tous les utilisateurs.
      *
-     * @return User[] Un tableau d'objets User ordonnés par nom de famille.
+     * @return User[] un tableau d'objets User ordonnés par nom de famille
      */
     public function findUsersIds(): array
     {

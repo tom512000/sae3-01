@@ -6,7 +6,6 @@ use App\Entity\Offre;
 use App\Repository\EntrepriseRepository;
 use App\Repository\OffreRepository;
 use App\Repository\TypeRepository;
-use Transliterator;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\RepositoryProxy;
@@ -32,20 +31,17 @@ use Zenstruck\Foundry\RepositoryProxy;
  */
 final class OffreFactory extends ModelFactory
 {
-    private Transliterator $transliterator;
-    private EntrepriseRepository  $entrepriseRepository;
-    private TypeRepository  $typeRepository;
+    private \Transliterator $transliterator;
+    private EntrepriseRepository $entrepriseRepository;
+    private TypeRepository $typeRepository;
 
     /**
      * Constructeur de la factory.
-     *
-     * @param EntrepriseRepository $entrepriseRepository
-     * @param TypeRepository $typeRepository
      */
     public function __construct(EntrepriseRepository $entrepriseRepository, TypeRepository $typeRepository)
     {
         parent::__construct();
-        $this->transliterator = Transliterator::create('Any-Lower; Latin-ASCII; Lower()');
+        $this->transliterator = \Transliterator::create('Any-Lower; Latin-ASCII; Lower()');
         $this->entrepriseRepository = $entrepriseRepository;
         $this->typeRepository = $typeRepository;
     }
@@ -53,7 +49,7 @@ final class OffreFactory extends ModelFactory
     /**
      * Définit les valeurs par défaut lors de la création d'une offre.
      *
-     * @return array Tableau des valeurs par défaut.
+     * @return array tableau des valeurs par défaut
      */
     protected function getDefaults(): array
     {
@@ -61,7 +57,7 @@ final class OffreFactory extends ModelFactory
         $existingTypesIds = $this->typeRepository->findTypesIds();
         $level = self::faker()->numberBetween(0, 5);
 
-        if ($level == 0) {
+        if (0 == $level) {
             $level = 'BAC';
         } else {
             $level = 'BAC +'.$level;
@@ -83,9 +79,9 @@ final class OffreFactory extends ModelFactory
     /**
      * Normalise un nom en convertissant les caractères spéciaux.
      *
-     * @param string $name Nom à normaliser.
+     * @param string $name nom à normaliser
      *
-     * @return string Nom normalisé.
+     * @return string nom normalisé
      */
     protected function normalizeName($name): string
     {
@@ -97,7 +93,7 @@ final class OffreFactory extends ModelFactory
     /**
      * Méthode d'initialisation de la factory.
      *
-     * @return OffreFactory Instance de la factory.
+     * @return OffreFactory instance de la factory
      */
     protected function initialize(): self
     {
@@ -107,7 +103,7 @@ final class OffreFactory extends ModelFactory
     /**
      * Retourne la classe de l'entité gérée par la factory.
      *
-     * @return string Nom de la classe Offre.
+     * @return string nom de la classe Offre
      */
     protected static function getClass(): string
     {

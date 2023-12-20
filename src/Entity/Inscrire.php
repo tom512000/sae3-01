@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\InscrireRepository;
-use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -12,19 +11,19 @@ class Inscrire
 {
     #[ORM\Id]
     #[ORM\ManyToOne(inversedBy: 'inscrires')]
-    #[ORM\JoinColumn(name:"idOffre", referencedColumnName:"id")]
+    #[ORM\JoinColumn(name: 'idOffre', referencedColumnName: 'id')]
     private ?Offre $Offre = null;
 
     #[ORM\Id]
     #[ORM\ManyToOne(inversedBy: 'inscrires')]
-    #[ORM\JoinColumn(name:"idUser", referencedColumnName:"id")]
+    #[ORM\JoinColumn(name: 'idUser', referencedColumnName: 'id')]
     private ?User $User = null;
 
     #[ORM\Column]
     private ?int $Status = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?DateTimeInterface $dateDemande = null;
+    private ?\DateTimeInterface $dateDemande = null;
 
     /**
      * Obtient l'offre à laquelle l'utilisateur est inscrit.
@@ -37,9 +36,9 @@ class Inscrire
     /**
      * Définit l'offre à laquelle l'utilisateur est inscrit.
      *
-     * @param Offre|null $Offre L'offre à définir.
+     * @param offre|null $Offre L'offre à définir
      *
-     * @return Inscrire L'instance actuelle de l'inscription.
+     * @return inscrire L'instance actuelle de l'inscription
      */
     public function setOffre(?Offre $Offre): static
     {
@@ -59,9 +58,9 @@ class Inscrire
     /**
      * Définit l'utilisateur inscrit.
      *
-     * @param User|null $User L'utilisateur à définir.
+     * @param user|null $User L'utilisateur à définir
      *
-     * @return Inscrire L'instance actuelle de l'inscription.
+     * @return inscrire L'instance actuelle de l'inscription
      */
     public function setUser(?User $User): static
     {
@@ -81,9 +80,9 @@ class Inscrire
     /**
      * Définit le statut de l'inscription.
      *
-     * @param int $Status Le statut à définir.
+     * @param int $Status le statut à définir
      *
-     * @return Inscrire L'instance actuelle de l'inscription.
+     * @return inscrire L'instance actuelle de l'inscription
      */
     public function setStatus(int $Status): static
     {
@@ -95,7 +94,7 @@ class Inscrire
     /**
      * Obtient la date de la demande d'inscription.
      */
-    public function getDateDemande(): ?DateTimeInterface
+    public function getDateDemande(): ?\DateTimeInterface
     {
         return $this->dateDemande;
     }
@@ -103,11 +102,11 @@ class Inscrire
     /**
      * Définit la date de la demande d'inscription.
      *
-     * @param DateTimeInterface $dateDemande La date à définir.
+     * @param \DateTimeInterface $dateDemande la date à définir
      *
-     * @return Inscrire L'instance actuelle de l'inscription.
+     * @return inscrire L'instance actuelle de l'inscription
      */
-    public function setDateDemande(DateTimeInterface $dateDemande): static
+    public function setDateDemande(\DateTimeInterface $dateDemande): static
     {
         $this->dateDemande = $dateDemande;
 
