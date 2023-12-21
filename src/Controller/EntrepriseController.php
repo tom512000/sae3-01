@@ -62,13 +62,16 @@ class EntrepriseController extends AbstractController
     #[Route('/entreprise/{entrepriseId}', name: 'app_entreprise_show', requirements: ['entrepriseId' => '\d+'])]
     public function show(
         #[MapEntity(expr: 'repository.find(entrepriseId)')]
-        Entreprise $Entreprises,
+        ?Entreprise $Entreprises,
         Request $request): Response
     {
+        if (!$Entreprises){
+            return $this->redirectToRoute('app_entreprise_index');
+        }
         $textRechercheEntreprise = $request->query->get('textRecherche', '');
         $nbOffres = $this->offreRepository->findNbOffresByEntreprisesReturnArray([$Entreprises])[$Entreprises->getId()];
 
-        return $this->render('entreprise/index.html.twig', [
+        return $this->render('entreprise/show.html.twig', [
             'Entreprises' => $Entreprises,
             'textRechercheEntreprise' => $textRechercheEntreprise,
             'nbOffres' => $nbOffres,

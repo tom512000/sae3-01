@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block icon %}🏢{% endblock %}
+{% block title %}Entreprise{% endblock %}
+{% block background %}{{ asset('img/background.png') }}{% endblock %}
+
+{% block form %}
+    <form class="d-flex" role="search" action="{{ path('app_entreprise_index') }}" method="get">
+        <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search" name="textRecherche" value="{{ textRecherche|default }}">
+        <button class="btn btn-outline-success" type="submit">🔎</button>
+    </form>
+{% endblock %}
+
+{% block body %}
+    <div class="titre_entreprises">
+        <h1>DÉTAILS DE L'ENTREPRISE</h1>
+    </div>
+    <div class="details_entreprise">
+        <img src="{{ Entreprises.getLogo() }}" alt="Logo de {{ Entreprises.getNomEnt() }}"/>
+        <div class="details_entreprise_1">
+            <h1>{{ Entreprises.nomEnt }}</h1>
+            <p>{{ nbOffres }} annonces en ligne</p>
+        </div>
+        <div class="details_entreprise_2">
+            <h2>INFORMATIONS</h2>
+            <p>{{ Entreprises.adresse }}</p>
+            <p>{{ Entreprises.mail }}</p>
+            <p><a href="{{ Entreprises.siteWeb }}">Site de {{ Entreprises.getNomEnt() }}</a></p>
+        </div>
+        <div class="details_entreprise_3">
+            <form role="search" action="/entreprise/offre " method="get">
+                <input class="form-control" type="hidden" placeholder="Rechercher" aria-label="Search" name="entrepriseId" value="{{ Entreprises.id }}">
+                <button class="btn-offres-entreprise" type="submit">Voir toutes les offres</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
