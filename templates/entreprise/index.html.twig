@@ -12,34 +12,6 @@
 {% endblock %}
 
 {% block body %}
-
-    {# Affichage des détails d'une entreprise #}
-    {% if not Entreprises is iterable %}
-        <div class="titre_entreprises">
-            <h1>DÉTAILS DE L'ENTREPRISE</h1>
-        </div>
-        <div class="details_entreprise">
-            <img src="{{ Entreprises.getLogo() }}" alt="Logo de {{ Entreprises.getNomEnt() }}"/>
-            <div class="details_entreprise_1">
-                <h1>{{ Entreprises.nomEnt }}</h1>
-                <p>{{ nbOffres }} annonces en ligne</p>
-            </div>
-            <div class="details_entreprise_2">
-                <h2>INFORMATIONS</h2>
-                <p>{{ Entreprises.adresse }}</p>
-                <p>{{ Entreprises.mail }}</p>
-                <p><a href="{{ Entreprises.siteWeb }}">Site de {{ Entreprises.getNomEnt() }}</a></p>
-            </div>
-            <div class="details_entreprise_3">
-                <form role="search" action="/entreprise/offre " method="get">
-                    <input class="form-control" type="hidden" placeholder="Rechercher" aria-label="Search" name="entrepriseId" value="{{ Entreprises.id }}">
-                    <button class="btn-offres-entreprise" type="submit">Voir toutes les offres</button>
-                </form>
-            </div>
-        </div>
-
-    {% else %}
-
         {# Affichage de la liste de toutes les entreprises #}
         {% if Entreprises|length > 0 %}
             <div class="titre_entreprises">
@@ -69,5 +41,4 @@
             </div>
 
         {% endif %}
-    {% endif %}
 {% endblock %}

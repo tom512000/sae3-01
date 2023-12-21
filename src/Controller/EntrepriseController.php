@@ -71,7 +71,7 @@ class EntrepriseController extends AbstractController
         $textRechercheEntreprise = $request->query->get('textRecherche', '');
         $nbOffres = $this->offreRepository->findNbOffresByEntreprisesReturnArray([$Entreprises])[$Entreprises->getId()];
 
-        return $this->render('entreprise/index.html.twig', [
+        return $this->render('entreprise/show.html.twig', [
             'Entreprises' => $Entreprises,
             'textRechercheEntreprise' => $textRechercheEntreprise,
             'nbOffres' => $nbOffres,
