@@ -59,4 +59,17 @@ class ConnexionCest
         $I->seeResponseCodeIs(200);
         $I->see('ERREUR : DONNEES INVALIDES');
     }
+
+    public function testClickInscriptionUser(ControllerTester $I)
+    {
+        $I->amOnPage('/login');
+        $I->seeResponseCodeIs(200);
+
+        $I->click('.login_form .register_account a');
+
+        $expectedRoute = '/newUser';
+
+        $currentRoute = $I->grabFromCurrentUrl();
+        $I->assertEquals($expectedRoute, $currentRoute);
+    }
 }

@@ -69,8 +69,21 @@ class ShowCest
         $I->see('INFORMATIONS','.details_entreprise_2 h2');
         $I->see('3, boulevard de Morvan 47 739 Marques', '.details_entreprise_2 p');
         $I->see('begue@roussel.fr', '.details_entreprise_2 p');
+        $I->see('Site de TESTEntreprise', '.details_entreprise_2 p a');
 
+        $I->amOnPage('/entreprise/offre?entrepriseId=1');
+    }
 
+    public function testClickOffrePageEntrepriseShow(ControllerTester $I): void
+    {
+        $I->amOnPage('/entreprise/1');
+        $I->seeResponseCodeIs(200);
 
+        $I->click('.btn-offres-entreprise');
+
+        $expectedRoute = '/entreprise/offre?entrepriseId=1';
+
+        $currentRoute = $I->grabFromCurrentUrl();
+        $I->assertEquals($expectedRoute, $currentRoute);
     }
 }

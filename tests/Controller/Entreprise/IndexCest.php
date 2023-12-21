@@ -7,6 +7,7 @@ use App\Factory\EntrepriseFactory;
 use App\Factory\OffreFactory;
 use App\Factory\TypeFactory;
 use App\Factory\UserFactory;
+use App\Repository\EntrepriseRepository;
 use App\Repository\OffreRepository;
 use App\Tests\Support\ControllerTester;
 
@@ -44,9 +45,9 @@ class IndexCest
             'libelle' => 'STAGE',
         ]);
 
-        $OffreRepository = $I->grabService(OffreRepository::class);
+        $EntrepriseRepository = $I->grabService(EntrepriseRepository::class);
 
-        $Entreprise = $OffreRepository->find(1);
+        $Entreprise = $EntrepriseRepository->find(1);
 
         OffreFactory::createMany(10,[
             'entreprise' => $Entreprise

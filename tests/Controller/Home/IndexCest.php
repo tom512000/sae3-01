@@ -101,4 +101,20 @@ class IndexCest
         $currentRoute = $I->grabFromCurrentUrl();
         $I->assertEquals($expectedRoute, $currentRoute);
     }
+
+    public function testSearchPageHome(ControllerTester $I): void
+    {
+        $I->amOnPage('/home');
+
+        $I->fillField('input[name="textRecherche"]', 'AAAAAAA');
+        $I->click('🔎');
+
+        $I->seeResponseCodeIs(200);
+        $I->seeNumberOfElements('.bloc_offre', 1);
+
+        $expectedRoute = '/offre?textRecherche=AAAAAAA';
+
+        $currentRoute = $I->grabFromCurrentUrl();
+        $I->assertEquals($expectedRoute, $currentRoute);
+    }
 }

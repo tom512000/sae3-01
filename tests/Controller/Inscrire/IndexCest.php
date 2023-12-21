@@ -14,5 +14,6 @@ class IndexCest
     // tests
     public function tryToTest(ControllerTester $I)
     {
+        print_r("manque le test d'inscription et de désinscription a une offre");
     }
 }
