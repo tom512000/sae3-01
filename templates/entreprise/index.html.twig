@@ -5,7 +5,7 @@
 {% block background %}{{ asset('img/background.png') }}{% endblock %}
 
 {% block form %}
-    <form class="d-flex" role="search" action="{{ path('app_offre_OffreEntreprise') }}" method="get">
+    <form class="d-flex" role="search" action="{{ path('app_entreprise_index') }}" method="get">
         <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search" name="textRecherche" value="{{ textRecherche|default }}">
         <button class="btn btn-outline-success" type="submit">🔎</button>
     </form>

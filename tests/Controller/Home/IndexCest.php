@@ -71,6 +71,9 @@ class IndexCest
         $I->see('Offres récentes', '.titre_home h1');
         $I->seeNumberOfElements('.bloc_offre', 10);
 
+        $I->seeElement('form[role="search"]');
+        $I->seeElement('input.form-control');
+        $I->seeElement('button.btn.btn-outline-success');
     }
 
     public function testOnFirstClickOffrePageHome(ControllerTester $I): void
