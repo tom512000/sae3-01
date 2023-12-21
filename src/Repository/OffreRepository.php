@@ -204,7 +204,7 @@ class OffreRepository extends ServiceEntityRepository
      *
      * @throws NonUniqueResultException
      */
-    public function findById(int $id): Offre
+    public function findById(int $id): ?Offre
     {
         $qb = $this->createQueryBuilder('o')
             ->select('o', 'entreprise', 'Type', 'inscrires')

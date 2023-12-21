@@ -3,16 +3,18 @@
 
 namespace App\Tests\Controller\Offre;
 
+use App\Entity\Offre;
 use App\Factory\EntrepriseFactory;
 use App\Factory\OffreFactory;
 use App\Factory\TypeFactory;
 use App\Factory\UserFactory;
+use App\Repository\TypeRepository;
 use App\Tests\Support\ControllerTester;
 class IndexCest
 {
     public function _before(ControllerTester $I)
     {
-        EntrepriseFactory::createMany(10);
+        EntrepriseFactory::createMany(1);
 
         UserFactory::createOne([
             'lastName' => 'test',
@@ -30,31 +32,40 @@ class IndexCest
             'password' => 'test',
         ]);
 
-        $I->seeResponseCodeIsSuccessful();
-
-
-        OffreFactory::createMany( 5,[
-            'level' => '1',
-            'Type' => TypeFactory::createOne([
-                'libelle' => 'ALTERNANCE',
-            ])
+        TypeFactory::createOne([
+            'libelle' => 'ALTERNANCE',
         ]);
 
+        TypeFactory::createOne([
+            'libelle' => 'STAGE',
+        ]);
+        $typeRepository = $I->grabService(TypeRepository::class);
 
-        OffreFactory::createMany( 5,[
-            'nomOffre'=> 'TEST',
-            'level' => '2',
-            'Type' => TypeFactory::createOne([
-                'libelle' => 'STAGE',
-            ])
+        $ALTERNANCE = $typeRepository->find(1);
+        $STAGE = $typeRepository->find(2);
+
+        OffreFactory::createMany(10,[
+            'Type'=>$ALTERNANCE,
+            'nomOffre' => "TEST",
+            'level' => 'BAC +1'
         ]);
 
-        OffreFactory::createMany( 5,[
-            'level' => '3',
-            'Type' => TypeFactory::createOne([
-                'libelle' => 'STAGE',
-            ]),
-            'jourDeb' => new \DateTime('2023-12-05')
+        OffreFactory::createOne([
+            'Type'=>$STAGE,
+            'level'=> 'BAC +2',
+            'jourDeb' => new \DateTime('2230-05-05'),
+        ]);
+
+        OffreFactory::createOne([
+            'nomOffre' => 'AAAAAAAA',
+            'Type'=>$STAGE,
+            'level'=> 'BAC +2',
+            'jourDeb' => new \DateTime('1000-05-05'),
+        ]);
+
+        OffreFactory::createMany(10,[
+            'Type'=>$STAGE,
+            'level' => 'BAC +5'
         ]);
     }
 
@@ -69,37 +80,40 @@ class IndexCest
         $I->seeNumberOfElements('.bloc_offre', 14);
     }
 
-    public function testSearchByType(ControllerTester $I): void
+    public function testSearchByTypePageOffre(ControllerTester $I): void
     {
         $I->amOnPage('/offre?type=1');
 
         $I->seeResponseCodeIs(200);
-        $I->see('Offres', 'title');
-        $I->see('LISTE DES OFFRES', '.titre_offre h1');
-        $I->seeNumberOfElements('.bloc_offre', 5);
+        $I->seeNumberOfElements('.bloc_offre', 10);
     }
 
-    public function testSearchByNiveau(ControllerTester $I): void
+    public function testSearchByNiveauPageOffre(ControllerTester $I): void
     {
         $I->amOnPage('/offre?niveau=1');
 
         $I->seeResponseCodeIs(200);
-        $I->see('Offres', 'title');
-        $I->see('LISTE DES OFFRES', '.titre_offre h1');
-        $I->seeNumberOfElements('.bloc_offre', 5);
+        $I->seeNumberOfElements('.bloc_offre', 10);
     }
 
-    public function testSearchByDate(ControllerTester $I): void
+    public function testSearchByAfterDatePageOffre(ControllerTester $I): void
     {
-        $I->amOnPage('/offre?date=2023-12-05');
+        $I->amOnPage('/offre?date=2230-05-04&dateFiltre=2');
 
         $I->seeResponseCodeIs(200);
-        $I->see('Offres', 'title');
-        $I->see('LISTE DES OFFRES', '.titre_offre h1');
-        $I->seeNumberOfElements('.bloc_offre', 5);
+        $I->seeNumberOfElements('.bloc_offre', 1);
     }
 
-    public function testSearchByText(ControllerTester $I): void
+
+    public function testSearchByBeforeDatePageOffre(ControllerTester $I): void
+    {
+        $I->amOnPage('/offre?date=1000-05-06&dateFiltre=1');
+
+        $I->seeResponseCodeIs(200);
+        $I->seeNumberOfElements('.bloc_offre', 1);
+    }
+
+    public function testSearchByTextPageOffre(ControllerTester $I): void
     {
         $I->amOnPage('/offre');
 
@@ -107,9 +121,32 @@ class IndexCest
         $I->click('🔎');
 
         $I->seeResponseCodeIs(200);
-        $I->see('Offres', 'title');
-        $I->see('LISTE DES OFFRES', '.titre_offre h1');
-        $I->seeNumberOfElements('.bloc_offre', 5);
+        $I->seeNumberOfElements('.bloc_offre', 10);
     }
 
+    public function testOnFirstClickOffrePageOffre(ControllerTester $I): void
+    {
+        $I->amOnPage('/offre');
+        $I->seeResponseCodeIs(200);
+
+        $I->click('.bloc_offres .bloc_offre:first-child .bloc_offre_txt a');
+
+        $expectedRoute = '/offre/12';
+
+        $currentRoute = $I->grabFromCurrentUrl();
+        $I->assertEquals($expectedRoute, $currentRoute);
+    }
+
+    public function testOnFirstClickEnteprisePageOffre(ControllerTester $I): void
+    {
+        $I->amOnPage('/offre');
+        $I->seeResponseCodeIs(200);
+
+        $I->click('.bloc_offres .bloc_offre:first-child .bloc_offre_img a');
+
+        $expectedRoute = '/entreprise/1';
+
+        $currentRoute = $I->grabFromCurrentUrl();
+        $I->assertEquals($expectedRoute, $currentRoute);
+    }
 }

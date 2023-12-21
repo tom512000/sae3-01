@@ -136,10 +136,13 @@ class OffreController extends AbstractController
     #[Route('/offre/{offreId}', name: 'app_offre_show', requirements: ['offreId' => '\d+'])]
     public function show(
         #[MapEntity(class: 'App\Entity\Offre', expr: 'repository.findById(offreId)')]
-        Offre $Offre,
+        ?Offre $Offre,
         int $offreId,
         Security $security): Response
     {
+        if (!$Offre){
+            return $this->redirectToRoute('app_offre_index');
+        }
         $Inscrit = $this->inscrireRepository->IsInscrit($offreId, $security);
         $skills = $this->skillDemanderRepository->getSkillLibellesByOffreId($offreId);
         $nbInscriptionAccepter = $this->offreRepository->getNbInscriptionsAccepter([$Offre]);
