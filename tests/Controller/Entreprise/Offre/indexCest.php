@@ -50,7 +50,7 @@ class indexCest
 
         OffreFactory::createMany(10,[
             'Type'=>$ALTERNANCE,
-            'nomOffre' => "TEST",
+            'nomOffre' => "TESTOFFRE",
             'level' => 'BAC +1'
         ]);
 
@@ -120,7 +120,7 @@ class indexCest
                     {
                         $I->amOnPage('/entreprise/offre?entrepriseId=1');
 
-                        $I->fillField('input[name="textRecherche"]', 'test');
+                        $I->fillField('input[name="textRecherche"]', 'TESTOFFRE');
                         $I->click('🔎');
 
                         $I->seeResponseCodeIs(200);

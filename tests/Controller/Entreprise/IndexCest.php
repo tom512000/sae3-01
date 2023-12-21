@@ -85,7 +85,7 @@ class IndexCest
 
     public function testSearchByTextPageEntreprise(ControllerTester $I): void
     {
-        $I->amOnPage('/entreprise?textRecherche=AAAAA');
+        $I->amOnPage('/entreprise?textRecherche=AAAAAAAAA');
 
         $I->seeResponseCodeIs(200);
         $I->seeNumberOfElements('.bloc_entreprise', 1);

@@ -3,17 +3,116 @@
 
 namespace App\Tests\Controller\Inscrire;
 
+use App\Factory\EntrepriseFactory;
+use App\Factory\InscrireFactory;
+use App\Factory\OffreFactory;
+use App\Factory\TypeFactory;
+use App\Factory\UserFactory;
+use App\Repository\EntrepriseRepository;
 use App\Tests\Support\ControllerTester;
 
 class IndexCest
 {
     public function _before(ControllerTester $I)
     {
+        EntrepriseFactory::createMany(10);
+
+        UserFactory::createOne([
+            'lastName' => 'test',
+            'firstName' => 'test',
+            'email' => 'test@gmail.com',
+            'password' => 'test',
+            'roles' => ['ROLE_ADMIN'],
+        ]);
+
+        $I->amOnPage('/login');
+        $I->see('Connexion');
+
+        $I->submitForm('form', [
+            'email' => 'test@gmail.com',
+            'password' => 'test',
+        ]);
+
+        TypeFactory::createOne([
+            'libelle' => 'ALTERNANCE',
+        ]);
+
+        TypeFactory::createOne([
+            'libelle' => 'STAGE',
+        ]);
+
+        OffreFactory::createMany(10);
+
+
     }
 
     // tests
-    public function tryToTest(ControllerTester $I)
+    public function testAucunInscriptionsPage(ControllerTester $I)
     {
-        print_r("manque le test d'inscription et de désinscription a une offre");
+
+        $I->amOnPage('/inscription');
+        $I->see('Vos inscriptions', '.titre_offre h1');
+        $I->seeElement('.titre_offre');
+        $I->seeElement('.bloc_legende');
+
+        $I->seeElement('.bloc_offres_vide h1');
+    }
+    public function testInscriptionsPage(ControllerTester $I)
+    {
+        InscrireFactory::createMany(2);
+
+        $I->amOnPage('/inscription');
+        $I->see('Vos inscriptions', '.titre_offre h1');
+        $I->seeElement('.titre_offre');
+        $I->seeElement('.bloc_legende');
+
+        $I->seeElement('.bloc_offres');
+        $I->seeElement('.bloc_offre');
+        $I->seeElement('.bloc_offre_img');
+        $I->seeElement('.bloc_offre_txt');
+        $I->seeElement('.infos1');
+        $I->seeElement('.infos2');
+        $I->seeElement('.description');
+        $I->seeElement('.infos3');
+        $I->seeElement('.inscrip-button button');
+    }
+
+    public function TestInsriptionOffre(ControllerTester $I): void
+    {
+        $I->amOnPage('/offre');
+        $I->seeResponseCodeIs(200);
+
+        $I->click('S\'inscrire');
+
+        $expectedRoute = '/inscription';
+
+        $currentRoute = $I->grabFromCurrentUrl();
+        $I->assertEquals($expectedRoute, $currentRoute);
+
+        $I->seeNumberOfElements('.bloc_offre', 1);
+    }
+
+
+    public function TestDesincriptionOffre(ControllerTester $I): void
+    {
+        $I->amOnPage('/offre');
+        $I->seeResponseCodeIs(200);
+
+        $I->click('S\'inscrire');
+
+
+        $expectedRoute = '/inscription';
+
+        $currentRoute = $I->grabFromCurrentUrl();
+        $I->assertEquals($expectedRoute, $currentRoute);
+
+        $I->seeNumberOfElements('.bloc_offre', 1);
+
+        $I->click('Se désincrire');
+
+        $currentRoute = $I->grabFromCurrentUrl();
+        $I->assertEquals($expectedRoute, $currentRoute);
+
+        $I->seeNumberOfElements('.bloc_offre', 0);
     }
 }
