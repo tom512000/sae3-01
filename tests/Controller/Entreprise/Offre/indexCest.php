@@ -8,14 +8,13 @@ use App\Factory\TypeFactory;
 use App\Factory\UserFactory;
 use App\Repository\TypeRepository;
 use App\Tests\Support\ControllerTester;
-use DateTime;
 
 class indexCest
 {
     public function _before(ControllerTester $I): void
     {
         EntrepriseFactory::createOne([
-            'nomEnt' => 'AAAAAAAAA'
+            'nomEnt' => 'AAAAAAAAA',
         ]);
 
         UserFactory::createOne([
@@ -24,7 +23,7 @@ class indexCest
             'email' => 'test@gmail.com',
             'password' => 'test',
             'roles' => [
-                'ROLE_ADMIN'
+                'ROLE_ADMIN',
             ],
         ]);
 
@@ -52,25 +51,25 @@ class indexCest
         OffreFactory::createMany(10, [
             'Type' => $ALTERNANCE,
             'nomOffre' => 'TESTOFFRE',
-            'level' => 'BAC +1'
+            'level' => 'BAC +1',
         ]);
 
         OffreFactory::createOne([
             'Type' => $STAGE,
-            'level'=> 'BAC +2',
-            'jourDeb' => new DateTime('2230-05-05'),
+            'level' => 'BAC +2',
+            'jourDeb' => new \DateTime('2230-05-05'),
         ]);
 
         OffreFactory::createOne([
             'nomOffre' => 'AAAAAAAA',
             'Type' => $STAGE,
-            'level'=> 'BAC +2',
-            'jourDeb' => new DateTime('1000-05-05'),
+            'level' => 'BAC +2',
+            'jourDeb' => new \DateTime('1000-05-05'),
         ]);
 
         OffreFactory::createMany(10, [
             'Type' => $STAGE,
-            'level' => 'BAC +5'
+            'level' => 'BAC +5',
         ]);
     }
 

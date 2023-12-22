@@ -2,8 +2,8 @@
 
 namespace App\Tests\Controller\Securite;
 
-use App\Tests\Support\ControllerTester;
 use App\Factory\UserFactory;
+use App\Tests\Support\ControllerTester;
 
 class ConnexionCest
 {
@@ -15,7 +15,7 @@ class ConnexionCest
             'email' => 'test@gmail.com',
             'password' => 'test',
             'roles' => [
-                'ROLE_ADMIN'
+                'ROLE_ADMIN',
             ],
         ]);
     }

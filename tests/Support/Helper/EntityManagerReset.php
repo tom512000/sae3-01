@@ -29,7 +29,7 @@ class EntityManagerReset extends Module implements DependsOnModule
     public function _depends(): array
     {
         return [
-            Symfony::class => $this->dependencyMessage
+            Symfony::class => $this->dependencyMessage,
         ];
     }
 
@@ -50,7 +50,8 @@ class EntityManagerReset extends Module implements DependsOnModule
         /** @var ManagerRegistry $doctrine */
         $doctrine = $this->symfony->grabService('doctrine');
 
-        if (!$doctrine->getManager()->isOpen())
+        if (!$doctrine->getManager()->isOpen()) {
             $doctrine->resetManager();
+        }
     }
 }

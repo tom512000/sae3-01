@@ -17,7 +17,7 @@ class ShowCest
             'nomEnt' => 'TESTEntreprise',
             'adresse' => '3, boulevard de Morvan 47 739 Marques',
             'mail' => 'begue@roussel.fr',
-            'siteWeb' => 'https://begue.legros.fr/'
+            'siteWeb' => 'https://begue.legros.fr/',
         ]);
 
         UserFactory::createOne([
@@ -26,7 +26,7 @@ class ShowCest
             'email' => 'test@gmail.com',
             'password' => 'test',
             'roles' => [
-                'ROLE_ADMIN'
+                'ROLE_ADMIN',
             ],
         ]);
 
@@ -51,7 +51,7 @@ class ShowCest
         $Entreprise = $EntrepriseRepository->find(1);
 
         OffreFactory::createMany(10, [
-            'entreprise' => $Entreprise
+            'entreprise' => $Entreprise,
         ]);
     }
 

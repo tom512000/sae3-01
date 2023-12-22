@@ -15,7 +15,7 @@ class ModificationProfilCest
             'email' => 'test@gmail.com',
             'password' => 'test',
             'roles' => [
-                'ROLE_USER'
+                'ROLE_USER',
             ],
         ]);
 

@@ -14,7 +14,7 @@ class IndexCest
     public function _before(ControllerTester $I): void
     {
         EntrepriseFactory::createOne([
-            'nomEnt' => 'AAAAAAAAA'
+            'nomEnt' => 'AAAAAAAAA',
         ]);
 
         EntrepriseFactory::createMany(10);
@@ -25,7 +25,7 @@ class IndexCest
             'email' => 'test@gmail.com',
             'password' => 'test',
             'roles' => [
-                'ROLE_ADMIN'
+                'ROLE_ADMIN',
             ],
         ]);
 
@@ -50,7 +50,7 @@ class IndexCest
         $Entreprise = $EntrepriseRepository->find(1);
 
         OffreFactory::createMany(10, [
-            'entreprise' => $Entreprise
+            'entreprise' => $Entreprise,
         ]);
     }
 

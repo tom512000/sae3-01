@@ -21,7 +21,7 @@ class IndexCest
             'email' => 'test@gmail.com',
             'password' => 'test',
             'roles' => [
-                'ROLE_ADMIN'
+                'ROLE_ADMIN',
             ],
         ]);
 

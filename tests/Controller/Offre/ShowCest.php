@@ -10,14 +10,13 @@ use App\Factory\TypeFactory;
 use App\Factory\UserFactory;
 use App\Repository\TypeRepository;
 use App\Tests\Support\ControllerTester;
-use DateTime;
 
 class ShowCest
 {
     public function _before(ControllerTester $I): void
     {
         EntrepriseFactory::createOne([
-            'nomEnt' => 'test'
+            'nomEnt' => 'test',
         ]);
 
         UserFactory::createOne([
@@ -26,7 +25,7 @@ class ShowCest
             'email' => 'test@gmail.com',
             'password' => 'test',
             'roles' => [
-                'ROLE_ADMIN'
+                'ROLE_ADMIN',
             ],
         ]);
 
@@ -52,7 +51,7 @@ class ShowCest
             'level' => 'BAC +1',
             'duree' => 20,
             'lieux' => '64, avenue de Valette 78404 Bousquet',
-            'jourDeb' => new DateTime('2023-05-05'),
+            'jourDeb' => new \DateTime('2023-05-05'),
             'nbPlace' => 8,
         ]);
 

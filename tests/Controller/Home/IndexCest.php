@@ -8,7 +8,6 @@ use App\Factory\TypeFactory;
 use App\Factory\UserFactory;
 use App\Repository\TypeRepository;
 use App\Tests\Support\ControllerTester;
-use DateTime;
 
 class IndexCest
 {
@@ -22,7 +21,7 @@ class IndexCest
             'email' => 'test@gmail.com',
             'password' => 'test',
             'roles' => [
-                'ROLE_ADMIN'
+                'ROLE_ADMIN',
             ],
         ]);
 
@@ -46,17 +45,17 @@ class IndexCest
         $alternance = $typeRepository->find(1);
         $stage = $typeRepository->find(2);
 
-        OffreFactory::createMany(10,[
+        OffreFactory::createMany(10, [
             'Type' => $alternance,
             'nomOffre' => 'TEST',
-            'level' => 'BAC +1'
+            'level' => 'BAC +1',
         ]);
 
         OffreFactory::createOne([
             'nomOffre' => 'AAAAAAAA',
             'Type' => $stage,
             'level' => 'BAC +2',
-            'jourDeb' => new DateTime('1000-05-05'),
+            'jourDeb' => new \DateTime('1000-05-05'),
         ]);
     }
 

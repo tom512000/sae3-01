@@ -15,7 +15,7 @@ class IndexCest
             'email' => 'test@gmail.com',
             'password' => 'test',
             'roles' => [
-                'ROLE_ADMIN'
+                'ROLE_ADMIN',
             ],
         ]);
 
@@ -42,7 +42,7 @@ class IndexCest
         $I->see('CV enregistré :');
         $I->see('Lettre de motivation enregistrée :');
 
-        $I->see('Modifier mon profil','button');
-        $I->see('Supprimer le compte','button');
+        $I->see('Modifier mon profil', 'button');
+        $I->see('Supprimer le compte', 'button');
     }
 }

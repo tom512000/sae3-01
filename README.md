@@ -32,15 +32,6 @@ Lorsque vous avez terminé une tâche, <span style="color: green">resynchronisez
 
 Ensuite, sur GitLab, <span style="color: green">creez une merge-request</span> sur votre branche et <span style="color: green">assignez un camarade</span> à la revue et à la validation.
 
-### Scripts
-- `composer start` : Lance le serveur web de test.
-- `composer stop` : Arrête le serveur web de test.
-- `composer test:cs` : Lance la commande de vérification du code par PHP CS Fixer.
-- `composer fix:cs` : Lance la commande de correction du code par PHP CS Fixer.
-- `composer test:codeception` : Nettoie le répertoire « _output » et le code généré par Codeception, initialise la base de données de test et lance les tests de Codeception.
-- `composer test` : Teste la mise en forme du code et lance les tests avec Codeception.
-- `composer db` : Détruit et recrée la base de données, migre sa structure et regénère les données factices.
-
 ### *<span style="color: red">3. Site et navigation</span>*
 
 Pour lancer le site, assurez vous d'être <span style="color: red">connecté au VPN</span>.
@@ -52,13 +43,11 @@ Accedez à l'url du site : <span style="color: red">127.0.0.1:8000/</span>. Tant
 Si vous tentez de naviguer autre part, vous serez redirigés vers <span style="color: red">le formulaire de connexion</span>.
 
 Depuis ce formulaire, vous pouvez vous connecter :
-
 - `adresse mail` : rentrez une adresse mail valide parmis les comptes disponibles.
 - `mot de passe` : rentrez un mot de passe valide parmis les comptes disponibles. (<span style="color: red">'test' pour tous les comptes créés par la factory</span>)
 - `compte admin` : compte administrateur de test, email : <span style="color: red">valentin.cladel@gmail.com</span>, mdp : <span style="color: red">test</span>
 
 Vous pouvez également vous inscrire :
-
 - Cliquer sur le lien 'S'inscrire' pour accéder à la page
 - Remplissez les informations
 - Cliquer sur valider pour créer le compte et l'enregistrer dans la base
@@ -68,3 +57,17 @@ Une fois connecté, vous avez accès au site et pouvez consulter offres, entrepr
 Vous pouvez également accéder à la section 'Mon Compte' depuis la barre de navigation pour accéder a votre profil puis a sa modification, a vos inscriptions, et si vous êtes connecté en temps qu'admin, au <span style="color: red">dashboard admin</span>.
 
 Pour accéder a la page d'accueil depuis une autre page, il vous suffit de cliquer sur le logo <span style="color: red">EduTech</span> dans la barre de navigation et vous serez redirigés.
+
+## 📐 Scripts
+- `composer start` : Lance le serveur web de test.
+- `composer stop` : Arrête le serveur web de test.
+- `composer test:cs` : Lance la commande de vérification du code par PHP CS Fixer.
+- `composer fix:cs` : Lance la commande de correction du code par PHP CS Fixer.
+- `composer test:codeception` : Nettoie le répertoire « _output » et le code généré par Codeception, initialise la base de données de test et lance les tests de Codeception.
+- `composer test` : Teste la mise en forme du code et lance les tests avec Codeception.
+- `composer db` : Détruit et recrée la base de données, migre sa structure et regénère les données factices.
+
+## 📋 Autres
+Les fichiers suivants sont disponibles dans le dossier « files » :
+1. Cahier des charges au format PDF.
+2. Présentation de notre base de données au format PDF.
