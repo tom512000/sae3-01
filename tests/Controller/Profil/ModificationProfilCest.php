@@ -1,22 +1,22 @@
 <?php
 
-
 namespace App\Tests\Controller\Profil;
 
 use App\Factory\UserFactory;
-use App\Repository\UserRepository;
 use App\Tests\Support\ControllerTester;
 
 class ModificationProfilCest
 {
-    public function _before(ControllerTester $I)
+    public function _before(ControllerTester $I): void
     {
         UserFactory::createOne([
             'lastName' => 'test',
             'firstName' => 'test',
             'email' => 'test@gmail.com',
             'password' => 'test',
-            'roles' => ['ROLE_USER'],
+            'roles' => [
+                'ROLE_USER'
+            ],
         ]);
 
         $I->amOnPage('/login');
@@ -29,7 +29,7 @@ class ModificationProfilCest
     }
 
     // tests
-    public function testAffichageProfilModificationPage(ControllerTester $I)
+    public function testAffichageProfilModificationPage(ControllerTester $I): void
     {
         $I->amOnPage('/profil/modif');
         $I->see('MODIFIER LE PROFIL');

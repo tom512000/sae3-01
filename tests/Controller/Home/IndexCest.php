@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Tests\Controller\Home;
 
 use App\Factory\EntrepriseFactory;
@@ -9,10 +8,11 @@ use App\Factory\TypeFactory;
 use App\Factory\UserFactory;
 use App\Repository\TypeRepository;
 use App\Tests\Support\ControllerTester;
+use DateTime;
 
 class IndexCest
 {
-    public function _before(ControllerTester $I)
+    public function _before(ControllerTester $I): void
     {
         EntrepriseFactory::createMany(1);
 
@@ -21,7 +21,9 @@ class IndexCest
             'firstName' => 'test',
             'email' => 'test@gmail.com',
             'password' => 'test',
-            'roles' => ['ROLE_ADMIN'],
+            'roles' => [
+                'ROLE_ADMIN'
+            ],
         ]);
 
         $I->amOnPage('/login');
@@ -41,24 +43,22 @@ class IndexCest
         ]);
         $typeRepository = $I->grabService(TypeRepository::class);
 
-        $ALTERNANCE = $typeRepository->find(1);
-        $STAGE = $typeRepository->find(2);
+        $alternance = $typeRepository->find(1);
+        $stage = $typeRepository->find(2);
 
         OffreFactory::createMany(10,[
-            'Type'=>$ALTERNANCE,
-            'nomOffre' => "TEST",
+            'Type' => $alternance,
+            'nomOffre' => 'TEST',
             'level' => 'BAC +1'
         ]);
 
         OffreFactory::createOne([
             'nomOffre' => 'AAAAAAAA',
-            'Type'=>$STAGE,
-            'level'=> 'BAC +2',
-            'jourDeb' => new \DateTime('1000-05-05'),
+            'Type' => $stage,
+            'level' => 'BAC +2',
+            'jourDeb' => new DateTime('1000-05-05'),
         ]);
     }
-
-
 
     // tests
     public function testHomePage(ControllerTester $I): void

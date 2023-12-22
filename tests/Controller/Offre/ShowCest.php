@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Tests\Controller\Offre;
 
 use App\Factory\EntrepriseFactory;
@@ -11,13 +10,14 @@ use App\Factory\TypeFactory;
 use App\Factory\UserFactory;
 use App\Repository\TypeRepository;
 use App\Tests\Support\ControllerTester;
+use DateTime;
 
 class ShowCest
 {
-    public function _before(ControllerTester $I)
+    public function _before(ControllerTester $I): void
     {
         EntrepriseFactory::createOne([
-            'nomEnt' => "test"
+            'nomEnt' => 'test'
         ]);
 
         UserFactory::createOne([
@@ -25,7 +25,9 @@ class ShowCest
             'firstName' => 'test',
             'email' => 'test@gmail.com',
             'password' => 'test',
-            'roles' => ['ROLE_ADMIN'],
+            'roles' => [
+                'ROLE_ADMIN'
+            ],
         ]);
 
         $I->amOnPage('/login');
@@ -42,18 +44,17 @@ class ShowCest
 
         $typeRepository = $I->grabService(TypeRepository::class);
 
-        $ALTERNANCE = $typeRepository->find(1);
+        $alternance = $typeRepository->find(1);
 
         OffreFactory::createOne([
-            'Type'=>$ALTERNANCE,
-            'nomOffre' => "TESTOffre",
+            'Type' => $alternance,
+            'nomOffre' => 'TESTOffre',
             'level' => 'BAC +1',
             'duree' => 20,
-            'lieux' => "64, avenue de Valette 78404 Bousquet",
-            'jourDeb' => new \DateTime('2023-05-05'),
-            'nbPlace' => 8
+            'lieux' => '64, avenue de Valette 78404 Bousquet',
+            'jourDeb' => new DateTime('2023-05-05'),
+            'nbPlace' => 8,
         ]);
-
 
         $competences = [
             'Communication',
@@ -66,10 +67,9 @@ class ShowCest
             SkillFactory::createOne([
                 'libelle' => $competences[$i],
             ]);
+
             SkillDemanderFactory::createOne();
         }
-
-
     }
 
     // tests
@@ -81,7 +81,7 @@ class ShowCest
 
         $I->see('TESTOffre', '.bloc_offre_infos_1 h2');
 
-        $I->see('Début du  ALTERNANCE  le  05 May 2023  à l\'adresse :  64, avenue de Valette 78404 Bousquet.','.bloc_offre_infos_2 p:first-child');
+        $I->see('Début du  ALTERNANCE  le  05 May 2023  à l\'adresse :  64, avenue de Valette 78404 Bousquet.', '.bloc_offre_infos_2 p:first-child');
         $I->see('Description', '.bloc_offre_infos_2 h4');
 
         $I->see('Niveau', '.bloc_offre_infos_3 div:first-child h4');
@@ -96,16 +96,17 @@ class ShowCest
         $I->seeElement('.inscrip-button button.btn-success');
         $I->see('S\'inscrire', '.inscrip-button button.btn-success');
 
-        $I->see('Compétences','.bloc_offre_infos_4');
+        $I->see('Compétences', '.bloc_offre_infos_4');
         $I->seeNumberOfElements('.bloc_offre_infos_4 p', 4);
     }
 
-    public function testOffreInconuePageOffreShow(ControllerTester $I):void{
+    public function testOffreInconuePageOffreShow(ControllerTester $I): void
+    {
         $I->amOnPage('/offre/10');
 
         $expectedRoute = '/offre';
-
         $currentRoute = $I->grabFromCurrentUrl();
+
         $I->assertEquals($expectedRoute, $currentRoute);
     }
 
@@ -117,8 +118,8 @@ class ShowCest
         $I->click('.bloc_offre_infos_1 a');
 
         $expectedRoute = '/entreprise/1';
-
         $currentRoute = $I->grabFromCurrentUrl();
+
         $I->assertEquals($expectedRoute, $currentRoute);
     }
 }

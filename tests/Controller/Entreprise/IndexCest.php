@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Tests\Controller\Entreprise;
 
 use App\Factory\EntrepriseFactory;
@@ -8,12 +7,11 @@ use App\Factory\OffreFactory;
 use App\Factory\TypeFactory;
 use App\Factory\UserFactory;
 use App\Repository\EntrepriseRepository;
-use App\Repository\OffreRepository;
 use App\Tests\Support\ControllerTester;
 
 class IndexCest
 {
-    public function _before(ControllerTester $I)
+    public function _before(ControllerTester $I): void
     {
         EntrepriseFactory::createOne([
             'nomEnt' => 'AAAAAAAAA'
@@ -26,7 +24,9 @@ class IndexCest
             'firstName' => 'test',
             'email' => 'test@gmail.com',
             'password' => 'test',
-            'roles' => ['ROLE_ADMIN'],
+            'roles' => [
+                'ROLE_ADMIN'
+            ],
         ]);
 
         $I->amOnPage('/login');
@@ -49,7 +49,7 @@ class IndexCest
 
         $Entreprise = $EntrepriseRepository->find(1);
 
-        OffreFactory::createMany(10,[
+        OffreFactory::createMany(10, [
             'entreprise' => $Entreprise
         ]);
     }
@@ -97,6 +97,6 @@ class IndexCest
 
         $I->seeResponseCodeIs(200);
 
-        $I->see('Aucune entreprise trouver', '.entreprise_menu h1');
+        $I->see('Aucune Entreprise trouvée', '.entreprise_menu h1');
     }
 }

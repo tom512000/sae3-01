@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Tests\Controller\Entreprise;
 
 use App\Factory\EntrepriseFactory;
@@ -8,12 +7,11 @@ use App\Factory\OffreFactory;
 use App\Factory\TypeFactory;
 use App\Factory\UserFactory;
 use App\Repository\EntrepriseRepository;
-use App\Repository\OffreRepository;
 use App\Tests\Support\ControllerTester;
 
 class ShowCest
 {
-    public function _before(ControllerTester $I)
+    public function _before(ControllerTester $I): void
     {
         EntrepriseFactory::createOne([
             'nomEnt' => 'TESTEntreprise',
@@ -27,7 +25,9 @@ class ShowCest
             'firstName' => 'test',
             'email' => 'test@gmail.com',
             'password' => 'test',
-            'roles' => ['ROLE_ADMIN'],
+            'roles' => [
+                'ROLE_ADMIN'
+            ],
         ]);
 
         $I->amOnPage('/login');
@@ -50,7 +50,7 @@ class ShowCest
 
         $Entreprise = $EntrepriseRepository->find(1);
 
-        OffreFactory::createMany(10,[
+        OffreFactory::createMany(10, [
             'entreprise' => $Entreprise
         ]);
     }
@@ -65,8 +65,7 @@ class ShowCest
         $I->see('TESTEntreprise', '.details_entreprise .details_entreprise_1 h1');
         $I->see('10 annonces en ligne', '.details_entreprise .details_entreprise_1 p');
 
-
-        $I->see('INFORMATIONS','.details_entreprise_2 h2');
+        $I->see('INFORMATIONS', '.details_entreprise_2 h2');
         $I->see('3, boulevard de Morvan 47 739 Marques', '.details_entreprise_2 p');
         $I->see('begue@roussel.fr', '.details_entreprise_2 p');
         $I->see('Site de TESTEntreprise', '.details_entreprise_2 p a');

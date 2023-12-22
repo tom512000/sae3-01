@@ -1,18 +1,18 @@
 <?php
 
-
 namespace App\Tests\Controller\Offre;
 
-use App\Entity\Offre;
 use App\Factory\EntrepriseFactory;
 use App\Factory\OffreFactory;
 use App\Factory\TypeFactory;
 use App\Factory\UserFactory;
 use App\Repository\TypeRepository;
 use App\Tests\Support\ControllerTester;
+use DateTime;
+
 class IndexCest
 {
-    public function _before(ControllerTester $I)
+    public function _before(ControllerTester $I): void
     {
         EntrepriseFactory::createMany(1);
 
@@ -21,7 +21,9 @@ class IndexCest
             'firstName' => 'test',
             'email' => 'test@gmail.com',
             'password' => 'test',
-            'roles' => ['ROLE_ADMIN'],
+            'roles' => [
+                'ROLE_ADMIN'
+            ],
         ]);
 
         $I->amOnPage('/login');
@@ -39,36 +41,36 @@ class IndexCest
         TypeFactory::createOne([
             'libelle' => 'STAGE',
         ]);
+
         $typeRepository = $I->grabService(TypeRepository::class);
 
-        $ALTERNANCE = $typeRepository->find(1);
-        $STAGE = $typeRepository->find(2);
+        $alternance = $typeRepository->find(1);
+        $stage = $typeRepository->find(2);
 
-        OffreFactory::createMany(10,[
-            'Type'=>$ALTERNANCE,
-            'nomOffre' => "TEST",
+        OffreFactory::createMany(10, [
+            'Type' => $alternance,
+            'nomOffre' => 'TEST',
             'level' => 'BAC +1'
         ]);
 
         OffreFactory::createOne([
-            'Type'=>$STAGE,
+            'Type' => $stage,
             'level'=> 'BAC +2',
-            'jourDeb' => new \DateTime('2230-05-05'),
+            'jourDeb' => new DateTime('2230-05-05'),
         ]);
 
         OffreFactory::createOne([
             'nomOffre' => 'AAAAAAAA',
-            'Type'=>$STAGE,
+            'Type' => $stage,
             'level'=> 'BAC +2',
-            'jourDeb' => new \DateTime('1000-05-05'),
+            'jourDeb' => new DateTime('1000-05-05'),
         ]);
 
-        OffreFactory::createMany(10,[
-            'Type'=>$STAGE,
+        OffreFactory::createMany(10, [
+            'Type' => $stage,
             'level' => 'BAC +5'
         ]);
     }
-
 
     // tests
     public function testOffrePage(ControllerTester $I): void
@@ -83,7 +85,6 @@ class IndexCest
     public function testSearchByTypePageOffre(ControllerTester $I): void
     {
         $I->amOnPage('/offre?type=1');
-
         $I->seeResponseCodeIs(200);
         $I->seeNumberOfElements('.bloc_offre', 10);
     }
@@ -91,7 +92,6 @@ class IndexCest
     public function testSearchByNiveauPageOffre(ControllerTester $I): void
     {
         $I->amOnPage('/offre?niveau=1');
-
         $I->seeResponseCodeIs(200);
         $I->seeNumberOfElements('.bloc_offre', 10);
     }
@@ -99,16 +99,13 @@ class IndexCest
     public function testSearchByAfterDatePageOffre(ControllerTester $I): void
     {
         $I->amOnPage('/offre?date=2230-05-04&dateFiltre=2');
-
         $I->seeResponseCodeIs(200);
         $I->seeNumberOfElements('.bloc_offre', 1);
     }
 
-
     public function testSearchByBeforeDatePageOffre(ControllerTester $I): void
     {
         $I->amOnPage('/offre?date=1000-05-06&dateFiltre=1');
-
         $I->seeResponseCodeIs(200);
         $I->seeNumberOfElements('.bloc_offre', 1);
     }

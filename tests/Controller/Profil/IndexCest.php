@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Tests\Controller\Profil;
 
 use App\Factory\UserFactory;
@@ -8,14 +7,16 @@ use App\Tests\Support\ControllerTester;
 
 class IndexCest
 {
-    public function _before(ControllerTester $I)
+    public function _before(ControllerTester $I): void
     {
         UserFactory::createOne([
             'lastName' => 'test',
             'firstName' => 'test',
             'email' => 'test@gmail.com',
             'password' => 'test',
-            'roles' => ['ROLE_ADMIN'],
+            'roles' => [
+                'ROLE_ADMIN'
+            ],
         ]);
 
         $I->amOnPage('/login');
@@ -28,14 +29,11 @@ class IndexCest
     }
 
     // tests
-    public function TestProfilPage(ControllerTester $I)
+    public function TestProfilPage(ControllerTester $I): void
     {
         $I->amOnPage('/profil');
-
-        // Vérifiez que le titre "Profil" est présent sur la page
         $I->see('Profil');
 
-        // Vérifiez la présence d'informations spécifiques sur le profil (ajoutez d'autres vérifications au besoin)
         $I->see('Nom :');
         $I->see('Prénom :');
         $I->see('Numéro de téléphone :');
@@ -44,7 +42,6 @@ class IndexCest
         $I->see('CV enregistré :');
         $I->see('Lettre de motivation enregistrée :');
 
-        // Vérifiez la présence des liens pour modifier le profil et supprimer le compte
         $I->see('Modifier mon profil','button');
         $I->see('Supprimer le compte','button');
     }
