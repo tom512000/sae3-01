@@ -65,7 +65,7 @@ class EntrepriseController extends AbstractController
         ?Entreprise $Entreprises,
         Request $request): Response
     {
-        if (!$Entreprises){
+        if (!$Entreprises) {
             return $this->redirectToRoute('app_entreprise_index');
         }
         $textRechercheEntreprise = $request->query->get('textRecherche', '');

@@ -14,13 +14,13 @@ class EntityManagerReset extends Module implements DependsOnModule
 {
     private Symfony $symfony;
     protected string $dependencyMessage = <<<EOF
-Set Symfony as dependent module:
-
-modules:
-    enabled:
-        - \App\Tests\Support\Helper\EntityManagerReset:
-            depends: Symfony
-EOF;
+    Set Symfony as dependent module:
+    
+    modules:
+        enabled:
+            - \App\Tests\Support\Helper\EntityManagerReset:
+                depends: Symfony
+    EOF;
 
     protected array $config = [
         'depends' => null,
@@ -28,7 +28,9 @@ EOF;
 
     public function _depends(): array
     {
-        return [Symfony::class => $this->dependencyMessage];
+        return [
+            Symfony::class => $this->dependencyMessage,
+        ];
     }
 
     public function _inject(Symfony $symfony): void
@@ -47,6 +49,7 @@ EOF;
 
         /** @var ManagerRegistry $doctrine */
         $doctrine = $this->symfony->grabService('doctrine');
+
         if (!$doctrine->getManager()->isOpen()) {
             $doctrine->resetManager();
         }

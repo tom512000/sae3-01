@@ -1,25 +1,27 @@
 <?php
 
-
 namespace App\Tests\Controller\Securite;
 
-use App\Tests\Support\ControllerTester;
 use App\Factory\UserFactory;
+use App\Tests\Support\ControllerTester;
+
 class ConnexionCest
 {
-    public function _before(ControllerTester $I)
+    public function _before(ControllerTester $I): void
     {
         UserFactory::createOne([
             'lastName' => 'test',
             'firstName' => 'test',
             'email' => 'test@gmail.com',
             'password' => 'test',
-            'roles' => ['ROLE_ADMIN'],
+            'roles' => [
+                'ROLE_ADMIN',
+            ],
         ]);
     }
 
     // tests
-    public function testValidLogin(ControllerTester $I)
+    public function testValidLogin(ControllerTester $I): void
     {
         $I->amOnPage('/login');
         $I->see('Connexion');
@@ -32,7 +34,7 @@ class ConnexionCest
         $I->seeResponseCodeIsSuccessful();
     }
 
-    public function testInvalidPassword(ControllerTester $I)
+    public function testInvalidPassword(ControllerTester $I): void
     {
         $I->amOnPage('/login');
         $I->see('Connexion');
@@ -46,7 +48,7 @@ class ConnexionCest
         $I->see('ERREUR : DONNEES INVALIDES');
     }
 
-    public function testInvalidEmail(ControllerTester $I)
+    public function testInvalidEmail(ControllerTester $I): void
     {
         $I->amOnPage('/login');
         $I->see('Connexion');
@@ -60,7 +62,7 @@ class ConnexionCest
         $I->see('ERREUR : DONNEES INVALIDES');
     }
 
-    public function testClickInscriptionUser(ControllerTester $I)
+    public function testClickInscriptionUser(ControllerTester $I): void
     {
         $I->amOnPage('/login');
         $I->seeResponseCodeIs(200);
@@ -70,6 +72,7 @@ class ConnexionCest
         $expectedRoute = '/newUser';
 
         $currentRoute = $I->grabFromCurrentUrl();
+
         $I->assertEquals($expectedRoute, $currentRoute);
     }
 }

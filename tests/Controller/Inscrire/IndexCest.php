@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Tests\Controller\Inscrire;
 
 use App\Factory\EntrepriseFactory;
@@ -8,12 +7,11 @@ use App\Factory\InscrireFactory;
 use App\Factory\OffreFactory;
 use App\Factory\TypeFactory;
 use App\Factory\UserFactory;
-use App\Repository\EntrepriseRepository;
 use App\Tests\Support\ControllerTester;
 
 class IndexCest
 {
-    public function _before(ControllerTester $I)
+    public function _before(ControllerTester $I): void
     {
         EntrepriseFactory::createMany(10);
 
@@ -22,7 +20,9 @@ class IndexCest
             'firstName' => 'test',
             'email' => 'test@gmail.com',
             'password' => 'test',
-            'roles' => ['ROLE_ADMIN'],
+            'roles' => [
+                'ROLE_ADMIN',
+            ],
         ]);
 
         $I->amOnPage('/login');
@@ -42,14 +42,11 @@ class IndexCest
         ]);
 
         OffreFactory::createMany(10);
-
-
     }
 
     // tests
-    public function testAucunInscriptionsPage(ControllerTester $I)
+    public function testAucunInscriptionsPage(ControllerTester $I): void
     {
-
         $I->amOnPage('/inscription');
         $I->see('Vos inscriptions', '.titre_offre h1');
         $I->seeElement('.titre_offre');
@@ -57,7 +54,8 @@ class IndexCest
 
         $I->seeElement('.bloc_offres_vide h1');
     }
-    public function testInscriptionsPage(ControllerTester $I)
+
+    public function testInscriptionsPage(ControllerTester $I): void
     {
         InscrireFactory::createMany(2);
 
@@ -85,13 +83,11 @@ class IndexCest
         $I->click('S\'inscrire');
 
         $expectedRoute = '/inscription';
-
         $currentRoute = $I->grabFromCurrentUrl();
-        $I->assertEquals($expectedRoute, $currentRoute);
 
+        $I->assertEquals($expectedRoute, $currentRoute);
         $I->seeNumberOfElements('.bloc_offre', 1);
     }
-
 
     public function TestDesincriptionOffre(ControllerTester $I): void
     {
@@ -100,19 +96,17 @@ class IndexCest
 
         $I->click('S\'inscrire');
 
-
         $expectedRoute = '/inscription';
-
         $currentRoute = $I->grabFromCurrentUrl();
-        $I->assertEquals($expectedRoute, $currentRoute);
 
+        $I->assertEquals($expectedRoute, $currentRoute);
         $I->seeNumberOfElements('.bloc_offre', 1);
 
         $I->click('Se désincrire');
 
         $currentRoute = $I->grabFromCurrentUrl();
-        $I->assertEquals($expectedRoute, $currentRoute);
 
+        $I->assertEquals($expectedRoute, $currentRoute);
         $I->seeNumberOfElements('.bloc_offre', 0);
     }
 }

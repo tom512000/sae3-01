@@ -140,7 +140,7 @@ class OffreController extends AbstractController
         int $offreId,
         Security $security): Response
     {
-        if (!$Offre){
+        if (!$Offre) {
             return $this->redirectToRoute('app_offre_index');
         }
         $Inscrit = $this->inscrireRepository->IsInscrit($offreId, $security);
