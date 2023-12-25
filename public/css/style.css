@@ -1285,6 +1285,11 @@ div.ligne_profil p:last-child {
     div.menu_items > h3 {
         font-size: 25px;
     }
+
+    /* CSS entreprise/index.html.twig */
+    div.titre_entreprises > h1 {
+        font-size: 60px;
+    }
 }
 
 /* Tablet screen */
@@ -1383,5 +1388,10 @@ div.ligne_profil p:last-child {
 
     form.inscrip-button > button {
         margin-right: -40px;
+    }
+
+    /* CSS entreprise/index.html.twig */
+    div.titre_entreprises > h1 {
+        font-size: 45px;
     }
 }
