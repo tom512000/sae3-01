@@ -45,7 +45,7 @@ body {
     width: 100%;
     height: 100%;
     min-height: 100vh;
-    margin-top: 64px;
+    margin-top: 62px;
     background: url("../img/background.png") fixed center;
     background-size: cover;
 }
@@ -64,14 +64,6 @@ body {
 }
 
 /* CSS templates/base.html.twig */
-div.container-fluid > a {
-    height: 30px;
-}
-
-div.container-fluid > a > img {
-    height: 100%;
-}
-
 li.space {
     margin-right: 25px;
 }
@@ -88,6 +80,37 @@ a.btn-connection {
 body > nav.navbar {
     background-color: var(--third-color);
     border-bottom: 2px solid var(--main-color);
+}
+
+div.container-fluid > a:first-child {
+    height: 45px;
+}
+
+div.container-fluid > a:first-child > img {
+    width: 100%;
+    height: 100%;
+}
+
+div.container-fluid > a:nth-child(2) {
+    height: 33px;
+    margin-top: -10px;
+}
+
+div.container-fluid > a:nth-child(2) > img {
+    height: 100%;
+}
+
+button.navbar-toggler {
+    border: 1px solid var(--main-color);
+}
+
+button.navbar-toggler:hover {
+    border: 1px solid var(--main-color);
+    background-color: var(--main-color);
+}
+
+button.navbar-toggler > span {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(231,231,231)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
 
 ul.navbar-nav > li {
@@ -1239,4 +1262,20 @@ div.ligne_profil p:first-child {
 
 div.ligne_profil p:last-child {
     font-family: 'K2D', sans-serif;
+}
+
+/* CSS Media Queries */
+/* Laptop screen */
+@media screen and (min-width: 769px) and (max-width: 1500px) {
+
+}
+
+/* Tablet screen */
+@media screen and (min-width: 426px) and (max-width: 768px) {
+
+}
+
+/* Phone screen */
+@media screen and (max-width: 425px) {
+
 }
