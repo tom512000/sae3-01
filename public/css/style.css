@@ -64,18 +64,6 @@ body {
 }
 
 /* CSS templates/base.html.twig */
-li.space {
-    margin-right: 25px;
-}
-
-li.space > a > img {
-    height: 20px;
-}
-
-a.btn-connection {
-    margin-left: 25px;
-}
-
 /* Barre du menu */
 body > nav.navbar {
     background-color: var(--third-color);
@@ -124,6 +112,18 @@ ul.navbar-nav > li {
 
 .navbar-nav > li.nav-item > a:hover {
     color: var(--main-color);
+}
+
+li.space {
+    margin-right: 25px;
+}
+
+li.space > a > img {
+    height: 20px;
+}
+
+a.btn-connection {
+    margin-left: 25px;
 }
 
 form.d-flex button, a.btn-connection {
@@ -217,6 +217,7 @@ footer > p {
 }
 
 /* CSS home/index.html.twig */
+/* Menu home */
 div.menu_bloc {
     display: flex;
     flex-direction: column;
@@ -231,15 +232,16 @@ div.menu_bloc {
 
 div.menu_bloc > h1 {
     margin-bottom: 20px;
+    font-size: 40px;
     font-family: 'Comfortaa', sans-serif;
     color: var(--main-color);
 }
 
 div.menu_items {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
-    width: 800px;
+    width: 90%;
 }
 
 div.menu_items > h3 {
@@ -1267,13 +1269,23 @@ div.ligne_profil p:last-child {
 /* CSS Media Queries */
 /* Laptop screen */
 @media screen and (min-width: 769px) and (max-width: 1500px) {
+    /* CSS templates/base.html.twig */
+    /* Barre du menu */
     footer > div.footer_1 {
         justify-content: space-between;
+    }
+
+    /* CSS home/index.html.twig */
+    /* Menu home */
+    div.menu_items > h3 {
+        font-size: 25px;
     }
 }
 
 /* Tablet screen */
 @media screen and (min-width: 426px) and (max-width: 768px) {
+    /* CSS templates/base.html.twig */
+    /* Barre du menu */
     footer > div.footer_1 {
         width: 100%;
         justify-content: space-between;
@@ -1296,9 +1308,18 @@ div.ligne_profil p:last-child {
     div.footer_1_2 > p {
         font-size: 14px;
     }
-}
 
-/* Phone screen */
-@media screen and (max-width: 425px) {
+    /* CSS home/index.html.twig */
+    /* Menu home */
+    div.menu_bloc > h1 {
+        font-size: 30px;
+    }
 
+    div.menu_items > h3 {
+        font-size: 18px;
+    }
+
+    div.menu_items > div.barre {
+        height: 20px;
+    }
 }
