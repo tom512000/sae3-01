@@ -294,29 +294,6 @@ div.titre_home > div > h1 {
 }
 
 /* CSS offre/index.html.twig */
-div.titre_offre {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 100%;
-    height: 300px;
-    padding: 40px;
-    margin-bottom: 40px;
-    border-bottom: 2px solid darkred;
-    background: url("../img/background-info.png") no-repeat center;
-    background-size: cover;
-}
-
-div.titre_offre > h1 {
-    margin-bottom: 30px;
-    font-size: 65px;
-    background: -webkit-linear-gradient(var(--second-color), var(--main-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-family: 'Impact', sans-serif;
-}
-
 div.bloc_legende {
     display: flex;
     justify-content: center;
@@ -356,15 +333,24 @@ div.bloc_legende_3 {
     background-color: #FF9AA2;
 }
 
+div.taille1 {
+    height: 150px;
+}
+
 form.form_offre {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
-    width: 1000px;
+    width: 90%;
+    height: 80%;
     padding: 15px;
     border-radius: 10px;
     background-color: var(--fourth-color);
+}
+
+form.form_offre > div {
+    padding: 10px 0 10px 0;
 }
 
 form.form_offre > div.radio_group {
@@ -741,21 +727,21 @@ div.bloc_offre_infos_4 > p {
     font-family: 'Lexend', sans-serif;
 }
 
-/* CSS entreprise/index.html.twig */
-div.titre_entreprises {
+/* CSS Bloc de titre */
+div.titre_bloc {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 150px;
+    margin-bottom: 20px;
     padding: 50px;
     border-bottom: 2px solid darkred;
     background: url("../img/background-info.png") no-repeat center;
     background-size: cover;
 }
 
-div.titre_entreprises > h1 {
+div.titre_bloc > h1 {
     font-size: 65px;
     background: -webkit-linear-gradient(var(--second-color), var(--main-color));
     -webkit-background-clip: text;
@@ -763,6 +749,7 @@ div.titre_entreprises > h1 {
     font-family: 'Impact', sans-serif;
 }
 
+/* CSS entreprise/index.html.twig */
 div.entreprise_menu {
     display: flex;
     justify-content: center;
@@ -1287,7 +1274,7 @@ div.ligne_profil p:last-child {
     }
 
     /* CSS entreprise/index.html.twig */
-    div.titre_entreprises > h1 {
+    div.titre_bloc > h1 {
         font-size: 60px;
     }
 }
@@ -1391,7 +1378,7 @@ div.ligne_profil p:last-child {
     }
 
     /* CSS entreprise/index.html.twig */
-    div.titre_entreprises > h1 {
+    div.titre_bloc > h1 {
         font-size: 45px;
     }
 }
