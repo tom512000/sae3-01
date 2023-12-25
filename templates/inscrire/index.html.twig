@@ -5,8 +5,8 @@
 {% block background %}{{ asset('img/background.png') }}{% endblock %}
 
 {% block body %}
-    <div class="titre_offre">
-        <h1>Vos inscriptions</h1>
+    <div class="titre_bloc taille2">
+        <h1>MES INSCRIPTIONS</h1>
         <div class="bloc_legende">
             <div>
                 <div class="bloc_legende_1"></div>
@@ -23,10 +23,14 @@
         </div>
     </div>
     <div class="bloc_offres">
+
+        {# Affichage si l'utilisateur est inscrit à aucunes offres #}
         {% if inscriptions is empty %}
         <div class="bloc_offres_vide">
             <h1>Aucunes offres disponibles</h1>
         </div>
+
+        {# Affichage si l'utilisateur est inscrit à au moins une offre #}
         {% else %}
             {% for inscription in inscriptions %}
                 <div class="bloc_offre">
@@ -71,13 +75,14 @@
                             <p class="duree"><span>Durée :</span> {{ inscription.Offre.duree }} jour(s)</p>
                             <p class="niveau"><span>Niveau requis :</span> {{ inscription.offre.level }}</p>
                             <form class="inscrip-button" action="{{ path('app_inscire_desinscription', {'idOffre': inscription.Offre.id}) }}" method="get">
-                                <button class="btn btn-danger" type="submit">Se désincrire</button>
+                                <button class="btn btn-danger" type="submit">Se Désincrire</button>
                             </form>
                         </div>
                     </div>
+                    <br>
                 </div>
-                <br>
             {% endfor %}
+
         {% endif %}
     </div>
 {% endblock %}
