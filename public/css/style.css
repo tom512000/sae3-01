@@ -668,6 +668,7 @@ div.bloc_offre_infos_1 {
 }
 
 div.bloc_offre_infos_1 > h2 {
+    text-align: center;
     font-family: 'K2D', sans-serif;
     font-weight: bold;
 }

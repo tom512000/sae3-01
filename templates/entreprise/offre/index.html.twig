@@ -44,15 +44,18 @@
         </form>
     </div>
 
-        {% if Offres is empty %}
-            <div class="bloc_offres_vide">
-                <h1>Aucunes offres disponibles</h1>
-            </div>
-        {% else %}
-            <div class="bloc_offres">
-                {% for Offre in Offres %}
-                    {{ include('offre/_offre.html.twig') }}
-                {% endfor %}
-            </div>
-        {% endif %}
+    {# Affichage si aucunes offres existent pour l'entreprise #}
+    {% if Offres is empty %}
+        <div class="bloc_offres_vide">
+            <h1>Aucunes offres disponibles</h1>
+        </div>
+
+    {# Affichage si au moins une offre existe pour l'entreprise #}
+    {% else %}
+        <div class="bloc_offres">
+            {% for Offre in Offres %}
+                {{ include('offre/_offre.html.twig') }}
+            {% endfor %}
+        </div>
+    {% endif %}
 {% endblock %}
