@@ -2,18 +2,15 @@
 
 {% block icon %}👤{% endblock %}
 {% block title %}Profil{% endblock %}
-{% block background %}{{ asset('img/background-info.png') }}{% endblock %}
+{% block background %}{{ asset('img/background.png') }}{% endblock %}
 
 {% block body %}
+    <div class="titre_bloc">
+        <h1>PROFIL</h1>
+    </div>
     <div class="bloc_profil">
         <br>
         <div class="bloc_profil_1">
-            <div>
-                <h1>Profil</h1>
-            </div>
-        </div>
-        <br>
-        <div class="bloc_profil_2">
             <div class="ligne_profil">
                 <p>Nom :&ensp;</p>
                 <p>{{ app.user.firstName }}</p>
