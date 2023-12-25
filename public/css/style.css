@@ -1267,12 +1267,35 @@ div.ligne_profil p:last-child {
 /* CSS Media Queries */
 /* Laptop screen */
 @media screen and (min-width: 769px) and (max-width: 1500px) {
-
+    footer > div.footer_1 {
+        justify-content: space-between;
+    }
 }
 
 /* Tablet screen */
 @media screen and (min-width: 426px) and (max-width: 768px) {
+    footer > div.footer_1 {
+        width: 100%;
+        justify-content: space-between;
+        padding: 0 20px 0 20px;
+    }
 
+    div.footer_1 > img {
+        width: 50px;
+        height: 50px;
+    }
+
+    div.footer_1_1 > img {
+        height: 25px;
+    }
+
+    div.footer_1_2 > h4 {
+        font-size: 20px;
+    }
+
+    div.footer_1_2 > p {
+        font-size: 14px;
+    }
 }
 
 /* Phone screen */
