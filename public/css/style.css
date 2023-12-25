@@ -987,7 +987,7 @@ div.infos_a_propos_1 > div {
     align-items: center;
     width: 800px;
     height: 100%;
-    border-radius: 10px ;
+    border-radius: 10px;
     overflow: hidden;
     background-color: var(--fourth-color);
     border: 2px solid var(--fourth-color);
@@ -1086,7 +1086,7 @@ div.conditions_bloc_1 > div {
     align-items: center;
     width: 850px;
     height: 100%;
-    border-radius: 10px ;
+    border-radius: 10px;
     overflow: hidden;
     background-color: var(--fourth-color);
     border: 2px solid var(--fourth-color);
@@ -1149,7 +1149,7 @@ div.mentions_bloc_1 > div {
     align-items: center;
     width: 850px;
     height: 100%;
-    border-radius: 10px ;
+    border-radius: 10px;
     overflow: hidden;
     background-color: var(--fourth-color);
     border: 2px solid var(--fourth-color);
@@ -1217,7 +1217,7 @@ div.bloc_profil_1 > div {
     align-items: center;
     width: 500px;
     height: 100%;
-    border-radius: 10px ;
+    border-radius: 10px;
     overflow: hidden;
     background-color: var(--fourth-color);
     border: 2px solid var(--fourth-color);
