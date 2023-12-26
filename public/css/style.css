@@ -1500,4 +1500,17 @@ div.ligne_profil > p:last-child {
         text-align: center;
         font-size: 10px;
     }
+
+    /* CSS info_site/mentions.html.twig */
+    div.mentions_bloc_1 > h3 {
+        font-size: 15px;
+    }
+
+    div.mentions_bloc_1 > h4 {
+        font-size: 13px;
+    }
+
+    div.mentions_bloc_1 > p {
+        font-size: 10px;
+    }
 }
