@@ -1465,4 +1465,39 @@ div.ligne_profil > p:last-child {
     div.conditions_bloc_1 > p {
         font-size: 10px;
     }
+
+    /* CSS info_site/index.html.twig */
+    div.infos_a_propos_1 > h3 {
+        font-size: 15px;
+    }
+
+    div.infos_a_propos_1 > p {
+        font-size: 10px;
+    }
+
+    div.infos_a_propos_2 > h3 {
+        font-size: 15px;
+    }
+
+    div.infos_a_propos_2_1 > div.membre {
+        width: 140px;
+        height: 300px;
+    }
+
+    div.membre > img {
+        width: 100%;
+    }
+
+    div.membre > h4 {
+        font-size: 15px;
+    }
+
+    div.membre > p {
+        font-size: 12px;
+    }
+
+    div.membre > q {
+        text-align: center;
+        font-size: 10px;
+    }
 }
