@@ -1432,4 +1432,24 @@ div.ligne_profil > p:last-child {
     div.pagination span.current {
         font-size: 15px;
     }
+
+    /* CSS profil/index.html.twig */
+    div.ligne_profil {
+        flex-direction: column;
+    }
+
+    div.ligne_profil > p:first-child {
+        margin: 0;
+        font-size: 12px;
+    }
+
+    div.ligne_profil > p:last-child {
+        font-size: 12px;
+    }
+
+    div.bloc_profil_1 button {
+        width: 165px;
+        margin-top: 10px;
+        font-size: 12px;
+    }
 }
