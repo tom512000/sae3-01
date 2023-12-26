@@ -7,6 +7,7 @@ use App\Factory\UserFactory;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -168,7 +169,7 @@ class ProfileController extends AbstractController
 
     #[IsGranted('ROLE_USER')]
     #[Route('/profil/delete', name: 'app_profile_delete')]
-    public function delete(EntityManagerInterface $entityManager, #[CurrentUser] User $user, Request $request): Response
+    public function delete(Security $security,EntityManagerInterface $entityManager, #[CurrentUser] User $user, Request $request): Response
     {
         $form = $this->createForm(FormType::class);
         $form->add('Delete', SubmitType::class, ['label' => 'Supprimer']);
@@ -181,6 +182,7 @@ class ProfileController extends AbstractController
             $query->execute();
             $entityManager->remove($user);
             $entityManager->flush();
+            $security->logout(false);
 
             return $this->redirectToRoute('app_home');
         } elseif ($form->isSubmitted() && $form->isValid()) {
