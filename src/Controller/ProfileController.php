@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
@@ -45,7 +46,7 @@ class ProfileController extends AbstractController
      */
     #[IsGranted('ROLE_USER')]
     #[Route('/profil/modif', name: 'app_profile_modif')]
-    public function modif(EntityManagerInterface $entityManager, #[CurrentUser] User $user, Request $request, SluggerInterface $slugger): Response
+    public function modif(EntityManagerInterface $entityManager, #[CurrentUser] User $user, Request $request, SluggerInterface $slugger, UserPasswordHasherInterface $passwordHasher): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -87,6 +88,7 @@ class ProfileController extends AbstractController
                 $user->setLettreMotiv($newFilename);
             }
 
+            $user->setPassword($passwordHasher->hashPassword($user, $user->getPassword()));
             $entityManager->flush();
 
             return $this->redirectToRoute('app_profile');
@@ -153,6 +155,7 @@ class ProfileController extends AbstractController
                 'lastName' => $user->getLastName(),
                 'firstName' => $user->getFirstName(),
                 'email' => $user->getEmail(),
+                'password' => $user->getPassword(),
                 'dateNais' => $user->getDateNais(),
                 'phone' => $user->getPhone(),
                 'cv' => $user->getCv(),
