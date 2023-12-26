@@ -1416,6 +1416,7 @@ div.ligne_profil > p:last-child {
 
     /* Bloc de titre */
     div.titre_bloc > h1 {
+        text-align: center;
         font-size: 32px;
     }
 
