@@ -1452,4 +1452,17 @@ div.ligne_profil > p:last-child {
         margin-top: 10px;
         font-size: 12px;
     }
+
+    /* CSS info_site/conditions.html.twig */
+    div.conditions_bloc_1 > h3 {
+        font-size: 15px;
+    }
+
+    div.conditions_bloc_1 > h4 {
+        font-size: 13px;
+    }
+
+    div.conditions_bloc_1 > p {
+        font-size: 10px;
+    }
 }
