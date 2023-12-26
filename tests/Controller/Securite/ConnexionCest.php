@@ -45,7 +45,7 @@ class ConnexionCest
         ]);
 
         $I->seeResponseCodeIs(200);
-        $I->see('ERREUR : DONNEES INVALIDES');
+        $I->see('Une ou plusieurs données sont invalides.');
     }
 
     public function testInvalidEmail(ControllerTester $I): void
@@ -59,7 +59,7 @@ class ConnexionCest
         ]);
 
         $I->seeResponseCodeIs(200);
-        $I->see('ERREUR : DONNEES INVALIDES');
+        $I->see('Une ou plusieurs données sont invalides.');
     }
 
     public function testClickInscriptionUser(ControllerTester $I): void

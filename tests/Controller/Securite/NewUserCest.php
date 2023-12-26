@@ -14,7 +14,7 @@ class newUserCest
     public function tryToTest(ControllerTester $I): void
     {
         $I->amOnPage('/newUser');
-        $I->see('CRÉATION DU COMPTE');
+        $I->see('CRÉER MON COMPTE');
 
         $I->submitForm('form', [
             'lastName' => 'test',

@@ -32,16 +32,14 @@ class ModificationProfilCest
     public function testAffichageProfilModificationPage(ControllerTester $I): void
     {
         $I->amOnPage('/profil/modif');
-        $I->see('MODIFIER LE PROFIL');
+        $I->see('MODIFIER MON PROFIL', 'h1');
         $I->seeElement('.login_bloc form');
-
         $I->seeElement('input[name="user[firstName]"]');
         $I->seeElement('input[name="user[lastName]"]');
         $I->seeElement('input[name="user[phone]"]');
         $I->seeElement('input[name="user[email]"]');
         $I->seeElement('input[name="user[cv]"]');
         $I->seeElement('input[name="user[lettreMotiv]"]');
-
         $I->seeElement('label[for="firstName"]');
         $I->seeElement('label[for="lastName"]');
         $I->seeElement('label[for="phone"]');

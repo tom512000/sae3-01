@@ -79,7 +79,7 @@ class indexCest
         $I->amOnPage('/entreprise/offre?entrepriseId=1');
         $I->seeResponseCodeIs(200);
         $I->see('Offres', 'title');
-        $I->see('LISTE DES OFFRES DE L\'ENTREPRISE', '.titre_offre h1');
+        $I->see('LISTE DES OFFRES', '.titre_bloc h1');
         $I->seeNumberOfElements('.bloc_offre', 22);
     }
 
