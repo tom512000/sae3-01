@@ -915,7 +915,7 @@ div.relative_bloc {
 div.login_form {
     display: flex;
     flex-direction: column;
-    width: 40%;
+    width: 500px;
     height: 100%;
     position: relative;
     padding: 25px;
