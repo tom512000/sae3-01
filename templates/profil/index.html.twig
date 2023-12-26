@@ -34,7 +34,9 @@
             <div class="ligne_profil">
                 <p>CV enregistré :&ensp;</p>
                 {% if app.user.cv %}
-                    <p><a href="{{ asset('uploads/pdf/' ~ app.user.cv) }}">CV (PDF)</a></p>
+                    <p>
+                        <a href="{{ asset('uploads/pdf/' ~ app.user.cv) }}">CV (PDF)</a>
+                    </p>
                 {% else %}
                     <p>Aucun</p>
                 {% endif %}
@@ -42,7 +44,9 @@
             <div class="ligne_profil">
                 <p>Lettre de motivation enregistrée :&ensp;</p>
                 {% if app.user.lettreMotiv %}
-                    <p><a href="{{ asset('uploads/pdf/' ~ app.user.lettreMotiv) }}">Lettre de motivation (PDF)</a></p>
+                    <p>
+                        <a href="{{ asset('uploads/pdf/' ~ app.user.lettreMotiv) }}">Lettre de motivation (PDF)</a>
+                    </p>
                 {% else %}
                     <p>Aucune</p>
                 {% endif %}
