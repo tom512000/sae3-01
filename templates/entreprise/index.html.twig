@@ -12,26 +12,27 @@
 {% endblock %}
 
 {% block body %}
-        {# Affichage de la liste de toutes les entreprises #}
-        {% if Entreprises|length > 0 %}
-            <div class="titre_entreprises">
-                <h1>LISTE DES ENTREPRISES</h1>
-            </div>
-            <br>
-            <div class="bloc_entreprises">
-                {% for Entreprise in Entreprises %}
-                    <div class="bloc_entreprise">
-                        <div class="bord"></div>
-                        <div class="infos_entreprise">
-                            <a href="entreprise/{{ Entreprise.id }}">
-                                <img src="{{ Entreprise.logo }}" alt="Logo de {{ Entreprise.nomEnt }}"/>
-                            </a>
-                            <h3>{{ Entreprise.nomEnt }}</h3>
-                            <p>{{ nbOffres[Entreprise.getId()] }} annonces en ligne</p>
-                        </div>
+
+    {# Affichage de la liste de toutes les entreprises #}
+    {% if Entreprises|length > 0 %}
+        <div class="titre_bloc taille1">
+            <h1>LISTE DES ENTREPRISES</h1>
+        </div>
+        <br>
+        <div class="bloc_entreprises">
+            {% for Entreprise in Entreprises %}
+                <div class="bloc_entreprise">
+                    <div class="bord"></div>
+                    <div class="infos_entreprise">
+                        <a href="entreprise/{{ Entreprise.id }}">
+                            <img src="{{ Entreprise.logo }}" alt="Logo de {{ Entreprise.nomEnt }}"/>
+                        </a>
+                        <h3>{{ Entreprise.nomEnt }}</h3>
+                        <p>{{ nbOffres[Entreprise.getId()] }} annonces en ligne</p>
                     </div>
-                {% endfor %}
-            </div>
+                </div>
+            {% endfor %}
+        </div>
 
         {% else %}
 

@@ -60,7 +60,7 @@ class IndexCest
         $I->amOnPage('/entreprise');
         $I->seeResponseCodeIs(200);
         $I->see('Entreprises', 'title');
-        $I->see('LISTE DES ENTREPRISES', '.titre_entreprises h1');
+        $I->see('LISTE DES ENTREPRISES', '.titre_bloc h1');
         $I->seeNumberOfElements('.bloc_entreprise', 11);
 
         $I->see('annonces en ligne', '.bloc_entreprises .bloc_entreprise:first-child .infos_entreprise p');

@@ -45,7 +45,7 @@ body {
     width: 100%;
     height: 100%;
     min-height: 100vh;
-    margin-top: 64px;
+    margin-top: 62px;
     background: url("../img/background.png") fixed center;
     background-size: cover;
 }
@@ -64,30 +64,41 @@ body {
 }
 
 /* CSS templates/base.html.twig */
-div.container-fluid > a {
-    height: 30px;
-}
-
-div.container-fluid > a > img {
-    height: 100%;
-}
-
-li.space {
-    margin-right: 25px;
-}
-
-li.space > a > img {
-    height: 20px;
-}
-
-a.btn-connection {
-    margin-left: 25px;
-}
-
 /* Barre du menu */
 body > nav.navbar {
     background-color: var(--third-color);
     border-bottom: 2px solid var(--main-color);
+}
+
+div.container-fluid > a:first-child {
+    height: 45px;
+}
+
+div.container-fluid > a:first-child > img {
+    width: 100%;
+    height: 100%;
+}
+
+div.container-fluid > a:nth-child(2) {
+    height: 33px;
+    margin-top: -10px;
+}
+
+div.container-fluid > a:nth-child(2) > img {
+    height: 100%;
+}
+
+button.navbar-toggler {
+    border: 1px solid var(--main-color);
+}
+
+button.navbar-toggler:hover {
+    border: 1px solid var(--main-color);
+    background-color: var(--main-color);
+}
+
+button.navbar-toggler > span {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(231,231,231)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
 
 ul.navbar-nav > li {
@@ -101,6 +112,10 @@ ul.navbar-nav > li {
 
 .navbar-nav > li.nav-item > a:hover {
     color: var(--main-color);
+}
+
+a.btn-connection {
+    margin-left: 20px;
 }
 
 form.d-flex button, a.btn-connection {
@@ -188,12 +203,8 @@ footer > div.footer_2 {
     background-color: #ffffff;
 }
 
-footer > p {
-    color: #ffffff;
-    font-family: 'K2D', sans-serif;
-}
-
 /* CSS home/index.html.twig */
+/* Menu home */
 div.menu_bloc {
     display: flex;
     flex-direction: column;
@@ -207,16 +218,17 @@ div.menu_bloc {
 }
 
 div.menu_bloc > h1 {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    font-size: 40px;
     font-family: 'Comfortaa', sans-serif;
     color: var(--main-color);
 }
 
 div.menu_items {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
-    width: 800px;
+    width: 90%;
 }
 
 div.menu_items > h3 {
@@ -240,12 +252,13 @@ div.menu_items > div.barre {
     background-color: var(--main-color);
 }
 
+/* Titre menu home */
 div.titre_home {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100px;
+    padding: 0 25px 0 25px;
 }
 
 div.titre_home > div {
@@ -254,7 +267,8 @@ div.titre_home > div {
     align-items: center;
     width: 900px;
     height: 100%;
-    border-radius: 10px ;
+    padding: 15px;
+    border-radius: 10px;
     overflow: hidden;
     background-color: var(--fourth-color);
     border: 2px solid var(--fourth-color);
@@ -267,78 +281,35 @@ div.titre_home > div > h1 {
     color: var(--second-color);
 }
 
-/* CSS offre/index.html.twig */
-div.titre_offre {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 100%;
-    height: 300px;
-    padding: 40px;
-    margin-bottom: 40px;
-    border-bottom: 2px solid darkred;
-    background: url("../img/background-info.png") no-repeat center;
-    background-size: cover;
+/* CSS inscrire et offre */
+div.taille1 {
+    height: 150px;
 }
 
-div.titre_offre > h1 {
-    margin-bottom: 30px;
-    font-size: 65px;
-    background: -webkit-linear-gradient(var(--second-color), var(--main-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-family: 'Impact', sans-serif;
+div.taille2 {
+    margin-bottom: 20px;
 }
 
-div.bloc_legende {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 70%;
+div.bloc_1_inscrire {
+    width: 10px;
+    height: 100%;
 }
 
-div.bloc_legende > div {
-    display: flex;
-    align-items: center;
-    width: 230px;
-}
-
-div.bloc_legende p {
-    margin: 0 0 0 15px;
-    font-family: 'Lexend', sans-serif;
-}
-
-div.bloc_legende_1 {
-    border: 1px solid var(--main-color);
-    width: 20px;
-    height: 20px;
-    background-color: #5EB85E;
-}
-
-div.bloc_legende_2 {
-    border: 1px solid var(--main-color);
-    width: 20px;
-    height: 20px;
-    background-color: #87CEEB;
-}
-
-div.bloc_legende_3 {
-    border: 1px solid var(--main-color);
-    width: 20px;
-    height: 20px;
-    background-color: #FF9AA2;
-}
-
+/* Formulaire */
 form.form_offre {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
-    width: 1000px;
+    width: 90%;
+    height: 80%;
     padding: 15px;
     border-radius: 10px;
     background-color: var(--fourth-color);
+}
+
+form.form_offre > div {
+    padding: 10px 0 10px 0;
 }
 
 form.form_offre > div.radio_group {
@@ -380,16 +351,6 @@ form.form_offre > div.search {
     width: 220px;
 }
 
-button.style {
-    border: 1px solid var(--main-color);
-    color: var(--main-color);
-}
-
-button.style:hover {
-    border: 1px solid var(--main-color);
-    background-color: var(--main-color);
-}
-
 div.date_filtre {
     display: flex;
     flex-direction: column;
@@ -403,6 +364,18 @@ div.date_filtre > div > label {
     margin-left: 10px;
 }
 
+/* Bouton de Connexion / Déconnexion */
+button.style {
+    border: 1px solid var(--main-color);
+    color: var(--main-color);
+}
+
+button.style:hover {
+    border: 1px solid var(--main-color);
+    background-color: var(--main-color);
+}
+
+/* Aucunes offres */
 div.bloc_offres_vide {
     display: flex;
     align-items: center;
@@ -416,20 +389,64 @@ div.bloc_offres_vide > h1 {
     font-family: 'Cabin', sans-serif;
 }
 
+/* Liste des offres */
 div.bloc_offres {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
     width: 100%;
+    padding: 0 25px 0 25px;
 }
 
+/* CSS inscrire/index.html.twig */
+/* Légende */
+div.bloc_legende {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 70%;
+}
+
+div.bloc_legende > div {
+    display: flex;
+    align-items: center;
+    width: 230px;
+}
+
+div.bloc_legende p {
+    margin: 0 0 0 15px;
+    font-family: 'Lexend', sans-serif;
+}
+
+div.bloc_legende_1 {
+    border: 1px solid var(--main-color);
+    width: 20px;
+    height: 20px;
+    background-color: #5EB85E;
+}
+
+div.bloc_legende_2 {
+    border: 1px solid var(--main-color);
+    width: 20px;
+    height: 20px;
+    background-color: #87CEEB;
+}
+
+div.bloc_legende_3 {
+    border: 1px solid var(--main-color);
+    width: 20px;
+    height: 20px;
+    background-color: #FF9AA2;
+}
+
+/* CSS offre/_offre.html.twig */
 div.bloc_offre {
     display: flex;
     width: 900px;
     height: 270px;
-    margin: 0 25px 25px 40px;
+    margin-bottom: 40px;
     border-radius: 10px;
     overflow: hidden;
     background-color: var(--fourth-color);
@@ -448,12 +465,7 @@ div.bloc_offre_img > div.bloc_1 {
     background-color: var(--second-color);
 }
 
-div.bloc_1_inscrire {
-    width: 10px;
-    height: 100%;
-}
-
-div.bloc_offre_img div.bloc_2 {
+div.bloc_offre_img > div.bloc_2 {
     width: 100%;
     height: 100%;
     display: flex;
@@ -461,16 +473,16 @@ div.bloc_offre_img div.bloc_2 {
     align-items: center;
 }
 
-div.bloc_offre_img div.bloc_2 a {
-    width: 175px;
-    height: 175px;
+div.bloc_offre_img > div.bloc_2 > a {
+    width: 160px;
+    height: 160px;
 }
 
-div.bloc_offre_img div.bloc_2 a:hover {
+div.bloc_offre_img > div.bloc_2 > a:hover {
     opacity: 0.7;
 }
 
-div.bloc_offre_img div.bloc_2 a img {
+div.bloc_offre_img div.bloc_2 > a > img {
     width: 100%;
     height: 100%;
     border-radius: 10px;
@@ -480,14 +492,14 @@ div.bloc_offre_txt {
     width: 75%;
 }
 
-div.bloc_offre_txt div.infos1 {
+div.bloc_offre_txt > div.infos1 {
     display: flex;
     flex-direction: row;
     width: 100%;
     height: 30%;
 }
 
-div.bloc_offre_txt div.infos1_1 {
+div.bloc_offre_txt > div.infos1 > div.infos1_1 {
     display: flex;
     align-items: center;
     width: 60%;
@@ -495,24 +507,25 @@ div.bloc_offre_txt div.infos1_1 {
     padding-left: 20px;
 }
 
-div.infos1_1 a {
+div.infos1_1 > a {
     text-decoration: none;
+    font-size: 25px;
     font-weight: bold;
     color: var(--second-color);
 }
 
-div.infos1_1 a:hover {
+div.infos1_1 > a:hover {
     color: var(--main-color);
 }
 
-div.bloc_offre_txt div.infos1_2 {
+div.bloc_offre_txt > div.infos1 > div.infos1_2 {
     display: flex;
     flex-direction: column;
     width: 40%;
     height: 100%;
 }
 
-div.infos1_2 div.infos1_2_1 {
+div.infos1_2 > div.infos1_2_1 {
     display: flex;
     align-items: center;
     width: 100%;
@@ -520,7 +533,7 @@ div.infos1_2 div.infos1_2_1 {
     padding-left: 20px;
 }
 
-div.infos1_2 div.infos1_2_2 {
+div.infos1_2 > div.infos1_2_2 {
     display: flex;
     align-items: center;
     width: 100%;
@@ -530,7 +543,7 @@ div.infos1_2 div.infos1_2_2 {
     color: var(--second-color);
 }
 
-div.bloc_offre_txt div.infos2 {
+div.bloc_offre_txt > div.infos2 {
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -539,43 +552,44 @@ div.bloc_offre_txt div.infos2 {
     font-weight: bold;
 }
 
-div.infos2 div.infos2_1 {
+div.infos2 > div.infos2_1 {
     display: flex;
     align-items: center;
     width: 20%;
     height: 100%;
 }
 
-div.infos2 div.infos2_2 {
+div.infos2 > div.infos2_2 {
     display: flex;
     align-items: center;
     width: 80%;
     height: 100%;
 }
 
-div.bloc_offre_txt p.description {
+div.bloc_offre_txt > p.description {
     padding-left: 20px;
     padding-right: 20px;
     text-align: justify;
     opacity: 0.7;
 }
 
-div.bloc_offre_txt div.infos3 {
+div.bloc_offre_txt > div.infos3 {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 }
 
-div.infos3 p.duree {
+div.infos3 > p.duree {
     height: 30px;
     margin-left: 20px;
 }
 
-div.infos3 p.niveau {
+div.infos3 > p.niveau {
     height: 30px;
 }
 
-div.infos3 form.inscrip-button {
+div.infos3 > form.inscrip-button {
     margin-right: 60px;
 }
 
@@ -583,8 +597,8 @@ form.inscrip-button > button {
     transition: background-color 0.3s ease;
 }
 
-div.infos3 p.duree span,
-    div.infos3 p.niveau span {
+div.infos3 > p.duree > span,
+    div.infos3 > p.niveau > span {
     font-weight: bold;
 }
 
@@ -600,9 +614,12 @@ div.custom-pagination a {
     text-decoration: none;
     color: #333;
     background-color: #eee;
-    border: 1px solid var(--main-color);
-    border-radius: 3px;
+    border: 1px solid var(--third-color);
     transition: background-color 0.3s ease;
+}
+
+div.custom-pagination a:hover {
+    background-color: #b7b6b6;
 }
 
 div.custom-pagination span {
@@ -648,6 +665,7 @@ div.bloc_offre_infos_1 {
 }
 
 div.bloc_offre_infos_1 > h2 {
+    text-align: center;
     font-family: 'K2D', sans-serif;
     font-weight: bold;
 }
@@ -689,12 +707,12 @@ div.bloc_offre_infos_3 {
     justify-content: space-evenly;
 }
 
-div.bloc_offre_infos_3 h4 {
+div.bloc_offre_infos_3 > div > h4 {
     font-family: 'Comfortaa', sans-serif;
     font-weight: bold;
 }
 
-div.bloc_offre_infos_3 p {
+div.bloc_offre_infos_3 > div > p {
     font-family: 'Lexend', sans-serif;
 }
 
@@ -711,21 +729,20 @@ div.bloc_offre_infos_4 > p {
     font-family: 'Lexend', sans-serif;
 }
 
-/* CSS entreprise/index.html.twig */
-div.titre_entreprises {
+/* Bloc de titre */
+div.titre_bloc {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 150px;
     padding: 50px;
     border-bottom: 2px solid darkred;
     background: url("../img/background-info.png") no-repeat center;
     background-size: cover;
 }
 
-div.titre_entreprises > h1 {
+div.titre_bloc > h1 {
     font-size: 65px;
     background: -webkit-linear-gradient(var(--second-color), var(--main-color));
     -webkit-background-clip: text;
@@ -733,83 +750,7 @@ div.titre_entreprises > h1 {
     font-family: 'Impact', sans-serif;
 }
 
-div.entreprise_menu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    background: url("../img/background-info.png") no-repeat center;
-    background-size: cover;
-}
-
-div.details_entreprise {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-    height: 300px;
-    margin-top: 40px;
-    background-color: var(--fourth-color);
-}
-
-div.details_entreprise > img {
-    width: 200px;
-    height: 200px;
-    border-radius: 10px;
-}
-
-div.details_entreprise_1 {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-div.details_entreprise_1 > h1 {
-    font-family: 'Cabin', sans-serif;
-}
-
-div.details_entreprise_1 > p {
-    padding: 3px 5px 3px 5px;
-    border-radius: 10px;
-    color: var(--second-color);
-    font-family: 'K2D', sans-serif;
-    background-color: rgba(228, 55, 25, 0.7);
-}
-
-div.details_entreprise_2 {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-}
-
-div.details_entreprise_2 > h2 {
-    font-family: 'K2D', sans-serif;
-    font-weight: bold;
-}
-
-div.details_entreprise_2 > p {
-    font-family: 'Jost', sans-serif;
-}
-
-div.details_entreprise_2 > p > a {
-    font-weight: bold;
-    color: var(--main-color);
-}
-
-button.btn-offres-entreprise {
-    width: 200px;
-    height: 200px;
-    border: 1px solid var(--main-color);
-    border-radius: 20px;
-    font-family: 'Comfortaa', sans-serif;
-}
-
-button.btn-offres-entreprise:hover {
-    opacity: 0.8;
-}
-
+/* CSS entreprise/index.html.twig */
 div.bloc_entreprises {
     display: flex;
     flex-direction: row;
@@ -873,7 +814,90 @@ div.infos_entreprise > p {
     background-color: rgba(228, 55, 25, 0.7);
 }
 
-/* CSS security/index.html.twig */
+div.entreprise_menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background: url("../img/background-info.png") no-repeat center;
+    background-size: cover;
+}
+
+/* CSS entreprise/show.html.twig */
+div.details_entreprise {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin-top: 40px;
+    padding: 20px;
+    background-color: var(--fourth-color);
+}
+
+div.details_entreprise > div {
+    margin: 10px;
+}
+
+div.details_entreprise > img {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+div.details_entreprise_1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+div.details_entreprise_1 > h1 {
+    font-family: 'Cabin', sans-serif;
+}
+
+div.details_entreprise_1 > p {
+    padding: 3px 5px 3px 5px;
+    border-radius: 10px;
+    color: var(--second-color);
+    font-family: 'K2D', sans-serif;
+    background-color: rgba(228, 55, 25, 0.7);
+}
+
+div.details_entreprise_2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+div.details_entreprise_2 > h2 {
+    font-family: 'K2D', sans-serif;
+    font-weight: bold;
+}
+
+div.details_entreprise_2 > p {
+    font-family: 'Jost', sans-serif;
+}
+
+div.details_entreprise_2 > p > a {
+    font-weight: bold;
+    color: var(--main-color);
+}
+
+div.details_entreprise_3 button {
+    width: 200px;
+    height: 200px;
+    border: 1px solid var(--main-color);
+    border-radius: 20px;
+    font-family: 'Comfortaa', sans-serif;
+}
+
+div.details_entreprise_3 button:hover {
+    opacity: 0.8;
+}
+
+/* CSS delete/modif/new/login */
 form.login_bloc {
     display: flex;
     flex-direction: column;
@@ -882,14 +906,10 @@ form.login_bloc {
     width: 100%;
 }
 
-div.relative_bloc {
-    position: absolute;
-}
-
 div.login_form {
     display: flex;
     flex-direction: column;
-    width: 40%;
+    width: 500px;
     height: 100%;
     position: relative;
     padding: 25px;
@@ -949,33 +969,6 @@ div.infos_a_propos {
 }
 
 div.infos_a_propos_1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 70px;
-}
-
-div.infos_a_propos_1 > div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 800px;
-    height: 100%;
-    border-radius: 10px ;
-    overflow: hidden;
-    background-color: var(--fourth-color);
-    border: 2px solid var(--fourth-color);
-    box-shadow: 0 0 15px #000000;
-}
-
-div.infos_a_propos_1 > div > h1 {
-    margin: 0;
-    font-family: 'Comfortaa', sans-serif;
-    color: var(--second-color);
-}
-
-div.infos_a_propos_2 {
     width: calc(100% - 100px);
     margin: 0 50px 0 50px;
     padding: 25px;
@@ -986,13 +979,13 @@ div.infos_a_propos_2 {
     box-shadow: 0 0 15px #000000;
 }
 
-div.infos_a_propos_2 > p {
+div.infos_a_propos_1 > p {
     margin: 15px 0 0 0;
     text-align: justify;
     font-family: 'Comfortaa', sans-serif;
 }
 
-div.infos_a_propos_3 {
+div.infos_a_propos_2 {
     width: calc(100% - 100px);
     margin: 0 50px 50px 50px;
     padding: 25px;
@@ -1003,7 +996,7 @@ div.infos_a_propos_3 {
     box-shadow: 0 0 15px #000000;
 }
 
-div.infos_a_propos_3_1 {
+div.infos_a_propos_2_1 {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -1011,7 +1004,7 @@ div.infos_a_propos_3_1 {
     width: 100%;
 }
 
-div.membre {
+div.infos_a_propos_2_1 > div.membre {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -1048,33 +1041,6 @@ div.conditions_bloc {
 }
 
 div.conditions_bloc_1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 70px;
-}
-
-div.conditions_bloc_1 > div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 850px;
-    height: 100%;
-    border-radius: 10px ;
-    overflow: hidden;
-    background-color: var(--fourth-color);
-    border: 2px solid var(--fourth-color);
-    box-shadow: 0 0 15px #000000;
-}
-
-div.conditions_bloc_1 > div > h1 {
-    margin: 0;
-    font-family: 'Comfortaa', sans-serif;
-    color: var(--second-color);
-}
-
-div.conditions_bloc_2 {
     width: calc(100% - 100px);
     margin: 0 50px 0 50px;
     padding: 25px;
@@ -1085,22 +1051,18 @@ div.conditions_bloc_2 {
     box-shadow: 0 0 15px #000000;
 }
 
-div.conditions_bloc_2 > p {
+div.conditions_bloc_1 > p {
     margin-bottom: 20px;
     text-align: justify;
     font-family: 'Comfortaa', sans-serif;
 }
 
-div.conditions_bloc_2 > p > a {
+div.conditions_bloc_1 > p > a {
     color: var(--main-color);
 }
 
-div.conditions_bloc_2 > p > a:hover {
+div.conditions_bloc_1 > p > a:hover {
     color: var(--second-color);
-}
-
-.custom-pagination a:hover {
-    background-color: #b7b6b6;
 }
 
 /* CSS info_site/mentions.html.twig */
@@ -1111,33 +1073,6 @@ div.mentions_bloc {
 }
 
 div.mentions_bloc_1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 70px;
-}
-
-div.mentions_bloc_1 > div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 850px;
-    height: 100%;
-    border-radius: 10px ;
-    overflow: hidden;
-    background-color: var(--fourth-color);
-    border: 2px solid var(--fourth-color);
-    box-shadow: 0 0 15px #000000;
-}
-
-div.mentions_bloc_1 > div > h1 {
-    margin: 0;
-    font-family: 'Comfortaa', sans-serif;
-    color: var(--second-color);
-}
-
-div.mentions_bloc_2 {
     width: calc(100% - 100px);
     margin: 0 50px 0 50px;
     padding: 25px;
@@ -1148,58 +1083,37 @@ div.mentions_bloc_2 {
     box-shadow: 0 0 15px #000000;
 }
 
-div.mentions_bloc_2 > h3 {
+div.mentions_bloc_1 > h3 {
     margin-bottom: 15px;
 }
 
-div.mentions_bloc_2 > p {
+div.mentions_bloc_1 > p {
     margin-bottom: 20px;
     text-align: justify;
     font-family: 'Comfortaa', sans-serif;
 }
 
-div.mentions_bloc_2 > p > a {
+div.mentions_bloc_1 > p > a {
     color: var(--main-color);
 }
 
-div.mentions_bloc_2 > p > a:hover {
+div.mentions_bloc_1 > p > a:hover {
     color: var(--second-color);
 }
 
-/* profil/index.html.twig */
-div.profil_1 {
-    display: flex;
-    width: 100%;
-}
-
+/* CSS profil/index.html.twig */
 div.bloc_profil {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-div.bloc_profil_1 {
+div.profil_1 {
     display: flex;
-    justify-content: center;
-    align-items: center;
     width: 100%;
-    height: 70px;
 }
 
-div.bloc_profil_1 > div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 500px;
-    height: 100%;
-    border-radius: 10px ;
-    overflow: hidden;
-    background-color: var(--fourth-color);
-    border: 2px solid var(--fourth-color);
-    box-shadow: 0 0 15px #000000;
-}
-
-div.bloc_profil_2 {
+div.bloc_profil_1 {
     width: calc(100% - 100px);
     margin: 0 50px 25px 50px;
     padding: 25px;
@@ -1210,7 +1124,7 @@ div.bloc_profil_2 {
     box-shadow: 0 0 15px #000000;
 }
 
-div.bloc_profil_2 button {
+div.bloc_profil_1 button {
     width: 200px;
     height: 50px;
     border: 1px solid var(--main-color);
@@ -1218,7 +1132,7 @@ div.bloc_profil_2 button {
     font-family: 'Comfortaa', sans-serif;
 }
 
-div.bloc_profil_2 button:hover {
+div.bloc_profil_1 button:hover {
     color: var(--fourth-color);
     background-color: var(--main-color);
 }
@@ -1232,11 +1146,136 @@ div.ligne_profil > p {
     font-family: 'Comfortaa', sans-serif;
 }
 
-div.ligne_profil p:first-child {
+div.ligne_profil > p:first-child {
     font-family: 'Comfortaa', sans-serif;
     font-weight: bold;
 }
 
-div.ligne_profil p:last-child {
+div.ligne_profil > p:last-child {
     font-family: 'K2D', sans-serif;
+}
+
+/* CSS Media Queries */
+/* Laptop screen */
+@media screen and (min-width: 769px) and (max-width: 1500px) {
+    /* CSS templates/base.html.twig */
+    /* Barre du menu */
+    footer > div.footer_1 {
+        justify-content: space-between;
+    }
+
+    /* CSS home/index.html.twig */
+    /* Menu home */
+    div.menu_items > h3 {
+        font-size: 25px;
+    }
+
+    /* CSS entreprise/index.html.twig */
+    div.titre_bloc > h1 {
+        font-size: 60px;
+    }
+}
+
+/* Tablet screen */
+@media screen and (min-width: 426px) and (max-width: 768px) {
+    /* CSS templates/base.html.twig */
+    /* Barre du menu */
+    footer > div.footer_1 {
+        width: 100%;
+        justify-content: space-between;
+        padding: 0 20px 0 20px;
+    }
+
+    div.footer_1 > img {
+        width: 50px;
+        height: 50px;
+    }
+
+    div.footer_1_1 > img {
+        height: 25px;
+    }
+
+    div.footer_1_2 > h4 {
+        font-size: 20px;
+    }
+
+    div.footer_1_2 > p {
+        font-size: 14px;
+    }
+
+    /* CSS home/index.html.twig */
+    /* Menu home */
+    div.menu_bloc > h1 {
+        font-size: 30px;
+    }
+
+    div.menu_items > h3 {
+        font-size: 18px;
+    }
+
+    div.menu_items > div.barre {
+        width: 2px;
+        height: 20px;
+    }
+
+    /* CSS offre/_offre.html.twig */
+    div.bloc_offre_img {
+        width: 35%;
+    }
+
+    div.bloc_offre_txt {
+        width: 65%;
+    }
+
+    div.infos1_1 > a {
+        font-size: 17px;
+    }
+
+    div.infos1_2 {
+        margin-left: -30px;
+    }
+
+    div.infos1_2 * {
+        font-size: 13px;
+    }
+
+    div.infos2 * {
+        font-size: 13px;
+    }
+
+    div.infos2_1 {
+        width: 40%;
+    }
+
+    div.infos2_2 {
+        width: 60%;
+        padding-right: 5px;
+    }
+
+    p.description {
+        font-size: 12px;
+    }
+
+    div.infos3 {
+        margin-top: -7px;
+    }
+
+    div.infos3 > p.duree,
+    div.infos3 > p.niveau {
+        font-size: 13px;
+    }
+
+    p.duree > span,
+    p.niveau > span {
+        display: block;
+    }
+
+    form.inscrip-button > button {
+        margin-right: -40px;
+    }
+
+    /* CSS entreprise/index.html.twig */
+    div.titre_bloc > h1 {
+        font-size: 45px;
+    }
 }

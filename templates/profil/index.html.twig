@@ -2,18 +2,15 @@
 
 {% block icon %}👤{% endblock %}
 {% block title %}Profil{% endblock %}
-{% block background %}{{ asset('img/background-info.png') }}{% endblock %}
+{% block background %}{{ asset('img/background.png') }}{% endblock %}
 
 {% block body %}
+    <div class="titre_bloc">
+        <h1>MON PROFIL</h1>
+    </div>
     <div class="bloc_profil">
         <br>
         <div class="bloc_profil_1">
-            <div>
-                <h1>Profil</h1>
-            </div>
-        </div>
-        <br>
-        <div class="bloc_profil_2">
             <div class="ligne_profil">
                 <p>Nom :&ensp;</p>
                 <p>{{ app.user.firstName }}</p>
@@ -37,7 +34,9 @@
             <div class="ligne_profil">
                 <p>CV enregistré :&ensp;</p>
                 {% if app.user.cv %}
-                    <p><a href="{{ asset('uploads/pdf/' ~ app.user.cv) }}">CV (PDF)</a></p>
+                    <p>
+                        <a href="{{ asset('uploads/pdf/' ~ app.user.cv) }}">CV (PDF)</a>
+                    </p>
                 {% else %}
                     <p>Aucun</p>
                 {% endif %}
@@ -45,7 +44,9 @@
             <div class="ligne_profil">
                 <p>Lettre de motivation enregistrée :&ensp;</p>
                 {% if app.user.lettreMotiv %}
-                    <p><a href="{{ asset('uploads/pdf/' ~ app.user.lettreMotiv) }}">Lettre de motivation (PDF)</a></p>
+                    <p>
+                        <a href="{{ asset('uploads/pdf/' ~ app.user.lettreMotiv) }}">Lettre de motivation (PDF)</a>
+                    </p>
                 {% else %}
                     <p>Aucune</p>
                 {% endif %}

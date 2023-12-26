@@ -44,7 +44,7 @@
                     {% if inscription[Offre.id] is defined %}
                         {% if inscription[Offre.id] is not null%}
                             <form class="inscrip-button" action="{{ path('app_inscire_desinscription', {'idOffre': Offre.id}) }}" method="get">
-                                <button class="btn btn-danger show_button" type="submit">Se désincrire</button>
+                                <button class="btn btn-danger show_button" type="submit">Se Désinscrire</button>
                             </form>
                         {% else %}
                             <form class="inscrip-button" action="{{ path('app_inscire_inscription', {'idOffre': Offre.id}) }}" method="get">
@@ -58,7 +58,7 @@
                     {% endif %}
                 {% elseif inscription[Offre.id] is defined and inscription[Offre.id] is not null%}
                     <form class="inscrip-button" action="{{ path('app_inscire_desinscription', {'idOffre': Offre.id}) }}" method="get">
-                        <button class="btn btn-danger show_button" type="submit">Se désincrire</button>
+                        <button class="btn btn-danger show_button" type="submit">Se Désinscrire</button>
                     </form>
                 {% endif %}
             </div>

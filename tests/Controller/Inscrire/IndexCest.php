@@ -48,10 +48,8 @@ class IndexCest
     public function testAucunInscriptionsPage(ControllerTester $I): void
     {
         $I->amOnPage('/inscription');
-        $I->see('Vos inscriptions', '.titre_offre h1');
-        $I->seeElement('.titre_offre');
+        $I->see('MES INSCRIPTIONS', '.titre_bloc h1');
         $I->seeElement('.bloc_legende');
-
         $I->seeElement('.bloc_offres_vide h1');
     }
 
@@ -60,10 +58,8 @@ class IndexCest
         InscrireFactory::createMany(2);
 
         $I->amOnPage('/inscription');
-        $I->see('Vos inscriptions', '.titre_offre h1');
-        $I->seeElement('.titre_offre');
+        $I->see('MES INSCRIPTIONS', '.titre_bloc h1');
         $I->seeElement('.bloc_legende');
-
         $I->seeElement('.bloc_offres');
         $I->seeElement('.bloc_offre');
         $I->seeElement('.bloc_offre_img');
@@ -102,7 +98,7 @@ class IndexCest
         $I->assertEquals($expectedRoute, $currentRoute);
         $I->seeNumberOfElements('.bloc_offre', 1);
 
-        $I->click('Se désincrire');
+        $I->click('Se Désincrire');
 
         $currentRoute = $I->grabFromCurrentUrl();
 

@@ -9,7 +9,7 @@
     </div>
     <div class="bloc_offre_txt">
         <div class="infos1">
-            <div class="infos1_1 fs-5">
+            <div class="infos1_1">
                 <a href="/offre/{{ Offre.id }}">{{ Offre.nomOffre }}</a>
             </div>
             <div class="infos1_2">
@@ -24,7 +24,7 @@
         <div class="infos2">
             <div class="infos2_1">
                 {% set placesRestantes = nbInscriptionAccepter[Offre.id] is defined ? (Offre.nbPlace - nbInscriptionAccepter[Offre.id]) : Offre.nbPlace %}
-                {{ placesRestantes  }} place(s) restantes
+                <p>{{ placesRestantes  }} place(s) restantes</p>
             </div>
             <div class="infos2_2">
                 {{ Offre.lieux }}
@@ -32,10 +32,13 @@
         </div>
         <p class="description">{{ Offre.getDescrip() }}</p>
         <div class="infos3">
-            <p class="duree"><span>Durée :</span> {{ Offre.duree }} jour(s)</p>
-            <p class="niveau"><span>Niveau requis :</span> {{ Offre.level }}</p>
+            <p class="duree">
+                <span>Durée :</span> {{ Offre.duree }} jour(s)
+            </p>
+            <p class="niveau">
+                <span>Niveau requis :</span> {{ Offre.level }}
+            </p>
             {% if placesRestantes > 1 %}
-
                 {% if inscription[Offre.id] is defined %}
                     {% if inscription[Offre.id] is not null%}
                         <form class="inscrip-button" action="{{ path('app_inscire_desinscription', {'idOffre': Offre.id}) }}" method="get">
@@ -51,7 +54,6 @@
                         <button class="btn btn-success" type="submit">S'inscrire</button>
                     </form>
                 {% endif %}
-
             {% elseif inscription[Offre.id] is defined and inscription[Offre.id] is not null%}
                 <form class="inscrip-button" action="{{ path('app_inscire_desinscription', {'idOffre': Offre.id}) }}" method="get">
                     <button class="btn btn-danger" type="submit">Se désincrire</button>

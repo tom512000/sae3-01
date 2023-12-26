@@ -77,7 +77,7 @@ class IndexCest
         $I->amOnPage('/offre');
         $I->seeResponseCodeIs(200);
         $I->see('Offres', 'title');
-        $I->see('LISTE DES OFFRES', '.titre_offre h1');
+        $I->see('LISTE DES OFFRES', '.titre_bloc h1');
         $I->seeNumberOfElements('.bloc_offre', 14);
     }
 

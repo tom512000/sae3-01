@@ -5,32 +5,34 @@
 {% block background %}{{ asset('img/background.png') }}{% endblock %}
 
 {% block body %}
-
     <form class="login_bloc" method="post">
         <div class="login_form">
-            <h1 class="h3 mb-3 font-weight-normal">MODIFIER LE PROFIL</h1>
+            <h1 class="h3 mb-3 font-weight-normal">MODIFIER MON PROFIL</h1>
 
             {{ form_start(form) }}
-            <label for="firstName">Nom :</label>
-            <div>{{ form_widget(form.firstName,{'attr': {'class': 'form-control'}}) }}</div>
+            <label for="email">Adresse Email :</label>
+            <div>{{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}</div>
 
-            <label for="lastName">Prenom :</label>
-            <div>{{ form_widget(form.lastName,{'attr': {'class': 'form-control'}}) }}</div>
+            <label for="password">Mot de Passe :</label>
+            <div>{{ form_widget(form.password, {'attr': {'class': 'form-control'}}) }}</div>
+
+            <label for="firstName">Nom :</label>
+            <div>{{ form_widget(form.firstName, {'attr': {'class': 'form-control'}}) }}</div>
+
+            <label for="lastName">Prénom :</label>
+            <div>{{ form_widget(form.lastName, {'attr': {'class': 'form-control'}}) }}</div>
 
             <label for="phone">Numéro de Téléphone :</label>
-            <div>{{ form_widget(form.phone,{'attr': {'class': 'form-control'}}) }}</div>
+            <div>{{ form_widget(form.phone, {'attr': {'class': 'form-control'}}) }}</div>
 
             <label for="dateNais">Date de Naissance :</label>
-            <div>{{ form_widget(form.dateNais,{'attr': {'class': 'form-control'}}) }}</div>
-
-            <label for="email">Adresse Email :</label>
-            <div>{{ form_widget(form.email,{'attr': {'class': 'form-control'}}) }}</div>
+            <div>{{ form_widget(form.dateNais, {'attr': {'class': 'form-control'}}) }}</div>
 
             <label for="cv">CV (PDF) :</label>
-            <div>{{ form_widget(form.cv,{'attr': {'class': 'form-control'}}) }}</div>
+            <div>{{ form_widget(form.cv, {'attr': {'class': 'form-control'}}) }}</div>
 
             <label for="lettreMotiv">Lettre de Motivation (PDF) :</label>
-            <div>{{ form_widget(form.lettreMotiv,{'attr': {'class': 'form-control'}}) }}</div>
+            <div>{{ form_widget(form.lettreMotiv, {'attr': {'class': 'form-control'}}) }}</div>
             {{ form_end(form) }}
         </div>
     </form>
