@@ -1413,4 +1413,22 @@ div.ligne_profil > p:last-child {
     footer > p:last-child {
         font-size: 10px;
     }
+
+    /* Bloc de titre */
+    div.titre_bloc > h1 {
+        font-size: 32px;
+    }
+
+    form.form_offre * {
+        font-size: 7px;
+    }
+
+    /* Pagination */
+    div.pagination * {
+        font-size: 15px;
+    }
+
+    div.pagination span.current {
+        font-size: 15px;
+    }
 }
