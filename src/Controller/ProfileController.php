@@ -7,12 +7,14 @@ use App\Factory\UserFactory;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
@@ -44,7 +46,7 @@ class ProfileController extends AbstractController
      */
     #[IsGranted('ROLE_USER')]
     #[Route('/profil/modif', name: 'app_profile_modif')]
-    public function modif(EntityManagerInterface $entityManager, #[CurrentUser] User $user, Request $request, SluggerInterface $slugger): Response
+    public function modif(EntityManagerInterface $entityManager, #[CurrentUser] User $user, Request $request, SluggerInterface $slugger, UserPasswordHasherInterface $passwordHasher): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -58,10 +60,7 @@ class ProfileController extends AbstractController
                 $newFilename = $safeFilename.'-'.uniqid().'.'.$cvFile->guessExtension();
 
                 try {
-                    $cvFile->move(
-                        $this->getParameter('PDF_files'),
-                        $newFilename
-                    );
+                    $cvFile->move($this->getParameter('PDF_files'), $newFilename);
                 } catch (FileException) {
                 }
 
@@ -76,16 +75,14 @@ class ProfileController extends AbstractController
                 $newFilename = $safeFilename.'-'.uniqid().'.'.$motiFile->guessExtension();
 
                 try {
-                    $motiFile->move(
-                        $this->getParameter('PDF_files'),
-                        $newFilename
-                    );
+                    $motiFile->move($this->getParameter('PDF_files'), $newFilename);
                 } catch (FileException) {
                 }
 
                 $user->setLettreMotiv($newFilename);
             }
 
+            $user->setPassword($passwordHasher->hashPassword($user, $user->getPassword()));
             $entityManager->flush();
 
             return $this->redirectToRoute('app_profile');
@@ -120,10 +117,7 @@ class ProfileController extends AbstractController
                 $newFilename = $safeFilename.'-'.uniqid().'.'.$cvFile->guessExtension();
 
                 try {
-                    $cvFile->move(
-                        $this->getParameter('PDF_files'),
-                        $newFilename
-                    );
+                    $cvFile->move($this->getParameter('PDF_files'), $newFilename);
                 } catch (FileException) {
                 }
 
@@ -138,10 +132,7 @@ class ProfileController extends AbstractController
                 $newFilename = $safeFilename.'-'.uniqid().'.'.$motiFile->guessExtension();
 
                 try {
-                    $motiFile->move(
-                        $this->getParameter('PDF_files'),
-                        $newFilename
-                    );
+                    $motiFile->move($this->getParameter('PDF_files'), $newFilename);
                 } catch (FileException) {
                 }
 
@@ -152,6 +143,7 @@ class ProfileController extends AbstractController
                 'lastName' => $user->getLastName(),
                 'firstName' => $user->getFirstName(),
                 'email' => $user->getEmail(),
+                'password' => $user->getPassword(),
                 'dateNais' => $user->getDateNais(),
                 'phone' => $user->getPhone(),
                 'cv' => $user->getCv(),
@@ -168,11 +160,15 @@ class ProfileController extends AbstractController
 
     #[IsGranted('ROLE_USER')]
     #[Route('/profil/delete', name: 'app_profile_delete')]
-    public function delete(EntityManagerInterface $entityManager, #[CurrentUser] User $user, Request $request): Response
+    public function delete(Security $security,EntityManagerInterface $entityManager, #[CurrentUser] User $user, Request $request): Response
     {
         $form = $this->createForm(FormType::class);
-        $form->add('Delete', SubmitType::class, ['label' => 'Supprimer']);
-        $form->add('Cancel', SubmitType::class, ['label' => 'Annuler']);
+        $form->add('Delete', SubmitType::class, [
+            'label' => 'Supprimer'
+        ]);
+        $form->add('Cancel', SubmitType::class, [
+            'label' => 'Annuler'
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() && ($form->getClickedButton() === $form->get('Delete'))) {
@@ -181,6 +177,7 @@ class ProfileController extends AbstractController
             $query->execute();
             $entityManager->remove($user);
             $entityManager->flush();
+            $security->logout(false);
 
             return $this->redirectToRoute('app_home');
         } elseif ($form->isSubmitted() && $form->isValid()) {
@@ -188,7 +185,8 @@ class ProfileController extends AbstractController
         }
 
         return $this->render('profil/delete.html.twig', [
-            'user' => $user, 'form' => $form,
+            'user' => $user,
+            'form' => $form
         ]);
     }
 }
