@@ -188,7 +188,7 @@ class ProfileController extends AbstractController
         }
 
         return $this->render('profil/delete.html.twig', [
-            'user' => $user, 'form' => $form
+            'user' => $user, 'form' => $form,
         ]);
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\OffreRepository;
-use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -31,7 +30,7 @@ class Offre
     private ?string $lieux = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?DateTimeInterface $jourDeb = null;
+    private ?\DateTimeInterface $jourDeb = null;
 
     #[ORM\Column]
     private ?int $nbPlace = null;
@@ -160,7 +159,7 @@ class Offre
     /**
      * Obtient la date de début de l'offre.
      */
-    public function getJourDeb(): ?DateTimeInterface
+    public function getJourDeb(): ?\DateTimeInterface
     {
         return $this->jourDeb;
     }
@@ -176,11 +175,11 @@ class Offre
     /**
      * Définit la date de début de l'offre.
      *
-     * @param DateTimeInterface $jourDeb la date de début à définir
+     * @param \DateTimeInterface $jourDeb la date de début à définir
      *
      * @return offre L'instance actuelle de l'offre
      */
-    public function setJourDeb(DateTimeInterface $jourDeb): static
+    public function setJourDeb(\DateTimeInterface $jourDeb): static
     {
         $this->jourDeb = $jourDeb;
 

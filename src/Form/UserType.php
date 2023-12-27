@@ -31,37 +31,37 @@ class UserType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => 'Adresse Email :',
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
                 ],
             ])
             ->add('password', PasswordType::class, [
                 'label' => 'Mot de Passe :',
                 'attr' => [
-                    'class' => 'form-control'
-                ],
-            ])
-            ->add('firstName', null, [
-                'label' => 'Nom :',
-                'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
                 ],
             ])
             ->add('lastName', null, [
+                'label' => 'Nom :',
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+            ])
+            ->add('firstName', null, [
                 'label' => 'Prénom :',
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
                 ],
             ])
             ->add('phone', TelType::class, [
                 'label' => 'Numéro de Téléphone :',
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
                 ],
             ])
             ->add('dateNais', BirthdayType::class, [
                 'label' => 'Date de Naissance :',
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
                 ],
             ])
             ->add('cv', FileType::class, [
@@ -80,7 +80,7 @@ class UserType extends AbstractType
                 ],
                 'attr' => [
                     'class' => 'form-control',
-                    'enctype' => 'multipart/form-data'
+                    'enctype' => 'multipart/form-data',
                 ],
             ])
             ->add('lettreMotiv', FileType::class, [
@@ -99,7 +99,7 @@ class UserType extends AbstractType
                 ],
                 'attr' => [
                     'class' => 'form-control',
-                    'enctype' => 'multipart/form-data'
+                    'enctype' => 'multipart/form-data',
                 ],
             ])
             ->add('save', SubmitType::class, [
