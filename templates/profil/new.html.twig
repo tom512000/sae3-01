@@ -5,11 +5,11 @@
 {% block background %}{{ asset('img/background.png') }}{% endblock %}
 
 {% block body %}
-    <form class="login_bloc" method="post">
+    <div class="login_bloc">
         <div class="login_form">
             <h1 class="h3 mb-3 font-weight-normal">CRÉER MON COMPTE</h1>
             {{ form_start(form) }}
             {{ form_end(form) }}
         </div>
-    </form>
+    </div>
 {% endblock %}
