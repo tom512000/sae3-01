@@ -1551,4 +1551,9 @@ div.ligne_profil > p:last-child {
     input.form-control, div.form-control {
         font-size: 12px;
     }
+
+    /* CSS security/login.html.twig */
+    h4.register_account {
+        font-size: 15px;
+    }
 }
