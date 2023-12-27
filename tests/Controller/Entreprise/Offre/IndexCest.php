@@ -9,7 +9,7 @@ use App\Factory\UserFactory;
 use App\Repository\TypeRepository;
 use App\Tests\Support\ControllerTester;
 
-class indexCest
+class IndexCest
 {
     public function _before(ControllerTester $I): void
     {

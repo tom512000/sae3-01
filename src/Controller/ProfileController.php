@@ -60,10 +60,7 @@ class ProfileController extends AbstractController
                 $newFilename = $safeFilename.'-'.uniqid().'.'.$cvFile->guessExtension();
 
                 try {
-                    $cvFile->move(
-                        $this->getParameter('PDF_files'),
-                        $newFilename
-                    );
+                    $cvFile->move($this->getParameter('PDF_files'), $newFilename);
                 } catch (FileException) {
                 }
 
@@ -78,10 +75,7 @@ class ProfileController extends AbstractController
                 $newFilename = $safeFilename.'-'.uniqid().'.'.$motiFile->guessExtension();
 
                 try {
-                    $motiFile->move(
-                        $this->getParameter('PDF_files'),
-                        $newFilename
-                    );
+                    $motiFile->move($this->getParameter('PDF_files'), $newFilename);
                 } catch (FileException) {
                 }
 
@@ -123,10 +117,7 @@ class ProfileController extends AbstractController
                 $newFilename = $safeFilename.'-'.uniqid().'.'.$cvFile->guessExtension();
 
                 try {
-                    $cvFile->move(
-                        $this->getParameter('PDF_files'),
-                        $newFilename
-                    );
+                    $cvFile->move($this->getParameter('PDF_files'), $newFilename);
                 } catch (FileException) {
                 }
 
@@ -141,10 +132,7 @@ class ProfileController extends AbstractController
                 $newFilename = $safeFilename.'-'.uniqid().'.'.$motiFile->guessExtension();
 
                 try {
-                    $motiFile->move(
-                        $this->getParameter('PDF_files'),
-                        $newFilename
-                    );
+                    $motiFile->move($this->getParameter('PDF_files'), $newFilename);
                 } catch (FileException) {
                 }
 
@@ -175,8 +163,12 @@ class ProfileController extends AbstractController
     public function delete(Security $security,EntityManagerInterface $entityManager, #[CurrentUser] User $user, Request $request): Response
     {
         $form = $this->createForm(FormType::class);
-        $form->add('Delete', SubmitType::class, ['label' => 'Supprimer']);
-        $form->add('Cancel', SubmitType::class, ['label' => 'Annuler']);
+        $form->add('Delete', SubmitType::class, [
+            'label' => 'Supprimer'
+        ]);
+        $form->add('Cancel', SubmitType::class, [
+            'label' => 'Annuler'
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() && ($form->getClickedButton() === $form->get('Delete'))) {
@@ -192,6 +184,9 @@ class ProfileController extends AbstractController
             return $this->redirectToRoute('app_profile');
         }
 
-        return $this->render('profil/delete.html.twig', ['user' => $user, 'form' => $form]);
+        return $this->render('profil/delete.html.twig', [
+            'user' => $user,
+            'form' => $form
+        ]);
     }
 }

@@ -175,7 +175,7 @@ class Offre
     /**
      * Définit la date de début de l'offre.
      *
-     * @param \DateTimeInterface|null $jourDeb la date de début à définir
+     * @param \DateTimeInterface $jourDeb la date de début à définir
      *
      * @return offre L'instance actuelle de l'offre
      */

@@ -931,7 +931,7 @@ div.login_form > h1 {
     font-family: 'Archivo Black', sans-serif;
 }
 
-div.login_form > label {
+div.login_form label {
     margin-top: 10px;
     color: #ffffff;
     font-family: 'Raleway', sans-serif;
@@ -1544,7 +1544,7 @@ div.ligne_profil > p:last-child {
     }
 
     /* CSS profil/modif.html.twig */
-    div.login_form > label {
+    div.login_form label {
         font-size: 12px;
     }
 
