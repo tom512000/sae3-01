@@ -1542,4 +1542,13 @@ div.ligne_profil > p:last-child {
     div.login_form button {
         font-size: 15px;
     }
+
+    /* CSS profil/modif.html.twig */
+    div.login_form > label {
+        font-size: 12px;
+    }
+
+    input.form-control, div.form-control {
+        font-size: 12px;
+    }
 }
