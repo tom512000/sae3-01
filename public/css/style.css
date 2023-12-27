@@ -1529,4 +1529,17 @@ div.ligne_profil > p:last-child {
     div.bloc_legende > div {
         margin-top: 5px;
     }
+
+    /* CSS profil/delete.html.twig */
+    div.login_form {
+        width: 275px;
+    }
+
+    div.login_form > h1 {
+        font-size: 20px;
+    }
+
+    div.login_form button {
+        font-size: 15px;
+    }
 }
