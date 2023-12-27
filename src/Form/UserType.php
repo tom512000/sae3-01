@@ -28,26 +28,44 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('firstName', null, [
-                'label' => 'Nom',
-            ])
-            ->add('lastName', null, [
-                'label' => 'Prénom',
-            ])
-            ->add('phone', TelType::class, [
-                'label' => 'Numéro de Téléphone',
-            ])
-            ->add('dateNais', BirthdayType::class, [
-                'label' => 'Date de Naissance',
-            ])
             ->add('email', EmailType::class, [
-                'label' => 'Adresse Email',
+                'label' => 'Adresse Email :',
+                'attr' => [
+                    'class' => 'form-control'
+                ],
             ])
             ->add('password', PasswordType::class, [
-                'label' => 'Mot de Passe',
+                'label' => 'Mot de Passe :',
+                'attr' => [
+                    'class' => 'form-control'
+                ],
+            ])
+            ->add('firstName', null, [
+                'label' => 'Nom :',
+                'attr' => [
+                    'class' => 'form-control'
+                ],
+            ])
+            ->add('lastName', null, [
+                'label' => 'Prénom :',
+                'attr' => [
+                    'class' => 'form-control'
+                ],
+            ])
+            ->add('phone', TelType::class, [
+                'label' => 'Numéro de Téléphone :',
+                'attr' => [
+                    'class' => 'form-control'
+                ],
+            ])
+            ->add('dateNais', BirthdayType::class, [
+                'label' => 'Date de Naissance :',
+                'attr' => [
+                    'class' => 'form-control'
+                ],
             ])
             ->add('cv', FileType::class, [
-                'label' => 'cv (PDF)',
+                'label' => 'CV (PDF) :',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
@@ -60,9 +78,13 @@ class UserType extends AbstractType
                         'mimeTypesMessage' => 'Veuillez uploader un pdf valide',
                     ]),
                 ],
+                'attr' => [
+                    'class' => 'form-control',
+                    'enctype' => 'multipart/form-data'
+                ],
             ])
             ->add('lettreMotiv', FileType::class, [
-                'label' => 'Lettre de Motivation (PDF)',
+                'label' => 'Lettre de Motivation (PDF) :',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
@@ -74,12 +96,15 @@ class UserType extends AbstractType
                         ],
                         'mimeTypesMessage' => 'Veuillez uploader un pdf valide',
                     ]),
+                ],
+                'attr' => [
+                    'class' => 'form-control',
+                    'enctype' => 'multipart/form-data'
                 ],
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Sauvegarder',
-            ])
-        ;
+            ]);
     }
 
     /**

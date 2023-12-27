@@ -12,6 +12,14 @@
         <br>
         <div class="bloc_profil_1">
             <div class="ligne_profil">
+                <p>Adresse mail :&ensp;</p>
+                <p>{{ app.user.email }}</p>
+            </div>
+            <div class="ligne_profil">
+                <p>Mot de passe :&ensp;</p>
+                <p>{{ app.user.password }}</p>
+            </div>
+            <div class="ligne_profil">
                 <p>Nom :&ensp;</p>
                 <p>{{ app.user.firstName }}</p>
             </div>
@@ -22,10 +30,6 @@
             <div class="ligne_profil">
                 <p>Numéro de téléphone :&ensp;</p>
                 <p>{{ app.user.phone }}</p>
-            </div>
-            <div class="ligne_profil">
-                <p>Adresse mail :&ensp;</p>
-                <p>{{ app.user.email }}</p>
             </div>
             <div class="ligne_profil">
                 <p>Date de Naissance :&ensp;</p>
