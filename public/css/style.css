@@ -203,6 +203,12 @@ footer > div.footer_2 {
     background-color: #ffffff;
 }
 
+footer > p:last-child {
+    margin-top: 5px;
+    font-family: 'Comfortaa', sans-serif;
+    color: var(--fourth-color);
+}
+
 /* CSS home/index.html.twig */
 /* Menu home */
 div.menu_bloc {
@@ -1159,7 +1165,7 @@ div.ligne_profil > p:last-child {
 /* Laptop screen */
 @media screen and (min-width: 769px) and (max-width: 1500px) {
     /* CSS templates/base.html.twig */
-    /* Barre du menu */
+    /* Footer du menu */
     footer > div.footer_1 {
         justify-content: space-between;
     }
@@ -1179,7 +1185,7 @@ div.ligne_profil > p:last-child {
 /* Tablet screen */
 @media screen and (min-width: 426px) and (max-width: 768px) {
     /* CSS templates/base.html.twig */
-    /* Barre du menu */
+    /* Footer */
     footer > div.footer_1 {
         width: 100%;
         justify-content: space-between;
@@ -1277,5 +1283,277 @@ div.ligne_profil > p:last-child {
     /* CSS entreprise/index.html.twig */
     div.titre_bloc > h1 {
         font-size: 45px;
+    }
+}
+
+/* Phone screen */
+@media screen and (max-width: 426px) {
+    body {
+        margin-top: 57px;
+    }
+
+    /* CSS home/index.html.twig */
+    /* Barre du menu */
+    body > nav.navbar {
+        padding-bottom: 10px;
+    }
+
+    div.container-fluid > a:first-child {
+        height: 40px;
+    }
+
+    div.container-fluid > a:nth-child(2) {
+        height: 28px;
+    }
+
+    /* Menu home */
+    div.menu_bloc > h1 {
+        font-size: 23px;
+    }
+
+    div.menu_items {
+        width: 100%;
+    }
+
+    div.menu_items > h3 {
+        font-size: 9px;
+    }
+
+    div.menu_items > div.barre {
+        width: 2px;
+        height: 10px;
+    }
+
+    /* Titre menu home */
+    div.titre_home > div > h1 {
+        font-size: 20px;
+    }
+
+    /* Footer */
+    footer > div.footer_1 {
+        width: 95%;
+    }
+
+    div.footer_1 > img {
+        width: 40px;
+        height: 40px;
+    }
+
+    div.footer_1_1 > img {
+        width: 115px;
+    }
+
+    div.footer_1_2 {
+        width: 100px;
+    }
+
+    div.footer_1_2 > h4 {
+        font-size: 15px;
+    }
+
+    div.footer_1_2 > p {
+        font-size: 8px;
+    }
+
+    footer > p:last-child {
+        font-size: 10px;
+    }
+
+    /* CSS offre/_offre.html.twig */
+    div.bloc_offre {
+        flex-direction: column;
+    }
+
+    div.bloc_offre_img {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    div.bloc_offre_txt {
+        width: 100%;
+    }
+
+    div.bloc_offre_txt > div.infos1 {
+        flex-direction: column;
+        width: 100%;
+        height: 80%;
+    }
+
+    div.bloc_offre_txt > div.infos1 > div.infos1_1 {
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+    }
+
+    div.infos1_1 > a {
+        font-size: 20px;
+    }
+
+    div.bloc_offre_txt > div.infos1 > div.infos1_2 {
+        display: none;
+    }
+
+    div.bloc_offre_txt > div.infos2 {
+        display: none;
+    }
+
+    div.infos2_1 > p, p.description,
+    div.infos3 > p {
+        display: none;
+    }
+
+    div.bloc_offre_txt > div.infos3 {
+        justify-content: center;
+        align-items: center;
+    }
+
+    div.infos3 > form.inscrip-button {
+        margin: 0;
+    }
+
+    /* Bloc de titre */
+    div.titre_bloc > h1 {
+        text-align: center;
+        font-size: 32px;
+    }
+
+    form.form_offre * {
+        font-size: 7px;
+    }
+
+    /* Pagination */
+    div.pagination * {
+        font-size: 15px;
+    }
+
+    div.pagination span.current {
+        font-size: 15px;
+    }
+
+    /* CSS profil/index.html.twig */
+    div.ligne_profil {
+        flex-direction: column;
+    }
+
+    div.ligne_profil > p:first-child {
+        margin: 0;
+        font-size: 12px;
+    }
+
+    div.ligne_profil > p:last-child {
+        font-size: 12px;
+    }
+
+    div.bloc_profil_1 button {
+        width: 165px;
+        margin-top: 10px;
+        font-size: 12px;
+    }
+
+    /* CSS info_site/conditions.html.twig */
+    div.conditions_bloc_1 > h3 {
+        font-size: 15px;
+    }
+
+    div.conditions_bloc_1 > h4 {
+        font-size: 13px;
+    }
+
+    div.conditions_bloc_1 > p {
+        font-size: 10px;
+    }
+
+    /* CSS info_site/index.html.twig */
+    div.infos_a_propos_1 > h3 {
+        font-size: 15px;
+    }
+
+    div.infos_a_propos_1 > p {
+        font-size: 10px;
+    }
+
+    div.infos_a_propos_2 > h3 {
+        font-size: 15px;
+    }
+
+    div.infos_a_propos_2_1 > div.membre {
+        width: 140px;
+        height: 300px;
+    }
+
+    div.membre > img {
+        width: 100%;
+    }
+
+    div.membre > h4 {
+        font-size: 15px;
+    }
+
+    div.membre > p {
+        font-size: 12px;
+    }
+
+    div.membre > q {
+        text-align: center;
+        font-size: 10px;
+    }
+
+    /* CSS info_site/mentions.html.twig */
+    div.mentions_bloc_1 > h3 {
+        font-size: 15px;
+    }
+
+    div.mentions_bloc_1 > h4 {
+        font-size: 13px;
+    }
+
+    div.mentions_bloc_1 > p {
+        font-size: 10px;
+    }
+
+    /* CSS inscrire/index.html.twig */
+    div.bloc_1_inscrire {
+        width: 100%;
+        height: 10px;
+        margin-top: -10px;
+        margin-bottom: 3px;
+    }
+
+    div.bloc_legende p {
+        font-size: 10px;
+    }
+
+    div.bloc_legende > div {
+        margin-top: 5px;
+    }
+
+    /* CSS profil/delete.html.twig */
+    div.login_form {
+        width: 275px;
+    }
+
+    div.login_form > h1 {
+        font-size: 20px;
+    }
+
+    div.login_form button {
+        font-size: 15px;
+    }
+
+    /* CSS profil/modif.html.twig */
+    div.login_form > label {
+        font-size: 12px;
+    }
+
+    input.form-control, div.form-control {
+        font-size: 12px;
+    }
+
+    /* CSS security/login.html.twig */
+    h4.register_account {
+        font-size: 15px;
     }
 }
