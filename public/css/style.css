@@ -904,7 +904,7 @@ div.details_entreprise_3 button:hover {
 }
 
 /* CSS delete/modif/new/login */
-form.login_bloc {
+div.login_bloc {
     display: flex;
     flex-direction: column;
     justify-content: center;
