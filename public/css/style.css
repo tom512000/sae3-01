@@ -134,7 +134,7 @@ footer {
     justify-content: space-around;
     align-items: center;
     width: 100%;
-    height: 200px;
+    height: 220px;
     margin-top: auto;
     border-top: 10px solid var(--main-color);
     background-color: var(--third-color);
@@ -836,7 +836,6 @@ div.details_entreprise {
     justify-content: space-around;
     align-items: center;
     width: 100%;
-    margin-top: 40px;
     padding: 20px;
     background-color: var(--fourth-color);
 }
@@ -904,7 +903,7 @@ div.details_entreprise_3 button:hover {
 }
 
 /* CSS delete/modif/new/login */
-div.login_bloc {
+div.login_bloc, form.login_bloc {
     display: flex;
     flex-direction: column;
     justify-content: center;
