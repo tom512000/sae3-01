@@ -370,6 +370,10 @@ div.date_filtre > div > label {
     margin-left: 10px;
 }
 
+div.lieu {
+    width: 150px;
+}
+
 /* Bouton de Connexion / Déconnexion */
 button.style {
     border: 1px solid var(--main-color);
