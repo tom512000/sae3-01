@@ -35,16 +35,13 @@
                     <label for="dateFiltre2">Apres</label>
                 </div>
             </div>
+            <div class="lieu">
+                <input class="form-control me-2" type="search" placeholder="Lieu" aria-label="Search" name="lieuRechercher" value="{{ lieuRechercher|default }}">
+            </div>
             <div class="search">
                 <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search" name="textRecherche" value="{{ textRecherche|default }}">
-            </div>
-
-            <div class="search">
-                <input class="form-control me-2" type="search" placeholder="Lieux" aria-label="Search" name="lieuRechercher" value="{{ lieuRechercher|default }}">
                 <button class="btn btn-outline-success" type="submit">🔎</button>
             </div>
-
-
             <button class="btn btn-outline-success style" onclick="window.location.href='/offre'" type="button">Effacer</button>
         </form>
     </div>
