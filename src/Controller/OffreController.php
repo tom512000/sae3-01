@@ -66,8 +66,9 @@ class OffreController extends AbstractController
         $niveauRechercher = (int) $request->query->get('niveau', -1);
         $dateRechercher = $request->query->get('date', '');
         $dateFiltreRechercher = $request->query->get('dateFiltre', 0);
+        $lieuRechercher = $request->query->get('lieuRechercher', '');
 
-        $query = $this->offreRepository->findByFilter($typeRechercher, $textRechercher, $niveauRechercher, $dateRechercher, $dateFiltreRechercher);
+        $query = $this->offreRepository->findByFilter($typeRechercher, $textRechercher, $niveauRechercher, $dateRechercher, $dateFiltreRechercher, $lieuRechercher);
 
         $pagination = $paginator->paginate(
             $query,
@@ -106,8 +107,9 @@ class OffreController extends AbstractController
         $niveauRechercher = (int) $request->query->get('niveau', -1);
         $dateRechercher = $request->query->get('date', '');
         $dateFiltreRechercher = $request->query->get('dateFiltre', 0);
+        $lieuRechercher = $request->query->get('lieuRechercher', '');
 
-        $Offres = $this->offreRepository->findByFilterByEntrepriseId($entrepriseId, $typeRechercher, $textRechercher, $niveauRechercher, $dateRechercher, $dateFiltreRechercher);
+        $Offres = $this->offreRepository->findByFilterByEntrepriseId($entrepriseId, $typeRechercher, $textRechercher, $niveauRechercher, $dateRechercher, $dateFiltreRechercher, $lieuRechercher);
         $types = $this->typeRepository->findAll();
         $inscription = $this->inscrireRepository->getInscriptions($Offres, $this->security);
         $nbInscriptionAccepter = $this->offreRepository->getNbInscriptionsAccepter($Offres);

@@ -73,13 +73,13 @@ class OffreRepository extends ServiceEntityRepository
      *
      * @throws \Exception
      */
-    public function findByFilterByEntrepriseId(int $id, int $type, string $searchText, int $niveau, string $date, int $dateFiltre): array
+    public function findByFilterByEntrepriseId(int $id, int $type, string $searchText, int $niveau, string $date, int $dateFiltre, string $lieu): array
     {
         $qb = $this->createQueryBuilder('o')
             ->where('o.entreprise = :idEnt')
             ->setParameter('idEnt', $id);
 
-        return $this->Filter($type, $qb, $searchText, $niveau, $date, $dateFiltre);
+        return $this->Filter($type, $qb, $searchText, $niveau, $date, $dateFiltre, $lieu);
     }
 
     /**
@@ -95,11 +95,11 @@ class OffreRepository extends ServiceEntityRepository
      *
      * @throws \Exception
      */
-    public function findByFilter(int $type, string $searchText, int $niveau, string $date, int $dateFiltre): array
+    public function findByFilter(int $type, string $searchText, int $niveau, string $date, int $dateFiltre, string $lieu): array
     {
         $qb = $this->createQueryBuilder('o');
 
-        return $this->Filter($type, $qb, $searchText, $niveau, $date, $dateFiltre);
+        return $this->Filter($type, $qb, $searchText, $niveau, $date, $dateFiltre, $lieu);
     }
 
     /**
@@ -145,7 +145,7 @@ class OffreRepository extends ServiceEntityRepository
      *
      * @throws \Exception
      */
-    protected function Filter(int $type, QueryBuilder $qb, string $searchText, int $niveau, string $date, int $dateFiltre): mixed
+    protected function Filter(int $type, QueryBuilder $qb, string $searchText, int $niveau, string $date, int $dateFiltre, string $lieux): mixed
     {
         $qb->select('o', 'entreprise', 'Type', 'inscrires')
             ->leftJoin('o.entreprise', 'entreprise')
@@ -163,6 +163,12 @@ class OffreRepository extends ServiceEntityRepository
             $qb->andWhere($qb->expr()->orX(
                 $qb->expr()->like('UPPER(o.nomOffre)', 'UPPER(:searchText)')
             ))->setParameter('searchText', '%'.$searchText.'%');
+        }
+
+        if (!empty($lieux)) {
+            $qb->andWhere($qb->expr()->orX(
+                $qb->expr()->like('UPPER(o.lieux)', 'UPPER(:searchLieu)')
+            ))->setParameter('searchLieu', '%'.$lieux.'%');
         }
 
         if (-1 != $niveau) {
