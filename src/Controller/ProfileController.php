@@ -160,14 +160,14 @@ class ProfileController extends AbstractController
 
     #[IsGranted('ROLE_USER')]
     #[Route('/profil/delete', name: 'app_profile_delete')]
-    public function delete(Security $security,EntityManagerInterface $entityManager, #[CurrentUser] User $user, Request $request): Response
+    public function delete(Security $security, EntityManagerInterface $entityManager, #[CurrentUser] User $user, Request $request): Response
     {
         $form = $this->createForm(FormType::class);
         $form->add('Delete', SubmitType::class, [
-            'label' => 'Supprimer'
+            'label' => 'Supprimer',
         ]);
         $form->add('Cancel', SubmitType::class, [
-            'label' => 'Annuler'
+            'label' => 'Annuler',
         ]);
         $form->handleRequest($request);
 
@@ -186,7 +186,7 @@ class ProfileController extends AbstractController
 
         return $this->render('profil/delete.html.twig', [
             'user' => $user,
-            'form' => $form
+            'form' => $form,
         ]);
     }
 }
