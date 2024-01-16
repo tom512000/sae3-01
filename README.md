@@ -67,7 +67,66 @@ Pour accéder a la page d'accueil depuis une autre page, il vous suffit de cliqu
 - `composer test` : Teste la mise en forme du code et lance les tests avec Codeception.
 - `composer db` : Détruit et recrée la base de données, migre sa structure et regénère les données factices.
 
+## Création de la VM
+### 1) Création de votre machine virtuelle dans OpenNebula
+1. Accès à l'interface Web du cloud [OpenNebula](http://one-frontend:9869/).
+2. Connexion avec notre compte universitaire pour accéder à notre tableau de bord.
+3. Ajout d'une nouvelle machine virtuelle.
+4. Choix du modèle "template".
+5. Sélection du modèle "TP Install Ubuntu".
+6. Saisie du nom de la machine "VM-SAE3-01" avec une taille de disque dur de 25GB.
+7. Le second lecteur de notre machine virtuelle permet de selectionner la taille de l'image ISO du DVD de Fedora.
+8. Le bouton "Create" permer de créer et lancer le déploiement de la machine virtuelle.
+9. Le voyant orange montre que la machine virtuelle est en cours de déploiement, selection du nom de la machine virtuelle.
+10. Affichage des détails de notre machine virtuelle qui indiquent son stade de déploiement.
+11. Attendre le déploiement complet de la machine virtuelle ("RUNNING" ou voyant vert).
+12. Sélection du boutton d'affichage de la machine virtuelle.
+13. Lancement de l'installation de la distribution Ubuntu.
+14. Augmentation de la résolution de l'écran virtuel et poursuite de l'installation.
+15. Commencement de l'installation de notre distribution Linux.
+
+### 2) Utilisation de « Remote Viewer » pour accéder à votre machine virtuelle OpenNebula
+1. Téléchargement de la machine vituelle.
+2. Lancement de la machine virtuelle en format **.vv**
+   - Soit en double-cliquant sur le fichier "VM-SAE3-01.vv".
+   - Soit dans un terminal avec la commande :
+```HTTP
+$ remote-viewer repertoire/ou/est/rangé/le/fichier/VM-SAE3-01.vv
+```
+
+### 3) Installation d'une distribution Xubuntu
+1. Choix de lancer la distribution en live CD ou de démarrer directement l'installation.
+2. Sélection de "Français" puis sélection d'"Installer Xubuntu".
+3. Sélection de la disposition du clavier en "French".
+4. Désactivation des mises à jour pendant l'installation.
+
+### 4) Configuration des partitions de stockage
+1. Choix du type d’installation afin d'organiser notre disque dur pour accueillir le système d’exploitation Ubuntu.
+2. Sélection de "Nouvelle table de partition".
+3. Confirmation et initialisation du système de partitionnement du disque.
+4. Création des partitions :
+   - Partie 1 : Taille 500 Mo, primaire, système de fichiers "ext4" et un montage en /boot.
+   - Partie 2 : Taille 1500 Mo, primaire, utilisé comme "espace d’échange" et un montage en swap.
+   - Partie 3 : Taille 15000 Mo, type logique, système de fichier "ext4" et un montage en /.
+   - Partie 4 : Taille espace restant, type logique, système de fichier "ext4" et un montage en /home.
+5. Validation de notre système de partitionnement.
+6. Choix de notre fuseau horaire à Paris.
+7. Renseignement des informations de l'utilisateur de notre système :
+   - Nom : pcclientsae301-KVM
+   - Nom de notre ordinateur : pc-client-sae3-01
+   - Nom d'utilisateur : pc-client-sae3-01
+   - Mot de passe : pc-client
+8. Démarrage de l'installation.
+9. Sélection de "Redémarrer maintenant".
+10. Sélection de la touche "Entrer".
+11. Redémarrage de la machine virtuelle sur Xunbuntu.
+12. Première connexion.
+
 ## 📋 Autres
 Les fichiers suivants sont disponibles dans le dossier « files » :
 1. Cahier des charges au format PDF.
 2. Présentation de notre base de données au format PDF.
+3. Rapport d'analyse et de conception au format PDF.
+4. PowerPoint de l'oral du projet au format PPTX.
+5. Démonstration du site au format MP4.
+6. Fichier d'accès à la VM au format VV.
