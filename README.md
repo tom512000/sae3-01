@@ -239,6 +239,43 @@ $ remote-viewer repertoire/ou/est/rangé/le/fichier/VM-SAE3-01.vv
 4. `sudo service apache2 restart` : Redémarrage du serveur.
 5. Vérification de l'accès à la page du site (http://10.31.33.47).
 
+## 🔗 Connexion SSH avec une clé publique
+### 1) Génération d'un couple de clés publique/privée
+1. `ssh-keygen -t rsa` : Génération de notre couple de clés sur l'ordinateur client.
+2. `ls ~/.ssh/` : Observer les fichiers générés.
+3. `la -l ~/.ssh/` : Vérifier les droits de la clé privée.
+4. `setfacl -Rb ~/.ssh` : Changement des droits si la clé est accessible par d'autres utilisateurs.
+
+### 2) Ajouter une clé publique dans la configuration de OpenNebula
+1. Rendez-vous sur http://cloud/ et connexion avec notre compte universitaire.
+2. Localiser le menu permettant d'accéder à mes préférences.
+3. Cliquer sur le menu d'ajout d'une clé SSH publique.
+4. Copie de la clé publique dans le fichier *~/.ssh/id_rsa.pub* et coller dans le champ dédié de l'interface d'OpenNebula.
+5. Validation de notre saisie en appuyant sur « Add SSH Key ».
+
+### 3) Déployer une machine virtuelle OpenNebula
+1. Localisation du bouton d'ajout d'une machine virtuelle sur le tableau de bord d'OpenNebula.
+2. Observer les modèles disponibles.
+3. Trouver le modèle correspondant à votre choix, « Ubuntu Minimal 22.04 » est donné à titre d'exemple.
+4. Donner un nom explicite à notre machine virtuelle et fixer la taille de son disque dur puis valider à l'aide du bouton « Create ».
+5. Déploiement de notre machine virtuelle (indicateur orange).
+6. Repérer l'adresse IP de votre machine virtuelle dans les détails de ses statistiques.
+
+### 4) Connexion SSH à la machine virtuelle grâce à la clé
+1. `ssh root@10.31.33.47` : Connexion à la machine virtuelle.
+2. `ls -l .ssh/` : Vérification de la configuration SSH de l'utilisateur root.
+3. `cat .ssh/authorized_keys` : Vérification que la clé publique générée dans l'interface de OpenNebula fait bien partie des clés autorisées.
+
+### 5) Ajout d'une nouvelle clé SSH publique sur la machine distante
+1. Ouverture du shell sur notre machine locale.
+2. Génération d'un nouveau couple de clés dans le répertoire Documents.
+3. `ssh-copy-id -i ~/Documents/id_rsa.pub root@10.31.33.47` : Enregistrer notre nouvelle clé publique sur la machine distante.
+4. `ssh root@10.31.33.47` : Connexion sur la machine distante pour vérifier que notre nouvelle clé publique est bien présente.
+5. `cat .ssh/authorized_keys` : Vérification des clés autorisées.
+6. Copier les nouvelles clés publique et privée sur une clé USB et supression des clés de notre compte.
+7. Placer les fichiers id_rsa et id_rsa.pub de la clé USB dans le répertoire .ssh de notre compte Linux local.
+8. Utilisation du VPN pour accéder au cloud OpenNebula.
+
 ## 📋 Autres
 Les fichiers suivants sont disponibles dans le dossier « files » :
 1. Cahier des charges au format PDF.
