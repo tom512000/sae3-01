@@ -1,7 +1,9 @@
-# SAE 3-01 : Développement d'une application
+# SAE3-01 : Développement d'une application
+
+## 💼 Sujet
+Gestion des stages et alternances d'une formation : Cette application sera utilisée par des étudiants et des administrateurs. Il s'agit de gérer pour chaque proposition de sujet de stage ou d'alternance, les informations nécessaires telles que le lieu, les technologies (tags) et l'entreprise. L'application doit par ailleurs gérer l'inscription des étudiants intéressés à un stage ou une alternance. Les étudiants peuvent consulter la liste des stages ou alternances compléte ou la liste de stages ou alternances sélectionnés. Les administrateurs peuvent consulter la liste des étudiants intéressés par un stage ou une alternance et ils gérent la liste des des stages ou alternances pourvus.
 
 ## 👥 Auteurs
-
 - 👤 Valentin CLADEL - <span style="color: purple">clad0006</span>
 - 👤 Baptiste SIMON - <span style="color: purple">simo0170</span>
 - 👤 Tom SIKORA - <span style="color: purple">siko0001</span>
@@ -15,7 +17,6 @@
 
 ## 🛠 Installation et Configuration
 ### *<span style="color: orange">1. Installation</span>*
-
 Mettre à jour votre dépôt local :
 - `git clone https://iut-info.univ-reims.fr/gitlab/clad0006/sae3-01.git`
 - `cd <dépôt_local>`
@@ -25,44 +26,55 @@ Ensuite, dans le répertoire de votre projet, vous devez <span style="color: ora
 - `composer install`
 
 Finalement, <span style="color: orange">reconfigurez votre accès à la base de données</span> en redéfinissant le fichier « .env.local » :
-- `"DATABASE_URL="mysql://clad0006:clad0006@mysql:3306/clad0006_sae3?serverVersion=mariadb-10.2.25&charset=utf8"`
+- `DATABASE_URL="mysql://clad0006:clad0006@mysql:3306/clad0006_sae3?serverVersion=mariadb-10.2.25&charset=utf8"`
 
 ### *<span style="color: green">2. Instructions de push</span>*
-
-Lorsque vous avez terminé une tâche, <span style="color: green">resynchronisez votre dépôt distant</span> (Invite de commandes ou PhpStorm) :
-
+Lorsque vous avez terminé une tâche, <span style="color: green">resynchronisez votre dépôt distant</span> grâce aux commandes suivantes :
 - `git branch <branche>`
 - `git checkout <branche>`
 - `git commit -m "message-commit"`
 - `git push --set-upstream origin <branche>`
 
-Ensuite, sur GitLab, <span style="color: green">creez une merge-request</span> sur votre branche et <span style="color: green">assignez un camarade</span> à la revue et à la validation.
+Ensuite, sur GitLab, <span style="color: green">créez un merge-request</span> sur votre branche et <span style="color: green">assignez un membre du projet</span> à la revue et à la validation.
 
 ### *<span style="color: red">3. Site et navigation</span>*
+Pour lancer le site, assurez-vous d'être <span style="color: red">connecté au VPN</span>.
+Ensuite, lancez le serveur de test avec la commande suivante :
+- `composer start`
 
-Pour lancer le site, assurez vous d'être <span style="color: red">connecté au VPN</span>.
-Ensuite, lancez la commande suivante dans votre terminal :
+Accédez à l'url du site : <span style="color: red">http://localhost:8000</span>.
+Tant que vous ne vous connectez pas, vous ne pourrez accéder qu'à la page d'accueil.
+Si vous tentez de naviguer sur une autre page, vous serez automatiquement redirigé vers <span style="color: red">le formulaire de connexion</span>.
 
-- `composer start` : Lance le serveur web de test.
+Depuis ce formulaire, vous pouvez vous connecter avec votre adresse email et votre mot de passe créés précédemment.
+Vous pouvez également vous connecter avec le compte administrateur de test :
+- Adresse Email : <span style="color: red">valentin.cladel@gmail.com</span>
+- Mot de passe : <span style="color: red">test</span>
 
-Accedez à l'url du site : <span style="color: red">127.0.0.1:8000/</span>. Tant que vous ne vous connectez pas, vous ne pourrez acceder qu'a la page d'accueil.
-Si vous tentez de naviguer autre part, vous serez redirigés vers <span style="color: red">le formulaire de connexion</span>.
+Vous pouvez créer un compte :
+- Cliquez sur "S'inscrire" pour accéder à la page de création de compte.
+- Remplissez les informations (Adresse Email, Mot de passe, Nom, Prénom, Numéro de téléphone, Date de naissance, un CV et une lettre de Motivation si nécessaire).
+- Cliquez sur "Sauvegarder" pour valider la création du compte et l'enregistrer dans la base de données.
+- Vous pouvez maintenant vous connecter.
 
-Depuis ce formulaire, vous pouvez vous connecter :
-- `adresse mail` : rentrez une adresse mail valide parmis les comptes disponibles.
-- `mot de passe` : rentrez un mot de passe valide parmis les comptes disponibles. (<span style="color: red">'test' pour tous les comptes créés par la factory</span>)
-- `compte admin` : compte administrateur de test, email : <span style="color: red">valentin.cladel@gmail.com</span>, mdp : <span style="color: red">test</span>
+Une fois connecté, vous avez accès au site et vous pouvez consulter :
+- Les offres
+- Les offres récentes
+- Les détails d'une offre
+- Les entreprises
+- Les détails d'une entreprise
+- Les offres d'une entreprise
+- La page de profil
+- La page de modification du profil
+- La page de supression du profil
+- La page d'inscriptions
+- Le tableau de bord (si vous êtes administrateur)
+- La page à propos de nous
+- La page des conditions générales d'utilisation
+- La page des mentions légales
 
-Vous pouvez également vous inscrire :
-- Cliquer sur le lien 'S'inscrire' pour accéder à la page
-- Remplissez les informations
-- Cliquer sur valider pour créer le compte et l'enregistrer dans la base
-- Vous pouvez désormais vous y connecter
-
-Une fois connecté, vous avez accès au site et pouvez consulter offres, entreprises, vous inscrire ou desinscrire a des offres etc.
-Vous pouvez également accéder à la section 'Mon Compte' depuis la barre de navigation pour accéder a votre profil puis a sa modification, a vos inscriptions, et si vous êtes connecté en temps qu'admin, au <span style="color: red">dashboard admin</span>.
-
-Pour accéder a la page d'accueil depuis une autre page, il vous suffit de cliquer sur le logo <span style="color: red">EduTech</span> dans la barre de navigation et vous serez redirigés.
+Ces différentes pages sont accessibles via la barre de navigation ou le pied de page.
+Pour accéder à la page d'accueil depuis une autre page, il suffit de cliquer sur le texte <span style="color: red">EduTech</span> ou le <span style="color: red">logo d'EduTech</span> dans la barre de navigation.
 
 ## 📐 Scripts
 - `composer start` : Lance le serveur web de test.
@@ -107,12 +119,12 @@ $ remote-viewer repertoire/ou/est/rangé/le/fichier/VM-SAE3-01.vv
 4. Désactivation des mises à jour pendant l'installation.
 
 ### 4) Configuration des partitions de stockage
-1. Choix du type d’installation afin d'organiser notre disque dur pour accueillir le système d’exploitation Ubuntu.
+1. Choix du type d'installation afin d'organiser notre disque dur pour accueillir le système d'exploitation Ubuntu.
 2. Sélection de "Nouvelle table de partition".
 3. Confirmation et initialisation du système de partitionnement du disque.
 4. Création des partitions :
    - Partie 1 : Taille 500 Mo, primaire, système de fichiers "ext4" et un montage en /boot.
-   - Partie 2 : Taille 1500 Mo, primaire, utilisé comme "espace d’échange" et un montage en swap.
+   - Partie 2 : Taille 1500 Mo, primaire, utilisé comme "espace d'échange" et un montage en swap.
    - Partie 3 : Taille 15000 Mo, type logique, système de fichier "ext4" et un montage en /.
    - Partie 4 : Taille espace restant, type logique, système de fichier "ext4" et un montage en /home.
 5. Validation de notre système de partitionnement.
@@ -145,8 +157,8 @@ $ remote-viewer repertoire/ou/est/rangé/le/fichier/VM-SAE3-01.vv
 5. Vérification du bon fonctionnement du serveur Web (http://localhost/).
 6. `sudo a2enmod userdir` : Activation des pages d'accueil des utilisateurs à l'aide du module userdir.
 7. `sudo service apache2 restart` : Redémarrage du service apache2.
-8. `git clone https://iut-info.univ-reims.fr/gitlab/clad0006/sae3-01.git` : Clonage du dépôt git de notre projet dans le répertoire d’accueil de l'utilisateur.
-9. `sudo chown www-data:www-data ~/sae3-01` : Attribution des droits d’accès à l’utilisateur du serveur Web www-data pour le répertoire sae3-01.
+8. `git clone https://iut-info.univ-reims.fr/gitlab/clad0006/sae3-01.git` : Clonage du dépôt git de notre projet dans le répertoire d'accueil de l'utilisateur.
+9. `sudo chown www-data:www-data ~/sae3-01` : Attribution des droits d'accès à l'utilisateur du serveur Web www-data pour le répertoire sae3-01.
 10. `sudo chmod 755 ~/sae3-01` : Affectation des droits par défaut pour le répertoire sae3-01.
 11. `sudo ln -s $HOME/sae3-01 /var/www` : Création d'un lien symbolique de notre projet vers l'arborescence /var/www.
 12. `nslookup 10.31.33.47` : Récupération du nom DNS de notre machine virtuelle.
