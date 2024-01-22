@@ -13,6 +13,7 @@ Gestion des stages et alternances d'une formation : Cette application sera utili
 - Identifiant : `pc-client-sae3-01`
 - Mot de passe : `pc-client`
 - Adresse IP : `10.31.33.47`
+- PassPhrase : `pc-client`
 - Site : http://10.31.33.47/
 
 ## 🛠 Installation et Configuration
@@ -158,11 +159,14 @@ $ remote-viewer repertoire/ou/est/rangé/le/fichier/VM-SAE3-01.vv
 6. `sudo a2enmod userdir` : Activation des pages d'accueil des utilisateurs à l'aide du module userdir.
 7. `sudo service apache2 restart` : Redémarrage du service apache2.
 8. `git clone https://iut-info.univ-reims.fr/gitlab/clad0006/sae3-01.git` : Clonage du dépôt git de notre projet dans le répertoire d'accueil de l'utilisateur.
-9. `sudo chown www-data:www-data ~/sae3-01` : Attribution des droits d'accès à l'utilisateur du serveur Web www-data pour le répertoire sae3-01.
-10. `sudo chmod 755 ~/sae3-01` : Affectation des droits par défaut pour le répertoire sae3-01.
-11. `sudo ln -s $HOME/sae3-01 /var/www` : Création d'un lien symbolique de notre projet vers l'arborescence /var/www.
-12. `nslookup 10.31.33.47` : Récupération du nom DNS de notre machine virtuelle.
-13. `sudo evim /etc/hosts` : Modification du fichier /etc/hosts.
+9. `composer install` : Installation de composer pour notre projet.
+10. `sudo touch ~/sae3-01/.env.local` : Création du fichier de connexion à la base de données.
+11. `sudo evim ~/sae3-01/.env.local` : Ajout de la ligne `DATABASE_URL="mysql://clad0006:clad0006@mysql:3306/clad0006_sae3?serverVersion=mariadb-10.2.25&charset=utf8"`.
+12. `sudo chown www-data:www-data ~/sae3-01` : Attribution des droits d'accès à l'utilisateur du serveur Web www-data pour le répertoire sae3-01.
+13. `sudo chmod 755 ~/sae3-01` : Affectation des droits par défaut pour le répertoire sae3-01.
+14. `sudo ln -s $HOME/sae3-01 /var/www` : Création d'un lien symbolique de notre projet vers l'arborescence /var/www.
+15. `nslookup 10.31.33.47` : Récupération du nom DNS de notre machine virtuelle.
+16. `sudo evim /etc/hosts` : Modification du fichier /etc/hosts.
     ```bash
     127.0.0.1    localhost
     127.0.0.1    2A4V3-31UVM0303.ad-urca.univ-reims.fr
@@ -174,8 +178,8 @@ $ remote-viewer repertoire/ou/est/rangé/le/fichier/VM-SAE3-01.vv
     ff02::1 ip6-allnodes
     ff02::2 ip6-allrouters
     ```
-14. `sudo touch /etc/apache2/sites-available/pc-client-sae3-01.conf` : Création du fichier de configuration du serveur.
-15. `sudo evim /etc/apache2/sites-available/pc-client-sae3-01.conf` : Modification du fichier de configuration pc-client-sae3-01.conf.
+17. `sudo touch /etc/apache2/sites-available/pc-client-sae3-01.conf` : Création du fichier de configuration du serveur.
+18. `sudo evim /etc/apache2/sites-available/pc-client-sae3-01.conf` : Modification du fichier de configuration pc-client-sae3-01.conf.
     ```bash
     <VirtualHost *:80>
         ServerName http://2A4V3-31UVM0303.ad-urca.univ-reims.fr
@@ -193,8 +197,8 @@ $ remote-viewer repertoire/ou/est/rangé/le/fichier/VM-SAE3-01.vv
             </Directory>
     </VirtualHost>
     ```
-16. `sudo a2ensite /etc/apache2/sites-available/pc-client-sae3-01.conf` : Activation du site.
-17. `sudo evim /etc/apache2/sites-available/000-default.conf` : Modification du fichier de configuration par défaut.
+19. `sudo a2ensite /etc/apache2/sites-available/pc-client-sae3-01.conf` : Activation du site.
+20. `sudo evim /etc/apache2/sites-available/000-default.conf` : Modification du fichier de configuration par défaut.
     ```bash
         <VirtualHost *:80>
             ServerAdmin webmaster@localhost
@@ -210,8 +214,8 @@ $ remote-viewer repertoire/ou/est/rangé/le/fichier/VM-SAE3-01.vv
             CustomLog ${APACHE_LOG_DIR}/access.log combined
     </VirtualHost>
     ```
-18. `sudo touch /etc/apache2/conf-available/serveur.conf` : Création d'un fichier de configuration du serveur.
-19. `sudo evim /etc/apache2/conf-available/serveur.conf` : Modification du fichier de configuration du serveur.
+21. `sudo touch /etc/apache2/conf-available/serveur.conf` : Création d'un fichier de configuration du serveur.
+22. `sudo evim /etc/apache2/conf-available/serveur.conf` : Modification du fichier de configuration du serveur.
     ```bash
     <Directory /var/www/sae3-01/public>
         Options Indexes FollowSymLinks
@@ -221,8 +225,8 @@ $ remote-viewer repertoire/ou/est/rangé/le/fichier/VM-SAE3-01.vv
     </Directory>
     Alias "/sae3-01" "/var/www/sae3-01/public"
     ```
-20. `sudo a2enconf /etc/apache2/conf-available/serveur.conf` : Activation de la configuration.
-21. `sudo apache2ctl configtest` : Vérification des configurations "Syntax OK".
+23. `sudo a2enconf /etc/apache2/conf-available/serveur.conf` : Activation de la configuration.
+24. `sudo apache2ctl configtest` : Vérification des configurations "Syntax OK".
 
 ### 3) Langage de programmation PHP
 1. `sudo apt-get install php` : Installation du paquet php.
